@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './SearchBar.scss'
+import './searchBar.scss'
 
 function SearchBar() {
     return ( 

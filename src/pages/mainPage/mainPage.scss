@@ -1,6 +1,6 @@
 body {
     // background-color: #0D0F11;
-    background-image: url("../../../background/bg-main.png");
+    background-image: url("./../../background/bg-main.png");
     background-repeat: no-repeat;
     background-size: 100%;
     display: flex;
@@ -53,17 +53,17 @@ display: flex;
 }
 
 .block:nth-child(1) {
-    background-image: url('../../../background/block1back.png');
+    background-image: url('./../../background/block1back.png');
     background-repeat: no-repeat;
     background-size: cover;
 }
 .block:nth-child(2) {
-    background-image: url('../../../background/block2back.png');
+    background-image: url('./../../background/block2back.png');
     background-repeat: no-repeat;
     background-size: cover;
 }
 .block:nth-child(3) {
-    background-image: url('../../../background/block3back.png');
+    background-image: url('./../../background/block3back.png');
     background-repeat: no-repeat;
     background-size: cover;
 }

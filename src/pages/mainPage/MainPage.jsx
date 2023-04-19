@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './mainPage.scss'
-import logo from '../../../background/logoFinpollWithBACK.png'
-import itap from '../../../background/itapLogo.png'
-import superset from '../../../background/supersetLogo.png'
-import profiler from '../../../background/profilerLogo.png'
+import logo from './../../background/logoFinpollWithBACK.png'
+import itap from './../../background/itapLogo.png'
+import superset from './../../background/supersetLogo.png'
+import profiler from './../../background/profilerLogo.png'
 
 import Navbar from '../../components/nav-bar/Navbar';
 
