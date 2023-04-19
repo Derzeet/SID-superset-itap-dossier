@@ -1,0 +1,29 @@
+@mixin inputLabel {
+    display: flex;
+    flex-direction: column;
+
+    min-width: max-content;
+    max-width: 800px;
+    // margin-right: 100px;
+}
+
+.right-top-section {
+
+    padding: 20px;
+    
+    .other-line {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        overflow: visible;
+    }
+}
+
+.bumber {
+    border-left: 1px solid rgba(134, 134, 134, 0.9);
+    padding-left: 10px;
+}
+
+* {
+    font-size: 14px;
+}
