@@ -5,11 +5,11 @@ import TextField from '@mui/material/TextField';
 import FormControl from '@mui/material/FormControl';
 import Button from '@mui/material/Button';
 
-import Navbar from '../../components/nav-bar/Navbar';
-import TabContent_IIN from '../../components/tab-content-iin/TabContent_IIN';
-import TabContent_FIO from '../../components/tab-content-fio/TabContent_FIO';
-import TabContent_BIN from '../../components/tab-content-bin/TabContent_BIN';
-import TabContent_UL from '../../components/tab-content-ul/TabContent_UL';
+import Navbar from '../../components/dossierComponents/nav-bar/Navbar';
+import TabContent_IIN from '../../components/dossierComponents/tab-content-iin/TabContent_IIN';
+import TabContent_FIO from '../../components/dossierComponents/tab-content-fio/TabContent_FIO';
+import TabContent_BIN from '../../components/dossierComponents/tab-content-bin/TabContent_BIN';
+import TabContent_UL from '../../components/dossierComponents/tab-content-ul/TabContent_UL';
 
 const Search = (props) => {
     const [value, setValue] = React.useState(0);

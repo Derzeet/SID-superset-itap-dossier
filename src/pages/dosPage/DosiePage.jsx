@@ -4,12 +4,12 @@ import { useParams } from "react-router-dom";
 import './dosiePage.scss'
 import './loader.scss'
 
-import Navbar from '../../components/nav-bar/Navbar';
-import LeftTopFrame from '../../components/left-top-frame/LeftTopFrame';
-import RightTopFrame from '../../components/rigth-top-frame/RightTopFrame';
-import LeftBottomFrame from '../../components/left-bottom-frame/LeftBottomFrame';
-import RightBottomFrame from '../../components/right-bottom-frame/RightBottomFrame';
-import SearchBar from '../../components/search-bar/SearchBar';
+import Navbar from '../../components/dossierComponents/nav-bar/Navbar';
+import LeftTopFrame from '../../components/dossierComponents/left-top-frame/LeftTopFrame';
+import RightTopFrame from '../../components/dossierComponents/rigth-top-frame/RightTopFrame';
+import LeftBottomFrame from '../../components/dossierComponents/left-bottom-frame/LeftBottomFrame';
+import RightBottomFrame from '../../components/dossierComponents/right-bottom-frame/RightBottomFrame';
+import SearchBar from '../../components/dossierComponents/search-bar/SearchBar';
 import axios from 'axios';
 const baseURL = 'http://localhost:9095/'
 const DosiePage = (props) => {

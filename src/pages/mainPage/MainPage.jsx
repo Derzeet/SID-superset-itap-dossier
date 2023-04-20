@@ -6,7 +6,7 @@ import itap from './../../background/itapLogo.png'
 import superset from './../../background/supersetLogo.png'
 import profiler from './../../background/profilerLogo.png'
 
-import Navbar from '../../components/nav-bar/Navbar';
+import Navbar from '../../components/dossierComponents/nav-bar/Navbar';
 
 const MainPage = (props) => {
     const navigate = useNavigate();
