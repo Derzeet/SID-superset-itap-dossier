@@ -47,8 +47,6 @@
     padding: 20px;
     
     // height: 90%;
-    overflow: hidden !important;
-
     // > div {
     //     // border: 1px dashed darksalmon;
     //     height: max-content;
@@ -63,6 +61,8 @@
     }
 
     .other-line {
+        overflow: visible !important;
+        
         display: flex;
         flex-direction: row;
         justify-content: space-between;

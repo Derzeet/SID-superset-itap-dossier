@@ -1,11 +1,19 @@
 body {
     // background-color: #0D0F11;
-    background-image: url("./../../background/bg-main.png");
+    // background-image: url("./../../background/bg-main.png");
+    // background-image: url(./../../background/bg-main.png) !important;
+
     background-repeat: no-repeat;
     background-size: 100%;
     display: flex;
     place-items: center;
     min-height: 100vh;
+}
+
+.mainPageBlock {
+    background-image: url(./../../background/bg-main.png) !important;
+    background-size: 100%;
+    height: 100%;
 }
 
 .container {

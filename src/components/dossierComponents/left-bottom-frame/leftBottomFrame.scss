@@ -36,6 +36,10 @@
 }
 
 .left-bottom-section {
+    overflow: hidden;
+    * {
+        overflow: hidden;
+    }
 
     padding: 20px;
     

@@ -1,8 +1,4 @@
 body {
-    background-image: url(./../../images/bg-image.png) !important;
-    background: 100%;
-    background-position: top left;
-    background-repeat: no-repeat;
     
 }
 
@@ -13,6 +9,12 @@ body {
     height: 100%;
 
     font-family: 'Montserrat';
+
+    background-image: url(./../../images/bg-image.png) !important;
+    background: 100%;
+    background-position: top left;
+    background-repeat: no-repeat;
+    
 }
 
 
@@ -71,7 +73,7 @@ $tab-wrap-border-radius: 2px;
 
 .tab__content {
     background: #0D0F11 !important;
-    height: 65vh;
+    height: 70vh;
     overflow-y: scroll !important; 
     &::-webkit-scrollbar {
         display: none;
@@ -96,7 +98,7 @@ $tab-wrap-border-radius: 2px;
 
 @media only screen and (min-height: 1000px) {
     .tab__content {
-        height: max-content;
+        height: 73vh;
     }
 }
 

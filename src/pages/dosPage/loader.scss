@@ -10,6 +10,12 @@
     width: 100%;
     background: rgb(0, 0, 0, 0.2);
   }
+
+  overflow: hidden !important;
+
+  * {
+    overflow: hidden !important;
+  }
 }
 
 .load {
@@ -77,11 +83,10 @@
 }
 
 .loader {
-  overflow: hidden !important;
-
+  overflow: visible !important;
   position: absolute;
-  top: calc(50% + 1px);
-  left: calc(50% - 23px);
+  top: calc(50% + 25px);
+  left: calc(50% - 21px);
   width: 100px;
   height: 100px;
   border-radius: 50%;

@@ -11,7 +11,7 @@ import Navbar from '../../components/dossierComponents/nav-bar/Navbar';
 const MainPage = (props) => {
     const navigate = useNavigate();
     return (
-        <>
+        <div className='mainPageBlock'>
             <div className='container'>
                 <div className='logodiv'></div>
                 <img src={logo} className='logo'></img>
@@ -39,7 +39,7 @@ const MainPage = (props) => {
                     <p>Инструмент для поиска людей</p>
                 </div>
             </div>
-        </>
+        </div>
     );
 }
 

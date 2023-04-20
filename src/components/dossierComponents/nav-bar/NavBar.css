@@ -2,7 +2,17 @@
     text-decoration: none; 
     color: rgba(255, 255, 255, 0.3);
     transition: all ease 0.1s;
+
+    overflow: hidden;
 }
+.NavbarItems * {
+    overflow: hidden;
+}
+
+.NavbarItems {
+    overflow: hidden;
+}
+
 .admin {
     font-weight: 400;
     color: rgba(255, 255, 255, 0.3);

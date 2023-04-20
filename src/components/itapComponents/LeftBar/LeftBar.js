@@ -33,54 +33,58 @@ const LeftBar = (props) => {
 
     const [modal, setModal] = useState(false)
 
-    const [mode, setMode] = useState("")
+    const [mode, setMode] = useState("none")
     const [relString, setRelString] = useState("")
 
     useEffect(() => {
+        let formSearchOptions = document.querySelector("#formSearchOptions");
+            
+        let iin1 = document.querySelector("#formIIN1");
+        let iin2 = document.querySelector("#formIIN2");
+
+        let formFio1 = document.querySelector("#formFio1")
+        let formFio2 = document.querySelector("#formFio2")
+
+        let formLimit = document.querySelector("#formLimit")
+        let formDepth = document.querySelector("#formDepth")
+        
+        let formRels  = document.querySelector("#formRels")
+
         if (iin1 != '') {
-            setMode('con1')
-            // let value = document.getElementById("connections").value;
+            document.querySelector("#connections").value = "con1"
 
-            let formSearchOptions = document.querySelector("#formSearchOptions");
-
-            let iin1 = document.querySelector("#formIIN1");
-            let iin2 = document.querySelector("#formIIN2");
-
-            let formFio1 = document.querySelector("#formFio1")
-            let formFio2 = document.querySelector("#formFio2")
-
-            let formLimit = document.querySelector("#formLimit")
-            let formDepth = document.querySelector("#formDepth")
-            let formRels  = document.querySelector("#formRels")
-
+            iin1.style.display = 'flex';
+            iin2.style.display = 'none';
+            
+            formFio1.style.display = 'none';
+            formFio2.style.display = 'none';
+            
             // setMode(value)
-
+            
             iin1.childNodes[0].innerHTML = "Введите ИИН"
-
+            
             formSearchOptions.style.display = 'flex';
-
-            if (searchOption == "iinOption") {
-                iin1.style.display = 'flex';
-                iin2.style.display = 'none';
-
-                formFio1.style.display = 'none';
-                formFio2.style.display = 'none';
-
-            } else if (searchOption == "fioOption") {
-                iin1.style.display = 'none';
-                iin2.style.display = 'none';
-
-                formFio1.style.display = 'flex';
-                formFio2.style.display = 'none';
-            }
             
 
             formLimit.style.display = 'flex';
             formDepth.style.display = 'flex';
             formRels.style.display = 'flex';
             props.update()
+        } else {
+            iin1.style.display = 'none';
+            iin2.style.display = 'none';
+            
+            formFio1.style.display = 'none';
+            formFio2.style.display = 'none';
+            
+            formSearchOptions.style.display = 'none';
+            
+
+            formLimit.style.display = 'none';
+            formDepth.style.display = 'none';
+            formRels.style.display = 'none';
         }
-    })
+    }, [])
 
     const filter = (approvementObject) => { 
         console.log("approvement", approvementObject)
@@ -277,7 +281,7 @@ const LeftBar = (props) => {
                 <div className="formBlock">
                     <label htmlFor="connections">Найти связи между</label>
                     <div className="select">
-                        <select name="connections" id='connections' 
+                        <select name="connections" id='connections'
                         onChange={event => { 
                             let value = document.getElementById("connections").value;
 
@@ -410,22 +414,7 @@ const LeftBar = (props) => {
                                 formRels.style.display = 'flex';
                                 props.update()
                             }
-                            else if (value === "none") {
-                                formSearchOptions.style.display = 'none';
-
-                                iin1.style.display = 'none';
-                                iin2.style.display = 'none';
-
-                                formFio1.style.display = 'none';
-                                formFio2.style.display = 'none';
-
-                                formLimit.style.display = 'none';
-                                formDepth.style.display = 'none';
-                                formRels.style.display = 'none';
-                                props.update()
-                            }
                         }}>
-                            <option value="none">Выберите связь</option>
                             <option value="con1">Фл</option>
                             <option value="con4">Юл</option>
                             <option value="con2">Фл - Фл</option>

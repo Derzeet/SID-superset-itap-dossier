@@ -1,4 +1,9 @@
 .nav-bar {
+    overflow: hidden;
+    * {
+        overflow: hidden;
+    }
+
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
@@ -12,7 +17,7 @@
     background-color: #0D0F11;
 
     font-family: 'Montserrat';
-    font-size: 16px;
+    font-size: 2rem;
     font-weight: lighter;
     letter-spacing: 0.05rem;
     line-height: 30px;

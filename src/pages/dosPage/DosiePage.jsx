@@ -60,7 +60,7 @@ const DosiePage = (props) => {
         );
     } else {
         return (  
-            <>
+            <div className='dosiePage'>
                 <div className='loadComponent'>
                     <div className="dim"></div>
                     <div className='load'>
@@ -92,7 +92,7 @@ const DosiePage = (props) => {
                         </div>
                     </div>
                 </div> */}
-            </>
+            </div>
         );
     }
 

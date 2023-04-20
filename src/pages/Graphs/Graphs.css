@@ -1,6 +1,11 @@
+body {
+}
+
 .mainSection {
-    position: relative;
-  
+  background-color: #0D0F11 !important;
+
+
+    position: relative;  
     /* flex: 1; */
   
     display: flex;
@@ -13,12 +18,11 @@
     height: 880px;
   }
   
-body {
-  background-image: none !important;
-}
-  
   
   .centralBar {
+    background-color: #0D0F11 !important;
+
+
     position: relative;
   
     display: flex;

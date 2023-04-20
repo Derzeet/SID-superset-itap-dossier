@@ -8,6 +8,10 @@
 }
 
 .right-top-section {
+    overflow: hidden;
+    * {
+        overflow: hidden;
+    }
 
     padding: 20px;
     
@@ -17,6 +21,10 @@
         gap: 10px;
         overflow: visible;
     }
+
+    * {
+        font-size: 14px;
+    }
 }
 
 .bumber {
@@ -24,6 +32,3 @@
     padding-left: 10px;
 }
 
-* {
-    font-size: 14px;
-}

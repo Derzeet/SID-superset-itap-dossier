@@ -31,7 +31,7 @@ const Navbar = () => {
         <>
         <div className="nav-back">
             <nav className="NavbarItems">
-                <h1 className="logo"><Link to='/'>ITap</Link></h1>
+                <h1 className="logo"><Link to='/'>SID</Link></h1>
                 <div>
                     {console.log(userSession.roles.includes("ADMIN"))}
                     {

@@ -27,9 +27,9 @@ const Navbar = (props) => {
     }
     return ( 
         <>
-              <div className="nav-back">
+            <div className="nav-back">
             <nav className="NavbarItems">
-                <h1 className="logoNav"><Link to='/'>ITap</Link></h1>
+                <h1 className="logoNav"><Link to='/'>SID</Link></h1>
                 <div>
                     {/* {console.log(userSession.roles.includes("ADMIN"))} */}
                     {/* {
