@@ -27,6 +27,61 @@ public class NodesFL {
     private List<school> schools;
     private List<fl_contacts> contacts;
 
+    private List<MillitaryAccount> millitaryAccounts;
+    private List<convicts_terminated_by_rehab> convictsTerminatedByRehabs; //risk
+    private List<convicts_justified> convictsJustifieds;  //risk
+    private List<bankrot> bankrots; //risk
+    private List<fl_pension_contr> flPensionContrs;
+    private List<mv_rn_old> mvRnOlds;
+
+    public List<mv_rn_old> getMvRnOlds() {
+        return mvRnOlds;
+    }
+
+    public void setMvRnOlds(List<mv_rn_old> mvRnOlds) {
+        this.mvRnOlds = mvRnOlds;
+    }
+
+    public List<fl_pension_contr> getFlPensionContrs() {
+        return flPensionContrs;
+    }
+
+    public void setFlPensionContrs(List<fl_pension_contr> flPensionContrs) {
+        this.flPensionContrs = flPensionContrs;
+    }
+
+    public List<convicts_terminated_by_rehab> getConvictsTerminatedByRehabs() {
+        return convictsTerminatedByRehabs;
+    }
+
+    public void setConvictsTerminatedByRehabs(List<convicts_terminated_by_rehab> convictsTerminatedByRehabs) {
+        this.convictsTerminatedByRehabs = convictsTerminatedByRehabs;
+    }
+
+    public List<convicts_justified> getConvictsJustifieds() {
+        return convictsJustifieds;
+    }
+
+    public void setConvictsJustifieds(List<convicts_justified> convictsJustifieds) {
+        this.convictsJustifieds = convictsJustifieds;
+    }
+
+    public List<bankrot> getBankrots() {
+        return bankrots;
+    }
+
+    public void setBankrots(List<bankrot> bankrots) {
+        this.bankrots = bankrots;
+    }
+
+    public List<MillitaryAccount> getMillitaryAccounts() {
+        return millitaryAccounts;
+    }
+
+    public void setMillitaryAccounts(List<MillitaryAccount> millitaryAccounts) {
+        this.millitaryAccounts = millitaryAccounts;
+    }
+
     public List<fl_contacts> getContacts() {
         return contacts;
     }

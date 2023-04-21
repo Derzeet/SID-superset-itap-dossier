@@ -1,13 +1,11 @@
-package com.example.backend.modelsDossier;
-
-import org.springframework.data.repository.cdi.Eager;
+package com.example.backend.photo.modelsPhot;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "mv_ul", schema = "ser")
+@Table(name = "mv_ul", schema = "imp_kfm_ul")
 public class mv_ul {
     private String bin;
     private String full_name_rus;

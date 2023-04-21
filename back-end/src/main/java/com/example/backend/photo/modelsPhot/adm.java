@@ -1,56 +1,183 @@
-package com.example.backend.modelsDossier;
+package com.example.backend.photo.modelsPhot;
 
+import javax.annotation.Nullable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "adm", schema = "ser")
+@Table(name = "adm", schema = "imp_kfm_fl")
 public class adm {
-
+    @Column(name = "2")
+    @Nullable
+    private String two;
+    @Nullable
     private String org_identify_crime;
+    @Nullable
     private String authority_detected;
+    @Nullable
     private String divisions_ovd;
+    @Nullable
     private String material_num;
-
-    private String language_prod;
-    private String reg_date;
-    private String protocol_num;
-    private String protocol_date;
-    private String kui_number;
-    private String kui_date;
-    private Integer erdr_number;
-    private String erdr_date;
-
-
-    private String surname;
-    private String firstname;
-    private String secondname;
-    private String birth_date;
-    private String citizenship;
-    private String nationality;
-    private String iin;
-    private String work_place;
-    private String phone_num;
-    private String email;
-    private String ul_org_name;
-    private String ul_adress;
-    private String bin;
-    private String vehicle_brand;
-    private String state_auto_num;
-    private String qualification;
-    private int enforcement;
-
     @Id
 
-    private int id;
-    private String maim_measure;
-    private String end_date;
-    private String fine_amount;
-    private String teminate_reason;
-    private String source;
+    @Nullable
+    private String language_prod;
+    @Nullable
+    private String reg_date;
+    @Nullable
+    private String protocol_num;
+    @Nullable
+    private String protocol_date;
+    @Nullable
+    private String kui_number;
+    @Nullable
+    private String kui_date;
+    @Nullable
+    private Integer erdr_number;
+    @Nullable
+    private String erdr_date;
+    @Nullable
+    @Column(name = "15")
 
+    private String fifteen;
+    @Nullable
+    @Column(name = "16")
+
+    private String sixteen;
+    @Nullable
+    @Column(name = "17")
+
+    private String seventeen;
+    @Nullable
+    @Column(name = "18")
+
+    private String eighteen;
+    @Nullable
+    @Column(name = "19")
+
+    private String nineteen;
+    @Nullable
+    @Column(name = "20")
+
+    private String twenty;
+    @Nullable
+    @Column(name = "21")
+
+    private String twenty_one;
+    @Nullable
+
+    private String surname;
+    @Nullable
+    private String firstname;
+    @Nullable
+    private String secondname;
+    @Nullable
+    private String birth_date;
+    @Nullable
+    private String citizenship;
+    @Nullable
+    private String nationality;
+    @Nullable
+    private String iin;
+    @Nullable
+    private String work_place;
+    @Nullable
+    private String phone_num;
+    @Nullable
+    private String email;
+    @Nullable
+    private String ul_org_name;
+    @Nullable
+    private String ul_adress;
+    @Nullable
+    private String bin;
+    @Nullable
+    private String vehicle_brand;
+    @Nullable
+    private String state_auto_num;
+    @Nullable
+    private String qualification;
+    @Nullable
+    private Integer enforcement;
+    @Nullable
+    private Integer id;
+    @Nullable
+    private String maim_measure;
+    @Nullable
+    private String end_date;
+    @Nullable
+    private String fine_amount;
+    @Nullable
+    private String teminate_reason;
+    @Nullable
+    private String source;
+    @Nullable
+    @Column(name = "37")
+
+    private String thirty_seven;
+    @Nullable
+    @Column(name = "38")
+
+    private String thirty_eight;
+    @Nullable
+    @Column(name = "39")
+
+    private String thirty_nine;
+    @Nullable
+    @Column(name = "40")
+
+    private String fourty;
+    @Nullable
+    @Column(name = "42")
+
+    private String fourty_two;
+    @Nullable
+    @Column(name = "43")
+
+    private String fourty_three;
+    @Nullable
+    @Column(name = "44")
+
+    private String fourty_four;
+    @Nullable
+    @Column(name = "49")
+
+    private String fourty_nine;
+    @Nullable
+    @Column(name = "51")
+
+    private String fifty_one;
+    @Nullable
+    @Column(name = "52")
+
+    private String fifty_two;
+    @Nullable
+    @Column(name = "53")
+
+    private String fifty_three;
+    @Nullable
+    @Column(name = "54")
+
+    private String fifty_four;
+    @Nullable
+    @Column(name = "55")
+
+    private String fifty_five;
+    @Column(name = "56")
+    @Nullable
+
+    private String fifty_six;
+    @Nullable
+
+    public String getTwo() {
+        return two;
+    }
+
+    public void setTwo(String two) {
+        this.two = two;
+    }
 
     public String getOrg_identify_crime() {
         return org_identify_crime;
@@ -148,6 +275,61 @@ public class adm {
         this.erdr_date = erdr_date;
     }
 
+    public String getFifteen() {
+        return fifteen;
+    }
+
+    public void setFifteen(String fifteen) {
+        this.fifteen = fifteen;
+    }
+
+    public String getSixteen() {
+        return sixteen;
+    }
+
+    public void setSixteen(String sixteen) {
+        this.sixteen = sixteen;
+    }
+
+    public String getSeventeen() {
+        return seventeen;
+    }
+
+    public void setSeventeen(String seventeen) {
+        this.seventeen = seventeen;
+    }
+
+    public String getEighteen() {
+        return eighteen;
+    }
+
+    public void setEighteen(String eighteen) {
+        this.eighteen = eighteen;
+    }
+
+    public String getNineteen() {
+        return nineteen;
+    }
+
+    public void setNineteen(String nineteen) {
+        this.nineteen = nineteen;
+    }
+
+    public String getTwenty() {
+        return twenty;
+    }
+
+    public void setTwenty(String twenty) {
+        this.twenty = twenty;
+    }
+
+    public String getTwenty_one() {
+        return twenty_one;
+    }
+
+    public void setTwenty_one(String twenty_one) {
+        this.twenty_one = twenty_one;
+    }
 
     public String getSurname() {
         return surname;
@@ -333,5 +515,115 @@ public class adm {
         this.source = source;
     }
 
+    public String getThirty_seven() {
+        return thirty_seven;
+    }
 
+    public void setThirty_seven(String thirty_seven) {
+        this.thirty_seven = thirty_seven;
+    }
+
+    public String getThirty_eight() {
+        return thirty_eight;
+    }
+
+    public void setThirty_eight(String thirty_eight) {
+        this.thirty_eight = thirty_eight;
+    }
+
+    public String getThirty_nine() {
+        return thirty_nine;
+    }
+
+    public void setThirty_nine(String thirty_nine) {
+        this.thirty_nine = thirty_nine;
+    }
+
+    public String getFourty() {
+        return fourty;
+    }
+
+    public void setFourty(String fourty) {
+        this.fourty = fourty;
+    }
+
+    public String getFourty_two() {
+        return fourty_two;
+    }
+
+    public void setFourty_two(String fourty_two) {
+        this.fourty_two = fourty_two;
+    }
+
+    public String getFourty_three() {
+        return fourty_three;
+    }
+
+    public void setFourty_three(String fourty_three) {
+        this.fourty_three = fourty_three;
+    }
+
+    public String getFourty_four() {
+        return fourty_four;
+    }
+
+    public void setFourty_four(String fourty_four) {
+        this.fourty_four = fourty_four;
+    }
+
+    public String getFourty_nine() {
+        return fourty_nine;
+    }
+
+    public void setFourty_nine(String fourty_nine) {
+        this.fourty_nine = fourty_nine;
+    }
+
+    public String getFifty_one() {
+        return fifty_one;
+    }
+
+    public void setFifty_one(String fifty_one) {
+        this.fifty_one = fifty_one;
+    }
+
+    public String getFifty_two() {
+        return fifty_two;
+    }
+
+    public void setFifty_two(String fifty_two) {
+        this.fifty_two = fifty_two;
+    }
+
+    public String getFifty_three() {
+        return fifty_three;
+    }
+
+    public void setFifty_three(String fifty_three) {
+        this.fifty_three = fifty_three;
+    }
+
+    public String getFifty_four() {
+        return fifty_four;
+    }
+
+    public void setFifty_four(String fifty_four) {
+        this.fifty_four = fifty_four;
+    }
+
+    public String getFifty_five() {
+        return fifty_five;
+    }
+
+    public void setFifty_five(String fifty_five) {
+        this.fifty_five = fifty_five;
+    }
+
+    public String getFifty_six() {
+        return fifty_six;
+    }
+
+    public void setFifty_six(String fifty_six) {
+        this.fifty_six = fifty_six;
+    }
 }

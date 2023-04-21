@@ -1,16 +1,36 @@
 package com.example.backend.modelsDossier;
 
-import com.example.backend.photo.modelsPhot.photoDb;
+import com.example.backend.photo.modelsPhot.*;
 
 import java.util.List;
 
 public class NodesUL {
     private List<mv_ul> mvUls;
+    private List<mv_ul_founder_fl> mvUlFounderFls;
 
-    private List<omn> omns;
+
+    private List<omn> omns; //risk
     private List<equipment> equipment;
     private List<dormant> dormants;
+    private List<bankrot> bankrots; //risk
+
     private List<adm> adms;
+
+    public List<mv_ul_founder_fl> getMvUlFounderFls() {
+        return mvUlFounderFls;
+    }
+
+    public void setMvUlFounderFls(List<mv_ul_founder_fl> mvUlFounderFls) {
+        this.mvUlFounderFls = mvUlFounderFls;
+    }
+
+    public List<bankrot> getBankrots() {
+        return bankrots;
+    }
+
+    public void setBankrots(List<bankrot> bankrots) {
+        this.bankrots = bankrots;
+    }
 
     public List<mv_ul> getMvUls() {
         return mvUls;

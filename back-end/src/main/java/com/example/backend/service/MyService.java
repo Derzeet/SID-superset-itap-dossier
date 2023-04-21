@@ -1,9 +1,7 @@
 package com.example.backend.service;
 
 import com.example.backend.modelsDossier.*;
-import com.example.backend.photo.modelsPhot.fl_relatives;
-import com.example.backend.photo.modelsPhot.photoDb;
-import com.example.backend.photo.modelsPhot.reg_address_fl;
+import com.example.backend.photo.modelsPhot.*;
 import com.example.backend.photo.repositoryPhot.fl_relativesRepository;
 import com.example.backend.photo.repositoryPhot.mv_iin_docRepo;
 import com.example.backend.photo.repositoryPhot.pdlReposotory;
@@ -22,6 +20,19 @@ import java.util.Map;
 @Service
 public class MyService {
     @Autowired
+    bankrotRepo bankrotRepo;
+    @Autowired
+    convicts_terminated_by_rehabRepo convicts_terminated_by_rehabRepo;
+    @Autowired
+    criminalsRepo criminalsRepo;
+    @Autowired
+    fl_pension_contrRepo flPensionContrRepo;
+    @Autowired
+    mv_ul_founder_flRepo mvUlFounderFlRepo;
+    @Autowired
+    convicts_justifiedRepo convicts_justifiedRepo;
+
+    @Autowired
     private newPhotoService newPhotoService;
     @Autowired
     private mv_auto_fl_repo mvAutoFlRepo;
@@ -36,15 +47,18 @@ public class MyService {
     @Autowired
     private equipment_repo equipment_repo;
     @Autowired
-    private dormant_repo dormantRepo;
+    private mv_rn_oldRepo mv_rn_oldRepo;
     @Autowired
-    private mv_ul_repo mv_ul_repo;
+    private dormant_repo dormantRepo;
+
     @Autowired
     private fl_relativesRepository fl_relativesRepository;
     @Autowired
     private reg_address_fl_Repo regAddressFlRepo;
     @Autowired
     private pdlReposotory pdlReposotory;
+    @Autowired
+    mv_ul_repo mv_ul_repo;
     @Autowired
     private mv_iin_docRepo mvIinDocRepo;
     @Autowired
@@ -53,6 +67,8 @@ public class MyService {
     private schoolRepo schoolRepo;
     @Autowired
     private flContactsRepo flContactsRepo;
+    @Autowired
+    private militaryAccountRepo militaryAccountRepo;
     public List<searchResultModelFL> getByIIN_photo(String IIN) {
         List<mv_fl> fls = mv_FlRepo.getUsersByLike(IIN);
 
@@ -136,20 +152,32 @@ public class MyService {
         List<mv_fl> myMv_fl =  mv_FlRepo.getUsersByLike(IIN);
         List<omn> myOmn =  omn_repos.getUsersByLike(IIN);
         List<orphans> myOrphans =  orphans_repo.getUsersByLike(IIN);
-//        List<adm> MyAdm =  admRepo.getUsersByLike(IIN);
+        List<bankrot> bankrots = bankrotRepo.getbankrotByByIIN(IIN);
+        List<convicts_justified> convictsJustifieds = convicts_justifiedRepo.getconvicts_justifiedByByIIN(IIN);
+        List<convicts_terminated_by_rehab> convictsTerminatedByRehabs = convicts_terminated_by_rehabRepo.getconvicts_terminated_by_rehabByByIIN(IIN);
+        List<criminals> criminals = criminalsRepo.getcriminalsByByIIN(IIN);
+        List<adm> MyAdm =  admRepo.getUsersByLike(IIN);
         List<dormant> myDormant =  dormantRepo.getUsersByLike(IIN);
+        List<mv_rn_old> mvRnOlds = mv_rn_oldRepo.getUsersByLike(IIN);
         List<equipment> myEquipment =  equipment_repo.getUsersByLike(IIN);
         List<fl_relatives> relatives = fl_relativesRepository.findAllByIin(IIN);
         List<reg_address_fl> addressFls = regAddressFlRepo.getByIIN(IIN);
+        List<fl_pension_contr> flPensionContrs = flPensionContrRepo.findAllByIin(IIN);
         omn myOmns =  omn_repos.getUsersByLikeIin_bins(IIN);
+        myNode.setConvictsJustifieds(convictsJustifieds);
+        myNode.setMvRnOlds(mvRnOlds);
+        myNode.setBankrots(bankrots);
+        myNode.setCriminals(criminals);
+        myNode.setConvictsTerminatedByRehabs(convictsTerminatedByRehabs);
         myOmn.add(myOmns);
         myNode.setRegAddressFls(addressFls);
         myNode = tryAddPhoto(myNode,IIN);
+        myNode.setFlPensionContrs(flPensionContrs);
         myNode.setMvFls(myMv_fl);
         myNode.setMvAutoFls(myMv_auto_fl);
         myNode.setOmns(myOmn);
         myNode.setOrphans(myOrphans);
-//        myNode.setAdms(MyAdm);
+        myNode.setAdms(MyAdm);
         myNode.setContacts(flContactsRepo.findAllByIin(IIN));
         myNode.setDormants(myDormant);
         myNode.setEquipment(myEquipment);
@@ -158,16 +186,21 @@ public class MyService {
         myNode.setMvIinDocs(mvIinDocRepo.getByIIN(IIN));
         myNode.setUniversities(uniRepo.getByIIN(IIN));
         myNode.setSchools(schoolRepo.getByIIN(IIN));
+        myNode.setMillitaryAccounts(militaryAccountRepo.findAllByIin(IIN));
         return myNode;
     }
  public NodesUL getNodeUL(String BIN){
         NodesUL myNode = new NodesUL();
-        List<mv_ul> myMv_ul =  mv_ul_repo.getUsersByLike(BIN);
+        List<mv_ul_founder_fl> mvUlFounderFls = mvUlFounderFlRepo.getUsersByLike(BIN);
+        List<bankrot> bankrots = bankrotRepo.getbankrotByByIIN(BIN);
+        List<mv_ul> mvUls = mv_ul_repo.getUsersByLike(BIN);
         List<adm> MyAdm =  admRepo.getUsersByLikeBin(BIN);
         List<dormant> myDormant =  dormantRepo.getUsersByLike(BIN);
         List<equipment> myEquipment =  equipment_repo.getUsersByLike(BIN);
         List<omn> myOmns =  omn_repos.getUsersByLikeIin_bin(BIN);
-        myNode.setMvUls(myMv_ul);
+        myNode.setMvUls(mvUls);
+        myNode.setBankrots(bankrots);
+        myNode.setMvUlFounderFls(mvUlFounderFls);
         myNode.setOmns(myOmns);
         myNode.setAdms(MyAdm);
         myNode.setDormants(myDormant);
