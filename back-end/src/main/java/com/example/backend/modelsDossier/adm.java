@@ -8,13 +8,12 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "adm", schema = "ser")
 public class adm {
-    @Id
-    @Column(name = "2")
-    private String two;
+
     private String org_identify_crime;
     private String authority_detected;
     private String divisions_ovd;
     private String material_num;
+
     private String language_prod;
     private String reg_date;
     private String protocol_num;
@@ -23,27 +22,7 @@ public class adm {
     private String kui_date;
     private Integer erdr_number;
     private String erdr_date;
-    @Column(name = "15")
 
-    private String fifteen;
-    @Column(name = "16")
-
-    private String sixteen;
-    @Column(name = "17")
-
-    private String seventeen;
-    @Column(name = "18")
-
-    private String eighteen;
-    @Column(name = "19")
-
-    private String nineteen;
-    @Column(name = "20")
-
-    private String twenty;
-    @Column(name = "21")
-
-    private String twenty_one;
 
     private String surname;
     private String firstname;
@@ -61,63 +40,17 @@ public class adm {
     private String vehicle_brand;
     private String state_auto_num;
     private String qualification;
-    private Integer enforcement;
-    private Integer id;
+    private int enforcement;
+
+    @Id
+
+    private int id;
     private String maim_measure;
     private String end_date;
     private String fine_amount;
     private String teminate_reason;
     private String source;
-    @Column(name = "37")
 
-    private String thirty_seven;
-    @Column(name = "38")
-
-    private String thirty_eight;
-    @Column(name = "39")
-
-    private String thirty_nine;
-    @Column(name = "40")
-
-    private String fourty;
-    @Column(name = "42")
-
-    private String fourty_two;
-    @Column(name = "43")
-
-    private String fourty_three;
-    @Column(name = "44")
-
-    private String fourty_four;
-    @Column(name = "49")
-
-    private String fourty_nine;
-    @Column(name = "51")
-
-    private String fifty_one;
-    @Column(name = "52")
-
-    private String fifty_two;
-    @Column(name = "53")
-
-    private String fifty_three;
-    @Column(name = "54")
-
-    private String fifty_four;
-    @Column(name = "55")
-
-    private String fifty_five;
-    @Column(name = "56")
-
-    private String fifty_six;
-
-    public String getTwo() {
-        return two;
-    }
-
-    public void setTwo(String two) {
-        this.two = two;
-    }
 
     public String getOrg_identify_crime() {
         return org_identify_crime;
@@ -215,61 +148,6 @@ public class adm {
         this.erdr_date = erdr_date;
     }
 
-    public String getFifteen() {
-        return fifteen;
-    }
-
-    public void setFifteen(String fifteen) {
-        this.fifteen = fifteen;
-    }
-
-    public String getSixteen() {
-        return sixteen;
-    }
-
-    public void setSixteen(String sixteen) {
-        this.sixteen = sixteen;
-    }
-
-    public String getSeventeen() {
-        return seventeen;
-    }
-
-    public void setSeventeen(String seventeen) {
-        this.seventeen = seventeen;
-    }
-
-    public String getEighteen() {
-        return eighteen;
-    }
-
-    public void setEighteen(String eighteen) {
-        this.eighteen = eighteen;
-    }
-
-    public String getNineteen() {
-        return nineteen;
-    }
-
-    public void setNineteen(String nineteen) {
-        this.nineteen = nineteen;
-    }
-
-    public String getTwenty() {
-        return twenty;
-    }
-
-    public void setTwenty(String twenty) {
-        this.twenty = twenty;
-    }
-
-    public String getTwenty_one() {
-        return twenty_one;
-    }
-
-    public void setTwenty_one(String twenty_one) {
-        this.twenty_one = twenty_one;
-    }
 
     public String getSurname() {
         return surname;
@@ -455,115 +333,5 @@ public class adm {
         this.source = source;
     }
 
-    public String getThirty_seven() {
-        return thirty_seven;
-    }
 
-    public void setThirty_seven(String thirty_seven) {
-        this.thirty_seven = thirty_seven;
-    }
-
-    public String getThirty_eight() {
-        return thirty_eight;
-    }
-
-    public void setThirty_eight(String thirty_eight) {
-        this.thirty_eight = thirty_eight;
-    }
-
-    public String getThirty_nine() {
-        return thirty_nine;
-    }
-
-    public void setThirty_nine(String thirty_nine) {
-        this.thirty_nine = thirty_nine;
-    }
-
-    public String getFourty() {
-        return fourty;
-    }
-
-    public void setFourty(String fourty) {
-        this.fourty = fourty;
-    }
-
-    public String getFourty_two() {
-        return fourty_two;
-    }
-
-    public void setFourty_two(String fourty_two) {
-        this.fourty_two = fourty_two;
-    }
-
-    public String getFourty_three() {
-        return fourty_three;
-    }
-
-    public void setFourty_three(String fourty_three) {
-        this.fourty_three = fourty_three;
-    }
-
-    public String getFourty_four() {
-        return fourty_four;
-    }
-
-    public void setFourty_four(String fourty_four) {
-        this.fourty_four = fourty_four;
-    }
-
-    public String getFourty_nine() {
-        return fourty_nine;
-    }
-
-    public void setFourty_nine(String fourty_nine) {
-        this.fourty_nine = fourty_nine;
-    }
-
-    public String getFifty_one() {
-        return fifty_one;
-    }
-
-    public void setFifty_one(String fifty_one) {
-        this.fifty_one = fifty_one;
-    }
-
-    public String getFifty_two() {
-        return fifty_two;
-    }
-
-    public void setFifty_two(String fifty_two) {
-        this.fifty_two = fifty_two;
-    }
-
-    public String getFifty_three() {
-        return fifty_three;
-    }
-
-    public void setFifty_three(String fifty_three) {
-        this.fifty_three = fifty_three;
-    }
-
-    public String getFifty_four() {
-        return fifty_four;
-    }
-
-    public void setFifty_four(String fifty_four) {
-        this.fifty_four = fifty_four;
-    }
-
-    public String getFifty_five() {
-        return fifty_five;
-    }
-
-    public void setFifty_five(String fifty_five) {
-        this.fifty_five = fifty_five;
-    }
-
-    public String getFifty_six() {
-        return fifty_six;
-    }
-
-    public void setFifty_six(String fifty_six) {
-        this.fifty_six = fifty_six;
-    }
 }

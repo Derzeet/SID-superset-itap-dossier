@@ -33,7 +33,7 @@ const LeftBar = (props) => {
 
     const [modal, setModal] = useState(false)
 
-    const [mode, setMode] = useState("none")
+    const [mode, setMode] = useState("con1")
     const [relString, setRelString] = useState("")
 
     useEffect(() => {

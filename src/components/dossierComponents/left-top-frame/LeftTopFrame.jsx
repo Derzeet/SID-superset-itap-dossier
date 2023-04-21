@@ -5,20 +5,26 @@ import './leftTopFrame.scss'
 
 function LeftTopFrame(props) {
     const [photo, setPhoto] = useState('')
+    const [photos, setPhotos] = useState([{photo: ''}, {photo: ''}])
     const [first_name, setfirst_name] = useState('')
     const [last_name, setlast_name] = useState('')
     const [patronymic, setpatronymic] = useState('')
     const [iin, setiin] = useState('')
+
+    const [sliderNum, setSliderNum] = useState(0)
     // const [first_name, setfirst_name] = useState('')
     // const [first_name, setfirst_name] = useState('')
     // const [first_name, setfirst_name] = useState('')
     useEffect(() => {
         // console.log("lol", props)
         setPhoto(props.photo)
+        setPhotos(props.photos)
         setfirst_name(props.data[0].first_name)
         setlast_name(props.data[0].last_name)
         setpatronymic(props.data[0].patronymic)
         setiin(props.data[0].iin)
+        setSliderNum(props.photos.length-1)
+        // console.log(photos)
     })
     // const [iin, setIIN] = useState("")
     //
@@ -37,7 +43,15 @@ function LeftTopFrame(props) {
         <div className="left-top-section">
             <div className="first-line">
                 <div className="avatar">
-                    <img src={"data:image/png;base64, " + photo} alt="No Image" />
+                    <img src={"data:image/png;base64, " + photos[sliderNum].photo} alt="No Image" />
+                    {/*<img src={"data:image/png;base64, " + photo} alt="No Image" />*/}
+                    <div>
+                        <div onClick={() => {
+                        }}>prev</div>
+                        <div onClick={() => {
+
+                        }}>next</div>
+                    </div>
                 </div>    
                 <div className='person-main-info'>
                     <div>

@@ -31,18 +31,15 @@ const Navbar = (props) => {
             <nav className="NavbarItems">
                 <h1 className="logoNav"><Link to='/'>SID</Link></h1>
                 <div>
-                    {/* {console.log(userSession.roles.includes("ADMIN"))} */}
-                    {/* {
-                        userSession && 
-                        userSession.roles.includes("ADMIN")
-                        ?  (
-                            <>
-                            <div className="admin"><a onClick={() => toAdmin()}>Админ панель</a></div>
-                            <div className="admin"><Link to="/registration">Регистрация</Link></div>
-                            </>
-                        ) : ("")
-                    } */}
-                   
+                    {userSession &&
+                    userSession.roles.includes("ADMIN")
+                    ?  (
+                        <>
+                        <div className="admin"><a onClick={() => toAdmin()}>Админ панель</a></div>
+                        <div className="admin"><Link to="/registration">Регистрация</Link></div>
+                        </>
+                    ) : ("")}
+
                     <ul className="nav-menu">
                     {userSession ? 
                         <>

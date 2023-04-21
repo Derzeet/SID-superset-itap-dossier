@@ -22,36 +22,37 @@ import java.util.Map;
 @Service
 public class MyService {
     @Autowired
-    newPhotoService newPhotoService;
+    private newPhotoService newPhotoService;
     @Autowired
-    mv_auto_fl_repo mvAutoFlRepo;
+    private mv_auto_fl_repo mvAutoFlRepo;
     @Autowired
-    mv_fl_repo mv_FlRepo;
+    private mv_fl_repo mv_FlRepo;
     @Autowired
-    omn_repo omn_repos;
+    private omn_repo omn_repos;
     @Autowired
-    orphans_repo orphans_repo;
+    private orphans_repo orphans_repo;
     @Autowired
-    adm_repo admRepo;
+    private adm_repo admRepo;
     @Autowired
-    equipment_repo equipment_repo;
+    private equipment_repo equipment_repo;
     @Autowired
-    dormant_repo dormantRepo;
+    private dormant_repo dormantRepo;
     @Autowired
-    mv_ul_repo mv_ul_repo;
+    private mv_ul_repo mv_ul_repo;
     @Autowired
-    fl_relativesRepository fl_relativesRepository;
+    private fl_relativesRepository fl_relativesRepository;
     @Autowired
-    reg_address_fl_Repo regAddressFlRepo;
+    private reg_address_fl_Repo regAddressFlRepo;
     @Autowired
-    pdlReposotory pdlReposotory;
+    private pdlReposotory pdlReposotory;
     @Autowired
-    mv_iin_docRepo mvIinDocRepo;
+    private mv_iin_docRepo mvIinDocRepo;
     @Autowired
-    universitiesRepo uniRepo;
+    private universitiesRepo uniRepo;
     @Autowired
-    schoolRepo schoolRepo;
-
+    private schoolRepo schoolRepo;
+    @Autowired
+    private flContactsRepo flContactsRepo;
     public List<searchResultModelFL> getByIIN_photo(String IIN) {
         List<mv_fl> fls = mv_FlRepo.getUsersByLike(IIN);
 
@@ -135,10 +136,10 @@ public class MyService {
         List<mv_fl> myMv_fl =  mv_FlRepo.getUsersByLike(IIN);
         List<omn> myOmn =  omn_repos.getUsersByLike(IIN);
         List<orphans> myOrphans =  orphans_repo.getUsersByLike(IIN);
-        List<adm> MyAdm =  admRepo.getUsersByLike(IIN);
+//        List<adm> MyAdm =  admRepo.getUsersByLike(IIN);
         List<dormant> myDormant =  dormantRepo.getUsersByLike(IIN);
         List<equipment> myEquipment =  equipment_repo.getUsersByLike(IIN);
-        List<fl_relatives> relatives = fl_relativesRepository.getRelativesByFio(IIN);
+        List<fl_relatives> relatives = fl_relativesRepository.findAllByIin(IIN);
         List<reg_address_fl> addressFls = regAddressFlRepo.getByIIN(IIN);
         omn myOmns =  omn_repos.getUsersByLikeIin_bins(IIN);
         myOmn.add(myOmns);
@@ -148,7 +149,8 @@ public class MyService {
         myNode.setMvAutoFls(myMv_auto_fl);
         myNode.setOmns(myOmn);
         myNode.setOrphans(myOrphans);
-        myNode.setAdms(MyAdm);
+//        myNode.setAdms(MyAdm);
+        myNode.setContacts(flContactsRepo.findAllByIin(IIN));
         myNode.setDormants(myDormant);
         myNode.setEquipment(myEquipment);
         myNode.setFl_relatives(relatives);

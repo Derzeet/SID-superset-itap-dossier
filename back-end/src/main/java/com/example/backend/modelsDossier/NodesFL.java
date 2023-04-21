@@ -22,6 +22,18 @@ public class NodesFL {
 
     private List<mv_iin_doc> mvIinDocs;
     private List<criminals> criminals;
+    private List<com.example.backend.photo.modelsPhot.universities> universities;
+
+    private List<school> schools;
+    private List<fl_contacts> contacts;
+
+    public List<fl_contacts> getContacts() {
+        return contacts;
+    }
+
+    public void setContacts(List<fl_contacts> contacts) {
+        this.contacts = contacts;
+    }
 
     public List<com.example.backend.photo.modelsPhot.criminals> getCriminals() {
         return criminals;
@@ -30,10 +42,6 @@ public class NodesFL {
     public void setCriminals(List<com.example.backend.photo.modelsPhot.criminals> criminals) {
         this.criminals = criminals;
     }
-
-    private List<com.example.backend.photo.modelsPhot.universities> universities;
-
-    private List<school> schools;
 
     public List<school> getSchools() {
         return schools;

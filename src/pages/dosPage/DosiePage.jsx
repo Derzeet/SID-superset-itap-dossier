@@ -11,7 +11,7 @@ import LeftBottomFrame from '../../components/dossierComponents/left-bottom-fram
 import RightBottomFrame from '../../components/dossierComponents/right-bottom-frame/RightBottomFrame';
 import SearchBar from '../../components/dossierComponents/search-bar/SearchBar';
 import axios from 'axios';
-const baseURL = 'http://localhost:9095/'
+const baseURL = 'http://192.168.30.24:9095/'
 const DosiePage = (props) => {
     const [leftTopFrameData, setLeftTopFrameData] = useState({});
     const [docs, setDocs] = useState([])
@@ -22,6 +22,8 @@ const DosiePage = (props) => {
     const [base, setBase] = useState('')
     const { iin } = useParams();
     const [loading, isLoading] = useState(null)
+
+    const [photos, setPhotos] = useState([])
 
     useEffect(() => {
         console.log(iin)
@@ -34,6 +36,8 @@ const DosiePage = (props) => {
                 setLeftTopFrameData(res.data.mvFls)
                 setRelatives(res.data.fl_relatives)
                 setBase(res.data.photoDbf[0].photo)
+                setPhotos(res.data.photoDbf)
+                // res.data.photoDDFmap()
                 setAddresses(res.data.regAddressFls)
                 setDocs(res.data.mvIinDocs)
                 setTransport(res.data.mvAutoFls)
@@ -49,7 +53,7 @@ const DosiePage = (props) => {
                 <div className='dosiePage'>
                     <div className="central-bar">
                         <div className="frames">
-                            <LeftTopFrame photo={base} data={leftTopFrameData}/>
+                            <LeftTopFrame photo={base} photos={photos} data={leftTopFrameData}/>
                             <RightTopFrame relatives={relatives}/>
                             <LeftBottomFrame docs={docs} addresses={addresses} transport={transport}/>
                             <RightBottomFrame/>

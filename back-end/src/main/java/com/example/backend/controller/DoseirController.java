@@ -20,7 +20,7 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-@CrossOrigin(origins = "*", maxAge = 5179)
+@CrossOrigin(origins = "*", maxAge = 3000)
 public class DoseirController {
     @Autowired
     newPhotoRepo newPhotoRepo;

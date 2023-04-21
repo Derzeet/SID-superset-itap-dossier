@@ -9,6 +9,8 @@ import java.util.List;
 
 @Repository
 public interface fl_relativesRepository extends JpaRepository<fl_relatives, Long>  {
+
+    List<fl_relatives> findAllByIin(String iin);
     @Query(value= "select * from imp_zags.fl_relatives where parent_iin = ?1", nativeQuery = true)
     List<fl_relatives> getRelativesByFio(String IIN);
 }

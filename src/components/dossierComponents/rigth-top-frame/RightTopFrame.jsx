@@ -71,9 +71,9 @@ function Row(props) {
       <>
         <TableRow className="uitablerow" sx={{height:'10px',}} style={{borderBottom: 'hidden'}}>
           <TableCell sx={{padding: 1}} style={{fontSize: '12px', fontWeight: 500, color: "#FFFFFF"}}><a>{props.index + 1}</a></TableCell>
-          <TableCell sx={{padding: 1}} style={{ width: '60%', paddingLeft: '18px', fontSize: '12px', fontWeight: 500, color: "#FFFFFF" }} align="left"><a>{row.fio}</a></TableCell>
-          <TableCell sx={{padding: 1}} style={{ paddingLeft: '18px', fontSize: '12px', fontWeight: 500, color: "#FFFFFF" }}><a>{row.iin || '---'}</a></TableCell>
-          <TableCell sx={{padding: 1}} style={{fontSize: '12px', fontWeight: 500, color: "#FFFFFF" }}><Link style={{textDecoration: 'none', color: 'white'}} className='goLink' target='_blank' rel='noopener noreferrer' to={'/profiler/person/'+ row.iin}>Перейти..</Link></TableCell>
+          <TableCell sx={{padding: 1}} style={{ width: '60%', paddingLeft: '18px', fontSize: '12px', fontWeight: 500, color: "#FFFFFF" }} align="left"><a>{row.parent_fio}</a></TableCell>
+          <TableCell sx={{padding: 1}} style={{ paddingLeft: '18px', fontSize: '12px', fontWeight: 500, color: "#FFFFFF" }}><a>{row.parent_iin || '---'}</a></TableCell>
+          <TableCell sx={{padding: 1}} style={{fontSize: '12px', fontWeight: 500, color: "#FFFFFF" }}><Link style={{textDecoration: 'none', color: 'white'}} className='goLink' target='_blank' rel='noopener noreferrer' to={'/profiler/person/'+ row.parent_iin}>Перейти..</Link></TableCell>
           <TableCell sx={{padding: 1}}>
             <IconButton
               aria-label="expand row"

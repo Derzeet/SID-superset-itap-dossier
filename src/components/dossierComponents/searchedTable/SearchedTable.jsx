@@ -63,12 +63,19 @@ function SearchedTable(props) {
           </TableCell>
           <TableCell sx={tdStyle} align="left">{row.first_name} {row.last_name} {row.patronymic}</TableCell>
           <TableCell sx={tdStyle} align="left">{row.iin}</TableCell>
-          <TableCell sx={tdStyle} align="left"><Link style={{textDecoration: 'none', color: 'white'}} className='goLink'  target='_blank' rel='noopener noreferrer' to={'/profiler/person/'+ row.iin}>Перейти..</Link>
-          <a style={{textDecoration: 'none', color: 'white', cursor: "pointer"}} onClick={() => {
-             const string = queryString.stringify({iin: row.iin})
-             const url = `/itap?${string}`
-             window.open(url, '_blank', 'noopener,noreferrer')
-          }} className='goLink'> Перейти в ITAP</a></TableCell>
+          <TableCell sx={tdStyle} align="left" style={{
+              display: 'flex',
+              flexDirection: 'row',
+              gap: '10px',
+              alignItems: 'center'
+          }}>
+              <Link style={{textDecoration: 'none', color: 'white', backgroundColor: "#33B6FF", padding: '5px 10px', borderRadius: '4px'}} className='goLink'
+                                                     target='_blank' rel='noopener noreferrer' to={'/profiler/person/'+ row.iin}>Перейти</Link>
+              <a style={{textDecoration: 'none', color: 'white', cursor: "pointer", backgroundColor: "#33B6FF", padding: '5px 10px', borderRadius: '4px'}} onClick={() => {
+                 const string = queryString.stringify({iin: row.iin})
+                 const url = `/itap?${string}`
+                 window.open(url, '_blank', 'noopener,noreferrer')
+              }} className='goLink'> Перейти в ITAP</a></TableCell>
 
         </TableRow>
       ))

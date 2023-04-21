@@ -79,7 +79,7 @@ const Option = (props) => {
 };
 
 const RelationBlock = (props) => {
-    const [selectedOptions, setSelectedOptions] = useState([])
+    const [selectedOptions, setSelectedOptions] = useState([...relationsLevel1, ...relationsLevel2])
 
     const checkAdmin = () => {
         const userSession = JSON.parse(localStorage.getItem("user"))

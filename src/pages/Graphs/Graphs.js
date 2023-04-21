@@ -366,10 +366,13 @@ const GraphNetnew = (props) => {
             let tempNodes = nodes
             let tempEdges = edges
 
+            console.log("res dataa", res.data.nodes, res.data.edges)
+            console.log("my", nodes, edges)
+
             res.data.edges.map(item => {
                 setEdgeSettings(item)
                 _edges.push(item)
-            }) 
+            })
 
             res.data.nodes.map(item => {
                 setNodeSettings(item)
@@ -379,6 +382,7 @@ const GraphNetnew = (props) => {
             let newNodes = mergeWithoutDuplicates(tempNodes, _nodes)
             let newEdges = mergeWithoutDuplicates(tempEdges, _edges)
 
+            console.log("after merge", newNodes, newEdges);
             setNodes(newNodes)
             setEdges(newEdges)
 
