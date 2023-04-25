@@ -3,6 +3,7 @@ package com.example.backend.modelsDossier;
 import com.example.backend.photo.modelsPhot.*;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class NodesFL {
@@ -31,7 +32,16 @@ public class NodesFL {
     private List<convicts_terminated_by_rehab> convictsTerminatedByRehabs; //risk
     private List<convicts_justified> convictsJustifieds;  //risk
     private List<bankrot> bankrots; //risk
-    private List<fl_pension_contr> flPensionContrs;
+    private List<ArrayList> flPensionContrs;
+
+    public List<ArrayList> getFlPensionContrs() {
+        return flPensionContrs;
+    }
+
+    public void setFlPensionContrs(List<ArrayList> flPensionContrs) {
+        this.flPensionContrs = flPensionContrs;
+    }
+
     private List<mv_rn_old> mvRnOlds;
 
     public List<mv_rn_old> getMvRnOlds() {
@@ -42,13 +52,7 @@ public class NodesFL {
         this.mvRnOlds = mvRnOlds;
     }
 
-    public List<fl_pension_contr> getFlPensionContrs() {
-        return flPensionContrs;
-    }
 
-    public void setFlPensionContrs(List<fl_pension_contr> flPensionContrs) {
-        this.flPensionContrs = flPensionContrs;
-    }
 
     public List<convicts_terminated_by_rehab> getConvictsTerminatedByRehabs() {
         return convictsTerminatedByRehabs;

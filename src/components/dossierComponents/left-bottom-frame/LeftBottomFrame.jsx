@@ -21,6 +21,7 @@ function LeftBottomFrame(props) {
     const [docs, setDocs] = useState([])
     const [addresses, setAddresses] = useState([])
     const [transport, setTransport] = useState([])
+    const [schools, setSchools] = useState([])
 
     
     useEffect(()=> {
@@ -37,6 +38,7 @@ function LeftBottomFrame(props) {
         setDocs(props.docs)
         setAddresses(props.addresses)
         setTransport(filteredTSPRT)
+        setSchools(props.schools)
     }, [soc])
     return ( 
 

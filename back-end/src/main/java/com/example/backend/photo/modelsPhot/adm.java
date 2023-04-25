@@ -20,7 +20,6 @@ public class adm {
     private String divisions_ovd;
     @Nullable
     private String material_num;
-    @Id
 
     @Nullable
     private String language_prod;
@@ -80,6 +79,8 @@ public class adm {
     @Nullable
     private String nationality;
     @Nullable
+    @Id
+
     private String iin;
     @Nullable
     private String work_place;

@@ -1,5 +1,8 @@
 package com.example.backend.photo.modelsPhot;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
 import javax.annotation.Nullable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +11,8 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "fl_pension_contr", schema = "imp_kfm_fl")
+@NoArgsConstructor
+@AllArgsConstructor
 public class fl_pension_contr {
 
 

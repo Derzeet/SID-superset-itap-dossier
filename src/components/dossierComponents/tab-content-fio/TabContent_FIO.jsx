@@ -68,7 +68,6 @@ function TabContent_FIO(props) {
 
     const [result, setResult] = React.useState(null);
     const [photo, setPhoto] = React.useState('')
-
     const handleSelectPerson = (photo) => {
         setPhoto(photo)
     }

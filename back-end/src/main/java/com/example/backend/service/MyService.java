@@ -9,6 +9,7 @@ import com.example.backend.photo.repositoryPhot.reg_address_fl_Repo;
 import com.example.backend.photo.repositoryPhot.*;
 import com.example.backend.repositoryDossier.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Field;
@@ -20,6 +21,8 @@ import java.util.Map;
 @Service
 public class MyService {
     @Autowired
+    JdbcTemplate jdbcTemplate;
+    @Autowired
     bankrotRepo bankrotRepo;
     @Autowired
     convicts_terminated_by_rehabRepo convicts_terminated_by_rehabRepo;
@@ -27,6 +30,8 @@ public class MyService {
     criminalsRepo criminalsRepo;
     @Autowired
     fl_pension_contrRepo flPensionContrRepo;
+    @Autowired
+    fl_pension_MiniRepo flPensionMiniRepo;
     @Autowired
     mv_ul_founder_flRepo mvUlFounderFlRepo;
     @Autowired
@@ -162,9 +167,10 @@ public class MyService {
         List<equipment> myEquipment =  equipment_repo.getUsersByLike(IIN);
         List<fl_relatives> relatives = fl_relativesRepository.findAllByIin(IIN);
         List<reg_address_fl> addressFls = regAddressFlRepo.getByIIN(IIN);
-        List<fl_pension_contr> flPensionContrs = flPensionContrRepo.getUsersByLike(IIN);
-        List<String> CompanyNames = flPensionContrRepo.getUsersByLikeCompany(IIN);
-        System.out.println(CompanyNames);
+        List<String> flPensionContrs = flPensionContrRepo.getUsersByLikeCompany(IIN);
+//        List<String> CompanyNames = flPensionContrRepo.getUsersByLikeCompany(IIN);
+        System.out.println(flPensionContrs);
+        List<flPensionMini> flPensionContrs1 = new ArrayList<>();
         omn myOmns =  omn_repos.getUsersByLikeIin_bins(IIN);
         myNode.setConvictsJustifieds(convictsJustifieds);
         myNode.setMvRnOlds(mvRnOlds);
@@ -174,7 +180,16 @@ public class MyService {
         myOmn.add(myOmns);
         myNode.setRegAddressFls(addressFls);
         myNode = tryAddPhoto(myNode,IIN);
-        myNode.setFlPensionContrs(flPensionContrs);
+        List<ArrayList> arrayLists = new ArrayList<>();
+        for(String flPension : flPensionContrs){
+            List<flPensionMini> fl_pension_contrss = new ArrayList<>();
+            fl_pension_contrss = flPensionMiniRepo.getAllByCompanies(IIN,flPension);
+            System.out.println(flPensionContrRepo.findAmountOfAmountByKNP(IIN,flPension));
+
+            arrayLists.add((ArrayList) fl_pension_contrss);
+            System.out.println(fl_pension_contrss);
+            myNode.setFlPensionContrs(arrayLists);
+        }
         myNode.setMvFls(myMv_fl);
         myNode.setMvAutoFls(myMv_auto_fl);
         myNode.setOmns(myOmn);

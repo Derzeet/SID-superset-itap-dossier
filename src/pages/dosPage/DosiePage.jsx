@@ -25,6 +25,10 @@ const DosiePage = (props) => {
 
     const [photos, setPhotos] = useState([])
 
+    // risks
+    const [criminals, setCriminals] = useState([])
+    const [schools, setSchools] = useState([])
+
     useEffect(() => {
         console.log(iin)
         const searchIIN = () => {
@@ -41,6 +45,9 @@ const DosiePage = (props) => {
                 setAddresses(res.data.regAddressFls)
                 setDocs(res.data.mvIinDocs)
                 setTransport(res.data.mvAutoFls)
+                setSchools(res.data.schools)
+                setCriminals(res.data.criminals)
+
                 isLoading(false)
             })
         }
@@ -55,8 +62,8 @@ const DosiePage = (props) => {
                         <div className="frames">
                             <LeftTopFrame photo={base} photos={photos} data={leftTopFrameData}/>
                             <RightTopFrame relatives={relatives}/>
-                            <LeftBottomFrame docs={docs} addresses={addresses} transport={transport}/>
-                            <RightBottomFrame/>
+                            <LeftBottomFrame docs={docs} addresses={addresses} transport={transport} schools={schools}/>
+                            <RightBottomFrame criminals={criminals}/>
                         </div>
                     </div>
                 </div>
