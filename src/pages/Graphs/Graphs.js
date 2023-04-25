@@ -340,7 +340,8 @@ const GraphNetnew = (props) => {
 
     const mergeWithoutDuplicates = (arr1, arr2) => {
         let concatArray = arr1.concat(arr2)
-        let newArray = concatArray.filter((value, index, self) =>
+        let newArray = []
+        newArray = concatArray.filter((value, index, self) =>
             index === self.findIndex((t) => (
                 t.id === value.id
             ))
@@ -366,28 +367,42 @@ const GraphNetnew = (props) => {
             let tempNodes = nodes
             let tempEdges = edges
 
-            console.log("res dataa", res.data.nodes, res.data.edges)
-            console.log("my", nodes, edges)
-
             res.data.edges.map(item => {
                 setEdgeSettings(item)
-                _edges.push(item)
+                let duplFlag = false
+                tempEdges.map(node => {
+                    if (node.id === item.id) duplFlag = true
+                })
+                if (!duplFlag) {
+                    tempEdges.push(item)
+                    Network.body.data.edges.add(item);
+                }
+
             })
 
             res.data.nodes.map(item => {
                 setNodeSettings(item)
-                _nodes.push(item)
+                let duplFlag = false
+                tempNodes.map(node => {
+                    if (node.id === item.id) duplFlag = true
+                })
+                if (!duplFlag) {
+                    tempNodes.push(item)
+                    Network.body.data.nodes.add(item);
+                }
             })
 
-            let newNodes = mergeWithoutDuplicates(tempNodes, _nodes)
-            let newEdges = mergeWithoutDuplicates(tempEdges, _edges)
+            // let newNodes = mergeWithoutDuplicates(tempNodes, _nodes)
+            // let newEdges = mergeWithoutDuplicates(tempEdges, _edges)
 
-            console.log("after merge", newNodes, newEdges);
-            setNodes(newNodes)
-            setEdges(newEdges)
+
+
+            setNodes(tempNodes)
+            setEdges(tempEdges)
 
             setPhysicsEnable(true)
 
+            Network.redraw()
             Network.fit({});
         })
     }
@@ -437,7 +452,6 @@ const GraphNetnew = (props) => {
             deepRemove(item.id)
         })
         
-        removeFloatingNodes()
     }
 
     const deepRemove = (id) => {
@@ -450,13 +464,9 @@ const GraphNetnew = (props) => {
         })
 
         console.log(relatedNodes)
-    }
-
-    const removeFloatingNodes = () => {
-        
-
 
     }
+
 
     const removeNode = (id) => {
         Network.body.data.nodes.remove([{id: id}]);
@@ -624,7 +634,7 @@ const GraphNetnew = (props) => {
                     
                 assignInfoBlock({
                     "ИИН": sp.IIN || "Нет ИИН-а",
-                    "Имя": sp.FIO.split(" ")[1] || "Нет имя", 
+                    "Имя": sp.FIO ? sp.FIO.split(" ")[1] : "Нет имени",
                     "Фамилия": sp.Familia || "Нет фамилии",
                     "ФИО": sp.FIO || "Нет ФИО",
                     "Отчество": sp.Otchestvo || "Нет отчества",
@@ -776,7 +786,6 @@ const GraphNetnew = (props) => {
             "ИИН": sp.IIN,
             "Дата начала отчисления ОПВ/СО": sp.data_nachalo,
             "Дата окончания отчисления ОПВ/СО": sp.data_oconchanya,
-            "Средняя заработная плата": sp.average_zp,
             "Количество месяцев пенсионных отчислений": sp.mesyac_pensionnih,
             "Пенсионные отчисления": sp.pensionnoe_otchislenie,
             "Социальные отчисления": sp.soc_ochislenya,
@@ -805,7 +814,7 @@ const GraphNetnew = (props) => {
             "Тип аффилированности": sp.Type_affilirovannosti,
             "БИН/ИИН работадателя": sp.IINBIN_rabotadatelya,
             "Наименование типа должности на русском": sp.naimenovanie_tipa_dolzhnosty,
-            "Наименование типа должности на русском": sp.NAME_tipa_dolzhnosty,
+            "Наименование типа должности на русском ": sp.NAME_tipa_dolzhnosty,
             "Дата начала": sp.data_nachalo,
             "Дата окончания": sp.data_oconchanya,
             "ИИН": sp.IIN,
@@ -927,6 +936,8 @@ const GraphNetnew = (props) => {
         graJSON.edges = edges
         graJSON.nodes = nodes
 
+        console.log(Network)
+        // Network.redraw()
     }, [nodes, edges])
 
     const download = () => {
@@ -939,8 +950,8 @@ const GraphNetnew = (props) => {
             anchor.click()
             anchor.remove()
         })
-    }        
-    
+    }
+
     const exportBt = () => {
         const fileName = "graph.txt"
         const fileContent = JSON.stringify(graJSON, null, 2)

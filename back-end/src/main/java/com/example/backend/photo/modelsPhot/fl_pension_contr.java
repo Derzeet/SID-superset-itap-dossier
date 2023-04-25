@@ -1,4 +1,4 @@
-package com.example.backend.modelsDossier;
+package com.example.backend.photo.modelsPhot;
 
 import javax.annotation.Nullable;
 import javax.persistence.Column;
@@ -7,8 +7,12 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "fl_pension_contr", schema = "ser")
+@Table(name = "fl_pension_contr", schema = "imp_kfm_fl")
 public class fl_pension_contr {
+
+
+
+
     @Nullable
     @Column(name = "SURNAME")
     private String surname;

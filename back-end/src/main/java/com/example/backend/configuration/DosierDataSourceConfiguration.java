@@ -44,7 +44,7 @@ public class DosierDataSourceConfiguration {
             EntityManagerFactoryBuilder builder) {
         return builder
                 .dataSource(dossierDataSource())
-                .packages(esf_all2.class, mv_auto_fl.class,fl_pension_contr.class, dormant.class, equipment.class, mv_fl.class, omn.class, orphans.class)
+                .packages(esf_all2.class, mv_auto_fl.class, dormant.class, equipment.class, mv_fl.class, omn.class, orphans.class)
                 .build();
     }
 

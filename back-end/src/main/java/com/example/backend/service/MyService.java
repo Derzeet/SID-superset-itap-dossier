@@ -162,7 +162,9 @@ public class MyService {
         List<equipment> myEquipment =  equipment_repo.getUsersByLike(IIN);
         List<fl_relatives> relatives = fl_relativesRepository.findAllByIin(IIN);
         List<reg_address_fl> addressFls = regAddressFlRepo.getByIIN(IIN);
-        List<fl_pension_contr> flPensionContrs = flPensionContrRepo.findAllByIin(IIN);
+        List<fl_pension_contr> flPensionContrs = flPensionContrRepo.getUsersByLike(IIN);
+        List<String> CompanyNames = flPensionContrRepo.getUsersByLikeCompany(IIN);
+        System.out.println(CompanyNames);
         omn myOmns =  omn_repos.getUsersByLikeIin_bins(IIN);
         myNode.setConvictsJustifieds(convictsJustifieds);
         myNode.setMvRnOlds(mvRnOlds);
