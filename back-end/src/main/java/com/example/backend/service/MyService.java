@@ -9,6 +9,7 @@ import com.example.backend.photo.repositoryPhot.reg_address_fl_Repo;
 import com.example.backend.photo.repositoryPhot.*;
 import com.example.backend.repositoryDossier.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
@@ -180,16 +181,24 @@ public class MyService {
         myOmn.add(myOmns);
         myNode.setRegAddressFls(addressFls);
         myNode = tryAddPhoto(myNode,IIN);
-        List<ArrayList> arrayLists = new ArrayList<>();
+        List<FL_PENSION_FINAL> flPensionFinals = new ArrayList<>();
         for(String flPension : flPensionContrs){
+            FL_PENSION_FINAL flPensionFinal = new FL_PENSION_FINAL();
             List<flPensionMini> fl_pension_contrss = new ArrayList<>();
             fl_pension_contrss = flPensionMiniRepo.getAllByCompanies(IIN,flPension);
-            System.out.println(flPensionContrRepo.findAmountOfAmountByKNP(IIN,flPension));
-
-            arrayLists.add((ArrayList) fl_pension_contrss);
-            System.out.println(fl_pension_contrss);
-            myNode.setFlPensionContrs(arrayLists);
+            List<Map<String, Object>> r = flPensionContrRepo.findAmountOfAmountByKNP(IIN,flPension);
+            List<String> fff = flPensionMiniRepo.getAllByCompaniesYear(IIN,flPension);
+//            System.out.println(flPensionContrRepo.findAmountOfAmountByKNP(IIN,flPension));
+//            Object findAmountOfAmountByKNPf = flPensionContrRepo.findAmountOfAmountByKNP(IIN,flPension);
+//            System.out.printf(String.valueOf(findAmountOfAmountByKNPf.getClass().getName()));
+            flPensionFinal.setFlPensionMinis(fl_pension_contrss);
+            flPensionFinal.setNakoplenya(r);
+            flPensionFinal.setYears(fff);
+            flPensionFinal.setCompanyBin(flPension);
+            flPensionFinals.add(flPensionFinal);
+//            System.out.println(findAmountOfAmountByKNPf);
         }
+        myNode.setFlPensionContrs(flPensionFinals);
         myNode.setMvFls(myMv_fl);
         myNode.setMvAutoFls(myMv_auto_fl);
         myNode.setOmns(myOmn);
@@ -205,6 +214,9 @@ public class MyService {
         myNode.setSchools(schoolRepo.getByIIN(IIN));
         myNode.setMillitaryAccounts(militaryAccountRepo.findAllByIin(IIN));
         return myNode;
+    }
+    public List<Map<String, Object>> findAmountOfAmountByKNP(String iin, String bin) {
+        return flPensionContrRepo.findAmountOfAmountByKNP("810615301348", "951040000069");
     }
  public NodesUL getNodeUL(String BIN){
         NodesUL myNode = new NodesUL();

@@ -32,13 +32,13 @@ public class NodesFL {
     private List<convicts_terminated_by_rehab> convictsTerminatedByRehabs; //risk
     private List<convicts_justified> convictsJustifieds;  //risk
     private List<bankrot> bankrots; //risk
-    private List<ArrayList> flPensionContrs;
+    private List<FL_PENSION_FINAL> flPensionContrs;
 
-    public List<ArrayList> getFlPensionContrs() {
+    public List<FL_PENSION_FINAL> getFlPensionContrs() {
         return flPensionContrs;
     }
 
-    public void setFlPensionContrs(List<ArrayList> flPensionContrs) {
+    public void setFlPensionContrs(List<FL_PENSION_FINAL> flPensionContrs) {
         this.flPensionContrs = flPensionContrs;
     }
 

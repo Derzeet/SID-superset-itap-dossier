@@ -17,11 +17,11 @@ public interface fl_pension_contrRepo extends JpaRepository<fl_pension_contr, Lo
 //    FROM imp_kfm_fl.fl_pension_contr
 //    WHERE "IIN" = '810615301348' and "P_RNN" = '061600005040'
 //    GROUP BY "KNP"
-@Query(value= "SELECT  SUM(\"AMOUNT\") AS AMOUNT, \"KNP\"\n" +
+@Query(value= "SELECT  cast(SUM(\"AMOUNT\") as text) AS AMOUNT, \"KNP\"\n" +
         "             FROM imp_kfm_fl.fl_pension_contr\n" +
         "            WHERE \"IIN\" = ?1 and \"P_RNN\" = ?2\n" +
         "                GROUP BY \"KNP\" ", nativeQuery = true)
-List<HashMap<String,Object>> findAmountOfAmountByKNP(String iin, String bin);
+List<Map<String,Object>> findAmountOfAmountByKNP(String iin, String bin);
 
     @Query(value = "SELECT EXTRACT(YEAR FROM \"PAY_DATE\") AS year,\n" +
             "       \"P_NAME\", \"KNP\",\n" +

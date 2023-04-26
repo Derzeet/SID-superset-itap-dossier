@@ -17,4 +17,8 @@ public interface fl_pension_MiniRepo extends JpaRepository<flPensionMini, Long> 
             "    WHERE \"IIN\" = ?1 and \"P_RNN\" = ?2 \n" +
             "    GROUP BY EXTRACT(YEAR FROM \"PAY_DATE\"), \"P_NAME\", \"KNP\"  ", nativeQuery = true)
     List<flPensionMini> getAllByCompanies(String iin , String bin);
+    @Query(value = "SELECT DISTINCT(EXTRACT(YEAR FROM \"PAY_DATE\")) \n" +
+            "    FROM imp_kfm_fl.fl_pension_contr\n" +
+            "    WHERE \"IIN\" = ?1 and \"P_RNN\" = ?2 \n", nativeQuery = true)
+    List<String> getAllByCompaniesYear(String iin , String bin);
 }
