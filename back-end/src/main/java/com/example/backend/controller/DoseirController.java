@@ -49,7 +49,7 @@ public class DoseirController {
     }
     @GetMapping("/cc")
     public NodesUL getChfc() {
-        NodesUL ss = myService.getNodeUL("170740007045");
+        NodesUL ss = myService.getNodeUL("030240005647");
         return ss;
     }
 

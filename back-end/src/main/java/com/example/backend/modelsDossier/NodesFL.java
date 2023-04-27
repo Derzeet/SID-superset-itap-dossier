@@ -29,10 +29,119 @@ public class NodesFL {
     private List<fl_contacts> contacts;
 
     private List<MillitaryAccount> millitaryAccounts;
+    private List<MilitaryAccounting2Entity> militaryAccounting2Entities;
     private List<convicts_terminated_by_rehab> convictsTerminatedByRehabs; //risk
     private List<convicts_justified> convictsJustifieds;  //risk
     private List<bankrot> bankrots; //risk
     private List<FL_PENSION_FINAL> flPensionContrs;
+    private List<msh> mshes;
+    private List<block_esf> blockEsfs;
+    private List<mv_ul_founder_fl> mvUlFounderFls;
+    private List<NdsEntity> ndsEntities;
+
+    public List<NdsEntity> getNdsEntities() {
+        return ndsEntities;
+    }
+
+    public void setNdsEntities(List<NdsEntity> ndsEntities) {
+        this.ndsEntities = ndsEntities;
+    }
+
+    public List<mv_ul_founder_fl> getMvUlFounderFls() {
+        return mvUlFounderFls;
+    }
+
+    public void setMvUlFounderFls(List<mv_ul_founder_fl> mvUlFounderFls) {
+        this.mvUlFounderFls = mvUlFounderFls;
+    }
+
+    public List<block_esf> getBlockEsfs() {
+        return blockEsfs;
+    }
+
+    public void setBlockEsfs(List<block_esf> blockEsfs) {
+        this.blockEsfs = blockEsfs;
+    }
+
+    private List<FirstCreditBureauEntity> FirstCreditBureauEntities;
+private List<IpgoEmailEntity> ipgoEmailEntities;
+private List<TIpEntity>TIpEntity;
+private List<AccountantListEntity> accountantListEntities;
+private List<AdvocateListEntity> advocateListEntities;
+private List<AuditorsListEntity> auditorsListEntities;
+private List<BailiffListEntity> bailiffListEntities;
+
+    public List<AdvocateListEntity> getAdvocateListEntities() {
+        return advocateListEntities;
+    }
+
+    public void setAdvocateListEntities(List<AdvocateListEntity> advocateListEntities) {
+        this.advocateListEntities = advocateListEntities;
+    }
+
+    public List<AuditorsListEntity> getAuditorsListEntities() {
+        return auditorsListEntities;
+    }
+
+    public void setAuditorsListEntities(List<AuditorsListEntity> auditorsListEntities) {
+        this.auditorsListEntities = auditorsListEntities;
+    }
+
+    public List<BailiffListEntity> getBailiffListEntities() {
+        return bailiffListEntities;
+    }
+
+    public void setBailiffListEntities(List<BailiffListEntity> bailiffListEntities) {
+        this.bailiffListEntities = bailiffListEntities;
+    }
+
+    public List<AccountantListEntity> getAccountantListEntities() {
+        return accountantListEntities;
+    }
+
+    public void setAccountantListEntities(List<AccountantListEntity> accountantListEntities) {
+        this.accountantListEntities = accountantListEntities;
+    }
+
+    public List<com.example.backend.photo.modelsPhot.TIpEntity> getTIpEntity() {
+        return TIpEntity;
+    }
+
+    public void setTIpEntity(List<com.example.backend.photo.modelsPhot.TIpEntity> TIpEntity) {
+        this.TIpEntity = TIpEntity;
+    }
+
+    public List<IpgoEmailEntity> getIpgoEmailEntities() {
+        return ipgoEmailEntities;
+    }
+
+    public void setIpgoEmailEntities(List<IpgoEmailEntity> ipgoEmailEntities) {
+        this.ipgoEmailEntities = ipgoEmailEntities;
+    }
+
+    public List<FirstCreditBureauEntity> getFirstCreditBureauEntities() {
+        return FirstCreditBureauEntities;
+    }
+
+    public void setFirstCreditBureauEntities(List<FirstCreditBureauEntity> firstCreditBureauEntities) {
+        FirstCreditBureauEntities = firstCreditBureauEntities;
+    }
+
+    public List<msh> getMshes() {
+        return mshes;
+    }
+
+    public void setMshes(List<msh> mshes) {
+        this.mshes = mshes;
+    }
+
+    public List<MilitaryAccounting2Entity> getMilitaryAccounting2Entities() {
+        return militaryAccounting2Entities;
+    }
+
+    public void setMilitaryAccounting2Entities(List<MilitaryAccounting2Entity> militaryAccounting2Entities) {
+        this.militaryAccounting2Entities = militaryAccounting2Entities;
+    }
 
     public List<FL_PENSION_FINAL> getFlPensionContrs() {
         return flPensionContrs;
