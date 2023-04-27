@@ -1,5 +1,6 @@
 package com.example.backend.photo.modelsPhot;
 
+import javax.annotation.Nullable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -9,9 +10,14 @@ import java.sql.Date;
 @Table(name = "bankrot", schema = "imp_risk")
 public class bankrot {
     @Id
+    @Nullable
+
     private String iin_bin;
+    @Nullable
     private String document;
+    @Nullable
     private Date update_dt;
+    @Nullable
     private String reason;
 
     public String getIin_bin() {

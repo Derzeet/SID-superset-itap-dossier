@@ -11,6 +11,7 @@ import javax.persistence.Table;
 public class flPensionMini {
     @Column(name = "PAY_DATE")
     @Nullable
+
     private String payDate;
 
     @Column(name = "P_NAME")
@@ -21,12 +22,13 @@ public class flPensionMini {
 
     @Column(name = "KNP")
     @Nullable
-    @Id
 
     private String knp;
 
 
     @Nullable
+    @Id
+
     @Column(name = "AMOUNT")
     private Double amount;
 

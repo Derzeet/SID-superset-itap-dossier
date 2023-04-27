@@ -24,7 +24,15 @@ public class MyService {
     @Autowired
     JdbcTemplate jdbcTemplate;
     @Autowired
+    TIpEntityRepo TIpEntityRepo;
+    @Autowired
     bankrotRepo bankrotRepo;
+    @Autowired
+    mshRepo mshRepo;
+    @Autowired
+    OpgRepo opgRepo;
+    @Autowired
+    block_esfRepo block_esfRepo;
     @Autowired
     convicts_terminated_by_rehabRepo convicts_terminated_by_rehabRepo;
     @Autowired
@@ -34,10 +42,23 @@ public class MyService {
     @Autowired
     fl_pension_MiniRepo flPensionMiniRepo;
     @Autowired
+    MilitaryAccounting2Repo MilitaryAccounting2Repo;
+    @Autowired
     mv_ul_founder_flRepo mvUlFounderFlRepo;
     @Autowired
     convicts_justifiedRepo convicts_justifiedRepo;
-
+    @Autowired
+    IpgoEmailEntityRepo IpgoEmailEntityRepo;
+    @Autowired
+    AdvocateListEntityRepo advocateListEntityRepo;
+    @Autowired
+    AuditorsListEntityRepo auditorsListEntityRepo;
+    @Autowired
+    BailiffListEntityRepo bailiffListEntityRepo;
+    @Autowired
+    AccountantListEntityRepo accountantListEntityRepo;
+    @Autowired
+    FirstCreditBureauEntityRepo FirstCreditBureauEntityRepo;
     @Autowired
     private newPhotoService newPhotoService;
     @Autowired
@@ -69,6 +90,8 @@ public class MyService {
     private mv_iin_docRepo mvIinDocRepo;
     @Autowired
     private universitiesRepo uniRepo;
+    @Autowired
+    private NdsEntityRepo ndsEntityRepo;
     @Autowired
     private schoolRepo schoolRepo;
     @Autowired
@@ -164,6 +187,7 @@ public class MyService {
         List<criminals> criminals = criminalsRepo.getcriminalsByByIIN(IIN);
         List<adm> MyAdm =  admRepo.getUsersByLike(IIN);
         List<dormant> myDormant =  dormantRepo.getUsersByLike(IIN);
+        List<MilitaryAccounting2Entity> militaryAccounting2Entities = MilitaryAccounting2Repo.getUsersByLike(IIN);
         List<mv_rn_old> mvRnOlds = mv_rn_oldRepo.getUsersByLike(IIN);
         List<equipment> myEquipment =  equipment_repo.getUsersByLike(IIN);
         List<fl_relatives> relatives = fl_relativesRepository.findAllByIin(IIN);
@@ -173,14 +197,8 @@ public class MyService {
         System.out.println(flPensionContrs);
         List<flPensionMini> flPensionContrs1 = new ArrayList<>();
         omn myOmns =  omn_repos.getUsersByLikeIin_bins(IIN);
-        myNode.setConvictsJustifieds(convictsJustifieds);
-        myNode.setMvRnOlds(mvRnOlds);
-        myNode.setBankrots(bankrots);
-        myNode.setCriminals(criminals);
-        myNode.setConvictsTerminatedByRehabs(convictsTerminatedByRehabs);
-        myOmn.add(myOmns);
-        myNode.setRegAddressFls(addressFls);
-        myNode = tryAddPhoto(myNode,IIN);
+        List<msh> mshes = mshRepo.getUsersByLike(IIN);
+
         List<FL_PENSION_FINAL> flPensionFinals = new ArrayList<>();
         for(String flPension : flPensionContrs){
             FL_PENSION_FINAL flPensionFinal = new FL_PENSION_FINAL();
@@ -198,6 +216,36 @@ public class MyService {
             flPensionFinals.add(flPensionFinal);
 //            System.out.println(findAmountOfAmountByKNPf);
         }
+        List<IpgoEmailEntity> ipgoEmailEntities = IpgoEmailEntityRepo.getUsersByLike(IIN);
+        List<FirstCreditBureauEntity> firstCreditBureauEntities = FirstCreditBureauEntityRepo.getUsersByLike(IIN);
+        List<TIpEntity> TIpEntity = TIpEntityRepo.getUsersByLike(IIN);
+        List<AccountantListEntity> accountantListEntities = accountantListEntityRepo.getUsersByLike(IIN);
+        List<AdvocateListEntity> advocateListEntities = advocateListEntityRepo.getUsersByLike(IIN);
+        List<AuditorsListEntity> auditorsListEntities = auditorsListEntityRepo.getUsersByLike(IIN);
+        List<BailiffListEntity> bailiffListEntities = bailiffListEntityRepo.getUsersByLike(IIN);
+        List<block_esf> blockEsfs = block_esfRepo.getblock_esfByIIN(IIN);
+        List<mv_ul_founder_fl> mvUlFounderFls = mvUlFounderFlRepo.getUsersByLikeIIN(IIN);
+        List<NdsEntity> ndsEntities = ndsEntityRepo.getUsersByLike(IIN);
+        myNode.setNdsEntities(ndsEntities);
+        myNode.setMvUlFounderFls(mvUlFounderFls);
+        myNode.setBlockEsfs(blockEsfs);
+        myNode.setAccountantListEntities(accountantListEntities);
+        myNode.setAdvocateListEntities(advocateListEntities);
+        myNode.setAuditorsListEntities(auditorsListEntities);
+        myNode.setBailiffListEntities(bailiffListEntities);
+        myNode.setTIpEntity(TIpEntity);
+        myNode.setFirstCreditBureauEntities(firstCreditBureauEntities);
+        myNode.setIpgoEmailEntities(ipgoEmailEntities);
+        myNode.setMilitaryAccounting2Entities(militaryAccounting2Entities);
+        myNode.setConvictsJustifieds(convictsJustifieds);
+        myNode.setMvRnOlds(mvRnOlds);
+        myNode.setBankrots(bankrots);
+        myNode.setCriminals(criminals);
+        myNode.setConvictsTerminatedByRehabs(convictsTerminatedByRehabs);
+        myOmn.add(myOmns);
+        myNode.setRegAddressFls(addressFls);
+        myNode.setMshes(mshes);
+        myNode = tryAddPhoto(myNode,IIN);
         myNode.setFlPensionContrs(flPensionFinals);
         myNode.setMvFls(myMv_fl);
         myNode.setMvAutoFls(myMv_auto_fl);
@@ -227,7 +275,21 @@ public class MyService {
         List<dormant> myDormant =  dormantRepo.getUsersByLike(BIN);
         List<equipment> myEquipment =  equipment_repo.getUsersByLike(BIN);
         List<omn> myOmns =  omn_repos.getUsersByLikeIin_bin(BIN);
-        myNode.setMvUls(mvUls);
+        List<msh> mshes = mshRepo.getUsersByLike(BIN);
+        List<criminals> criminals = criminalsRepo.getcriminalsByByIIN(BIN);
+        List<block_esf> blockEsfs = block_esfRepo.getblock_esfByIIN(BIN);
+        List<OpgEntity> opgEntities = opgRepo.getopgByIIN(BIN);
+     List<AccountantListEntity> accountantListEntities = accountantListEntityRepo.getUsersByLikeBIN(BIN);
+     List<NdsEntity> ndsEntities = ndsEntityRepo.getUsersByLike(BIN);
+     List<mv_rn_old> mvRnOlds = mv_rn_oldRepo.getUsersByLike(BIN);
+     myNode.setMvRnOlds(mvRnOlds);
+     myNode.setNdsEntities(ndsEntities);
+     myNode.setAccountantListEntities(accountantListEntities);
+     myNode.setMshes(mshes);
+     myNode.setOpgEntities(opgEntities);
+     myNode.setBlockEsfs(blockEsfs);
+     myNode.setMvUls(mvUls);
+     myNode.setCriminals(criminals);
         myNode.setBankrots(bankrots);
         myNode.setMvUlFounderFls(mvUlFounderFls);
         myNode.setOmns(myOmns);
