@@ -11,6 +11,8 @@ function LeftTopFrame(props) {
     const [patronymic, setpatronymic] = useState('')
     const [iin, setiin] = useState('')
 
+    const [canChange, setCanChange] = useState(true)
+
     const [sliderNum, setSliderNum] = useState(0)
     // const [first_name, setfirst_name] = useState('')
     // const [first_name, setfirst_name] = useState('')
@@ -22,7 +24,6 @@ function LeftTopFrame(props) {
         setlast_name(props.data && props.data[0] && (props.data[0].last_name))
         setpatronymic(props.data && props.data[0] && (props.data[0].patronymic))
         setiin(props.data && props.data[0] && (props.data[0].iin))
-        setSliderNum(props.photo && props.photos.length-1)
     })
     // const [iin, setIIN] = useState("")
     //
@@ -36,6 +37,27 @@ function LeftTopFrame(props) {
     //     }
     // }
 
+    const handleSliderNext = () => {
+
+        let temp = sliderNum-1
+        if (temp < 0) {
+            temp = photos.length-1
+        }
+
+        setSliderNum(temp)
+    }
+
+    const handleSliderPrev = () => {
+
+        let temp = sliderNum+1
+        if (temp >= photos.length) {
+            temp = 0
+        }
+
+        setSliderNum(temp)
+
+    }
+
     return ( 
         <div className="left-top-section">
             <div className="first-line">
@@ -43,11 +65,8 @@ function LeftTopFrame(props) {
                     <img src={"data:image/png;base64, " + (props.photos && props.photos[sliderNum] && photos[sliderNum].photo)} alt="No Image" />
                     {/*<img src={"data:image/png;base64, " + photo} alt="No Image" />*/}
                     <div>
-                        <div onClick={() => {
-                        }}>prev</div>
-                        <div onClick={() => {
-
-                        }}>next</div>
+                        <div onClick={handleSliderNext}>{"<"}</div>
+                        <div onClick={handleSliderPrev}>{">"}</div>
                     </div>
                 </div>    
                 <div className='person-main-info'>

@@ -197,7 +197,7 @@ function TabContent_FIO(props) {
                     </div>
                 </div>
                 <div>
-                    <img></img>
+                    <img src={'data:image/jpeg;base64,' +  photo} alt=''/>
                 </div>
             </div>
             

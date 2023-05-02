@@ -193,7 +193,7 @@ function TabConent_IIN(props) {
                     </FormControl>
                 </div>
                 <div>
-                    <img src={'data:image/jpeg;base64,' +  photo} alt=''></img>
+                    <img src={'data:image/jpeg;base64,' +  photo} alt=''/>
                 </div>
             </div>
 

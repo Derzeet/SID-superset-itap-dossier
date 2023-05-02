@@ -79,6 +79,12 @@ function App() {
                 <DosiePage/>
               </>
             }/>
+            <Route path='/profiler/ul/:bin' element={
+              <>
+                <Navbar/>
+                <DosiePage/>
+              </>
+            }/>
             <Route path="/itap" element={
               <>
                 <Navbar/>
