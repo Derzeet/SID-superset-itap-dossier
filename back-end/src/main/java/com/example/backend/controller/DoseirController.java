@@ -48,14 +48,18 @@ public class DoseirController {
         return myService.getNode(iin);
     }
     @GetMapping("/cc")
-    public NodesUL getChfc() {
-        NodesUL ss = myService.getNodeUL("030240005647");
+    public NodesUL getChfc(@RequestParam String bin) {
+        NodesUL ss = myService.getNodeUL(bin);
         return ss;
     }
 
     @GetMapping("/iin")
     public List<searchResultModelFL> getByIIN(@RequestParam String iin) {
         return myService.getByIIN_photo(iin);
+    }
+    @GetMapping("/nomer_doc")
+    public List<searchResultModelFL> getByDoc(@RequestParam String doc) {
+        return myService.getByDoc_photo(doc);
     }
 
     @GetMapping("/fio")

@@ -20,6 +20,24 @@ public class NodesFL {
     private List<reg_address_fl> regAddressFls;
 
     private List<pdl> pdls;
+    private List<WantedListEntity> wantedListEntities;
+    private List<CommodityProducer> commodityProducers;
+
+    public List<CommodityProducer> getCommodityProducers() {
+        return commodityProducers;
+    }
+
+    public void setCommodityProducers(List<CommodityProducer> commodityProducers) {
+        this.commodityProducers = commodityProducers;
+    }
+
+    public List<WantedListEntity> getWantedListEntities() {
+        return wantedListEntities;
+    }
+
+    public void setWantedListEntities(List<WantedListEntity> wantedListEntities) {
+        this.wantedListEntities = wantedListEntities;
+    }
 
     private List<mv_iin_doc> mvIinDocs;
     private List<criminals> criminals;
@@ -70,6 +88,15 @@ private List<AccountantListEntity> accountantListEntities;
 private List<AdvocateListEntity> advocateListEntities;
 private List<AuditorsListEntity> auditorsListEntities;
 private List<BailiffListEntity> bailiffListEntities;
+private List<MzEntity> mzEntities ;
+
+    public List<MzEntity> getMzEntities() {
+        return mzEntities;
+    }
+
+    public void setMzEntities(List<MzEntity> mzEntities) {
+        this.mzEntities = mzEntities;
+    }
 
     public List<AdvocateListEntity> getAdvocateListEntities() {
         return advocateListEntities;

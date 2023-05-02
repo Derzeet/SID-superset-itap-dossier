@@ -22,7 +22,11 @@ import java.util.Map;
 @Service
 public class MyService {
     @Autowired
+    QoldauRepo QoldauRepo;
+    @Autowired
     JdbcTemplate jdbcTemplate;
+    @Autowired
+    CommodityProducerRepo commodityProducerRepo;
     @Autowired
     TIpEntityRepo TIpEntityRepo;
     @Autowired
@@ -36,9 +40,15 @@ public class MyService {
     @Autowired
     convicts_terminated_by_rehabRepo convicts_terminated_by_rehabRepo;
     @Autowired
+    TaxOutEntityRepo taxOutEntityRepo;
+    @Autowired
     criminalsRepo criminalsRepo;
     @Autowired
     fl_pension_contrRepo flPensionContrRepo;
+    @Autowired
+    MzEntityRepo MzEntityRepo;
+    @Autowired
+    WantedListRepo wantedListRepo;
     @Autowired
     fl_pension_MiniRepo flPensionMiniRepo;
     @Autowired
@@ -63,6 +73,8 @@ public class MyService {
     private newPhotoService newPhotoService;
     @Autowired
     private mv_auto_fl_repo mvAutoFlRepo;
+    @Autowired
+    FpgTempEntityRepo fpgTempEntityRepo;
     @Autowired
     private mv_fl_repo mv_FlRepo;
     @Autowired
@@ -98,10 +110,21 @@ public class MyService {
     private flContactsRepo flContactsRepo;
     @Autowired
     private militaryAccountRepo militaryAccountRepo;
+    @Autowired
+    mv_iin_docRepo mv_iin_docRepo;
     public List<searchResultModelFL> getByIIN_photo(String IIN) {
         List<mv_fl> fls = mv_FlRepo.getUsersByLike(IIN);
 
         List<searchResultModelFL> result = findWithPhoto(fls);
+        return result;
+    } public List<searchResultModelFL> getByDoc_photo(String IIN) {
+        List<mv_iin_doc> fls = mv_iin_docRepo.getByDoc_number(IIN);
+        List<mv_fl> fls1 = new ArrayList<>();
+        for(mv_iin_doc flss : fls){
+            System.out.println(flss.getIin());
+            fls1 = mv_FlRepo.getUsersByLike(flss.getIin());
+        }
+        List<searchResultModelFL> result = findWithPhoto(fls1);
         return result;
     }
 
@@ -226,6 +249,12 @@ public class MyService {
         List<block_esf> blockEsfs = block_esfRepo.getblock_esfByIIN(IIN);
         List<mv_ul_founder_fl> mvUlFounderFls = mvUlFounderFlRepo.getUsersByLikeIIN(IIN);
         List<NdsEntity> ndsEntities = ndsEntityRepo.getUsersByLike(IIN);
+        List<MzEntity> mzEntities = MzEntityRepo.getopgByIIN(IIN);
+        List<WantedListEntity> wantedListEntities =  wantedListRepo.getByIIN(IIN);
+        List<CommodityProducer> commodityProducers = commodityProducerRepo.getiin_binByIIN(IIN);
+        myNode.setCommodityProducers(commodityProducers);
+        myNode.setWantedListEntities(wantedListEntities);
+        myNode.setMzEntities(mzEntities);
         myNode.setNdsEntities(ndsEntities);
         myNode.setMvUlFounderFls(mvUlFounderFls);
         myNode.setBlockEsfs(blockEsfs);
@@ -282,6 +311,16 @@ public class MyService {
      List<AccountantListEntity> accountantListEntities = accountantListEntityRepo.getUsersByLikeBIN(BIN);
      List<NdsEntity> ndsEntities = ndsEntityRepo.getUsersByLike(BIN);
      List<mv_rn_old> mvRnOlds = mv_rn_oldRepo.getUsersByLike(BIN);
+     List<TaxOutEntity> taxOutEntities = taxOutEntityRepo.getUsersByLike(BIN);
+     List<FpgTempEntity> fpgTempEntities = fpgTempEntityRepo.getUsersByLike(BIN);
+     List<pdl> pdls = pdlReposotory.getByBin(BIN);
+     List<QoldauSubsidy> q = QoldauRepo.getByIIN(BIN);
+     List<CommodityProducer> commodityProducers = commodityProducerRepo.getiin_binByIIN(BIN);
+     myNode.setCommodityProducers(commodityProducers);
+     myNode.setQoldauSubsidy(q);
+     myNode.setPdls(pdls);
+     myNode.setFpgTempEntities(fpgTempEntities);
+     myNode.setTaxOutEntities(taxOutEntities);
      myNode.setMvRnOlds(mvRnOlds);
      myNode.setNdsEntities(ndsEntities);
      myNode.setAccountantListEntities(accountantListEntities);
