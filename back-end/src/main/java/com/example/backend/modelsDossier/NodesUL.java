@@ -1,6 +1,7 @@
 package com.example.backend.modelsDossier;
 
 import com.example.backend.photo.modelsPhot.*;
+import com.example.backend.repositoryDossier.TaxOutEntityRepo;
 
 import java.util.List;
 
@@ -26,7 +27,51 @@ public class NodesUL {
     private List<block_esf> blockEsfs;
     private List<NdsEntity> ndsEntities;
     private List<mv_rn_old> mvRnOlds;
+    private List<TaxOutEntity> taxOutEntities;
+    private List<FpgTempEntity> fpgTempEntities; //Risk
+    private List<pdl> pdls;
+    private List<QoldauSubsidy> QoldauSubsidy;
+    private List<CommodityProducer> commodityProducers;
 
+    public List<CommodityProducer> getCommodityProducers() {
+        return commodityProducers;
+    }
+
+    public void setCommodityProducers(List<CommodityProducer> commodityProducers) {
+        this.commodityProducers = commodityProducers;
+    }
+
+    public List<com.example.backend.photo.modelsPhot.QoldauSubsidy> getQoldauSubsidy() {
+        return QoldauSubsidy;
+    }
+
+    public void setQoldauSubsidy(List<com.example.backend.photo.modelsPhot.QoldauSubsidy> qoldauSubsidy) {
+        QoldauSubsidy = qoldauSubsidy;
+    }
+
+    public List<pdl> getPdls() {
+        return pdls;
+    }
+
+    public void setPdls(List<pdl> pdls) {
+        this.pdls = pdls;
+    }
+
+    public List<FpgTempEntity> getFpgTempEntities() {
+        return fpgTempEntities;
+    }
+
+    public void setFpgTempEntities(List<FpgTempEntity> fpgTempEntities) {
+        this.fpgTempEntities = fpgTempEntities;
+    }
+
+    public List<TaxOutEntity> getTaxOutEntities() {
+        return taxOutEntities;
+    }
+
+    public void setTaxOutEntities(List<TaxOutEntity> taxOutEntities) {
+        this.taxOutEntities = taxOutEntities;
+    }
 
     public List<mv_rn_old> getMvRnOlds() {
         return mvRnOlds;

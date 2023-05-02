@@ -10,4 +10,6 @@ import java.util.List;
 public interface pdlReposotory extends JpaRepository<pdl, String> {
     @Query(value = "select * FROM imp_kfm_fl.pdl where iin = ?1", nativeQuery = true)
     List<pdl> getByIIN(String iin);
+    @Query(value = "select * FROM imp_kfm_fl.pdl where bin = ?1", nativeQuery = true)
+    List<pdl> getByBin(String iin);
 }
