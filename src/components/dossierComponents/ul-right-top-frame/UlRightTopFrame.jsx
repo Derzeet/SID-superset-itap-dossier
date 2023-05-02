@@ -20,9 +20,11 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 function UlRightTopFrame(props) {
   const soc = ''
-  const [relatives, setRelatives] = useState([])
+  const [founders, setFounders] = useState([]);
+
   useEffect(() => {
-    setRelatives(props.relatives)
+    setFounders(props.founders)
+    console.log(props.founders)
   }, [soc])
 
 
@@ -37,43 +39,69 @@ function UlRightTopFrame(props) {
         
         <div className="right-top-section">
             <div className="other-line">
-                <div>
-                    <label htmlFor="born-city" style={{fontSize: '16px', fontWeight: '500', color: "#FFFFFF"}}>Родственники</label>
-                    <TableContainer sx={{marginTop: '10px'}}>
-                        <Table aria-label="collapsible table" className="uitable">
-                            <TableHead>
-                            <TableRow className="uitableHead"  style={{borderBottom: 'hidden'}}>
-                                <TableCell sx={{padding: 1}} style={{ width: '5%',fontSize: '12px', color: "#6D6D6D"}} align="left"><a>№</a></TableCell>
-                                <TableCell sx={{padding: 1}} style={{ width: '50%', fontSize: '12px', color: "#6D6D6D" }} align="left"><a className="bumber">ФИО</a></TableCell>
-                                <TableCell sx={{padding: 1}} style={{ width: '20%', fontSize: '12px', color: "#6D6D6D" }} align="left"><a className="bumber">ИИН</a></TableCell>
-                                <TableCell sx={{padding: 1}} style={{ width: '15%', color: "#6D6D6D" }} align="left"></TableCell>
-                                <TableCell sx={{padding: 1}} style={{ width: '10%', color: "#6D6D6D" }} align="left"></TableCell>
-                            </TableRow>
-                            </TableHead> 
-                            <TableBody style={{borderBottom: 'hidden'}}>
-                            { relatives.length>0 ? relatives.map((row, index) => (
-                                <Row row={row} index={index} />
-                            )): <TableCell  className="zeroResult" align="center" colSpan={4} style={{borderBottom: 'hidden'}}><a>Нет данных</a></TableCell>}
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
-                </div>
+                <FoundersBlock array={founders} exist={founders.length>0}/>
             </div>  
         </div>
 
     );
 }
-function Row(props) {
-    const { row } = props;
-    const [open, setOpen] = useState(false);
+
+const FoundersBlock = (props) => {
+    const {array, exist} = props
+    const [open, setOpen] = useState(false)
+
+    return (
+        <>
+        <TableContainer sx={{marginTop: 0}}>
+            <Table aria-label="collapsible table" className="uitable">
+
+            <TableRow className="uitablerow" sx={{height:'10px',}} style={{borderBottom: 'hidden'}}>
+                <TableCell sx={{padding: 1}} style={{borderBottom: 'hidden', width: '90%', fontSize: '12px', fontWeight: 500, color: "#FFFFFF"}}><a>Со основатели</a></TableCell>
+                <TableCell sx={{padding: 1}} style={{width: '10%'}} align='right'>
+                        <IconButton
+                        aria-label="expand row"
+                        size="small"
+                        onClick={() => setOpen(!open)}
+                        >
+                        {open ? <KeyboardArrowUpIcon style={{ fill: '#ffffff' }}/> : <KeyboardArrowDownIcon style={{ fill: '#ffffff' }}/>}
+                        </IconButton>
+                    </TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell sx={{padding: 1}} style={{ paddingBottom: 0, paddingTop: 0}} colSpan={6}>
+                <Collapse in={open} timeout="auto" unmountOnExit>
+                    <Box sx={{ margin: 0, marginLeft: '0' }}>
+                    <TableHead sx={{backgroundColor: '#ffffff0a'}}>
+                        <TableRow className="uitableHead">
+                            <TableCell sx={{padding: 1}} style={{ width: '15%',fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left"><a>ФИО</a></TableCell>
+                            <TableCell sx={{padding: 1}} style={{ width: '50%', fontSize: '12px', color: "rgb(199, 199, 199)" }} align="left"><a>Дата регистрации</a></TableCell>
+                            <TableCell sx={{padding: 1}} style={{ width: '5%', color: "#fff" }} align="left"></TableCell>
+                        </TableRow>
+                    </TableHead> 
+                    <TableBody style={{borderBottom: 'hidden'}}>
+                    {exist ? array.map((row, index) => (
+                        <FounderRow row={row} />
+                    )): <TableCell  className="zeroResult" align="center" colSpan={4} style={{borderBottom: 'hidden'}}><a>Нет данных</a></TableCell>}
+                    </TableBody>
+                    </Box>
+                </Collapse>
+                </TableCell>
+            </TableRow>
+            </Table>
+        </TableContainer>
+        </>
+    )
+}
+
+const FounderRow = (props) => {
+    const {row} = props
+    const [open, setOpen] = useState(false)
   
     return (
       <>
         <TableRow className="uitablerow" sx={{height:'10px',}} style={{borderBottom: 'hidden'}}>
-          <TableCell sx={{padding: 1}} style={{fontSize: '12px', fontWeight: 500, color: "#FFFFFF"}}><a>{props.index + 1}</a></TableCell>
-          <TableCell sx={{padding: 1}} style={{ width: '60%', paddingLeft: '18px', fontSize: '12px', fontWeight: 500, color: "#FFFFFF" }} align="left"><a>{row.parent_fio}</a></TableCell>
-          <TableCell sx={{padding: 1}} style={{ paddingLeft: '18px', fontSize: '12px', fontWeight: 500, color: "#FFFFFF" }}><a>{row.parent_iin || '---'}</a></TableCell>
-          <TableCell sx={{padding: 1}} style={{fontSize: '12px', fontWeight: 500, color: "#FFFFFF" }}><Link style={{textDecoration: 'none', color: 'white'}} className='goLink' target='_blank' rel='noopener noreferrer' to={'/profiler/person/'+ row.parent_iin}>Перейти..</Link></TableCell>
+          <TableCell sx={{padding: 1}} style={{ fontSize: '12px', fontWeight: 500, color: "#FFFFFF"}}><a>{row.lastname+' '+row.firstname+' '+row.patronymic || "---"}</a></TableCell>
+          <TableCell sx={{padding: 1}} style={{ fontSize: '12px', fontWeight: 500, color: "#FFFFFF" }} align="left"><a>{row.reg_date || "---"}</a></TableCell>
           <TableCell sx={{padding: 1}}>
             <IconButton
               aria-label="expand row"
@@ -87,16 +115,16 @@ function Row(props) {
         <TableRow style={{borderBottom: 'hidden'}}>
           <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={4}>
             <Collapse in={open} timeout="auto" unmountOnExit>
-              <Box sx={{ margin: 1, marginLeft: '3.5%' }}>
+              <Box sx={{ margin: 1, marginLeft: '2.6%' }}>
                 <Table size="small" aria-label="purchases">
                   <TableHead>
                     <TableRow style={{borderBottom: 'hidden'}}>
-                      <TableCell style={{ width: '30%', fontSize: '12px', color: "#6D6D6D" }}  align="left"><a>ИИН</a></TableCell>
-                      <TableCell style={{ width: '70%', fontSize: '12px', color: "#FFFFFF" }} align="left"><a>{row.iin}</a></TableCell>
+                      <TableCell style={{ width: '30%', fontSize: '12px', color: "#6D6D6D" }}  align="left"><a>Депозит</a></TableCell>
+                      <TableCell style={{ width: '70%', fontSize: '12px', color: "#FFFFFF" }} align="left"><a>{row.deposit || "---"}</a></TableCell>
                     </TableRow>
                     <TableRow style={{borderBottom: 'hidden'}}>
-                      <TableCell style={{ width: '30%', fontSize: '12px', color: "#6D6D6D"}}  align="left"><a>Тип родства</a></TableCell>
-                      <TableCell style={{ width: '70%', fontSize: '12px', color: "#FFFFFF" }} align="left"><a>{row.relative_type}</a></TableCell>
+                      <TableCell style={{ width: '30%', fontSize: '12px', color: "#6D6D6D" }}  align="left"><a>share</a></TableCell>
+                      <TableCell style={{ width: '70%', fontSize: '12px', color: "#FFFFFF" }} align="left"><a>{row.share || "---"}</a></TableCell>
                     </TableRow>
                   </TableHead>
                 </Table>
@@ -105,13 +133,11 @@ function Row(props) {
           </TableCell>
         </TableRow>
       </>
-    );
-  }
+    )
+}
 
 function withParams(Component) {
     return props => <Component {...props} username={useParams()} />;
 }
 
 export default withParams(UlRightTopFrame);
-
-// export default RightTopFrame;

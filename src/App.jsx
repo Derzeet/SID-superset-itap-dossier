@@ -10,6 +10,7 @@ import {
   Route,
 } from "react-router-dom";
 import DosiePage from './pages/dosPage/DosiePage';
+import UlDosiePage from './pages/ulDosPage/UlDosiePage';
 import MainPage from './pages/mainPage/MainPage';
 import SearchPage from './pages/searchPage/SearchPage';
 import Navbar from './components/dossierComponents/nav-bar/Navbar';
@@ -82,7 +83,7 @@ function App() {
             <Route path='/profiler/ul/:bin' element={
               <>
                 <Navbar/>
-                <DosiePage/>
+                <UlDosiePage/>
               </>
             }/>
             <Route path="/itap" element={
