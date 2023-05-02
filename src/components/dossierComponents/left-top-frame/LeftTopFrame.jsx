@@ -16,15 +16,13 @@ function LeftTopFrame(props) {
     // const [first_name, setfirst_name] = useState('')
     // const [first_name, setfirst_name] = useState('')
     useEffect(() => {
-        // console.log("lol", props)
         setPhoto(props.photo)
         setPhotos(props.photos)
-        setfirst_name(props.data[0].first_name)
-        setlast_name(props.data[0].last_name)
-        setpatronymic(props.data[0].patronymic)
-        setiin(props.data[0].iin)
-        setSliderNum(props.photos.length-1)
-        // console.log(photos)
+        setfirst_name(props.data && props.data[0] && (props.data[0].first_name))
+        setlast_name(props.data && props.data[0] && (props.data[0].last_name))
+        setpatronymic(props.data && props.data[0] && (props.data[0].patronymic))
+        setiin(props.data && props.data[0] && (props.data[0].iin))
+        setSliderNum(props.photo && props.photos.length-1)
     })
     // const [iin, setIIN] = useState("")
     //
@@ -33,7 +31,6 @@ function LeftTopFrame(props) {
     //
     //         if (event.target.value !== iin) {
     //             setIIN(event.target.value)
-    //             console.log(event.target.value)
     //             props.fetchIIN(event.target.value)
     //         }
     //     }
@@ -43,7 +40,7 @@ function LeftTopFrame(props) {
         <div className="left-top-section">
             <div className="first-line">
                 <div className="avatar">
-                    <img src={"data:image/png;base64, " + photos[sliderNum].photo} alt="No Image" />
+                    <img src={"data:image/png;base64, " + (props.photos && props.photos[sliderNum] && photos[sliderNum].photo)} alt="No Image" />
                     {/*<img src={"data:image/png;base64, " + photo} alt="No Image" />*/}
                     <div>
                         <div onClick={() => {
@@ -121,7 +118,7 @@ function LeftTopFrame(props) {
 
                     id="filled-read-only-input" 
                     // inputProps={{'aria-label': 'Without label' }} 
-                    value={props.data[0].birth_date || "---"}
+                    value={props.data && props.data[0] && (props.data[0].birth_date || "---")}
                     variant="outlined" />
                 </div>
                 <div>
@@ -134,7 +131,7 @@ function LeftTopFrame(props) {
 
                     id="filled-read-only-input" 
                     // inputProps={{'aria-label': 'Without label' }} 
-                    value={props.data[0].nationality_ru_name || "---"}
+                    value={props.data && props.data[0] && (props.data[0].nationality_ru_name || "---")}
                     variant="outlined" />
                 </div>
                 <div>
@@ -147,7 +144,7 @@ function LeftTopFrame(props) {
 
                     id="filled-read-only-input" 
                     // inputProps={{'aria-label': 'Without label' }} 
-                    value={props.data[0].citizenship_ru_name || "---"}
+                    value={props.data && props.data[0] && (props.data[0].citizenship_ru_name || "---")}
                     variant="outlined" />
                 </div>
                 <div>
@@ -160,7 +157,7 @@ function LeftTopFrame(props) {
 
                     id="filled-read-only-input" 
                     // inputProps={{'aria-label': 'Without label' }} 
-                    value={props.data[0].gender==='1' ? 'МУЖЧИНА' : 'ЖЕНЩИНА'}
+                    value={props.data && props.data[0] && (props.data[0].gender==='1' ? 'МУЖЧИНА' : 'ЖЕНЩИНА')}
                     variant="outlined" />
                 </div>
             </div>   
