@@ -9,6 +9,8 @@ import javax.persistence.Table;
 @Table(name = "mv_rn_old", schema = "imp_rn")
 public class mv_rn_old {
     @Nullable
+    @Id
+
 
     private String cadastral_number;
     @Nullable
@@ -97,7 +99,6 @@ public class mv_rn_old {
     private String owner_full_name;
 
     @Nullable
-    @Id
 
 
     private String owner_iin_bin;
