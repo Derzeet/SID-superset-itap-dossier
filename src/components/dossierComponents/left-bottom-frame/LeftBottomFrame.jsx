@@ -27,6 +27,7 @@ function LeftBottomFrame(props) {
     const [military, setMilitary] = useState([])
     const [nedvijimost, setNedvijimost] = useState([])
     const [militaryEntities, setMilitaryEntities] = useState([])
+    const [contacts, setContacts] = useState([])
     
     useEffect(()=> {
         props.docs.sort((a, b) => {
@@ -48,6 +49,7 @@ function LeftBottomFrame(props) {
         setMilitary(props.military)
         setMilitaryEntities(props.militaryEntities)
         setNedvijimost(props.nedvijimost)
+        setContacts(props.contacts)
 
     }, [soc])
     return ( 
@@ -95,6 +97,7 @@ function LeftBottomFrame(props) {
                     <FlPensionBlock pensions={pensions} exist={pensions.length > 0 ? true : false}/>
                     <MilitaryBlock military={military} militaryEntities={militaryEntities} exist={military && military.length > 0 ? true : false}/>
                     <NedvijimostBlock nedvijimost={nedvijimost} exist={nedvijimost.length > 0 ? true : false}/>
+                    <ContactsBlock array={contacts} exist={contacts.length > 0? true : false}/>
                 </div>
                 {/* TRANSPORT */}
                 <div style={{width: '100%'}}>
@@ -103,6 +106,96 @@ function LeftBottomFrame(props) {
         </div>
 
     );
+}
+
+const ContactsBlock = (props) => {
+  const {array, exist} = props
+  const [open, setOpen] = useState(false)
+
+  return (
+    <>
+      <TableContainer sx={{marginTop: 0}}>
+        <Table aria-label="collapsible table" className="uitable">
+
+          <TableRow className="uitablerow" sx={{height:'10px',}} style={{borderBottom: 'hidden'}}>
+              <TableCell sx={{padding: 1}} style={{borderBottom: 'hidden', width: '90%', fontSize: '12px', fontWeight: 500, color: "#FFFFFF"}}><a>Контактные данные</a></TableCell>
+              <TableCell sx={{padding: 1}} style={{width: '10%'}} align='right'>
+                    <IconButton
+                    aria-label="expand row"
+                    size="small"
+                    onClick={() => setOpen(!open)}
+                    >
+                    {open ? <KeyboardArrowUpIcon style={{ fill: '#ffffff' }}/> : <KeyboardArrowDownIcon style={{ fill: '#ffffff' }}/>}
+                    </IconButton>
+                </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell sx={{padding: 1}} style={{ paddingBottom: 0, paddingTop: 0}} colSpan={6}>
+              <Collapse in={open} timeout="auto" unmountOnExit>
+                <Box sx={{ margin: 0, marginLeft: '0' }}>
+                  <TableHead sx={{backgroundColor: '#ffffff0a'}}>
+                    <TableRow className="uitableHead">
+                        <TableCell sx={{padding: 1}} style={{ width: '15%',fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left"><a>Email</a></TableCell>
+                        <TableCell sx={{padding: 1}} style={{ width: '50%', fontSize: '12px', color: "rgb(199, 199, 199)" }} align="left"><a >Номер телефона</a></TableCell>
+                        <TableCell sx={{padding: 1}} style={{ width: '5%', color: "#fff" }} align="left"></TableCell>
+                    </TableRow>
+                  </TableHead> 
+                  <TableBody style={{borderBottom: 'hidden'}}>
+                  {exist ? array.map((row, index) => (
+                      <ContactRow row={row} />
+                  )): <TableCell  className="zeroResult" align="center" colSpan={4} style={{borderBottom: 'hidden'}}><a>Нет данных</a></TableCell>}
+                  </TableBody>
+                </Box>
+              </Collapse>
+            </TableCell>
+          </TableRow>
+        </Table>
+      </TableContainer>
+    </>
+  )
+}
+
+const ContactRow = (props) => {
+  const {row} = props
+  const [open, setOpen] = useState(false)
+
+  return (
+    <>
+      <TableRow className="uitablerow" sx={{height:'10px',}} style={{borderBottom: 'hidden'}}>
+        <TableCell sx={{padding: 1}} style={{ fontSize: '12px', fontWeight: 500, color: "#FFFFFF"}}><a>{row.email || "---"}</a></TableCell>
+        <TableCell sx={{padding: 1}} style={{ fontSize: '12px', fontWeight: 500, color: "#FFFFFF" }} align="left"><a>{row.phone || "---"}</a></TableCell>
+        <TableCell sx={{padding: 1}}>
+          <IconButton
+            aria-label="expand row"
+            size="small"
+            onClick={() => setOpen(!open)}
+          >
+            {open ? <KeyboardArrowUpIcon style={{ fill: '#ffffff' }}/> : <KeyboardArrowDownIcon style={{ fill: '#ffffff' }}/>}
+          </IconButton>
+        </TableCell>
+      </TableRow>
+      <TableRow style={{borderBottom: 'hidden'}}>
+        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={4}>
+          <Collapse in={open} timeout="auto" unmountOnExit>
+            <Box sx={{ margin: 1, marginLeft: '2.6%' }}>
+              <Table size="small" aria-label="purchases">
+                <TableHead>
+                  <TableRow style={{borderBottom: 'hidden'}}>
+                    <TableCell style={{ width: '30%', fontSize: '12px', color: "#6D6D6D" }}  align="left"><a>Ник</a></TableCell>
+                    <TableCell style={{ width: '70%', fontSize: '12px', color: "#FFFFFF" }} align="left"><a>{row.nickname || "---"}</a></TableCell>
+                  </TableRow>
+                  <TableRow style={{borderBottom: 'hidden'}}>
+                    <TableCell style={{ width: '30%', fontSize: '12px', color: "#6D6D6D" }}  align="left"><a>Source</a></TableCell>
+                    <TableCell style={{ width: '70%', fontSize: '12px', color: "#FFFFFF" }} align="left"><a>{row.source || "---"}</a></TableCell>
+                  </TableRow>
+                </TableHead>
+              </Table>
+            </Box>
+          </Collapse>
+        </TableCell>
+      </TableRow>
+    </>
+  )
 }
 
 const NedvijimostBlock = (props) => {
