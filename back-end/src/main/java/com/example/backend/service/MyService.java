@@ -399,7 +399,7 @@ public class MyService {
      List<AccountantListEntity> accountantListEntities = accountantListEntityRepo.getUsersByLikeBIN(BIN);
      List<NdsEntity> ndsEntities = ndsEntityRepo.getUsersByLike(BIN);
      List<mv_rn_old> mvRnOlds = mv_rn_oldRepo.getUsersByLike(BIN);
-     List<TaxOutEntity> taxOutEntities = taxOutEntityRepo.getUsersByLike(BIN);
+//     List<TaxOutEntity> taxOutEntities = taxOutEntityRepo.getUsersByLike(BIN);
      List<FpgTempEntity> fpgTempEntities = fpgTempEntityRepo.getUsersByLike(BIN);
      List<pdl> pdls = pdlReposotory.getByBin(BIN);
      List<QoldauSubsidy> q = QoldauRepo.getByIIN(BIN);
@@ -408,7 +408,7 @@ public class MyService {
      myNode.setQoldauSubsidy(q);
      myNode.setPdls(pdls);
      myNode.setFpgTempEntities(fpgTempEntities);
-     myNode.setTaxOutEntities(taxOutEntities);
+//     myNode.setTaxOutEntities(taxOutEntities);
      myNode.setMvRnOlds(mvRnOlds);
      myNode.setNdsEntities(ndsEntities);
      myNode.setAccountantListEntities(accountantListEntities);

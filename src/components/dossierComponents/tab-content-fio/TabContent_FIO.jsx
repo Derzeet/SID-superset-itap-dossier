@@ -25,8 +25,8 @@ import SearchedTable from '../searchedTable/SearchedTable';
 import './tabContent_fio.scss'
 
 import DopInfoBlock from '../dop-info-block/DopInfoBlock';
-// const baseURL = 'http://192.168.30.24:9095/'
-const baseURL = 'http://localhost:9095/'
+const baseURL = 'http://192.168.30.24:9095/'
+// const baseURL = 'http://localhost:9095/'
 const selectStyle = {
     width: '200px',
     height: '35px',
@@ -253,7 +253,7 @@ function TabContent_FIO(props) {
                             <DopInfoBlock dateFrom={dateFrom} setDateFrom={setDateFrom} 
                                 dateTo={dateTo} setDateTo={setDateTo} 
                                 gender={gender} setGender={setGender} 
-                                nation={nation} setNation={setNation}
+                                nation={nation.toUpperCase()} setNation={setNation}
                                 country={country} setCountry={setCountry}
                                 city={city} setCity={setCity}
                                 region={region} setRegion={setRegion}

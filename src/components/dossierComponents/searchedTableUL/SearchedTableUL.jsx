@@ -55,7 +55,6 @@ function SearchedTable(props) {
           <TableRow hover
             key={index}
             sx={{ 'td, th': { border: 0 } }}
-            onClick={() => props.selectPhoto(row.photo)}
           >
             <TableCell sx={tdStyle} component="td" scope="row">{index+1}</TableCell>
             <TableCell sx={tdStyle} align="left">{row.bin}</TableCell>

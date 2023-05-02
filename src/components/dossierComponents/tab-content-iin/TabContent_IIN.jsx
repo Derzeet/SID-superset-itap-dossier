@@ -26,6 +26,7 @@ const baseURL = 'http://192.168.30.24:9095/'
 
 function TabConent_IIN(props) {
     const [iin, setIIN] = React.useState('');
+    const [doc, setDoc] = useState('')
     const [result, setResult] = React.useState(null);
     const [photo, setPhoto] = React.useState('')
     const [loading, setLoading] = React.useState(false)
@@ -44,6 +45,18 @@ function TabConent_IIN(props) {
         setLoading(true)
         console.log(params)
         axios.get(baseURL+'iin', {params: params}).then(res => {
+            console.log(res.data)
+            setResult(res.data)
+            setLoading(false)
+        })
+        setPhoto('')
+    }
+    const searchDoc = async () => {
+        console.log(loading)
+        const params = {doc_number: doc}
+        setLoading(true)
+        console.log(params)
+        axios.get(baseURL+'bydoc_number', {params: params}).then(res => {
             console.log(res.data)
             setResult(res.data)
             setLoading(false)
@@ -110,7 +123,9 @@ function TabConent_IIN(props) {
                                     // border: "1px solid #565656", 
                                     borderRadius: "4px",
                                 }} id="outlined-basic"
-                                inputProps={{ style: inputStyle, 'aria-label': 'Without label' }} 
+                                inputProps={{ style: inputStyle, 'aria-label': 'Without label' }}
+                                       value={doc}
+                                       onChange={(e) => setDoc(e.target.value)}
                                 variant="outlined" />
                             <Button sx={{
                                     height: '34px', 
@@ -118,7 +133,7 @@ function TabConent_IIN(props) {
                                     color: 'white', 
                                     width: 'fit-content', 
                                     marginLeft: 3 
-                                }} variant="contained">
+                                }} onClick= {() => searchDoc()} variant="contained">
                                 <span className='buttonSearch'>Запрос</span>
                             </Button>
                         </div>
