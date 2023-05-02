@@ -25,7 +25,8 @@ import SearchedTable from '../searchedTable/SearchedTable';
 import './tabContent_fio.scss'
 
 import DopInfoBlock from '../dop-info-block/DopInfoBlock';
-const baseURL = 'http://192.168.30.24:9095/'
+// const baseURL = 'http://192.168.30.24:9095/'
+const baseURL = 'http://localhost:9095/'
 const selectStyle = {
     width: '200px',
     height: '35px',
@@ -65,6 +66,14 @@ function TabContent_FIO(props) {
     const [fname, setFname] = useState('')
     const [fathName, setFathName] = useState('')
     const [lname, setLname] = useState('')
+    const [dateFrom, setDateFrom] = useState('')
+    const [dateTo, setDateTo] = useState('')
+    const [gender, setGender] = useState('')
+    const [nation, setNation] = useState('')
+    const [country, setCountry] = useState('')
+    const [city, setCity] = useState('')
+    const [region, setRegion] = useState('')
+    const [vin, setVin] = useState('')
 
     const [result, setResult] = React.useState(null);
     const [photo, setPhoto] = React.useState('')
@@ -98,9 +107,21 @@ function TabContent_FIO(props) {
         } else {
             resFathName = '$' + fathName.toUpperCase()
         }
-        const params = {i: resFname, o: resFathName, f: resLname}
-        console.log(params)
-        axios.get(baseURL+'fio', {params: params}).then(res => {
+        const req = {
+            i: resFname, 
+            o: resFathName, 
+            f: resLname,
+            dateFrom,
+            dateTo,
+            gender,
+            nation,
+            city, 
+            country, 
+            region,
+            vin
+        }
+        console.log(req)
+        axios.get(baseURL+'additionalfio', {params: req}).then(res => {
             console.log(res.data)
             setResult(res.data)
             setLoading(false)
@@ -229,7 +250,15 @@ function TabContent_FIO(props) {
                             <Collapse in={showDopInfo} timeout="auto" unmountOnExit>
                             <Box sx={{ margin: 0, marginLeft: '0' }}>
                                     
-                            <DopInfoBlock show={showDopInfo}/>
+                            <DopInfoBlock dateFrom={dateFrom} setDateFrom={setDateFrom} 
+                                dateTo={dateTo} setDateTo={setDateTo} 
+                                gender={gender} setGender={setGender} 
+                                nation={nation} setNation={setNation}
+                                country={country} setCountry={setCountry}
+                                city={city} setCity={setCity}
+                                region={region} setRegion={setRegion}
+                                vin = {vin} setVin={setVin}
+                                show={showDopInfo}/>
                             <div style={{height: '20px'}}></div>
                             </Box>
                             </Collapse>

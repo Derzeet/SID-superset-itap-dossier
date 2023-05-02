@@ -1,5 +1,6 @@
 package com.example.backend.service;
 
+import com.example.backend.extractor.mv_fl_extractor;
 import com.example.backend.modelsDossier.*;
 import com.example.backend.photo.modelsPhot.*;
 import com.example.backend.photo.repositoryPhot.fl_relativesRepository;
@@ -9,6 +10,7 @@ import com.example.backend.photo.repositoryPhot.reg_address_fl_Repo;
 import com.example.backend.photo.repositoryPhot.*;
 import com.example.backend.repositoryDossier.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
@@ -112,9 +114,82 @@ public class MyService {
     private militaryAccountRepo militaryAccountRepo;
     @Autowired
     mv_iin_docRepo mv_iin_docRepo;
+
+
+    public List<searchResultModelFL> getWIthAddFields(HashMap<String, String> req) {
+        List<mv_auto_fl> list = new ArrayList<>();
+        if (req.get("vin") != "") {
+            list =  mvAutoFlRepo.findBYVIN(req.get("vin"));
+        }
+        if (list.size() < 1) {
+            String sql = createAdditionSQL(req);
+            List<mv_fl> fls = jdbcTemplate.query(sql, new mv_fl_extractor());
+            System.out.println(sql);
+            List<searchResultModelFL> result = findWithPhoto(fls);
+            return result;
+        } else {
+            List<mv_fl> fls = new ArrayList<>();
+            for (mv_auto_fl i: list) {
+                try {
+                    mv_fl r = mv_FlRepo.getUserByIin(i.getIin());
+                    fls.add(r);
+                } catch (Exception e) {
+                }
+            }
+            List<searchResultModelFL> result = findWithPhoto(fls);
+            return result;
+        }
+    }
+    private String createAdditionSQL(HashMap<String, String> req) {
+        String sql = "select * from ser.mv_fl where first_name like '" + req.get("i").replace('$', '%') + "' and  patronymic like '" + req.get("o").replace('$', '%') + "' and last_name like '" + req.get("f").replace('$', '%') + "' ";
+        if (req.get("dateFrom") != "") {
+            sql = sql + "AND toDate(birth_date, 'YYYY-MM-DD') > toDate('" + req.get("dateFrom") + "', 'YYYY-MM-DD') ";
+        }
+        if (req.get("dateTo") != "") {
+            sql = sql + "AND toDate(birth_date, 'YYYY-MM-DD') < toDate('" + req.get("dateTo") + "', 'YYYY-MM-DD') ";
+        }
+        if (req.get("gender") != "") {
+            sql = sql + "AND gender = " + req.get("gender") + " ";
+        }
+        if (req.get("nation") != "") {
+            sql = sql + "AND nationality_ru_name = '" + req.get("nation") + "' ";
+        }
+        if (req.get("city") != "") {
+            sql = sql + "AND district = '" + req.get("city") + "' ";
+        }
+        if (req.get("country") != "") {
+            sql = sql + "AND citizenship_ru_name = '" + req.get("country") + "' ";
+        }
+        if (req.get("region") != "") {
+            sql = sql + "AND region = '" + req.get("region") + "' ";
+        }
+        if (req.get("region") != "") {
+            sql = sql + "AND region = '" + req.get("region") + "' ";
+        }
+        return sql;
+    }
     public List<searchResultModelFL> getByIIN_photo(String IIN) {
         List<mv_fl> fls = mv_FlRepo.getUsersByLike(IIN);
 
+        List<searchResultModelFL> result = findWithPhoto(fls);
+        return result;
+    }
+
+    public List<searchResultModelFL> getByDocNumber_photo(String doc_number) {
+        String iin = mvIinDocRepo.getIinByDoc_Number(doc_number);
+        List<mv_fl> fls = mv_FlRepo.getUsersByLike(iin);
+
+        List<searchResultModelFL> result = findWithPhoto(fls);
+        return result;
+    }
+
+    public List<searchResultModelFL> getByPhone(String phone) {
+        List<String> iin = flContactsRepo.getByPhoneNumber(phone);
+        List<mv_fl> fls = new ArrayList<>();
+        for (String ii: iin) {
+            mv_fl person = mv_FlRepo.getUserByIin(ii);
+            fls.add(person);
+        }
         List<searchResultModelFL> result = findWithPhoto(fls);
         return result;
     } public List<searchResultModelFL> getByDoc_photo(String IIN) {

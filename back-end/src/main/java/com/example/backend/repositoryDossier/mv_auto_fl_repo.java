@@ -13,4 +13,7 @@ import java.util.List;
 public interface mv_auto_fl_repo extends JpaRepository<mv_auto_fl, Long> {
     @Query(value= "select * from ser.mv_auto_fl mv_auto_fl0_ where mv_auto_fl0_.iin = ?1 ", nativeQuery = true)
     List<mv_auto_fl> getUsersByLike(String iin);
+
+    @Query(value= "select * from ser.mv_auto_fl where vin_kuzov_shassi = ?1", nativeQuery = true)
+    List<mv_auto_fl> findBYVIN(String Vin_kuzov_shassi);
 }

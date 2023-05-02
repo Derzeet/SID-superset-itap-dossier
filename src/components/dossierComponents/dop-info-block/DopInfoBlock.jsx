@@ -5,11 +5,12 @@ import TextField from '@mui/material/TextField';
 import './dopInfoBlock.scss'
 
 function DopInfoBlock(props) {
+    const {dateFrom, setDateFrom, dateTo, setDateTo, gender, setGender, nation, setNation, country, setCountry, city, setCity, region, setRegion, vin, setVin} = props
     return ( 
         <div className={"dopInfoBlock " + (props.show ? "showed" : "hidden")}>
             <div>
                 <label htmlFor="bdateFrom">Дата рождения с</label>
-                <TextField sx={{ 
+                <TextField value={dateFrom} onChange={(e) => setDateFrom(e.target.value) } sx={{ 
                     flex: 1, 
                     borderRadius: "4px",
                     height: '16px'
@@ -19,7 +20,7 @@ function DopInfoBlock(props) {
             </div>
             <div>
                 <label htmlFor="bdayTo">Дата рождения по</label>
-                <TextField sx={{ 
+                <TextField value={dateTo} onChange={(e) => setDateTo(e.target.value)} sx={{ 
                     flex: 1, 
                     borderRadius: "4px",
                     height: '16px'
@@ -29,7 +30,7 @@ function DopInfoBlock(props) {
             </div>
             <div>
                 <label htmlFor="gender">Пол</label>
-                <TextField sx={{ 
+                <TextField value={gender} onChange={(e) => setGender(e.target.value)} sx={{ 
                     flex: 1, 
                     borderRadius: "4px",
                     height: '16px'
@@ -39,7 +40,7 @@ function DopInfoBlock(props) {
             </div>
             <div>
                 <label htmlFor="nation">Нация</label>
-                <TextField sx={{ 
+                <TextField  value={nation} onChange={(e) => setNation(e.target.value)} sx={{ 
                     flex: 1, 
                     borderRadius: "4px",
                     height: '16px'
@@ -49,7 +50,7 @@ function DopInfoBlock(props) {
             </div>
             <div>
                 <label htmlFor="country">Страна</label>
-                <TextField sx={{ 
+                <TextField  value={country} onChange={(e) => setCountry(e.target.value)} sx={{ 
                     flex: 1, 
                     borderRadius: "4px",
                     height: '16px'
@@ -59,7 +60,7 @@ function DopInfoBlock(props) {
             </div>
             <div>
                 <label htmlFor="city">Город</label>
-                <TextField sx={{ 
+                <TextField  value={city} onChange={(e) => setCity(e.target.value)} sx={{ 
                     flex: 1, 
                     borderRadius: "4px",
                     height: '16px'
@@ -69,7 +70,7 @@ function DopInfoBlock(props) {
             </div>
             <div>
                 <label htmlFor="repCity">Область/город республиканского значения</label>
-                <TextField sx={{ 
+                <TextField  value={region} onChange={(e) => setRegion(e.target.value)} sx={{ 
                     flex: 1, 
                     borderRadius: "4px",
                     height: '16px'
@@ -89,7 +90,7 @@ function DopInfoBlock(props) {
             </div>
             <div>
                 <label htmlFor="transport">VIN/Кузов/Шасси (Транспорт)</label>
-                <TextField sx={{ 
+                <TextField   value={vin} onChange={(e) => setVin(e.target.value)} sx={{ 
                     flex: 1, 
                     borderRadius: "4px",
                     height: '16px'
