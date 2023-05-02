@@ -61,11 +61,27 @@ public class DoseirController {
     public List<searchResultModelFL> getByDoc(@RequestParam String doc) {
         return myService.getByDoc_photo(doc);
     }
+    @GetMapping("/bydoc_number")
+    public List<searchResultModelFL> getByDocNumber(@RequestParam String doc_number) {
+        return myService.getByDocNumber_photo(doc_number);
+    }
+
+    @GetMapping("/additionalfio")
+    public List<searchResultModelFL> getByAdditions(@RequestParam HashMap<String, String> req) {
+        System.out.println(req);
+        return myService.getWIthAddFields(req);
+    }
+
+    @GetMapping("/byphone")
+    public List<searchResultModelFL> getByPhone(@RequestParam String phone) {
+        return myService.getByPhone(phone);
+    }
 
     @GetMapping("/fio")
     public List<searchResultModelFL> findByFIO(@RequestParam String i, @RequestParam String o, @RequestParam String f) {
         return myService.getByFIO_photo(i.replace('$', '%'), o.replace('$', '%'), f.replace('$', '%'));
     }
+
     @GetMapping("/sex")
     public List<Map<String,Object>> get(){
         return myService.findAmountOfAmountByKNP("gr","gd");
