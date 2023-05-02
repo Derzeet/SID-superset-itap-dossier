@@ -10,7 +10,7 @@ import LeftBottomFrame from '../../components/dossierComponents/ul-left-bottom-f
 import RightBottomFrame from '../../components/dossierComponents/ul-right-bottom-frame/UlRightBottomFrame';
 import axios from 'axios';
 
-const baseURL = 'http://192.168.30.24:9095/'
+const baseURL = 'http://localhost:9095/'
 const UlDosiePage = (props) => {
     const { bin } = useParams();
     const [loading, isLoading] = useState(null)

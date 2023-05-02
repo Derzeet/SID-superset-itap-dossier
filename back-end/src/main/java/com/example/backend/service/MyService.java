@@ -370,6 +370,19 @@ public class MyService {
     public List<Map<String, Object>> findAmountOfAmountByKNP(String iin, String bin) {
         return flPensionContrRepo.findAmountOfAmountByKNP("810615301348", "951040000069");
     }
+
+    public List<searchResultModelUl> searchResultUl(String bin) {
+        List<mv_ul> mvUls = mv_ul_repo.getUsersByLike(bin);
+        List<searchResultModelUl> list = new ArrayList<>();
+        for (mv_ul l: mvUls) {
+            searchResultModelUl res = new searchResultModelUl();
+            res.setBin(l.getBin());
+            res.setName(l.getFull_name_rus());
+            list.add(res);
+        }
+
+        return list;
+    }
  public NodesUL getNodeUL(String BIN){
         NodesUL myNode = new NodesUL();
         List<mv_ul_founder_fl> mvUlFounderFls = mvUlFounderFlRepo.getUsersByLike(BIN);

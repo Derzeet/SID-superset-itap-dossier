@@ -7,6 +7,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import queryString from 'query-string';
 
 const rows = [
   {number: '1', fname: 'Темирлан', lname: 'Есенулы', fathName: '', IIN: '040205551504'},
@@ -58,9 +59,22 @@ function SearchedTable(props) {
           >
             <TableCell sx={tdStyle} component="td" scope="row">{index+1}</TableCell>
             <TableCell sx={tdStyle} align="left">{row.bin}</TableCell>
-            <TableCell sx={tdStyle} align="left">{row.ulName}</TableCell>
-            <TableCell sx={tdStyle} align="left">{row.region}</TableCell>
-            <TableCell sx={tdStyle} align="left"><Link style={{textDecoration: 'none', color: 'white'}} className='goLink'  target='_blank' rel='noopener noreferrer' to={'/profiler/person/'+ row.iin}>Перейти..</Link></TableCell>
+            <TableCell sx={tdStyle} align="left">{row.name}</TableCell>
+            {/* <TableCell sx={tdStyle} align="left">{row.region}</TableCell> */}
+            <TableCell sx={tdStyle} align="left" style={{
+              display: 'flex',
+              flexDirection: 'row',
+              gap: '10px',
+              alignItems: 'center'
+          }}>
+              <Link style={{textDecoration: 'none', color: 'white', backgroundColor: "#33B6FF", padding: '5px 10px', borderRadius: '4px'}} className='goLink'
+                                                     target='_blank' rel='noopener noreferrer' to={'/profiler/ul/'+ row.bin}>Перейти</Link>
+              <a style={{textDecoration: 'none', color: 'white', cursor: "pointer", backgroundColor: "#33B6FF", padding: '5px 10px', borderRadius: '4px'}} onClick={() => {
+                 const string = queryString.stringify({bin: row.bin})
+                 const url = `/itap?${string}`
+                 window.open(url, '_blank', 'noopener,noreferrer')
+              }} className='goLink'> Перейти в ITAP</a></TableCell>
+
           </TableRow>
         ))
       }
@@ -73,8 +87,8 @@ function SearchedTable(props) {
               <TableRow >
                 <TableCell sx={thStyle} style={{width: '5%', fontSize: '12px', fontWeight: 500, color: "#6D6D6D" }}>№</TableCell>
                 <TableCell sx={thStyle} style={{width: '25%', fontSize: '12px', fontWeight: 500, color: "#6D6D6D"  }}align="left"><span style={{}}>БИН</span></TableCell>
-                <TableCell sx={thStyle} style={{width: '25%', fontSize: '12px', fontWeight: 500, color: "#6D6D6D" }} align="left"><span>Наименование организации</span></TableCell>
-                <TableCell sx={thStyle} style={{width: '25%', fontSize: '12px', fontWeight: 500, color: "#6D6D6D" }} align="left"><span>Регион</span></TableCell>
+                <TableCell sx={thStyle} style={{width: '50%', fontSize: '12px', fontWeight: 500, color: "#6D6D6D" }} align="left"><span>Наименование организации</span></TableCell>
+                {/* <TableCell sx={thStyle} style={{width: '25%', fontSize: '12px', fontWeight: 500, color: "#6D6D6D" }} align="left"><span>Регион</span></TableCell> */}
                 <TableCell sx={thStyle} style={{width: '20%', fontSize: '12px', fontWeight: 500, color: "#6D6D6D" }} align="left"><span>Действие</span></TableCell>
               </TableRow>
             </TableHead>

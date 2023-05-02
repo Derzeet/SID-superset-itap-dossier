@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+
 
 import TextField from '@mui/material/TextField';
 import FormControl from '@mui/material/FormControl';
 import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+import LinearProgress from '@mui/material/LinearProgress';
 
-import SearchedTable from '../searchedTable/SearchedTable';
+import SearchedTable from '../searchedTableUL/SearchedTableUL';
+const baseURL = 'http://localhost:9095/'
 
 const inputStyle = {
     height: "3px", 
@@ -18,6 +23,20 @@ const inputStyle = {
 }
 
 function TabConent_BIN(props) {
+    const [bin, setBIN] = useState('')
+    const [result, setResult] = useState([])
+    const [loading, setLoading] = useState(false)
+    const searchBIN = async () => {
+        console.log(loading)
+        const params = {bin: bin}
+        setLoading(true)
+        console.log(params)
+        axios.get(baseURL+'bin', {params: params}).then(res => {
+            console.log(res.data)
+            setResult(res.data)
+            setLoading(false)
+        })
+    }
     return ( 
         <div className="tab__content">
  
@@ -38,6 +57,8 @@ function TabConent_BIN(props) {
                             flex: 1, 
                             borderRadius: "4px",
                         }} 
+                        value ={bin}
+                        onChange={(e) => setBIN(e.target.value)}
                         id="outlined-basic" 
                         inputProps={{ style: inputStyle,'aria-label': 'Without label' }} 
                         variant="outlined" />
@@ -47,7 +68,7 @@ function TabConent_BIN(props) {
                             color: 'white', 
                             width: 'fit-content', 
                             marginLeft: 3 
-                        }} variant="contained">
+                        }} onClick={() => searchBIN()} variant="contained">
                         <span className='buttonSearch'>Запрос</span>
                     </Button>
                 </div>
@@ -118,7 +139,15 @@ function TabConent_BIN(props) {
 
             <div className='searchResultBlock'>
                 <p>Результат</p>
-                <SearchedTable/>
+                { loading? (
+                        <Box sx={{ width: '100%' }}>
+                            <div style={{height: '50px'}}></div>
+                            <LinearProgress />
+                        </Box>
+                    ) : ( 
+                        
+                        <SearchedTable result={result}/>
+                )}
             </div>
         </div>
     );
