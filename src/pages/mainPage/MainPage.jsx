@@ -14,7 +14,8 @@ const MainPage = (props) => {
         <div className='mainPageBlock'>
             <div className='container'>
                 <div className='logodiv'></div>
-                <img src={logo} className='logo'></img>
+                {/* <img src={logo} className='logo'></img> */}
+                <a className='logo'>SID</a>
             </div>
             <div className='blockdiv'>
                 <div className='block' onClick={() => {
@@ -36,7 +37,7 @@ const MainPage = (props) => {
                 }}>
                     <img src={profiler} className='block-img'></img>
                     <a>Profiler</a>
-                    <p>Инструмент для поиска людей</p>
+                    <p>Инструмент для поиска объектов</p>
                 </div>
             </div>
         </div>

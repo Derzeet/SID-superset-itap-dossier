@@ -14,6 +14,7 @@ body {
     background-image: url(./../../background/bg-main.png) !important;
     background-size: 100%;
     height: 100%;
+    z-index: 2;
 }
 
 .container {
@@ -38,13 +39,16 @@ display: flex;
 }
 
 .logo {
-    position: relative;
+    // position: relative;
     z-index: 1;
-    height: 362px;
-    width: 362px;
+    // height: 362px;
+    // width: 362px;
     display: block;
     margin: 0 auto;
-    margin-top: 20px;
+    // margin-top: 20px;
+    font-size: 155px;
+    opacity: 0.5;
+    font-weight: 600;
 }
 
 .blockdiv {
@@ -83,7 +87,7 @@ display: flex;
     display: block;
     width: 30%;
     height: 450px;
-    background: linear-gradient(135.17deg, rgba(255, 255, 255, 0.11) -0.84%, rgba(255, 255, 255, 0) 103.64%);
+    // background: linear-gradient(135.17deg, rgba(255, 255, 255, 0.11) -0.84%, rgba(255, 255, 255, 0) 103.64%);
     // border: 1px solid #797979;
     border-radius: 3px;
     display: flex;
@@ -105,7 +109,7 @@ display: flex;
         border: 1px solid #ffffff44;
         // box-shadow: 0 0px 50px 1px #000000aa;
         // transform: scale(1.015);
-        transition: all 0.4s ease;
+        transition: all 0.5s ease;
         z-index: 100;
         filter: brightness(1.1);
         ::before{
@@ -146,13 +150,13 @@ display: flex;
         height: 150px;
     }
     .logo {
-        margin-top: 10px;
-        height: 310px;
+        margin-top: 40px;
+        height: 210px;
         width: 310px;
     }
     .block {
         // width: 30%;
-        height: 350px;
+        height: 400px;
     }
     .blockdiv {
         margin-top: 40px;

@@ -116,6 +116,18 @@ public class MyService {
     mv_iin_docRepo mv_iin_docRepo;
 
 
+    public List<searchResultModelUl> searchUlByName(String name) {
+        List<mv_ul> mvUls = mv_ul_repo.getUlsByName(name.replace("$", "%"));
+        List<searchResultModelUl> list = new ArrayList<>();
+        for (mv_ul l: mvUls) {
+            searchResultModelUl res = new searchResultModelUl();
+            res.setBin(l.getBin());
+            res.setName(l.getFull_name_rus());
+            list.add(res);
+        }
+        return list;
+    }
+
     public List<searchResultModelFL> getWIthAddFields(HashMap<String, String> req) {
         List<mv_auto_fl> list = new ArrayList<>();
         if (req.get("vin") != "") {
@@ -152,19 +164,19 @@ public class MyService {
             sql = sql + "AND gender = " + req.get("gender") + " ";
         }
         if (req.get("nation") != "") {
-            sql = sql + "AND nationality_ru_name = '" + req.get("nation") + "' ";
+            sql = sql + "AND nationality_ru_name = '" + req.get("nation").toUpperCase() + "' ";
         }
         if (req.get("city") != "") {
-            sql = sql + "AND district = '" + req.get("city") + "' ";
+            sql = sql + "AND district = '" + req.get("city").toUpperCase() + "' ";
         }
         if (req.get("country") != "") {
-            sql = sql + "AND citizenship_ru_name = '" + req.get("country") + "' ";
+            sql = sql + "AND citizenship_ru_name = '" + req.get("country").toUpperCase() + "' ";
         }
         if (req.get("region") != "") {
-            sql = sql + "AND region = '" + req.get("region") + "' ";
+            sql = sql + "AND region = '" + req.get("region").toUpperCase() + "' ";
         }
         if (req.get("region") != "") {
-            sql = sql + "AND region = '" + req.get("region") + "' ";
+            sql = sql + "AND region = '" + req.get("region").toUpperCase() + "' ";
         }
         return sql;
     }

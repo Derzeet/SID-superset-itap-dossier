@@ -90,14 +90,14 @@ function LeftBottomFrame(props) {
                             </TableBody>
                         </Table>
                     </TableContainer>
-                    <TransportRow row={transport} exist={transport.length > 0 ? true : false}/>
+                    <TransportRow row={transport} exist={transport  != null ? true : false}/>
                     {/* <SchoolRow schools={schools} exist={schools.length > 0 ? true : false}/> */}
-                    <SchoolsBlock schools={schools} exist={schools.length > 0 ? true : false}/>
-                    <UniversityBlock universities={universities} exist={universities.length > 0 ? true : false}/>
-                    <FlPensionBlock pensions={pensions} exist={pensions.length > 0 ? true : false}/>
-                    <MilitaryBlock military={military} militaryEntities={militaryEntities} exist={military && military.length > 0 ? true : false}/>
-                    <NedvijimostBlock nedvijimost={nedvijimost} exist={nedvijimost.length > 0 ? true : false}/>
-                    <ContactsBlock array={contacts} exist={contacts.length > 0? true : false}/>
+                    <SchoolsBlock schools={schools} exist={schools  != null  ? true : false}/>
+                    <UniversityBlock universities={universities} exist={universities  != null  ? true : false}/>
+                    <FlPensionBlock pensions={pensions} exist={pensions  != null  ? true : false}/>
+                    <MilitaryBlock military={military} militaryEntities={militaryEntities} exist={military && military  != null  ? true : false}/>
+                    <NedvijimostBlock nedvijimost={nedvijimost} exist={nedvijimost  != null  ? true : false}/>
+                    <ContactsBlock array={contacts} exist={contacts  != null ? true : false}/>
                 </div>
                 {/* TRANSPORT */}
                 <div style={{width: '100%'}}>

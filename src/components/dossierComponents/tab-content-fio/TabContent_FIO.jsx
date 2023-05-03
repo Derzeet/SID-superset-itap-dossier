@@ -111,13 +111,13 @@ function TabContent_FIO(props) {
             i: resFname, 
             o: resFathName, 
             f: resLname,
-            dateFrom,
-            dateTo,
+            dateFrom: dateFrom == '' ? '' : dateFrom.format('YYYY-MM-DD'),
+            dateTo: dateTo == '' ? '' : dateTo.format('YYYY-MM-DD'),
             gender,
-            nation,
-            city, 
-            country, 
-            region,
+            nation: nation.toUpperCase(),
+            city: city.toUpperCase(), 
+            country: country.toUpperCase(), 
+            region: region.toUpperCase(),
             vin
         }
         console.log(req)
@@ -217,8 +217,8 @@ function TabContent_FIO(props) {
                         </div>
                     </div>
                 </div>
-                <div>
-                    <img src={'data:image/jpeg;base64,' +  photo} alt=''/>
+                <div style= {{position: "fixed", right: "10%", zIndex: 9, backgroundColor: 'white'}} >
+                    <img style= {{right: 0}} src={'data:image/jpeg;base64,' +  photo} alt=''/>
                 </div>
             </div>
             
@@ -230,10 +230,10 @@ function TabContent_FIO(props) {
                     <div>{showDopInfo ? "HideIcon" : "ShowIcon"}</div>
                 </div>
                 <DopInfoBlock show={showDopInfo}/> */}
-                <TableContainer sx={{marginTop: 0, backgroundColor: '#1e1f24'}} style={{overflow: 'unset'}}>
+                <TableContainer sx={{marginTop: 0, backgroundColor: '#0D0F11'}} style={{overflow: 'unset'}}>
                     <Table aria-label="collapsible table" className="uitable">
                         <TableRow className="uitablerow" sx={{height:'10px',}} style={{borderBottom: 'hidden'}}>
-                        <TableCell sx={{padding: 1}} style={{width: '90%', fontSize: '12px', fontWeight: 500, color: "#FFFFFF"}}><a>Дополнительные данные</a></TableCell>
+                        <TableCell sx={{padding: 1}} style={{width: '90%', fontSize: '12px', fontWeight: 500, color: "#FFFFFF"}}><a style={{marginLeft: '15px', fontSize: '15px'}}>Дополнительные данные</a></TableCell>
                         <TableCell sx={{padding: 1}} style={{width: '10%'}} align='right'>
                             <IconButton
                             aria-label="expand row"

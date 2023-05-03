@@ -44,7 +44,7 @@ var onSelectNode = false;
 
 const GraphNetnew = (props) => {
     const location = useLocation()
-    const {iin} = queryString.parse(location.search)
+    const {object, type} = queryString.parse(location.search)
     const [updateGraph, setUpdateGraph] = useState(true)
 
     const [nodes, setNodes] = useState([])
@@ -1063,7 +1063,7 @@ const GraphNetnew = (props) => {
     if (counter === 0 && !isLoading) {
         return (
             <div className='mainSection'>
-                <LeftBar iin={iin} handleLayout={handleLayout} update={update} importBt={importBt} exportBt={exportBt} handleSubmit={Submit}></LeftBar>
+                <LeftBar object={object} type={type} handleLayout={handleLayout} update={update} importBt={importBt} exportBt={exportBt} handleSubmit={Submit}></LeftBar>
                 <div className='centralBar'>
                     <div className="waiterBox">
                         <i id="waiter" className="fa-solid fa-magnifying-glass"></i>
@@ -1075,7 +1075,7 @@ const GraphNetnew = (props) => {
     } else if (counter !== 0 && nodes.length === 0 && !isLoading) {
         return (
             <div className='mainSection'>
-                <LeftBar iin={iin} handleLayout={handleLayout} update={update} importBt={importBt} exportBt={exportBt} handleSubmit={Submit}></LeftBar>
+                <LeftBar  object={object} type={type} handleLayout={handleLayout} update={update} importBt={importBt} exportBt={exportBt} handleSubmit={Submit}></LeftBar>
                 <div className='centralBar'>
                     <div className="waiterBox">
                         <a>No objects found</a>
@@ -1087,7 +1087,7 @@ const GraphNetnew = (props) => {
     } else if (isLoading && nodes.length === 0) {
         return (
             <div className='mainSection'>
-                <LeftBar iin={iin} handleLayout={handleLayout} update={update} importBt={importBt} exportBt={exportBt} handleSubmit={Submit}></LeftBar>
+                <LeftBar  object={object} type={type} handleLayout={handleLayout} update={update} importBt={importBt} exportBt={exportBt} handleSubmit={Submit}></LeftBar>
                 <div className='centralBar'>
                     <div className="loader">
                         <div className="inner one"></div>

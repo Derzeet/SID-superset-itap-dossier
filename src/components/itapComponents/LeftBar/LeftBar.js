@@ -11,8 +11,10 @@ const LeftBar = (props) => {
     const navigate = useNavigate()
     const reader = new FileReader()
 
+    const [type, setType] = useState(props.type != '' ? props.type : '')
+
     const [newReq, setNewReq] = useState(true)
-    const [iin1, setIIN1] = useState(props.iin != '' ? props.iin : '')
+    const [iin1, setIIN1] = useState(props.object != '' ? props.object : '')
     const [iin2, setIIN2] = useState("")
 
     const [searchOption, setSearchOption] = useState("iinOption")
@@ -50,7 +52,8 @@ const LeftBar = (props) => {
         
         let formRels  = document.querySelector("#formRels")
 
-        if (iin1 != '') {
+        if (iin1 != '' && type == "iin") {
+            let value = document.getElementById("connections").value;
             document.querySelector("#connections").value = "con1"
 
             iin1.style.display = 'flex';
@@ -70,19 +73,47 @@ const LeftBar = (props) => {
             formDepth.style.display = 'flex';
             formRels.style.display = 'flex';
             props.update()
+            setMode("con1")
+        } else if (iin1 != '' && type == "bin") {
+            setMode("con4")
+            iin1.childNodes[0].innerHTML = "Введите БИН"
+            iin2.childNodes[0].innerHTML = "Введите второй БИН"
+
+            formSearchOptions.style.display = 'none';
+            
+            iin1.style.display = 'flex';
+            iin2.style.display = 'flex';
+
+            formFio1.style.display = 'none';
+            formFio2.style.display = 'none';
+
+            formLimit.style.display = 'none';
+            formDepth.style.display = 'none';
+
+            formRels.style.display = 'flex';
+            props.update()
         } else {
-            iin1.style.display = 'none';
+            let value = document.getElementById("connections").value;
+            document.querySelector("#connections").value = "con1"
+
+            iin1.style.display = 'flex';
             iin2.style.display = 'none';
             
             formFio1.style.display = 'none';
             formFio2.style.display = 'none';
             
-            formSearchOptions.style.display = 'none';
+            // setMode(value)
+            
+            iin1.childNodes[0].innerHTML = "Введите ИИН"
+            
+            formSearchOptions.style.display = 'flex';
             
 
-            formLimit.style.display = 'none';
-            formDepth.style.display = 'none';
-            formRels.style.display = 'none';
+            formLimit.style.display = 'flex';
+            formDepth.style.display = 'flex';
+            formRels.style.display = 'flex';
+            props.update()
+            setMode("con1")
         }
     }, [])
 
@@ -414,7 +445,7 @@ const LeftBar = (props) => {
                                 formRels.style.display = 'flex';
                                 props.update()
                             }
-                        }}>
+                        }} value={mode}>
                             <option value="con1">Фл</option>
                             <option value="con4">Юл</option>
                             <option value="con2">Фл - Фл</option>

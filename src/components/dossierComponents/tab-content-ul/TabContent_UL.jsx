@@ -5,6 +5,8 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
 import MenuItem from '@mui/material/MenuItem';
+import Box from '@mui/material/Box';
+import LinearProgress from '@mui/material/LinearProgress';
 import Select from '@mui/material/Select';
 
 import './tabContent_ul.scss'
@@ -44,7 +46,29 @@ const inputStyle = {
 function TabContent_UL(props) {
     const [ulName, setULName] = useState("")
     const [ulNameType, setULNameType] = useState("begin")
+    const [loading, setLoading] = useState(false)
+    const [result, setResult] = useState([])
 
+    const searchName = async () => {
+        setLoading(true)
+        let resName = ""
+        if (ulNameType == 'begin') {
+            resName = ulName.toUpperCase() + '$'
+        } else if (ulNameType == 'have') {
+            resName = '$' + ulName.toUpperCase() + '$'
+        } else {
+            resName = '$' + ulName.toUpperCase()
+        }
+        const req = {
+            name: resName
+        }
+        console.log(req)
+        axios.get(baseURL+'binname', {params: req}).then(res => {
+            console.log(res.data)
+            setResult(res.data)
+            setLoading(false)
+        })
+    }
     return ( 
         <div className="tab__content tab_ul">
             <div className="searchForm">
@@ -105,14 +129,22 @@ function TabContent_UL(props) {
                             color: 'white', 
                             width: 'fit-content', 
                             marginLeft: 3 
-                        }} variant="contained">
+                        }} onClick={()=> searchName()} variant="contained">
                         <span className='buttonSearch'>Запрос</span>
                     </Button>
                 </div>
             </div>
             <div className='searchResultBlock'>
                 <p>Результат</p>
-                <SearchedTable/>
+                { loading? (
+                        <Box sx={{ width: '100%' }}>
+                            <div style={{height: '50px'}}></div>
+                            <LinearProgress />
+                        </Box>
+                    ) : ( 
+                        
+                        <SearchedTable result={result}/>
+                )}
             </div>
         </div>
     );
