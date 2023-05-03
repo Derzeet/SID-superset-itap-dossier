@@ -13,7 +13,7 @@ import './tabContent_ul.scss'
 
 import SearchedTable from '../searchedTableUL/SearchedTableUL';
 
-const baseURL = 'http://localhost:9095/'
+const baseURL = 'http://192.168.30.24:9095/'
 const selectStyle = {
     width: '200px',
     height: '35px',

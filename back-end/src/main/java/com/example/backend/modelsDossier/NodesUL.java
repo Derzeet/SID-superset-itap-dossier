@@ -15,16 +15,16 @@ public class NodesUL {
     private List<equipment> equipment;
     private List<dormant> dormants;
     private List<bankrot> bankrots; //risk
-    private List<OpgEntity> opgEntities;
+    private List<OpgEntity> opgEntities; //risk
 
-    private List<adm> adms;
+    private List<adm> adms;  //risk
 
     public List<mv_ul_founder_fl> getMvUlFounderFls() {
         return mvUlFounderFls;
     }
     private List<msh> mshes;
-    private List<criminals> criminals;
-    private List<block_esf> blockEsfs;
+    private List<criminals> criminals;  //risk
+    private List<block_esf> blockEsfs;  //risk
     private List<NdsEntity> ndsEntities;
     private List<mv_rn_old> mvRnOlds;
     private List<TaxOutEntity> taxOutEntities;
@@ -32,6 +32,34 @@ public class NodesUL {
     private List<pdl> pdls;
     private List<QoldauSubsidy> QoldauSubsidy;
     private List<CommodityProducer> commodityProducers;
+    private List<RegAddressUlEntity> regAddressUlEntities;
+    private List<SvedenyaObUchastnikovUlEntity> svedenyaObUchastnikovUlEntities;
+    private boolean Person_with_risk;
+
+    public boolean isPerson_with_risk() {
+        return Person_with_risk;
+    }
+
+    public void setPerson_with_risk(boolean person_with_risk) {
+        Person_with_risk = person_with_risk;
+    }
+
+    public List<SvedenyaObUchastnikovUlEntity> getSvedenyaObUchastnikovUlEntities() {
+        return svedenyaObUchastnikovUlEntities;
+    }
+
+    public void setSvedenyaObUchastnikovUlEntities(List<SvedenyaObUchastnikovUlEntity> svedenyaObUchastnikovUlEntities) {
+        this.svedenyaObUchastnikovUlEntities = svedenyaObUchastnikovUlEntities;
+    }
+
+    public List<RegAddressUlEntity> getRegAddressUlEntities() {
+        return regAddressUlEntities;
+    }
+
+    public void setRegAddressUlEntities(List<RegAddressUlEntity> regAddressUlEntities) {
+        this.regAddressUlEntities = regAddressUlEntities;
+    }
+
 
     public List<CommodityProducer> getCommodityProducers() {
         return commodityProducers;

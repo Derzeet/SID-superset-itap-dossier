@@ -61,6 +61,10 @@ public class MyService {
     convicts_justifiedRepo convicts_justifiedRepo;
     @Autowired
     IpgoEmailEntityRepo IpgoEmailEntityRepo;
+    @Autowired MvUlFounderUlRepo mvUlFounderUlRepo;
+    @Autowired MvUlLeaderEntityRepo mvUlLeaderEntityRepo;
+    @Autowired
+    RegAddressUlEntityRepo RegAddressUlEntityRepo;
     @Autowired
     AdvocateListEntityRepo advocateListEntityRepo;
     @Autowired
@@ -298,7 +302,7 @@ public class MyService {
         List<adm> MyAdm =  admRepo.getUsersByLike(IIN);
         List<dormant> myDormant =  dormantRepo.getUsersByLike(IIN);
         List<MilitaryAccounting2Entity> militaryAccounting2Entities = MilitaryAccounting2Repo.getUsersByLike(IIN);
-        List<mv_rn_old> mvRnOlds = mv_rn_oldRepo.getUsersByLike(IIN);
+//        List<mv_rn_old> mvRnOlds = mv_rn_oldRepo.getUsersByLike(IIN);
         List<equipment> myEquipment =  equipment_repo.getUsersByLike(IIN);
         List<fl_relatives> relatives = fl_relativesRepository.findAllByIin(IIN);
         List<reg_address_fl> addressFls = regAddressFlRepo.getByIIN(IIN);
@@ -306,7 +310,6 @@ public class MyService {
 //        List<String> CompanyNames = flPensionContrRepo.getUsersByLikeCompany(IIN);
         System.out.println(flPensionContrs);
         List<flPensionMini> flPensionContrs1 = new ArrayList<>();
-        omn myOmns =  omn_repos.getUsersByLikeIin_bins(IIN);
         List<msh> mshes = mshRepo.getUsersByLike(IIN);
 
         List<FL_PENSION_FINAL> flPensionFinals = new ArrayList<>();
@@ -354,11 +357,10 @@ public class MyService {
         myNode.setIpgoEmailEntities(ipgoEmailEntities);
         myNode.setMilitaryAccounting2Entities(militaryAccounting2Entities);
         myNode.setConvictsJustifieds(convictsJustifieds);
-        myNode.setMvRnOlds(mvRnOlds);
+//        myNode.setMvRnOlds(mvRnOlds);
         myNode.setBankrots(bankrots);
         myNode.setCriminals(criminals);
         myNode.setConvictsTerminatedByRehabs(convictsTerminatedByRehabs);
-        myOmn.add(myOmns);
         myNode.setRegAddressFls(addressFls);
         myNode.setMshes(mshes);
         myNode = tryAddPhoto(myNode,IIN);
@@ -377,6 +379,22 @@ public class MyService {
         myNode.setUniversities(uniRepo.getByIIN(IIN));
         myNode.setSchools(schoolRepo.getByIIN(IIN));
         myNode.setMillitaryAccounts(militaryAccountRepo.findAllByIin(IIN));
+        if(myNode.getFirstCreditBureauEntities().size()== 0
+        & myNode.getAdms().size()== 0
+        & myNode.getOmns().size()== 0
+        & myNode.getWantedListEntities().size()== 0
+                & myNode.getCriminals().size()== 0
+                & myNode.getConvictsTerminatedByRehabs().size()== 0
+                & myNode.getConvictsJustifieds().size()== 0
+                & myNode.getBankrots().size()== 0
+                & myNode.getBlockEsfs().size()== 0
+                & myNode.getMzEntities().size()== 0  ){
+            System.out.println(myNode.getFirstCreditBureauEntities().size());
+            System.out.println(myNode.getFirstCreditBureauEntities().isEmpty());
+            myNode.setPerson_with_risk(false);
+        }else {
+            myNode.setPerson_with_risk(true);
+        }
         return myNode;
     }
     public List<Map<String, Object>> findAmountOfAmountByKNP(String iin, String bin) {
@@ -410,18 +428,49 @@ public class MyService {
         List<OpgEntity> opgEntities = opgRepo.getopgByIIN(BIN);
      List<AccountantListEntity> accountantListEntities = accountantListEntityRepo.getUsersByLikeBIN(BIN);
      List<NdsEntity> ndsEntities = ndsEntityRepo.getUsersByLike(BIN);
-     List<mv_rn_old> mvRnOlds = mv_rn_oldRepo.getUsersByLike(BIN);
+//     List<mv_rn_old> mvRnOlds = mv_rn_oldRepo.getUsersByLike(BIN);
 //     List<TaxOutEntity> taxOutEntities = taxOutEntityRepo.getUsersByLike(BIN);
      List<FpgTempEntity> fpgTempEntities = fpgTempEntityRepo.getUsersByLike(BIN);
      List<pdl> pdls = pdlReposotory.getByBin(BIN);
      List<QoldauSubsidy> q = QoldauRepo.getByIIN(BIN);
      List<CommodityProducer> commodityProducers = commodityProducerRepo.getiin_binByIIN(BIN);
+     List<MvUlFounderUl> mvUlFounderUls = mvUlFounderUlRepo.getUsersByLike(BIN);
+     List<SvedenyaObUchastnikovUlEntity> svedenyaObUchastnikovUlEntities = new ArrayList<>();
+     for(MvUlFounderUl mvUlFUl : mvUlFounderUls){
+         SvedenyaObUchastnikovUlEntity svedenyaObUchastnikovUlEntity = new SvedenyaObUchastnikovUlEntity();
+         svedenyaObUchastnikovUlEntity.setIin_bin(mvUlFUl.getFounderBin());
+         svedenyaObUchastnikovUlEntity.setFIOorUlName(mvUlFUl.getFounderNameRu());
+         svedenyaObUchastnikovUlEntity.setReg_date(mvUlFUl.getRegDate());
+         if(mvUlFUl.isCurrent()){
+         svedenyaObUchastnikovUlEntity.setIdentificator("Учредитель ЮЛ");
+     } else {
+             svedenyaObUchastnikovUlEntity.setIdentificator("Учредитель ЮЛ (исторический)");
+         }
+         svedenyaObUchastnikovUlEntities.add(svedenyaObUchastnikovUlEntity);
+     }
+     List<MvUlLeaderEntity> mvUlLeaderEntities = mvUlLeaderEntityRepo.getUsersByLike(BIN);
+     for(MvUlLeaderEntity mvUlFUl : mvUlLeaderEntities){
+         SvedenyaObUchastnikovUlEntity svedenyaObUchastnikovUlEntity = new SvedenyaObUchastnikovUlEntity();
+         svedenyaObUchastnikovUlEntity.setIin_bin(mvUlFUl.getIin());
+         svedenyaObUchastnikovUlEntity.setFIOorUlName(mvUlFUl.getLastName() + " " + mvUlFUl.getFirstName()+ " " + mvUlFUl.getPatronymic());
+         svedenyaObUchastnikovUlEntity.setReg_date(mvUlFUl.getRegDate());
+         if(mvUlFUl.getCurrent() == true){
+             svedenyaObUchastnikovUlEntity.setIdentificator("Директор");
+         } else {
+             svedenyaObUchastnikovUlEntity.setIdentificator("Директор (исторический)");
+         }
+         svedenyaObUchastnikovUlEntities.add(svedenyaObUchastnikovUlEntity);
+
+     }
+     List<RegAddressUlEntity> regAddressUlEntities = RegAddressUlEntityRepo.getUsersByLike(BIN);
+     myNode.setSvedenyaObUchastnikovUlEntities(svedenyaObUchastnikovUlEntities);
+     myNode.setRegAddressUlEntities(regAddressUlEntities);
      myNode.setCommodityProducers(commodityProducers);
      myNode.setQoldauSubsidy(q);
      myNode.setPdls(pdls);
      myNode.setFpgTempEntities(fpgTempEntities);
 //     myNode.setTaxOutEntities(taxOutEntities);
-     myNode.setMvRnOlds(mvRnOlds);
+//     myNode.setMvRnOlds(mvRnOlds);
      myNode.setNdsEntities(ndsEntities);
      myNode.setAccountantListEntities(accountantListEntities);
      myNode.setMshes(mshes);
@@ -435,6 +484,17 @@ public class MyService {
         myNode.setAdms(MyAdm);
         myNode.setDormants(myDormant);
         myNode.setEquipment(myEquipment);
+     if(myNode.getOmns().size()== 0
+             & myNode.getBankrots().size()== 0
+             & myNode.getAdms().size()== 0
+             & myNode.getOpgEntities().size()== 0
+             & myNode.getCriminals().size()== 0
+             & myNode.getBlockEsfs().size()== 0
+             & myNode.getFpgTempEntities().size()== 0){
+         myNode.setPerson_with_risk(false);
+     }else {
+         myNode.setPerson_with_risk(true);
+     }
         return myNode;
-    }
-}
+
+}}

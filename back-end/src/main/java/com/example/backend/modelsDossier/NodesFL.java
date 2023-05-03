@@ -11,16 +11,16 @@ public class NodesFL {
 
     private List<photoDb> photoDbf;
     private List<mv_auto_fl> mvAutoFls;
-    private List<omn> omns;
-    private List<orphans> orphanss;
+    private List<omn> omns; //risk
+    private List<orphans> orphanss; //detdom
     private List<equipment> equipment;
     private List<dormant> dormants;
-    private List<adm> adms;
+    private List<adm> adms; //risk
     private List<fl_relatives> fl_relatives;
     private List<reg_address_fl> regAddressFls;
 
     private List<pdl> pdls;
-    private List<WantedListEntity> wantedListEntities;
+    private List<WantedListEntity> wantedListEntities; //risk
     private List<CommodityProducer> commodityProducers;
 
     public List<CommodityProducer> getCommodityProducers() {
@@ -40,7 +40,7 @@ public class NodesFL {
     }
 
     private List<mv_iin_doc> mvIinDocs;
-    private List<criminals> criminals;
+    private List<criminals> criminals; //risk
     private List<com.example.backend.photo.modelsPhot.universities> universities;
 
     private List<school> schools;
@@ -53,7 +53,7 @@ public class NodesFL {
     private List<bankrot> bankrots; //risk
     private List<FL_PENSION_FINAL> flPensionContrs;
     private List<msh> mshes;
-    private List<block_esf> blockEsfs;
+    private List<block_esf> blockEsfs;  //risk
     private List<mv_ul_founder_fl> mvUlFounderFls;
     private List<NdsEntity> ndsEntities;
 
@@ -81,14 +81,23 @@ public class NodesFL {
         this.blockEsfs = blockEsfs;
     }
 
-    private List<FirstCreditBureauEntity> FirstCreditBureauEntities;
+    private List<FirstCreditBureauEntity> FirstCreditBureauEntities;  //risk
 private List<IpgoEmailEntity> ipgoEmailEntities;
 private List<TIpEntity>TIpEntity;
 private List<AccountantListEntity> accountantListEntities;
 private List<AdvocateListEntity> advocateListEntities;
 private List<AuditorsListEntity> auditorsListEntities;
 private List<BailiffListEntity> bailiffListEntities;
-private List<MzEntity> mzEntities ;
+private List<MzEntity> mzEntities ;  //risk
+    private boolean Person_with_risk;
+
+    public boolean isPerson_with_risk() {
+        return Person_with_risk;
+    }
+
+    public void setPerson_with_risk(boolean person_with_risk) {
+        Person_with_risk = person_with_risk;
+    }
 
     public List<MzEntity> getMzEntities() {
         return mzEntities;
