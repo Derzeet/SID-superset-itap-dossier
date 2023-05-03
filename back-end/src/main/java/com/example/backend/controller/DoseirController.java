@@ -84,6 +84,11 @@ public class DoseirController {
         return myService.searchResultUl(bin);
     }
 
+    @GetMapping("/binname")
+    public List<searchResultModelUl> findBinByName(@RequestParam String name) {
+        return myService.searchUlByName(name.replace('$', '%'));
+    }
+
     @GetMapping("/sex")
     public List<Map<String,Object>> get(){
         return myService.findAmountOfAmountByKNP("gr","gd");

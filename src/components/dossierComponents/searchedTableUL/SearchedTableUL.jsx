@@ -7,6 +7,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { ButtonGroup } from '@mui/material';
+import {Button} from '@mui/material';
 import queryString from 'query-string';
 
 const rows = [
@@ -66,14 +68,20 @@ function SearchedTable(props) {
               gap: '10px',
               alignItems: 'center'
           }}>
-              <Link style={{textDecoration: 'none', color: 'white', backgroundColor: "#33B6FF", padding: '5px 10px', borderRadius: '4px'}} className='goLink'
-                                                     target='_blank' rel='noopener noreferrer' to={'/profiler/ul/'+ row.bin}>Перейти</Link>
-              <a style={{textDecoration: 'none', color: 'white', cursor: "pointer", backgroundColor: "#33B6FF", padding: '5px 10px', borderRadius: '4px'}} onClick={() => {
-                 const string = queryString.stringify({bin: row.bin})
-                 const url = `/itap?${string}`
-                 window.open(url, '_blank', 'noopener,noreferrer')
-              }} className='goLink'> Перейти в ITAP</a></TableCell>
-
+              <ButtonGroup
+                  variant='outlined'
+                  aria-label='outlined-button-group'>
+                    <Button onClick={() => {
+                      const url = `/profiler/ul/` + row.bin
+                      window.open(url, '_blank', 'noopener,noreferrer')
+                      }}>Досье</Button>
+                    <Button onClick={() => {
+                      const string = queryString.stringify({object: row.bin, type: "bin"})
+                      const url = `/itap?${string}`
+                      window.open(url, '_blank', 'noopener,noreferrer')
+                      }}>Itap</Button>
+              </ButtonGroup>
+              </TableCell>
           </TableRow>
         ))
       }
@@ -84,11 +92,11 @@ function SearchedTable(props) {
           <Table sx={{ minWidth: 650, background: "#0D0F11"}} aria-label="simple table">
             <TableHead>
               <TableRow >
-                <TableCell sx={thStyle} style={{width: '5%', fontSize: '12px', fontWeight: 500, color: "#6D6D6D" }}>№</TableCell>
-                <TableCell sx={thStyle} style={{width: '25%', fontSize: '12px', fontWeight: 500, color: "#6D6D6D"  }}align="left"><span style={{}}>БИН</span></TableCell>
-                <TableCell sx={thStyle} style={{width: '50%', fontSize: '12px', fontWeight: 500, color: "#6D6D6D" }} align="left"><span>Наименование организации</span></TableCell>
+                <TableCell sx={thStyle} style={{width: '5%', fontWeight: 500, color: "#6D6D6D" }}>№</TableCell>
+                <TableCell sx={thStyle} style={{width: '13%', fontWeight: 500, color: "#6D6D6D"  }}align="left"><span style={{}}>БИН</span></TableCell>
+                <TableCell sx={thStyle} style={{width: '62%', fontWeight: 500, color: "#6D6D6D" }} align="left"><span>Наименование организации</span></TableCell>
                 {/* <TableCell sx={thStyle} style={{width: '25%', fontSize: '12px', fontWeight: 500, color: "#6D6D6D" }} align="left"><span>Регион</span></TableCell> */}
-                <TableCell sx={thStyle} style={{width: '20%', fontSize: '12px', fontWeight: 500, color: "#6D6D6D" }} align="left"><span>Действие</span></TableCell>
+                <TableCell sx={thStyle} style={{width: '20%', fontWeight: 500, color: "#6D6D6D" }} align="left"><span>Действие</span></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>

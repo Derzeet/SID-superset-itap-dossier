@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from 'react';
 
 import TextField from '@mui/material/TextField';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { DatePicker } from '@mui/x-date-pickers';
+import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs'
+import { FormControl, InputLabel, MenuItem } from '@mui/material';
+import {Select} from '@mui/material';
+
+import dayjs from 'dayjs';
 
 import './dopInfoBlock.scss'
 
@@ -10,37 +17,36 @@ function DopInfoBlock(props) {
         <div className={"dopInfoBlock " + (props.show ? "showed" : "hidden")}>
             <div>
                 <label htmlFor="bdateFrom">Дата рождения с</label>
-                <TextField value={dateFrom} onChange={(e) => setDateFrom(e.target.value) } sx={{ 
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DatePicker value={dateFrom} onChange={(e) => setDateFrom(dayjs(e)) }  format='YYYY-MM-DD'/>
+                </LocalizationProvider>
+                {/* <TextField value={dateFrom} onChange={(e) => setDateFrom(e.target.value) } sx={{ 
                     flex: 1, 
                     borderRadius: "4px",
                     height: '16px'
                 }}  
                 id='bdateFrom'
-                variant="outlined" />
+                variant="outlined" /> */}
             </div>
             <div>
                 <label htmlFor="bdayTo">Дата рождения по</label>
-                <TextField value={dateTo} onChange={(e) => setDateTo(e.target.value)} sx={{ 
-                    flex: 1, 
-                    borderRadius: "4px",
-                    height: '16px'
-                }}  
-                id='bdayTo'
-                variant="outlined" />
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DatePicker value={dateTo} onChange={(e) => setDateTo(dayjs(e)) }  format='YYYY-MM-DD'/>
+                </LocalizationProvider>
+
             </div>
             <div>
                 <label htmlFor="gender">Пол</label>
-                <TextField value={gender} onChange={(e) => setGender(e.target.value)} sx={{ 
-                    flex: 1, 
-                    borderRadius: "4px",
-                    height: '16px'
-                }}  
-                id='gender'
-                variant="outlined" />
+                <FormControl>
+                    <Select value={gender} onChange={(e) => setGender(e.target.value)} >
+                        <MenuItem value={1}>МУЖСКОЙ</MenuItem>
+                        <MenuItem value={2}>ЖЕНСКИЙ</MenuItem>
+                    </Select>
+                </FormControl>
             </div>
             <div>
                 <label htmlFor="nation">Нация</label>
-                <TextField  value={nation} onChange={(e) => setNation(e.target.value)} sx={{ 
+                <TextField value={nation} onChange={(e) => setNation(e.target.value)} sx={{ 
                     flex: 1, 
                     borderRadius: "4px",
                     height: '16px'

@@ -17,6 +17,10 @@ import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import { ButtonGroup } from '@mui/material';
+import {Button} from '@mui/material';
+import queryString from 'query-string';
+
 
 function RightTopFrame(props) {
   const soc = ''
@@ -73,7 +77,21 @@ function Row(props) {
           <TableCell sx={{padding: 1}} style={{fontSize: '12px', fontWeight: 500, color: "#FFFFFF"}}><a>{props.index + 1}</a></TableCell>
           <TableCell sx={{padding: 1}} style={{ width: '60%', paddingLeft: '18px', fontSize: '12px', fontWeight: 500, color: "#FFFFFF" }} align="left"><a>{row.parent_fio}</a></TableCell>
           <TableCell sx={{padding: 1}} style={{ paddingLeft: '18px', fontSize: '12px', fontWeight: 500, color: "#FFFFFF" }}><a>{row.parent_iin || '---'}</a></TableCell>
-          <TableCell sx={{padding: 1}} style={{fontSize: '12px', fontWeight: 500, color: "#FFFFFF" }}><Link style={{textDecoration: 'none', color: 'white'}} className='goLink' target='_blank' rel='noopener noreferrer' to={'/profiler/person/'+ row.parent_iin}>Перейти..</Link></TableCell>
+          <TableCell sx={{padding: 1}} style={{fontSize: '12px', fontWeight: 500, color: "#FFFFFF" }}>
+          <ButtonGroup size="small"
+                  variant='text'
+                  aria-label='outlined-button-group'>
+                    <Button size="small" onClick={() => {
+                      const url = `/profiler/person/` + row.parent_iin
+                      window.open(url, '_blank', 'noopener,noreferrer')
+                      }}>Досье</Button>
+                    <Button size="small" onClick={() => {
+                      const string = queryString.stringify({object: row.parent_iin, type: "iin"})
+                      const url = `/itap?${string}`
+                      window.open(url, '_blank', 'noopener,noreferrer')
+                      }}>Itap</Button>
+              </ButtonGroup>
+          </TableCell>
           <TableCell sx={{padding: 1}}>
             <IconButton
               aria-label="expand row"
