@@ -389,8 +389,6 @@ public class MyService {
                 & myNode.getBankrots().size()== 0
                 & myNode.getBlockEsfs().size()== 0
                 & myNode.getMzEntities().size()== 0  ){
-            System.out.println(myNode.getFirstCreditBureauEntities().size());
-            System.out.println(myNode.getFirstCreditBureauEntities().isEmpty());
             myNode.setPerson_with_risk(false);
         }else {
             myNode.setPerson_with_risk(true);
@@ -463,6 +461,8 @@ public class MyService {
 
      }
      List<RegAddressUlEntity> regAddressUlEntities = RegAddressUlEntityRepo.getUsersByLike(BIN);
+     List<fl_contacts> fl_contacts = flContactsRepo.findAllByIin(BIN);
+     myNode.setFl_contacts(fl_contacts);
      myNode.setSvedenyaObUchastnikovUlEntities(svedenyaObUchastnikovUlEntities);
      myNode.setRegAddressUlEntities(regAddressUlEntities);
      myNode.setCommodityProducers(commodityProducers);

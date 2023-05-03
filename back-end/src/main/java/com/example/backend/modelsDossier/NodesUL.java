@@ -34,6 +34,17 @@ public class NodesUL {
     private List<CommodityProducer> commodityProducers;
     private List<RegAddressUlEntity> regAddressUlEntities;
     private List<SvedenyaObUchastnikovUlEntity> svedenyaObUchastnikovUlEntities;
+    private List<fl_contacts> fl_contacts;
+
+
+    public List<com.example.backend.photo.modelsPhot.fl_contacts> getFl_contacts() {
+        return fl_contacts;
+    }
+
+    public void setFl_contacts(List<com.example.backend.photo.modelsPhot.fl_contacts> fl_contacts) {
+        this.fl_contacts = fl_contacts;
+    }
+
     private boolean Person_with_risk;
 
     public boolean isPerson_with_risk() {
