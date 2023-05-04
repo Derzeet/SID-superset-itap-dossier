@@ -33,8 +33,8 @@ const UlDosiePage = (props) => {
                 console.log(res.data)
                 setFounders(res.data.mvUlFounderFls)
                 setNedvijimost(res.data.mvRnOlds)
-                setTaxes(res.res.data.taxOutEntities)
-                setMshes(tempData.mshes)
+                setTaxes(res.data.taxOutEntities)
+                setMshes(res.data.mshes)
 
                 isLoading(false)
 

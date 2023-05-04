@@ -939,8 +939,12 @@ const FlPensionRow = (props) => {
       if (item && item.payDate === year && item.knp === knp) return true 
     })
 
+
     let sum = 0
-    for (let i=0; i<nakoplenie.length; i++) sum += parseInt(nakoplenie[i].amount)
+    for (let i=0; i<nakoplenie.length; i++) {
+        console.log(nakoplenie[i])
+        sum += parseInt(nakoplenie[i].amount)
+    }
 
     return sum
   }
