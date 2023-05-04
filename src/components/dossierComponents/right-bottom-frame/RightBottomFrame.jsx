@@ -25,39 +25,127 @@ function RightBottomFrame(props) {
                 {props.blockEsf && props.blockEsf.length > 0? <BlockEsfBlock array={props.blockEsf} exist={props.blockEsf.length > 0} /> : ""}
                 {props.mzEntities && props.mzEntities.length > 0? <MzBlock array={props.mzEntities} /> : ""}
                 {props.convictsTerminatedByRehabs && props.convictsTerminatedByRehabs.length > 0? <ConvictTerminatedBlock array={props.convictsTerminatedByRehabs}/> : ""}
+                {props.detdom && props.detdom.length > 0? <DetdomBlock array={props.detdom}/> : ""}
+                {props.adms && props.adms.length > 0? <AdmsBlock array={props.adms}/> : ""}
             </div>
         </div>
 
     );
 }
 
-const ConvictTerminatedBlock = (props) => {
+const AdmsBlock = (props) => {
     const {array} = props
     const exist = array.length > 0? true : false
     const [open, setOpen] = useState(true)
 
-/*
-{
-                  "erdr_number": "13151203101188",
-                  "iin": "820707302506",
-                  "qualification_desc": "Изнасилование",
-                  "qualification_code": "1200001",
-                  "qualificatiob_code_by_11": "2",
-                  "qualification_by_11": "средней тяжести",
-                  "code_last_solution": "4030",
-                  "last_solution": "прекращено по ст.35 ч.1 п.3 УПК РК",
-                  "last_solution_date": "2017-04-17",
-                  "last_name": "БАЙМУРЗИН",
-                  "first_name": "БЕРИК",
-                  "patronomyc": "СИСЕНГАЛИЕВИЧ",
-                  "birth_date": "1982-07-07",
-                  "investigative_authority_code": "19151203",
-                  "investigative_authority": "ГОП №2 Астанинского района УП г.Актобе",
-                  "is_find_iin": "false",
-                  "is_rab": false,
-                  "id": 217
-                }
-*/
+    return (
+        <>
+        <TableContainer sx={{marginTop: 0}}>
+            <Table aria-label="collapsible table" className="uitable">
+
+            <TableRow className="uitablerow" sx={{height:'10px',}} style={{borderBottom: 'hidden'}}>
+                <TableCell sx={{padding: 1}} style={{borderBottom: 'hidden', width: '90%', fontSize: '16px', fontWeight: '500', color: "#FFFFFF"}}><a>Административные правонарушения</a></TableCell>
+                <TableCell sx={{padding: 1}} style={{width: '10%'}} align='right'>
+                    <IconButton
+                    aria-label="expand row"
+                    size="small"
+                    onClick={() => setOpen(!open)}
+                    >
+                    {open ? <KeyboardArrowUpIcon style={{ fill: '#ffffff' }}/> : <KeyboardArrowDownIcon style={{ fill: '#ffffff' }}/>}
+                    </IconButton>
+                </TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell sx={{padding: 1}} style={{ paddingBottom: 0, paddingTop: 0}} colSpan={6}>
+                <Collapse in={open} timeout="auto" unmountOnExit>
+                    <Box sx={{ margin: 0, marginLeft: '0' }}>
+                    <TableHead sx={{backgroundColor: '#ffffff0a'}}>
+                        <TableRow className="uitableHead">
+                            <TableCell sx={{padding: 1}} style={{ width: '50%',fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left"><a>Орган выявивший правонарушение</a></TableCell>
+                            <TableCell sx={{padding: 1}} style={{ width: '15%', fontSize: '12px', color: "rgb(199, 199, 199)" }} align="left"><a>Дата заведения</a></TableCell>
+                            <TableCell sx={{padding: 1}} style={{ width: '30%', fontSize: '12px', color: "rgb(199, 199, 199)" }} align="left"><a>Номер протокола</a></TableCell>
+                            <TableCell sx={{padding: 1}} style={{ width: '5%', color: "#fff" }} align="left"></TableCell>
+                        </TableRow>
+                    </TableHead> 
+                    <TableBody style={{borderBottom: 'hidden'}}>
+                    {exist ? array.map((row, index) => (
+                        <AdmsRow row={row} />
+                    )): <TableCell  className="zeroResult" align="center" colSpan={4} style={{borderBottom: 'hidden'}}><a>Нет данных</a></TableCell>}
+                    </TableBody>
+                    </Box>
+                </Collapse>
+                </TableCell>
+            </TableRow>
+            </Table>
+        </TableContainer>
+        </>
+    )
+}
+
+const AdmsRow = (props) => {
+    const {row} = props
+    const [open, setOpen] = useState(false)
+
+    return (
+        <>
+        <TableRow className="uitablerow" sx={{height:'10px',}} style={{borderBottom: 'hidden'}}>
+            <TableCell sx={{padding: 1}} style={{ fontSize: '12px', fontWeight: 500, color: "#FFFFFF"}}><a>{row.authority_detected || "---"}</a></TableCell>
+            <TableCell sx={{padding: 1}} style={{ fontSize: '12px', fontWeight: 500, color: "#FFFFFF" }} align="left"><a>{row.reg_date || "---"}</a></TableCell>
+            <TableCell sx={{padding: 1}} style={{ fontSize: '12px', fontWeight: 500, color: "#FFFFFF" }} align="left"><a>{row.protocol_num || "---"}</a></TableCell>
+            <TableCell sx={{padding: 1}}>
+            <IconButton
+                aria-label="expand row"
+                size="small"
+                onClick={() => setOpen(!open)}
+            >
+                {open ? <KeyboardArrowUpIcon style={{ fill: '#ffffff' }}/> : <KeyboardArrowDownIcon style={{ fill: '#ffffff' }}/>}
+            </IconButton>
+            </TableCell>
+        </TableRow>
+        <TableRow style={{borderBottom: 'hidden'}}>
+            <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={4}>
+            <Collapse in={open} timeout="auto" unmountOnExit>
+                <Box sx={{ margin: 1, marginLeft: '2.6%' }}>
+                <Table size="small" aria-label="purchases">
+                    <TableHead>
+                        {/* <TableRow style={{borderBottom: 'hidden'}}>
+                            <TableCell style={{ width: '30%', fontSize: '12px', color: "#6D6D6D" }}  align="left"><a>Квалификация</a></TableCell>
+                            <TableCell style={{ width: '70%', fontSize: '12px', color: "#FFFFFF" }} align="left"><a>{"---" || "---"}</a></TableCell>
+                        </TableRow>
+                        <TableRow style={{borderBottom: 'hidden'}}>
+                            <TableCell style={{ width: '30%', fontSize: '12px', color: "#6D6D6D" }}  align="left"><a>Место работы</a></TableCell>
+                            <TableCell style={{ width: '70%', fontSize: '12px', color: "#FFFFFF" }} align="left"><a>{"---" || "---"}</a></TableCell>
+                        </TableRow>
+                        <TableRow style={{borderBottom: 'hidden'}}>
+                            <TableCell style={{ width: '30%', fontSize: '12px', color: "#6D6D6D" }}  align="left"><a>Принудительное исполнение</a></TableCell>
+                            <TableCell style={{ width: '70%', fontSize: '12px', color: "#FFFFFF" }} align="left"><a>{"---" || "---"}</a></TableCell>
+                        </TableRow>
+                        <TableRow style={{borderBottom: 'hidden'}}>
+                            <TableCell style={{ width: '30%', fontSize: '12px', color: "#6D6D6D" }}  align="left"><a>На срок до</a></TableCell>
+                            <TableCell style={{ width: '70%', fontSize: '12px', color: "#FFFFFF" }} align="left"><a>{"---" || "---"}</a></TableCell>
+                        </TableRow>
+                        <TableRow style={{borderBottom: 'hidden'}}>
+                            <TableCell style={{ width: '30%', fontSize: '12px', color: "#6D6D6D" }}  align="left"><a>Размер наложенного штрафа</a></TableCell>
+                            <TableCell style={{ width: '70%', fontSize: '12px', color: "#FFFFFF" }} align="left"><a>{"---" || "---"}</a></TableCell>
+                        </TableRow>
+                        <TableRow style={{borderBottom: 'hidden'}}>
+                            <TableCell style={{ width: '30%', fontSize: '12px', color: "#6D6D6D" }}  align="left"><a>Основания прекращения</a></TableCell>
+                            <TableCell style={{ width: '70%', fontSize: '12px', color: "#FFFFFF" }} align="left"><a>{"---" || "---"}</a></TableCell>
+                        </TableRow> */}
+                    </TableHead>
+                </Table>
+                </Box>
+            </Collapse>
+            </TableCell>
+        </TableRow>
+        </>
+    )
+}
+
+const ConvictTerminatedBlock = (props) => {
+    const {array} = props
+    const exist = array.length > 0? true : false
+    const [open, setOpen] = useState(true)
 
     return (
         <>
@@ -146,6 +234,71 @@ const ConvictTerminatedRow = (props) => {
                 </Box>
             </Collapse>
             </TableCell>
+        </TableRow>
+        </>
+    )
+}
+
+const DetdomBlock = (props) => {
+    const {array} = props
+    const exist = array.length > 0? true : false
+    const [open, setOpen] = useState(true)
+
+    return (
+        <>
+        <TableContainer sx={{marginTop: 0}}>
+            <Table aria-label="collapsible table" className="uitable">
+
+            <TableRow className="uitablerow" sx={{height:'10px',}} style={{borderBottom: 'hidden'}}>
+                <TableCell sx={{padding: 1}} style={{borderBottom: 'hidden', width: '90%', fontSize: '16px', fontWeight: '500', color: "#FFFFFF"}}><a>Воспитанник детского дома</a></TableCell>
+                <TableCell sx={{padding: 1}} style={{width: '10%'}} align='right'>
+                    <IconButton
+                    aria-label="expand row"
+                    size="small"
+                    onClick={() => setOpen(!open)}
+                    >
+                    {open ? <KeyboardArrowUpIcon style={{ fill: '#ffffff' }}/> : <KeyboardArrowDownIcon style={{ fill: '#ffffff' }}/>}
+                    </IconButton>
+                </TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell sx={{padding: 1}} style={{ paddingBottom: 0, paddingTop: 0}} colSpan={6}>
+                <Collapse in={open} timeout="auto" unmountOnExit>
+                    <Box sx={{ margin: 0, marginLeft: '0' }}>
+                    <TableHead sx={{backgroundColor: '#ffffff0a'}}>
+                        <TableRow className="uitableHead">
+                            <TableCell sx={{padding: 1}} style={{ width: '20%',fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left"><a>Регион</a></TableCell>
+                            <TableCell sx={{padding: 1}} style={{ width: '20%', fontSize: '12px', color: "rgb(199, 199, 199)" }} align="left"><a>Область</a></TableCell>
+                            <TableCell sx={{padding: 1}} style={{ width: '30%', fontSize: '12px', color: "rgb(199, 199, 199)" }} align="left"><a>Наименование учреждения</a></TableCell>
+                            <TableCell sx={{padding: 1}} style={{ width: '30%', fontSize: '12px', color: "rgb(199, 199, 199)" }} align="left"><a>Год выпуска</a></TableCell>
+                        </TableRow>
+                    </TableHead> 
+                    <TableBody style={{borderBottom: 'hidden'}}>
+                    {exist ? array.map((row, index) => (
+                        <DetdomRow row={row} />
+                    )): <TableCell  className="zeroResult" align="center" colSpan={4} style={{borderBottom: 'hidden'}}><a>Нет данных</a></TableCell>}
+                    </TableBody>
+                    </Box>
+                </Collapse>
+                </TableCell>
+            </TableRow>
+            </Table>
+        </TableContainer>
+        </>
+    )
+}
+
+const DetdomRow = (props) => {
+    const {row} = props
+    const [open, setOpen] = useState(false)
+
+    return (
+        <>
+        <TableRow className="uitablerow" sx={{height:'10px',}} style={{borderBottom: 'hidden'}}>
+            <TableCell sx={{padding: 1}} style={{ fontSize: '12px', fontWeight: 500, color: "#FFFFFF"}}><a>{row.region || "---"}</a></TableCell>
+            <TableCell sx={{padding: 1}} style={{ fontSize: '12px', fontWeight: 500, color: "#FFFFFF" }} align="left"><a>{row.distict || "---"}</a></TableCell>
+            <TableCell sx={{padding: 1}} style={{ fontSize: '12px', fontWeight: 500, color: "#FFFFFF" }} align="left"><a>{row.orphanage_name || "---"}</a></TableCell>
+            <TableCell sx={{padding: 1}} style={{ fontSize: '12px', fontWeight: 500, color: "#FFFFFF" }} align="left"><a>{row.graduation_year || "---"}</a></TableCell>
         </TableRow>
         </>
     )

@@ -28,13 +28,9 @@ function LeftBottomFrame(props) {
     const [nedvijimost, setNedvijimost] = useState([])
     const [militaryEntities, setMilitaryEntities] = useState([])
     const [contacts, setContacts] = useState([])
-    const [mshes, setMshes] = useState([])
+    const [equipment, setEquipment] = useState([])
+    const [ipgoEmailEntities, setIpgoEmailEntities] = useState([])
     
-    const [accountantListEntities, setAccountantListEntities] = useState([])
-    const [advocateListEntities, setAdvocateListEntities] = useState([])
-    const [auditorsListEntities, setAuditorsListEntities] = useState([])
-    const [bailiffListEntities, setBailiffListEntities] = useState([])
-
     const [professions, setProfessions] = useState({
       accountant: [],
       advocate: [],
@@ -63,7 +59,7 @@ function LeftBottomFrame(props) {
         setMilitaryEntities(props.militaryEntities)
         setNedvijimost(props.nedvijimost)
         setContacts(props.contacts)
-        setMshes(props.mshes)
+        setEquipment(props.equipment)
 
         setProfessions({
           accountant: props.accountantListEntities,
@@ -71,6 +67,8 @@ function LeftBottomFrame(props) {
           auditors: props.auditorsListEntities,
           bailiff: props.bailiffListEntities
         })
+
+        setIpgoEmailEntities(props.ipgoEmailEntities)
 
     }, [soc])
     return ( 
@@ -112,18 +110,15 @@ function LeftBottomFrame(props) {
                         </Table>
                     </TableContainer>
                     <TransportRow row={transport} exist={transport && transport.length > 0 ? true : false}/>
-                    {mshes && mshes.length > 0? <MshesBlock array={mshes} exist={mshes && mshes.length > 0 ? true : false}/> : ""}
+                    {equipment && equipment.length > 0? <EquipmentBlock array={equipment}/> : ""}
                     <SchoolsBlock schools={schools} exist={schools && schools.length > 0 ? true : false}/>
                     <UniversityBlock universities={universities} exist={universities && universities.length > 0 ? true : false}/>
                     {pensions && pensions.length > 0? <FlPensionBlock pensions={pensions} exist={pensions.length > 0 ? true : false}/> : ""}
                     {military && military.length > 0? <MilitaryBlock military={military} militaryEntities={militaryEntities} exist={military && military.length > 0 ? true : false}/> : ""}
                     {nedvijimost && nedvijimost.length > 0? <NedvijimostBlock nedvijimost={nedvijimost} exist={nedvijimost.length > 0 ? true : false}/> : ""}
                     {contacts && contacts.length > 0? <ContactsBlock array={contacts} exist={contacts.length > 0? true : false}/> : ""}
-                    {/* {accountantListEntities && accountantListEntities.length > 0? <AccountantListBlock array={accountantListEntities}/> : ""}
-                    {advocateListEntities && advocateListEntities.length > 0? <AdvocateListBlock array={advocateListEntities}/> : ""}
-                    {auditorsListEntities && auditorsListEntities.length > 0? <AuditorListBlock array={auditorsListEntities}/> : ""}
-                    {bailiffListEntities && bailiffListEntities.length > 0? <BailiffListBlock array={bailiffListEntities}/> : ""} */}
                     {professions && Object.keys(professions).length > 0? <ProfessionsBlock professions={professions}/> : ""}
+                    {<IpgoEmailBlock array={ipgoEmailEntities}/>}
                 </div>
                 {/* TRANSPORT */}
                 <div style={{width: '100%'}}>
@@ -133,64 +128,158 @@ function LeftBottomFrame(props) {
     );
 }
 
-const ProfessionsBlock = (props) => {
-  const {accountant, advocate, auditors, bailiff} = props.professions
+const IpgoEmailBlock = (props) => {
+  let {array} = props
+  const exist = array && array.length > 0
+  const [open, setOpen] = useState(false)
+
+  if (exist) {
+    array = array.filter((value, index, self) =>
+      index === self.findIndex((t) => (
+        t.organ === value.organ && t.position === value.position && t.email === value.email
+      ))
+    )
+
+    return (
+      <>
+        <TableContainer sx={{marginTop: 0}}>
+          <Table aria-label="collapsible table" className="uitable">
+
+            <TableRow className="uitablerow" sx={{height:'10px',}} style={{borderBottom: 'hidden'}}>
+                <TableCell sx={{padding: 1}} style={{borderBottom: 'hidden', width: '90%', fontSize: '16px', fontWeight: 500, color: "#FFFFFF"}}><a>Сведения по ИПГО</a></TableCell>
+                <TableCell sx={{padding: 1}} style={{width: '10%'}} align='right'>
+                      <IconButton
+                      aria-label="expand row"
+                      size="small"
+                      onClick={() => setOpen(!open)}
+                      >
+                      {open ? <KeyboardArrowUpIcon style={{ fill: '#ffffff' }}/> : <KeyboardArrowDownIcon style={{ fill: '#ffffff' }}/>}
+                      </IconButton>
+                  </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell sx={{padding: 1}} style={{ paddingBottom: 0, paddingTop: 0}} colSpan={6}>
+                <Collapse in={open} timeout="auto" unmountOnExit>
+                  <Box sx={{ margin: 0, marginLeft: '0' }}>
+                    <TableHead sx={{backgroundColor: '#ffffff0a'}}>
+                      <TableRow className="uitableHead">
+                          <TableCell sx={{padding: 1}} style={{ width: '30%',fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left"><a>Департамен</a></TableCell>
+                          <TableCell sx={{padding: 1}} style={{ width: '40%', fontSize: '12px', color: "rgb(199, 199, 199)" }} align="left"><a >Должность</a></TableCell>
+                          <TableCell sx={{padding: 1}} style={{ width: '30%', fontSize: '12px', color: "rgb(199, 199, 199)" }} align="left"><a >ИПГО почта</a></TableCell>
+                          <TableCell sx={{padding: 1}} style={{ width: '5%', color: "#fff" }} align="left"></TableCell>
+                      </TableRow>
+                    </TableHead> 
+                    <TableBody style={{borderBottom: 'hidden'}}>
+                    {exist ? array.map((row, index) => (
+                        <IpgoEmailRow row={row} />
+                    )): <TableCell  className="zeroResult" align="center" colSpan={4} style={{borderBottom: 'hidden'}}><a>Нет данных</a></TableCell>}
+                    </TableBody>
+                  </Box>
+                </Collapse>
+              </TableCell>
+            </TableRow>
+          </Table>
+        </TableContainer>
+      </>
+    )
+  }
+  else {
+    return null
+  }
+}
+
+const IpgoEmailRow = (props) => {
+  let {row} = props
   const [open, setOpen] = useState(false)
 
   return (
     <>
-      <TableContainer sx={{marginTop: 0}}>
-        <Table aria-label="collapsible table" className="uitable">
-
-          <TableRow className="uitablerow" sx={{height:'10px',}} style={{borderBottom: 'hidden'}}>
-              <TableCell sx={{padding: 1}} style={{borderBottom: 'hidden', width: '90%', fontSize: '16px', fontWeight: 500, color: "#FFFFFF"}}><a>Профессия</a></TableCell>
-              <TableCell sx={{padding: 1}} style={{width: '10%'}} align='right'>
-                    <IconButton
-                    aria-label="expand row"
-                    size="small"
-                    onClick={() => setOpen(!open)}
-                    >
-                    {open ? <KeyboardArrowUpIcon style={{ fill: '#ffffff' }}/> : <KeyboardArrowDownIcon style={{ fill: '#ffffff' }}/>}
-                    </IconButton>
-                </TableCell>
-          </TableRow>
-          <TableRow style={{width: '100%'}}>
-            <TableCell sx={{padding: 1}} style={{ paddingBottom: 0, paddingTop: 0}} colSpan={6}>
-              <Collapse in={open} timeout="auto" unmountOnExit>
-                <Box sx={{ margin: 0, marginLeft: '0', width: '100%' }}>
-                  <TableHead sx={{backgroundColor: '#ffffff0a'}} >
-                    <TableRow className="uitableHead" sx={{width: '100%'}}>
-                        <TableCell sx={{width: '50%', padding: 1}} style={{ width: '70%',fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left"><a>Профессия</a></TableCell>
-                        <TableCell sx={{width: '50%', padding: 1}} style={{ width: '20%',fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left"><a> </a></TableCell>
-                    </TableRow>
-                  </TableHead> 
-                  <TableBody style={{borderBottom: 'hidden'}}>
-                  {accountant.length > 0 || advocate.length > 0 || auditors.length > 0 || bailiff.length > 0
-                  ? 
-                  <>
-                  {accountant.map(row => (
-                    <ProfessionsRow row={row} />
-                  ))}
-                  {advocate.map(row => (
-                    <ProfessionsRow row={row} />
-                  ))}
-                  {auditors.map(row => (
-                    <ProfessionsRow row={row} />
-                  ))}
-                  {bailiff.map(row => (
-                    <ProfessionsRow row={row} />
-                  ))}
-                  </>
-                  : <TableCell className="zeroResult" align="center" colSpan={4} style={{borderBottom: 'hidden'}}><a>Нет данных</a></TableCell>}
-                  </TableBody>
-                </Box>
-              </Collapse>
-            </TableCell>
-          </TableRow>
-        </Table>
-      </TableContainer>
+      <TableRow className="uitablerow" sx={{height:'10px',}} style={{borderBottom: 'hidden'}}>
+        <TableCell sx={{padding: 1}} style={{ fontSize: '12px', fontWeight: 500, color: "#FFFFFF"}}><a>{row.organ || "---"}</a></TableCell>
+        <TableCell sx={{padding: 1}} style={{ fontSize: '12px', fontWeight: 500, color: "#FFFFFF" }} align="left"><a>{row.position || "---"}</a></TableCell>
+        <TableCell sx={{padding: 1}} style={{ fontSize: '12px', fontWeight: 500, color: "#FFFFFF" }} align="left"><a>{row.email || "---"}</a></TableCell>
+      </TableRow>
     </>
   )
+}
+
+const ProfessionsBlock = (props) => {
+  const {accountant, advocate, auditors, bailiff} = props.professions
+  const [open, setOpen] = useState(false)
+
+  let blockTitle = [
+    accountant && accountant.length > 0 ? "Бухгалтер" : '',
+    advocate && advocate.length > 0 ? "Адвокат" : '', 
+    auditors && auditors.length > 0 ? "Аудитор" : '',
+    bailiff && bailiff.length > 0 ? "Частный судебный исполнитель" : ''
+  ]
+
+  blockTitle = blockTitle.filter(value => value != '').join(', ')
+
+  if (blockTitle === undefined)
+    return (
+      <>
+        <TableContainer sx={{marginTop: 0}}>
+          <Table aria-label="collapsible table" className="uitable">
+
+            <TableRow className="uitablerow" sx={{height:'10px',}} style={{borderBottom: 'hidden'}}>
+                <TableCell sx={{padding: 1}} style={{borderBottom: 'hidden', width: '90%', fontSize: '16px', fontWeight: 500, color: "#FFFFFF"}}>
+                  <a>
+                    {blockTitle}
+                  </a>
+                </TableCell>
+                <TableCell sx={{padding: 1}} style={{width: '10%'}} align='right'>
+                      <IconButton
+                      aria-label="expand row"
+                      size="small"
+                      onClick={() => setOpen(!open)}
+                      >
+                      {open ? <KeyboardArrowUpIcon style={{ fill: '#ffffff' }}/> : <KeyboardArrowDownIcon style={{ fill: '#ffffff' }}/>}
+                      </IconButton>
+                  </TableCell>
+            </TableRow>
+            <TableRow style={{width: '100%'}}>
+              <TableCell sx={{padding: 1}} style={{width: '100%', paddingBottom: 0, paddingTop: 0}} colSpan={2}>
+                <Collapse in={open} timeout="auto" unmountOnExit>
+                  <Box sx={{ margin: 0, marginLeft: '0'}}>
+                    <TableContainer>
+                      <Table>
+                        <TableHead sx={{backgroundColor: '#ffffff0a'}} >
+                          <TableRow className="uitableHead">
+                              <TableCell sx={{padding: 1}} style={{ width: '90%', fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left"><a>Профессия</a></TableCell>
+                              <TableCell sx={{padding: 1}} style={{ width: '10%', fontSize: '12px', color: "rgb(199, 199, 199)"}} align="right"><a> </a></TableCell>
+                          </TableRow>
+                        </TableHead> 
+                        <TableBody style={{borderBottom: 'hidden'}}>
+                          {accountant.length > 0 || advocate.length > 0 || auditors.length > 0 || bailiff.length > 0
+                          ? 
+                          <>
+                          {accountant.map(row => (
+                            <ProfessionsRow row={row} />
+                          ))}
+                          {advocate.map(row => (
+                            <ProfessionsRow row={row} />
+                          ))}
+                          {auditors.map(row => (
+                            <ProfessionsRow row={row} />
+                          ))}
+                          {bailiff.map(row => (
+                            <ProfessionsRow row={row} />
+                          ))}
+                          </>
+                          : <TableCell className="zeroResult" align="center" colSpan={2} style={{borderBottom: 'hidden'}}><a>Нет данных</a></TableCell>}
+                        </TableBody>
+                      </Table>
+                    </TableContainer>
+                  </Box>
+                </Collapse>
+              </TableCell>
+            </TableRow>
+          </Table>
+        </TableContainer>
+      </>
+    )
+  else return null
 }
 
 const ProfessionsRow = (props) => {
@@ -204,12 +293,14 @@ const ProfessionsRow = (props) => {
     auditorNumber: 'Номер аудитора',
   }
 
+  let profName = row.prof || row.status || "---"
+  profName = profName.toUpperCase()
+
   return (
     <>
       <TableRow className="uitablerow" sx={{height:'10px',}} style={{borderBottom: 'hidden'}}>
-        <TableCell sx={{padding: 1}} style={{ fontSize: '12px', fontWeight: 500, color: "#FFFFFF"}}><a>{row.prof || row.status || "---"}</a></TableCell>
-        <TableCell sx={{padding: 1}} style={{ fontSize: '12px', fontWeight: 500, color: "#FFFFFF"}}><a> </a></TableCell>
-        <TableCell sx={{padding: 1}}>
+        <TableCell colSpan={1} sx={{padding: 1}} style={{fontSize: '12px', fontWeight: 500, color: "#FFFFFF"}}><a>{profName}</a></TableCell>
+        <TableCell colSpan={1} sx={{padding: 1}} align='right'>
           <IconButton
             aria-label="expand row"
             size="small"
@@ -220,7 +311,7 @@ const ProfessionsRow = (props) => {
         </TableCell>
       </TableRow>
       <TableRow style={{borderBottom: 'hidden'}}>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={4}>
+        <TableCell style={{ width: '100%', paddingBottom: 0, paddingTop: 0 }} colSpan={2}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box sx={{ margin: 1, marginLeft: '2.6%' }}>
               <Table size="small" aria-label="purchases">
@@ -246,89 +337,9 @@ const ProfessionsRow = (props) => {
   )
 }
 
-// const AccountantListBlock = (props) => {
-//   const {array} = props
-//   const exist = array && array.length > 0? true : false
-//   const [open, setOpen] = useState(false)
-
-//   return (
-//     <>
-//       <TableContainer sx={{marginTop: 0}}>
-//         <Table aria-label="collapsible table" className="uitable">
-
-//           <TableRow className="uitablerow" sx={{height:'10px',}} style={{borderBottom: 'hidden'}}>
-//               <TableCell sx={{padding: 1}} style={{borderBottom: 'hidden', width: '90%', fontSize: '16px', fontWeight: 500, color: "#FFFFFF"}}><a>Бухгалтер</a></TableCell>
-//               <TableCell sx={{padding: 1}} style={{width: '10%'}} align='right'>
-//                     <IconButton
-//                     aria-label="expand row"
-//                     size="small"
-//                     onClick={() => setOpen(!open)}
-//                     >
-//                     {open ? <KeyboardArrowUpIcon style={{ fill: '#ffffff' }}/> : <KeyboardArrowDownIcon style={{ fill: '#ffffff' }}/>}
-//                     </IconButton>
-//                 </TableCell>
-//           </TableRow>
-//           <TableRow style={{width: '100%'}}>
-//             <TableCell sx={{padding: 1}} style={{ paddingBottom: 0, paddingTop: 0}} colSpan={6}>
-//               <Collapse in={open} timeout="auto" unmountOnExit>
-//                 <Box sx={{ margin: 0, marginLeft: '0', width: '100%' }}>
-//                   <TableHead sx={{backgroundColor: '#ffffff0a'}} >
-//                     <TableRow className="uitableHead" sx={{width: '100%'}}>
-//                         <TableCell sx={{width: '50%', padding: 1}} style={{ width: '70%',fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left"><a>Профессия</a></TableCell>
-//                         <TableCell sx={{width: '50%', padding: 1}} style={{ width: '10%', fontSize: '12px', color: "rgb(199, 199, 199)" }} align="left"><a>БИН Работодателя</a></TableCell>
-//                     </TableRow>
-//                   </TableHead> 
-//                   <TableBody style={{borderBottom: 'hidden'}}>
-//                   {exist ? array.map((row, index) => (
-//                       <AccountantListRow row={row} />
-//                   )): <TableCell className="zeroResult" align="center" colSpan={4} style={{borderBottom: 'hidden'}}><a>Нет данных</a></TableCell>}
-//                   </TableBody>
-//                 </Box>
-//               </Collapse>
-//             </TableCell>
-//           </TableRow>
-//         </Table>
-//       </TableContainer>
-//     </>
-//   )
-// }
-
-// const AccountantListRow = (props) => {
-//   const {row} = props
-//   const [open, setOpen] = useState(false)
-
-//   return (
-//     <>
-//       <TableRow className="uitablerow" sx={{height:'10px',}} style={{borderBottom: 'hidden'}}>
-//         <TableCell sx={{padding: 1}} style={{ fontSize: '12px', fontWeight: 500, color: "#FFFFFF"}}><a>{row.prof || "---"}</a></TableCell>
-//         <TableCell sx={{padding: 1}} style={{ fontSize: '12px', fontWeight: 500, color: "#FFFFFF" }} align="left"><a>{row.bin || "---"}</a></TableCell>
-//       </TableRow>
-//     </>
-//   )
-// }
-
-// const AdvocateListBlock = (props) => {
-// }
-
-// const AdvocateListRow = (props) => {
-// }
-
-// const AuditorListBlock = (props) => {
-// }
-
-
-// const AuditorListRow = (props) => {
-// }
-
-// const BailiffListBlock = (props) => {
-// }
-
-
-// const BailiffListRow = (props) => {
-// }
-
-const MshesBlock = (props) => {
-  const {array, exist} = props
+const EquipmentBlock = (props) => {
+  const {array} = props
+  const exist = array.length > 0
   const [open, setOpen] = useState(false)
 
   return (
@@ -356,13 +367,13 @@ const MshesBlock = (props) => {
                     <TableRow className="uitableHead">
                         <TableCell sx={{padding: 1}} style={{ width: '15%',fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left"><a>Модель</a></TableCell>
                         <TableCell sx={{padding: 1}} style={{ width: '50%', fontSize: '12px', color: "rgb(199, 199, 199)" }} align="left"><a >Гос. номер</a></TableCell>
-                        <TableCell sx={{padding: 1}} style={{ width: '30%', fontSize: '12px', color: "rgb(199, 199, 199)" }} align="left"><a >ВИН</a></TableCell>
+                        <TableCell sx={{padding: 1}} style={{ width: '30%', fontSize: '12px', color: "rgb(199, 199, 199)" }} align="left"><a >Заводской номер (ВИН)</a></TableCell>
                         <TableCell sx={{padding: 1}} style={{ width: '5%', color: "#fff" }} align="left"></TableCell>
                     </TableRow>
                   </TableHead> 
                   <TableBody style={{borderBottom: 'hidden'}}>
                   {exist ? array.map((row, index) => (
-                      <MshesRow row={row} />
+                      <EquipmentRow row={row} />
                   )): <TableCell  className="zeroResult" align="center" colSpan={4} style={{borderBottom: 'hidden'}}><a>Нет данных</a></TableCell>}
                   </TableBody>
                 </Box>
@@ -375,11 +386,11 @@ const MshesBlock = (props) => {
   )
 }
 
-const MshesRow = (props) => {
+const EquipmentRow = (props) => {
   const {row} = props
   const [open, setOpen] = useState(false)
 
-  let regDate = new Date(row.regDate)
+  let regDate = new Date(row.reg_date)
   regDate = ('0' + regDate.getDate()).slice(-2) + '/'
             + ('0' + (regDate.getMonth()+1)).slice(-2) + '/'
             + regDate.getFullYear();
@@ -387,8 +398,8 @@ const MshesRow = (props) => {
   return (
     <>
       <TableRow className="uitablerow" sx={{height:'10px',}} style={{borderBottom: 'hidden'}}>
-        <TableCell sx={{padding: 1}} style={{ fontSize: '12px', fontWeight: 500, color: "#FFFFFF"}}><a>{row.equipmentModel || "---"}</a></TableCell>
-        <TableCell sx={{padding: 1}} style={{ fontSize: '12px', fontWeight: 500, color: "#FFFFFF" }} align="left"><a>{row.govNumber || "---"}</a></TableCell>
+        <TableCell sx={{padding: 1}} style={{ fontSize: '12px', fontWeight: 500, color: "#FFFFFF"}}><a>{row.equipment_model || "---"}</a></TableCell>
+        <TableCell sx={{padding: 1}} style={{ fontSize: '12px', fontWeight: 500, color: "#FFFFFF" }} align="left"><a>{row.gov_number || "---"}</a></TableCell>
         <TableCell sx={{padding: 1}} style={{ fontSize: '12px', fontWeight: 500, color: "#FFFFFF" }} align="left"><a>{row.vin || "---"}</a></TableCell>
         <TableCell sx={{padding: 1}}>
           <IconButton
@@ -406,17 +417,41 @@ const MshesRow = (props) => {
             <Box sx={{ margin: 1, marginLeft: '2.6%' }}>
               <Table size="small" aria-label="purchases">
                 <TableHead>
-                  <TableRow style={{borderBottom: 'hidden'}}>
-                    <TableCell style={{ width: '30%', fontSize: '12px', color: "#6D6D6D" }}  align="left"><a>Тип техники</a></TableCell>
+                  {/* <TableRow style={{borderBottom: 'hidden'}}>
+                    <TableCell style={{ width: '30%', fontSize: '12px', color: "#6D6D6D" }}  align="left"><a>Серия и номер техпаспорта</a></TableCell>
                     <TableCell style={{ width: '70%', fontSize: '12px', color: "#FFFFFF" }} align="left"><a>{row.equipmentType || "---"}</a></TableCell>
+                  </TableRow> */}
+                  <TableRow style={{borderBottom: 'hidden'}}>
+                    <TableCell style={{ width: '40%', fontSize: '12px', color: "#6D6D6D" }}  align="left"><a>Модель</a></TableCell>
+                    <TableCell style={{ width: '60%', fontSize: '12px', color: "#FFFFFF" }} align="left"><a>{row.equipmentType || "---"}</a></TableCell>
                   </TableRow>
                   <TableRow style={{borderBottom: 'hidden'}}>
-                    <TableCell style={{ width: '30%', fontSize: '12px', color: "#6D6D6D" }}  align="left"><a>Регистрационный серийный номер</a></TableCell>
-                    <TableCell style={{ width: '70%', fontSize: '12px', color: "#FFFFFF" }} align="left"><a>{row.regSeriesNum || "---"}</a></TableCell>
+                    <TableCell style={{ width: '40%', fontSize: '12px', color: "#6D6D6D" }}  align="left"><a>Дата регистрации</a></TableCell>
+                    <TableCell style={{ width: '60%', fontSize: '12px', color: "#FFFFFF" }} align="left"><a>{regDate|| "---"}</a></TableCell>
                   </TableRow>
                   <TableRow style={{borderBottom: 'hidden'}}>
-                    <TableCell style={{ width: '30%', fontSize: '12px', color: "#6D6D6D" }}  align="left"><a>Дата регистрации</a></TableCell>
-                    <TableCell style={{ width: '70%', fontSize: '12px', color: "#FFFFFF" }} align="left"><a>{regDate|| "---"}</a></TableCell>
+                    <TableCell style={{ width: '40%', fontSize: '12px', color: "#6D6D6D" }}  align="left"><a>Марка</a></TableCell>
+                    <TableCell style={{ width: '60%', fontSize: '12px', color: "#FFFFFF" }} align="left"><a>{row.brand || "---"}</a></TableCell>
+                  </TableRow>
+                  <TableRow style={{borderBottom: 'hidden'}}>
+                    <TableCell style={{ width: '40%', fontSize: '12px', color: "#6D6D6D" }}  align="left"><a>Серия и номер техпаспорта</a></TableCell>
+                    <TableCell style={{ width: '60%', fontSize: '12px', color: "#FFFFFF" }} align="left"><a>{row.reg_series_num || "---"}</a></TableCell>
+                  </TableRow>
+                  <TableRow style={{borderBottom: 'hidden'}}>
+                    <TableCell style={{ width: '40%', fontSize: '12px', color: "#6D6D6D" }}  align="left"><a>В аресте (да/нет)</a></TableCell>
+                    <TableCell style={{ width: '60%', fontSize: '12px', color: "#FFFFFF" }} align="left"><a>{row.is_arrest !== null ? (row.is_arrest ? "Да" : "Нет") : "---"}</a></TableCell>
+                  </TableRow>
+                  <TableRow style={{borderBottom: 'hidden'}}>
+                    <TableCell style={{ width: '40%', fontSize: '12px', color: "#6D6D6D" }}  align="left"><a>В залоге (да/нет)</a></TableCell>
+                    <TableCell style={{ width: '60%', fontSize: '12px', color: "#FFFFFF" }} align="left"><a>{row.is_pledge !== null ? (row.is_pledge ? "Да" : "Нет") : "---"}</a></TableCell>
+                  </TableRow>
+                  <TableRow style={{borderBottom: 'hidden'}}>
+                    <TableCell style={{ width: '40%', fontSize: '12px', color: "#6D6D6D" }}  align="left"><a>Первичная регистрация (да/нет)</a></TableCell>
+                    <TableCell style={{ width: '60%', fontSize: '12px', color: "#FFFFFF" }} align="left"><a>{row.is_first_reg !== null ? (row.is_first_reg ? "Да" : "Нет") : "---"}</a></TableCell>
+                  </TableRow>
+                  <TableRow style={{borderBottom: 'hidden'}}>
+                    <TableCell style={{ width: '40%', fontSize: '12px', color: "#6D6D6D" }}  align="left"><a>Первичная регистрация (да/нет)</a></TableCell>
+                    <TableCell style={{ width: '60%', fontSize: '12px', color: "#FFFFFF" }} align="left"><a>{row.is_first_reg !== null ? (row.is_first_reg ? "Да" : "Нет") : "---"}</a></TableCell>
                   </TableRow>
                 </TableHead>
               </Table>
@@ -772,7 +807,7 @@ const SchoolsBlock = (props) => {
                 <Box sx={{ margin: 0, marginLeft: '0' }}>
                   <TableHead sx={{backgroundColor: '#ffffff0a'}}>
                     <TableRow className="uitableHead">
-                        <TableCell sx={{padding: 1}} style={{ width: '15%',fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left"><a>БИН ШКОЛЫ</a></TableCell>
+                        <TableCell sx={{padding: 1}} style={{ width: '20%',fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left"><a>БИН ШКОЛЫ</a></TableCell>
                         <TableCell sx={{padding: 1}} style={{ width: '80%', fontSize: '12px', color: "rgb(199, 199, 199)" }} align="left"><a >Название школы</a></TableCell>
                         <TableCell sx={{padding: 1}} style={{ width: '5%', color: "#fff" }} align="left"></TableCell>
                     </TableRow>
@@ -780,7 +815,7 @@ const SchoolsBlock = (props) => {
                   <TableBody style={{borderBottom: 'hidden'}}>
                   {exist ? schools.map((row, index) => (
                       <SchoolRow school={row} index={index} />
-                  )): <TableCell  className="zeroResult" align="center" colSpan={4} style={{borderBottom: 'hidden'}}><a>Нет данных</a></TableCell>}
+                  )): <TableCell  className="zeroResult" align="center" colSpan={3} style={{borderBottom: 'hidden'}}><a>Нет данных</a></TableCell>}
                   </TableBody>
                 </Box>
               </Collapse>
@@ -984,7 +1019,7 @@ const UniversityBlock = (props) => {
                 <Box sx={{ margin: 0, marginLeft: '0' }}>
                   <TableHead sx={{backgroundColor: '#ffffff0a'}}>
                     <TableRow className="uitableHead">
-                        <TableCell sx={{padding: 1}} style={{ width: '15%',fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left"><a>БИН ВУЗА</a></TableCell>
+                        <TableCell sx={{padding: 1}} style={{ width: '20%',fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left"><a>БИН ВУЗА</a></TableCell>
                         <TableCell sx={{padding: 1}} style={{ width: '80%', fontSize: '12px', color: "rgb(199, 199, 199)" }} align="left"><a>Название ВУЗА</a></TableCell>
                         <TableCell sx={{padding: 1}} style={{ width: '5%', color: "#fff" }} align="left"></TableCell>
                     </TableRow>

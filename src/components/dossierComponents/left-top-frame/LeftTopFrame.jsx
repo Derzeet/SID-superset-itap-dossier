@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import './leftTopFrame.scss'
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
 function LeftTopFrame(props) {
     const [photo, setPhoto] = useState('')
@@ -61,14 +63,15 @@ function LeftTopFrame(props) {
     return ( 
         <div className="left-top-section">
             <div className="first-line">
-                <div className="avatar">
+            <div className="avatar">
+                <div className="avatar-image-wrapper">
                     <img src={"data:image/png;base64, " + (props.photos && props.photos[sliderNum] && photos[sliderNum].photo)} alt="No Image" />
-                    {/*<img src={"data:image/png;base64, " + photo} alt="No Image" />*/}
-                    <div>
-                        <div onClick={handleSliderNext}>{"<"}</div>
-                        <div onClick={handleSliderPrev}>{">"}</div>
+                    <div className="avatar-slider-controls">
+                    <div className="avatar-slider-arrow" onClick={handleSliderPrev}><ChevronLeftIcon/></div>
+                    <div className="avatar-slider-arrow" onClick={handleSliderNext}><ChevronRightIcon/></div>
                     </div>
-                </div>    
+                </div>
+            </div>
                 <div className='person-main-info'>
                     <div>
                         <label htmlFor="pName">Имя</label>

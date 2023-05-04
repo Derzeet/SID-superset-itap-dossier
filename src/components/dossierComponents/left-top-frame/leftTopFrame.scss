@@ -85,50 +85,50 @@
     }
 }
 
-.left-top-section .first-line .avatar {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
+// .left-top-section .first-line .avatar {
+//     position: relative;
+//     display: flex;
+//     flex-direction: column;
+//     gap: 5px;
 
-    > div {
-        position: absolute;
-        left: 0;
-        top: calc(50% - 10px);
-        width: 100%;
+//     > div {
+//         position: absolute;
+//         left: 0;
+//         top: calc(50% - 10px);
+//         width: 100%;
     
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
+//       display: flex;
+//       flex-direction: row;
+//       justify-content: space-between;
 
-      color: rgba(157, 157, 157, 0.5);
-    //   border: 1px solid rebeccapurple;
+//       color: rgba(157, 157, 157, 0.5);
+//     //   border: 1px solid rebeccapurple;
 
-        > div {
-            cursor: pointer;
-            font-size: 2em;
+//         > div {
+//             cursor: pointer;
+//             font-size: 2em;
 
-            &:hover {
-              color: rgba(157, 157, 157, 1);
-            }
-        }
-      > div:nth-child(1) {
-        padding-left: 5px;
-      }
-      > div:nth-child(2) {
-        padding-right: 5px;
-      }
-    }
+//             &:hover {
+//               color: rgba(157, 157, 157, 1);
+//             }
+//         }
+//       > div:nth-child(1) {
+//         padding-left: 5px;
+//       }
+//       > div:nth-child(2) {
+//         padding-right: 5px;
+//       }
+//     }
 
-    width: 30%;
-    padding: 0;
-    margin: 0;
+//     width: 30%;
+//     padding: 0;
+//     margin: 0;
 
-    img {
-        width: 100%;
-        // height: 100%;
-    }
-}
+//     img {
+//         width: 100%;
+//         // height: 100%;
+//     }
+// }
 
 .left-top-section .first-line .person-main-info {
     width: 100%;
@@ -145,3 +145,45 @@
 // .left-top-section .disabledInput {
 //     background-color: #EEEEEE !important;
 // };
+
+.avatar-image-wrapper {
+    position: relative;
+    display: inline-block;
+  }
+  .avatar-slider-controls {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+  .avatar-slider-controls:hover {
+    opacity: 1;
+  }
+  .avatar-slider-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    
+  }
+.avatar-slider-arrow:first-child {
+    background-color: #00000059;
+    width: 20px;
+    height: 100%;
+    padding-top: 100%;
+    padding-right: 10px;
+    left: 0px;
+}
+.avatar-slider-arrow:last-child {
+    width: 20px;
+    height: 100%;
+    padding-top: 100%;
+    padding-right: 8px;
+    background-color: #00000059;
+    right: 20px;
+}
