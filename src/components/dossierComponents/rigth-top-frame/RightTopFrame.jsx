@@ -78,19 +78,24 @@ function Row(props) {
           <TableCell sx={{padding: 1}} style={{ width: '60%', paddingLeft: '18px', fontSize: '12px', fontWeight: 500, color: "#FFFFFF" }} align="left"><a>{row.parent_fio}</a></TableCell>
           <TableCell sx={{padding: 1}} style={{ paddingLeft: '18px', fontSize: '12px', fontWeight: 500, color: "#FFFFFF" }}><a>{row.parent_iin || '---'}</a></TableCell>
           <TableCell sx={{padding: 1}} style={{fontSize: '12px', fontWeight: 500, color: "#FFFFFF" }}>
-          <ButtonGroup size="small"
-                  variant='text'
-                  aria-label='outlined-button-group'>
+            {row.parent_iin ? (
+
+              <ButtonGroup size="small"
+              variant='text'
+              aria-label='outlined-button-group'>
                     <Button size="small" onClick={() => {
                       const url = `/profiler/person/` + row.parent_iin
                       window.open(url, '_blank', 'noopener,noreferrer')
-                      }}>Досье</Button>
+                    }}>Досье</Button>
                     <Button size="small" onClick={() => {
                       const string = queryString.stringify({object: row.parent_iin, type: "iin"})
                       const url = `/itap?${string}`
                       window.open(url, '_blank', 'noopener,noreferrer')
-                      }}>Itap</Button>
+                    }}>Itap</Button>
               </ButtonGroup>
+            ) : (
+              <></>
+            )}
           </TableCell>
           <TableCell sx={{padding: 1}}>
             <IconButton

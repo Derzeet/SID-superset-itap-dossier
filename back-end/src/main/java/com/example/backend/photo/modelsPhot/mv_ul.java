@@ -5,7 +5,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "mv_ul", schema = "imp_kfm_ul")
+@Table(name = "mv_ul_old", schema = "imp_kfm_ul")
 public class mv_ul {
     private String bin;
     private String full_name_rus;

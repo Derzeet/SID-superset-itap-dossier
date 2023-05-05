@@ -39,7 +39,7 @@ function UlRightTopFrame(props) {
         
         <div className="right-top-section">
             <div className="other-line">
-                <FoundersBlock array={founders} exist={founders.length>0}/>
+                <FoundersBlock array={founders} exist={founders != null}/>
             </div>  
         </div>
 

@@ -11,7 +11,7 @@ import LeftBottomFrame from '../../components/dossierComponents/left-bottom-fram
 import RightBottomFrame from '../../components/dossierComponents/right-bottom-frame/RightBottomFrame';
 import SearchBar from '../../components/dossierComponents/search-bar/SearchBar';
 import axios from 'axios';
-const baseURL = 'http://192.168.30.24:9095/'
+const baseURL = 'http://localhost:9095/'
 const DosiePage = (props) => {
     const [leftTopFrameData, setLeftTopFrameData] = useState({});
     const [docs, setDocs] = useState([])
@@ -48,6 +48,7 @@ const DosiePage = (props) => {
     const [ipgoEmailEntities, setIpgoEmailEntities] = useState([])
     const [detdom, setDetdom] = useState([])
     const [adms, setAdms] = useState([])
+    const [ulLeaders, setUlLeaders] = useState([]) // Ul svedenia ob uchastiy
 
     useEffect(() => {
         const searchIIN = () => {
@@ -93,6 +94,8 @@ const DosiePage = (props) => {
                 setDetdom(res.data.orphans)
                 setAdms(res.data.adms)
 
+                setUlLeaders(res.data.ul_leaderList)
+
                 isLoading(false)
             })
         }
@@ -108,7 +111,7 @@ const DosiePage = (props) => {
                         <div className="frames">
                             <LeftTopFrame photo={base} photos={photos} data={leftTopFrameData}/>
                             <RightTopFrame relatives={relatives}/>
-                            <LeftBottomFrame docs={docs} addresses={addresses} transport={transport} 
+                            <LeftBottomFrame ulLeaders={ulLeaders} docs={docs} addresses={addresses} transport={transport} 
                                 schools={schools} universities={universities} pensions={pensions} military={military} militaryEntities={militaryEntities}
                                 nedvijimost={nedvijimost} contacts={contacts} equipment={equipment} accountantListEntities={accountantListEntities} advocateListEntities={advocateListEntities} auditorsListEntities={auditorsListEntities} bailiffListEntities={bailiffListEntities} ipgoEmailEntities={ipgoEmailEntities}/>
                             <RightBottomFrame convictsTerminatedByRehabs={convictsTerminatedByRehabs} criminals={criminals} convicts={convicts} firstCreditBureauEntities={firstCreditBureauEntities} blockEsf={blockEsf} mzEntities={mzEntities} detdom={detdom} adms={adms}/>

@@ -58,7 +58,7 @@ const AdmsBlock = (props) => {
             <TableRow>
                 <TableCell sx={{padding: 1}} style={{ paddingBottom: 0, paddingTop: 0}} colSpan={6}>
                 <Collapse in={open} timeout="auto" unmountOnExit>
-                    <Box sx={{ margin: 0, marginLeft: '0' }}>
+                    <Box sx={{borderRadius: '3px', margin: 0, marginLeft: '0' }}>
                     <TableHead sx={{backgroundColor: '#ffffff0a'}}>
                         <TableRow className="uitableHead">
                             <TableCell sx={{padding: 1}} style={{ width: '50%',fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left"><a>Орган выявивший правонарушение</a></TableCell>
@@ -105,7 +105,7 @@ const AdmsRow = (props) => {
         <TableRow style={{borderBottom: 'hidden'}}>
             <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={4}>
             <Collapse in={open} timeout="auto" unmountOnExit>
-                <Box sx={{ margin: 1, marginLeft: '2.6%' }}>
+                <Box sx={{borderRadius: '3px', margin: 1, marginLeft: '2.6%' }}>
                 <Table size="small" aria-label="purchases">
                     <TableHead>
                         {/* <TableRow style={{borderBottom: 'hidden'}}>
@@ -167,7 +167,7 @@ const ConvictTerminatedBlock = (props) => {
             <TableRow>
                 <TableCell sx={{padding: 1}} style={{ paddingBottom: 0, paddingTop: 0}} colSpan={6}>
                 <Collapse in={open} timeout="auto" unmountOnExit>
-                    <Box sx={{ margin: 0, marginLeft: '0' }}>
+                    <Box sx={{borderRadius: '3px', margin: 0, marginLeft: '0' }}>
                     <TableHead sx={{backgroundColor: '#ffffff0a'}}>
                         <TableRow className="uitableHead">
                             <TableCell sx={{padding: 1}} style={{ width: '15%',fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left"><a>Статья для учета</a></TableCell>
@@ -214,7 +214,7 @@ const ConvictTerminatedRow = (props) => {
         <TableRow style={{borderBottom: 'hidden'}}>
             <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={4}>
             <Collapse in={open} timeout="auto" unmountOnExit>
-                <Box sx={{ margin: 1, marginLeft: '2.6%' }}>
+                <Box sx={{borderRadius: '3px', margin: 1, marginLeft: '2.6%' }}>
                 <Table size="small" aria-label="purchases">
                     <TableHead>
                         <TableRow style={{borderBottom: 'hidden'}}>
@@ -264,7 +264,7 @@ const DetdomBlock = (props) => {
             <TableRow>
                 <TableCell sx={{padding: 1}} style={{ paddingBottom: 0, paddingTop: 0}} colSpan={6}>
                 <Collapse in={open} timeout="auto" unmountOnExit>
-                    <Box sx={{ margin: 0, marginLeft: '0' }}>
+                    <Box sx={{borderRadius: '3px', margin: 0, marginLeft: '0' }}>
                     <TableHead sx={{backgroundColor: '#ffffff0a'}}>
                         <TableRow className="uitableHead">
                             <TableCell sx={{padding: 1}} style={{ width: '20%',fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left"><a>Регион</a></TableCell>
@@ -329,7 +329,7 @@ const MzBlock = (props) => {
             <TableRow>
                 <TableCell sx={{padding: 1}} style={{ paddingBottom: 0, paddingTop: 0}} colSpan={6}>
                 <Collapse in={open} timeout="auto" unmountOnExit>
-                    <Box sx={{ margin: 0, marginLeft: '0' }}>
+                    <Box sx={{borderRadius: '3px', margin: 0, marginLeft: '0' }}>
                     <TableHead sx={{backgroundColor: '#ffffff0a'}}>
                         <TableRow className="uitableHead">
                             <TableCell sx={{padding: 1}} style={{ width: '15%',fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left"><a>Статья для учета</a></TableCell>
@@ -374,7 +374,7 @@ const MzRow = (props) => {
         <TableRow style={{borderBottom: 'hidden'}}>
             <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={4}>
             <Collapse in={open} timeout="auto" unmountOnExit>
-                <Box sx={{ margin: 1, marginLeft: '2.6%' }}>
+                <Box sx={{borderRadius: '3px', margin: 1, marginLeft: '2.6%' }}>
                 <Table size="small" aria-label="purchases">
                     <TableHead>
                         <TableRow style={{borderBottom: 'hidden'}}>
@@ -420,7 +420,7 @@ const CriminalsBlock = (props) => {
             <TableRow>
                 <TableCell sx={{padding: 1}} style={{ paddingBottom: 0, paddingTop: 0}} colSpan={6}>
                 <Collapse in={open} timeout="auto" unmountOnExit>
-                    <Box sx={{ margin: 0, marginLeft: '0' }}>
+                    <Box sx={{borderRadius: '3px', margin: 0, marginLeft: '0' }}>
                     <TableHead sx={{backgroundColor: '#ffffff0a'}}>
                         <TableRow className="uitableHead">
                             <TableCell sx={{padding: 1}} style={{ width: '15%',fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left"><a>Статья для учета</a></TableCell>
@@ -467,7 +467,7 @@ const CriminalRow = (props) => {
         <TableRow style={{borderBottom: 'hidden'}}>
             <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={4}>
             <Collapse in={open} timeout="auto" unmountOnExit>
-                <Box sx={{ margin: 1, marginLeft: '2.6%' }}>
+                <Box sx={{borderRadius: '3px', margin: 1, marginLeft: '2.6%' }}>
                 <Table size="small" aria-label="purchases">
                     <TableHead>
                         <TableRow style={{borderBottom: 'hidden'}}>
@@ -517,7 +517,7 @@ const ConvictsBlock = (props) => {
             <TableRow>
                 <TableCell sx={{padding: 1}} style={{ paddingBottom: 0, paddingTop: 0}} colSpan={6}>
                 <Collapse in={open} timeout="auto" unmountOnExit>
-                    <Box sx={{ margin: 0, marginLeft: '0' }}>
+                    <Box sx={{borderRadius: '3px', margin: 0, marginLeft: '0' }}>
                     <TableHead sx={{backgroundColor: '#ffffff0a'}}>
                         <TableRow className="uitableHead">
                             <TableCell sx={{padding: 1}} style={{ width: '15%',fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left"><a>Статья для учета</a></TableCell>
@@ -576,7 +576,7 @@ const ConvictRow = (props) => {
         <TableRow style={{borderBottom: 'hidden'}}>
             <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={4}>
             <Collapse in={open} timeout="auto" unmountOnExit>
-                <Box sx={{ margin: 1, marginLeft: '2.6%' }}>
+                <Box sx={{borderRadius: '3px', margin: 1, marginLeft: '2.6%' }}>
                 <Table size="small" aria-label="purchases">
                     <TableHead>
                         <TableRow style={{borderBottom: 'hidden'}}>
@@ -617,7 +617,7 @@ const BlockEsfBlock = (props) => {
             <TableRow>
                 <TableCell sx={{padding: 1}} style={{ paddingBottom: 0, paddingTop: 0}} colSpan={6}>
                 <Collapse in={open} timeout="auto" unmountOnExit>
-                    <Box sx={{ margin: 0, marginLeft: '0' }}>
+                    <Box sx={{borderRadius: '3px', margin: 0, marginLeft: '0' }}>
                     <TableHead sx={{backgroundColor: '#ffffff0a'}}>
                         <TableRow className="uitableHead">
                             <TableCell sx={{padding: 1}} style={{ width: '15%',fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left"><a>ИП</a></TableCell>
@@ -666,7 +666,7 @@ const BlockEsfRow = (props) => {
         <TableRow style={{borderBottom: 'hidden'}}>
             <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={4}>
             <Collapse in={open} timeout="auto" unmountOnExit>
-                <Box sx={{ margin: 1, marginLeft: '2.6%' }}>
+                <Box sx={{borderRadius: '3px', margin: 1, marginLeft: '2.6%' }}>
                 <Table size="small" aria-label="purchases">
                     <TableHead>
                     <TableRow style={{borderBottom: 'hidden'}}>
@@ -707,7 +707,7 @@ const CreditBlock = (props) => {
             <TableRow>
                 <TableCell sx={{padding: 1}} style={{ paddingBottom: 0, paddingTop: 0}} colSpan={6}>
                 <Collapse in={open} timeout="auto" unmountOnExit>
-                    <Box sx={{ margin: 0, marginLeft: '0' }}>
+                    <Box sx={{borderRadius: '3px', margin: 0, marginLeft: '0' }}>
                     <TableHead sx={{backgroundColor: '#ffffff0a'}}>
                         <TableRow className="uitableHead">
                             <TableCell sx={{padding: 1}} style={{ width: '15%',fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left"><a>Регион</a></TableCell>
@@ -763,7 +763,7 @@ const CreditRow = (props) => {
         <TableRow style={{borderBottom: 'hidden'}}>
             <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={4}>
             <Collapse in={open} timeout="auto" unmountOnExit>
-                <Box sx={{ margin: 1, marginLeft: '2.6%' }}>
+                <Box sx={{borderRadius: '3px', margin: 1, marginLeft: '2.6%' }}>
                 <Table size="small" aria-label="purchases">
                     <TableHead>
                     <TableRow style={{borderBottom: 'hidden'}}>

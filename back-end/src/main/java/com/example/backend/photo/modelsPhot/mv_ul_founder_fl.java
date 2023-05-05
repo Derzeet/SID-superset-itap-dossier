@@ -6,7 +6,7 @@ import javax.persistence.Table;
 import java.util.UUID;
 
 @Entity
-@Table(name = "mv_ul_founder_fl", schema = "imp_kfm_ul")
+@Table(name = "mv_ul_founder_fl_old", schema = "imp_kfm_ul")
 
 public class mv_ul_founder_fl {
     @Id

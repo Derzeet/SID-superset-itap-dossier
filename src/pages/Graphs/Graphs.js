@@ -295,17 +295,17 @@ const GraphNetnew = (props) => {
                 break;
         }
 
-        params["approvement_type"] = options.approvementObject ? options.approvementObject.approvement_type : null
-        params["orderNum"] = options.approvementObject ? options.approvementObject.orderNum : null
-        params["orderDate"] = options.approvementObject ? options.approvementObject.orderDate : null
-        params["articleName"] = options.approvementObject ? options.approvementObject.articleName : null
-        params["caseNum"] = options.approvementObject ?options.approvementObject.caseNum : null
-        params["checkingName"] = options.approvementObject ? options.approvementObject.checkingName : null
-        params["otherReasons"] = options.approvementObject ? options.approvementObject.other : null
-        params["organName"] = options.approvementObject ? options.approvementObject.organName : null
-        params["rukName"] = options.approvementObject ? options.approvementObject.rukName : null
-        params["sphereName"] = options.approvementObject ? options.approvementObject.sphereName : null
-        params["tematikName"] = options.approvementObject ? options.approvementObject.tematikName : null
+        params["approvement_type"] = options.approvementObject ? options.approvementObject.approvement_type : ''
+        params["orderNum"] = options.approvementObject ? options.approvementObject.orderNum : ''
+        params["orderDate"] = options.approvementObject ? options.approvementObject.orderDate : ''
+        params["articleName"] = options.approvementObject ? options.approvementObject.articleName : ''
+        params["caseNum"] = options.approvementObject ?options.approvementObject.caseNum : ''
+        params["checkingName"] = options.approvementObject ? options.approvementObject.checkingName : ''
+        params["otherReasons"] = options.approvementObject ? options.approvementObject.other : ''
+        params["organName"] = options.approvementObject ? options.approvementObject.organName : ''
+        params["rukName"] = options.approvementObject ? options.approvementObject.rukName : ''
+        params["sphereName"] = options.approvementObject ? options.approvementObject.sphereName : ''
+        params["tematikName"] = options.approvementObject ? options.approvementObject.tematikName : ''
 
         console.log(params)
 

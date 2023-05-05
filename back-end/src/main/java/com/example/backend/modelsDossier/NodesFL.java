@@ -8,7 +8,6 @@ import java.util.List;
 
 public class NodesFL {
     private List<mv_fl> mvFls;
-
     private List<photoDb> photoDbf;
     private List<mv_auto_fl> mvAutoFls;
     private List<omn> omns; //risk
@@ -19,28 +18,12 @@ public class NodesFL {
     private List<fl_relatives> fl_relatives;
     private List<reg_address_fl> regAddressFls;
 
+    private List<criminals> criminals; //risk
     private List<pdl> pdls;
     private List<WantedListEntity> wantedListEntities; //risk
     private List<CommodityProducer> commodityProducers;
 
-    public List<CommodityProducer> getCommodityProducers() {
-        return commodityProducers;
-    }
-
-    public void setCommodityProducers(List<CommodityProducer> commodityProducers) {
-        this.commodityProducers = commodityProducers;
-    }
-
-    public List<WantedListEntity> getWantedListEntities() {
-        return wantedListEntities;
-    }
-
-    public void setWantedListEntities(List<WantedListEntity> wantedListEntities) {
-        this.wantedListEntities = wantedListEntities;
-    }
-
     private List<mv_iin_doc> mvIinDocs;
-    private List<criminals> criminals; //risk
     private List<com.example.backend.photo.modelsPhot.universities> universities;
 
     private List<school> schools;
@@ -56,6 +39,38 @@ public class NodesFL {
     private List<block_esf> blockEsfs;  //risk
     private List<mv_ul_founder_fl> mvUlFounderFls;
     private List<NdsEntity> ndsEntities;
+    private List<IpgoEmailEntity> ipgoEmailEntities;
+    private List<TIpEntity>TIpEntity;
+    private List<AccountantListEntity> accountantListEntities;
+    private List<AdvocateListEntity> advocateListEntities;
+    private List<AuditorsListEntity> auditorsListEntities;
+    private List<BailiffListEntity> bailiffListEntities;
+    private List<MzEntity> mzEntities ;
+    private List<mv_rn_old> mvRnOlds;
+    private List<mv_ul_leader> ul_leaderList; //Сведения об участии в ЮЛ
+
+    public List<mv_ul_leader> getUl_leaderList() {
+        return ul_leaderList;
+    }
+
+    public void setUl_leaderList(List<mv_ul_leader> ul_leaderList) {
+        this.ul_leaderList = ul_leaderList;
+    }
+
+    public List<CommodityProducer> getCommodityProducers() {
+        return commodityProducers;
+    }
+    public void setCommodityProducers(List<CommodityProducer> commodityProducers) {
+        this.commodityProducers = commodityProducers;
+    }
+
+    public List<WantedListEntity> getWantedListEntities() {
+        return wantedListEntities;
+    }
+
+    public void setWantedListEntities(List<WantedListEntity> wantedListEntities) {
+        this.wantedListEntities = wantedListEntities;
+    }
 
     public List<NdsEntity> getNdsEntities() {
         return ndsEntities;
@@ -76,19 +91,11 @@ public class NodesFL {
     public List<block_esf> getBlockEsfs() {
         return blockEsfs;
     }
-
     public void setBlockEsfs(List<block_esf> blockEsfs) {
         this.blockEsfs = blockEsfs;
     }
 
     private List<FirstCreditBureauEntity> FirstCreditBureauEntities;  //risk
-private List<IpgoEmailEntity> ipgoEmailEntities;
-private List<TIpEntity>TIpEntity;
-private List<AccountantListEntity> accountantListEntities;
-private List<AdvocateListEntity> advocateListEntities;
-private List<AuditorsListEntity> auditorsListEntities;
-private List<BailiffListEntity> bailiffListEntities;
-private List<MzEntity> mzEntities ;  //risk
     private boolean Person_with_risk;
 
     public boolean isPerson_with_risk() {
@@ -187,7 +194,6 @@ private List<MzEntity> mzEntities ;  //risk
         this.flPensionContrs = flPensionContrs;
     }
 
-    private List<mv_rn_old> mvRnOlds;
 
     public List<mv_rn_old> getMvRnOlds() {
         return mvRnOlds;

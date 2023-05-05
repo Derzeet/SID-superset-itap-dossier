@@ -1,6 +1,7 @@
 package com.example.backend.controller;
 
 import com.example.backend.modelsDossier.*;
+import com.example.backend.photo.modelsPhot.fl_pension_contr;
 import com.example.backend.photo.modelsPhot.photoDb;
 import com.example.backend.photo.repositoryPhot.newPhotoRepo;
 import com.example.backend.repositoryDossier.esf_all2Repo;
@@ -93,4 +94,9 @@ public class DoseirController {
     public List<Map<String,Object>> get(){
         return myService.findAmountOfAmountByKNP("gr","gd");
     }
+
+//    @GetMapping("/ulpension")
+//    public List<fl_pension_contr> getPension(@RequestParam String bin) {
+//
+//    }
 }
