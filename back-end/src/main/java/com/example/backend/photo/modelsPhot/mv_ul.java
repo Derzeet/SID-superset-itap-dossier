@@ -1,5 +1,6 @@
 package com.example.backend.photo.modelsPhot;
 
+import javax.annotation.Nullable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -7,25 +8,42 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "mv_ul", schema = "imp_kfm_ul")
 public class mv_ul {
+    @Nullable
     private String bin;
+    @Nullable
     private String full_name_rus;
+    @Nullable
     private String full_name_kaz;
+    @Nullable
     private String org_status;
+    @Nullable
     private String org_registration_type;
+    @Nullable
     private String org_form;
+    @Nullable
     private String org_reg_date;
+    @Nullable
     private String legal_form;
+    @Nullable
     private String is_resident;
+    @Nullable
     private String registration_agensy;
+    @Nullable
     private String registration_number;
+    @Nullable
     private String oked;
+    @Nullable
     private String head_organization;
+    @Nullable
     @Id
-
     private String subject_id;
+    @Nullable
     private String layer_id;
+    @Nullable
     private String ul_status;
+    @Nullable
     private boolean is_upd;
+    @Nullable
     private String short_name;
 
     public String getBin() {
