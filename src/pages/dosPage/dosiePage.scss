@@ -5,6 +5,7 @@
 body {
 }
 .dosiePage {
+    position: relative;
 
     * {
         overflow: hidden !important;
@@ -19,7 +20,54 @@ body {
     height: 90%;
 
     display: flex;
-    flex-direction: column;
+    flex-direction: row !important;
+
+    .menu-open {
+        width: 20px;
+        height: 100%;
+
+        background-color: #0d0f1190;
+        transition: background-color .5s ease-in-out;
+
+        &:hover {
+            background-color: #7b8593;
+            transition: background-color .5s ease-in-out;
+        }
+
+        cursor: pointer;
+
+        position: absolute;
+        // display: block;
+        left: 0px;
+    }
+
+    .menu-bar {
+        position: relative;
+        border: 1px solid #3a3a3a;
+        width: 0;
+        padding: 20px 60px;
+
+        background-color: #0D0F11;
+        display: block;
+
+        transition: width .3s ease-in-out, padding .3s ease-in-out;
+
+        .menu-body {
+            display: flex;
+            flex-direction: column;
+
+            gap: 20px;
+        }
+
+        .menu-close {
+            position: absolute;
+            top: 0px;
+            right: 0px;
+
+            cursor: pointer;
+            
+        }
+    }
 
     .central-bar {
         display: flex;
