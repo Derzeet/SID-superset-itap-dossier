@@ -641,12 +641,12 @@ const GraphNetnew = (props) => {
                     "Дата рождения": sp.Data_Rozhdenya || "Нет даты рождения",
                 }, '#nodeInfoInner')
 
-                assignInfoBlock({
-                    "class": "Person",
-                    "PersonID": sp.PersonID,
-                    "Label": sp.Label,
-                    "Source": sp.Source,
-                }, '#nodeAddInfoInner')
+                // assignInfoBlock({
+                //     "class": "Person",
+                //     "PersonID": sp.PersonID,
+                //     "Label": sp.Label,
+                //     "Source": sp.Source,
+                // }, '#nodeAddInfoInner')
 
                 assignInfoBlock({"Аудитор": sp.Autditor}, '#nodeAddInfoInner')
                 assignInfoBlock({"Нотариус": sp.Notarius}, '#nodeAddInfoInner')
@@ -663,10 +663,10 @@ const GraphNetnew = (props) => {
                 }, '#nodeInfoInner')
 
                 assignInfoBlock({
-                    "class": sp.Name,
-                    "PersonID": sp.PersonID, 
-                    "Label": sp.Label,
-                    "Source": sp.Source,
+                    // "class": sp.Name,
+                    // "PersonID": sp.PersonID, 
+                    // "Label": sp.Label,
+                    // "Source": sp.Source,
                 }, '#nodeAddInfoInner')
 
                 assignInfoBlock({"Бухгалтер": sp.Buhgalter}, '#nodeAddInfoInner') 
@@ -687,13 +687,13 @@ const GraphNetnew = (props) => {
                 }, '#nodeInfoInner')
 
                 assignInfoBlock({
-                    "class": sp.Name,
+                    // "class": sp.Name,
                     "Код области": sp.Kod_oblasti, 
                     "Код страны": sp.Kod_Strani, 
                     "Код района": sp.Kod_rayona, 
-                    "PersonID": sp.PersonID, 
-                    "Label": sp.Label,
-                    "Source": sp.Source,
+                    // "PersonID": sp.PersonID, 
+                    // "Label": sp.Label,
+                    // "Source": sp.Source,
                 }, '#nodeAddInfoInner')
 
                 assignInfoBlock({"Мед. Орг.": sp.Med_org,}, '#nodeSudInfoInner')
@@ -765,10 +765,10 @@ const GraphNetnew = (props) => {
 
         const sp = SelectedEdge.properties
         assignInfoBlock({
-          "id": sp.id,
+        //   "id": sp.id,
           "Вид связи": sp.Vid_svyaziey,
-          "Label": sp.Label,
-          "Source": sp.Source
+        //   "Label": sp.Label,
+        //   "Source": sp.Source
         }, '#nodeInfoInner')
 
         if (SelectedEdge.type == "REG_ADDRESS_HIST" || SelectedEdge.type == "REG_ADDRESS_CUR" || SelectedEdge.type == "REG_ADDRESS") {
