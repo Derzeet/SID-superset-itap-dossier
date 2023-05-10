@@ -7,13 +7,16 @@ import com.example.backend.photo.repositoryPhot.newPhotoRepo;
 import com.example.backend.repositoryDossier.esf_all2Repo;
 import com.example.backend.repositoryDossier.mv_auto_fl_repo;
 import com.example.backend.service.MyService;
+import com.example.backend.tools.PdfGenerator;
+import com.lowagie.text.DocumentException;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -99,4 +102,18 @@ public class DoseirController {
 //    public List<fl_pension_contr> getPension(@RequestParam String bin) {
 //
 //    }
+
+    @GetMapping(value = "/download/{iin}", produces = MediaType.APPLICATION_PDF_VALUE)
+    public @ResponseBody byte[] generatePdfFile(HttpServletResponse response, @PathVariable("iin")String iin) throws DocumentException, IOException
+    {
+        response.setContentType("application/pdf");
+        String headerkey = "Content-Disposition";
+        String headervalue = "attachment; filename=doc" + ".pdf";
+        response.setHeader(headerkey, headervalue);
+        NodesFL r =  myService.getNode(iin);
+        PdfGenerator generator = new PdfGenerator();
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        generator.generate(r, baos);
+        return baos.toByteArray();
+    }
 }

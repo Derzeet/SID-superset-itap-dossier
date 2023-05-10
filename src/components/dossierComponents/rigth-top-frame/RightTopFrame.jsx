@@ -86,12 +86,12 @@ function Row(props) {
                     <Button size="small" onClick={() => {
                       const url = `/profiler/person/` + row.parent_iin
                       window.open(url, '_blank', 'noopener,noreferrer')
-                    }}>Досье</Button>
+                    }}>Profile</Button>
                     <Button size="small" onClick={() => {
                       const string = queryString.stringify({object: row.parent_iin, type: "iin"})
                       const url = `/itap?${string}`
                       window.open(url, '_blank', 'noopener,noreferrer')
-                    }}>Itap</Button>
+                    }}>Relations</Button>
               </ButtonGroup>
             ) : (
               <></>

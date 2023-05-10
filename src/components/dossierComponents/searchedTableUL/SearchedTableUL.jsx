@@ -75,12 +75,12 @@ function SearchedTable(props) {
                     <Button onClick={() => {
                       const url = `/profiler/ul/` + row.bin
                       window.open(url, '_blank', 'noopener,noreferrer')
-                    }}>Досье</Button>
+                    }}>Profile</Button>
                     <Button onClick={() => {
                       const string = queryString.stringify({object: row.bin, type: "bin"})
                       const url = `/itap?${string}`
                       window.open(url, '_blank', 'noopener,noreferrer')
-                    }}>Itap</Button>
+                    }}>Relations</Button>
               </ButtonGroup>
             ) : (
               <></>
