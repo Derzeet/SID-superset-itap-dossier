@@ -49,6 +49,7 @@ const DosiePage = (props) => {
     const [detdom, setDetdom] = useState([])
     const [adms, setAdms] = useState([])
     const [ulLeaders, setUlLeaders] = useState([]) // Ul svedenia ob uchastiy
+    const [flUlFounders, setFlUlFounders] = useState([])
 
     useEffect(() => {
         const searchIIN = () => {
@@ -95,6 +96,8 @@ const DosiePage = (props) => {
                 setAdms(res.data.adms)
 
                 setUlLeaders(res.data.ul_leaderList)
+            setFlUlFounders(res.data.mvUlFounderFls)
+
 
                 isLoading(false)
             })
@@ -111,7 +114,7 @@ const DosiePage = (props) => {
                         <div className="frames">
                             <LeftTopFrame photo={base} photos={photos} data={leftTopFrameData}/>
                             <RightTopFrame relatives={relatives}/>
-                            <LeftBottomFrame ulLeaders={ulLeaders} docs={docs} addresses={addresses} transport={transport} 
+                            <LeftBottomFrame flUlFounders={flUlFounders} ulLeaders={ulLeaders} docs={docs} addresses={addresses} transport={transport} 
                                 schools={schools} universities={universities} pensions={pensions} military={military} militaryEntities={militaryEntities}
                                 nedvijimost={nedvijimost} contacts={contacts} equipment={equipment} accountantListEntities={accountantListEntities} advocateListEntities={advocateListEntities} auditorsListEntities={auditorsListEntities} bailiffListEntities={bailiffListEntities} ipgoEmailEntities={ipgoEmailEntities}/>
                             <RightBottomFrame convictsTerminatedByRehabs={convictsTerminatedByRehabs} criminals={criminals} convicts={convicts} firstCreditBureauEntities={firstCreditBureauEntities} blockEsf={blockEsf} mzEntities={mzEntities} detdom={detdom} adms={adms}/>
