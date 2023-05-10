@@ -17,11 +17,11 @@ public interface fl_pension_contrRepo extends JpaRepository<fl_pension_contr, Lo
 //    FROM imp_kfm_fl.fl_pension_contr
 //    WHERE "IIN" = '810615301348' and "P_RNN" = '061600005040'
 //    GROUP BY "KNP"
-@Query(value= "SELECT  cast(SUM(\"AMOUNT\") as text) AS AMOUNT, \"KNP\"\n" +
-        "             FROM imp_kfm_fl.fl_pension_contr\n" +
-        "            WHERE \"IIN\" = ?1 and \"P_RNN\" = ?2\n" +
-        "                GROUP BY \"KNP\" ", nativeQuery = true)
-List<Map<String,Object>> findAmountOfAmountByKNP(String iin, String bin);
+    @Query(value= "SELECT  cast(SUM(\"AMOUNT\") as text) AS AMOUNT, \"KNP\"\n" +
+            "             FROM imp_kfm_fl.fl_pension_contr\n" +
+            "            WHERE \"IIN\" = ?1 and \"P_RNN\" = ?2\n" +
+            "                GROUP BY \"KNP\" ", nativeQuery = true)
+    List<Map<String,Object>> findAmountOfAmountByKNP(String iin, String bin);
 
     @Query(value = "SELECT EXTRACT(YEAR FROM \"PAY_DATE\") AS year,\n" +
             "       \"P_NAME\", \"KNP\",\n" +
@@ -31,4 +31,6 @@ List<Map<String,Object>> findAmountOfAmountByKNP(String iin, String bin);
             "    GROUP BY EXTRACT(YEAR FROM \"PAY_DATE\"), \"P_NAME\", \"KNP\"  ", nativeQuery = true)
     fl_pension_contr getAllByCompanies(String iin , String bin);
 
+    @Query(value = "select distinct (extract (year from fpc.\"PAY_DATE\")) from imp_kfm_fl.fl_pension_contr fpc where \"P_RNN\" = ?1", nativeQuery = true)
+    List<Integer> getYearThatExist(String bin);
 }

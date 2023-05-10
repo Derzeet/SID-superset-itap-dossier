@@ -10,8 +10,6 @@ const RightBar = (props) => {
   const [showNodeInfo, setShowNodeInfo] = useState(false)
   const [showNodeAddInfo, setShowNodeAddInfo] = useState(false)
 
-  
-
   useEffect(() => {
     props.setOpenLimit(openLimit)
     props.setShowRels(showRels)

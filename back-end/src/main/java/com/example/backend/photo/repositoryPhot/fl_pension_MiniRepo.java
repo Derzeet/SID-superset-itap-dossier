@@ -21,4 +21,5 @@ public interface fl_pension_MiniRepo extends JpaRepository<flPensionMini, Long> 
             "    FROM imp_kfm_fl.fl_pension_contr\n" +
             "    WHERE \"IIN\" = ?1 and \"P_RNN\" = ?2 \n", nativeQuery = true)
     List<String> getAllByCompaniesYear(String iin , String bin);
+
 }

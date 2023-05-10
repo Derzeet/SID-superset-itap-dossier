@@ -68,19 +68,23 @@ function SearchedTable(props) {
               gap: '10px',
               alignItems: 'center'
           }}>
+            {row.bin != '' && row.bin != null ? (
               <ButtonGroup
-                  variant='outlined'
-                  aria-label='outlined-button-group'>
+              variant='outlined'
+              aria-label='outlined-button-group'>
                     <Button onClick={() => {
                       const url = `/profiler/ul/` + row.bin
                       window.open(url, '_blank', 'noopener,noreferrer')
-                      }}>Досье</Button>
+                    }}>Profile</Button>
                     <Button onClick={() => {
                       const string = queryString.stringify({object: row.bin, type: "bin"})
                       const url = `/itap?${string}`
                       window.open(url, '_blank', 'noopener,noreferrer')
-                      }}>Itap</Button>
+                    }}>Relations</Button>
               </ButtonGroup>
+            ) : (
+              <></>
+            )}
               </TableCell>
           </TableRow>
         ))

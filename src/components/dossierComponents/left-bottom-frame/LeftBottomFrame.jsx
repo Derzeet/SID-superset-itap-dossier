@@ -30,6 +30,8 @@ function LeftBottomFrame(props) {
     const [contacts, setContacts] = useState([])
     const [equipment, setEquipment] = useState([])
     const [ipgoEmailEntities, setIpgoEmailEntities] = useState([])
+    const [ulLeaders, setUlLeaders] = useState([])
+    const [flUlFounders, setFlUlFounders] = useState([])
     
     const [professions, setProfessions] = useState({
       accountant: [],
@@ -60,6 +62,7 @@ function LeftBottomFrame(props) {
         setNedvijimost(props.nedvijimost)
         setContacts(props.contacts)
         setEquipment(props.equipment)
+        setUlLeaders(props.ulLeaders)
 
         setProfessions({
           accountant: props.accountantListEntities,
@@ -69,6 +72,7 @@ function LeftBottomFrame(props) {
         })
 
         setIpgoEmailEntities(props.ipgoEmailEntities)
+        setFlUlFounders(props.flUlFounders)
 
     }, [soc])
     return ( 
@@ -118,6 +122,8 @@ function LeftBottomFrame(props) {
                     {nedvijimost && nedvijimost.length > 0? <NedvijimostBlock nedvijimost={nedvijimost} exist={nedvijimost.length > 0 ? true : false}/> : ""}
                     {contacts && contacts.length > 0? <ContactsBlock array={contacts} exist={contacts.length > 0? true : false}/> : ""}
                     {professions && Object.keys(professions).length > 0? <ProfessionsBlock professions={professions}/> : ""}
+                    {ulLeaders ? <UlLeaderBlock uls={ulLeaders}/> : "" }
+                    {flUlFounders && flUlFounders.length > 0? <FlUlFounderBlock array={flUlFounders}/> : "" }
                     {<IpgoEmailBlock array={ipgoEmailEntities}/>}
                 </div>
                 {/* TRANSPORT */}
@@ -126,6 +132,166 @@ function LeftBottomFrame(props) {
             </div>   
         </div>
     );
+}
+
+const FlUlFounderBlock = (props) => {
+  const {array} = props
+  const exist = array.length > 0? true : false
+  const [open, setOpen] = useState(false)
+
+  return (
+    <>
+      <TableContainer sx={{marginTop: 0}}>
+        <Table aria-label="collapsible table" className="uitable">
+
+          <TableRow className="uitablerow" sx={{height:'10px',}} style={{borderBottom: 'hidden'}}>
+              <TableCell sx={{padding: 1}} style={{borderBottom: 'hidden', width: '90%', fontSize: '16px', fontWeight: 500, color: "#FFFFFF"}}><a>Сведения об участии в ЮЛ</a></TableCell>
+              <TableCell sx={{padding: 1}} style={{width: '10%'}} align='right'>
+                    <IconButton
+                    aria-label="expand row"
+                    size="small"
+                    onClick={() => setOpen(!open)}
+                    >
+                    {open ? <KeyboardArrowUpIcon style={{ fill: '#ffffff' }}/> : <KeyboardArrowDownIcon style={{ fill: '#ffffff' }}/>}
+                    </IconButton>
+                </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell sx={{padding: 1}} style={{ paddingBottom: 0, paddingTop: 0}} colSpan={6}>
+              <Collapse in={open} timeout="auto" unmountOnExit>
+                <Box sx={{borderRadius: '3px', margin: 0, marginLeft: '0' }}>
+                  <TableHead sx={{backgroundColor: '#ffffff0a'}}>
+                    <TableRow className="uitableHead">
+                        <TableCell sx={{padding: 1}} style={{ width: '20%',fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left"><a>Наименование ЮЛ</a></TableCell>
+                        <TableCell sx={{padding: 1}} style={{ width: '80%', fontSize: '12px', color: "rgb(199, 199, 199)" }} align="left"><a>Дата регистрации</a></TableCell>
+                        <TableCell sx={{padding: 1}} style={{ width: '80%', fontSize: '12px', color: "rgb(199, 199, 199)" }} align="left"><a>БИН</a></TableCell>
+                        <TableCell sx={{padding: 1}} style={{ width: '5%', color: "#fff" }} align="left"></TableCell>
+                    </TableRow>
+                  </TableHead> 
+                  <TableBody style={{borderBottom: 'hidden'}}>
+                  {exist ? array.map((row, index) => (
+                      <FlUlFounderRow row={row}/>
+                  )): <TableCell  className="zeroResult" align="center" colSpan={3} style={{borderBottom: 'hidden'}}><a>Нет данных</a></TableCell>}
+                  </TableBody>
+                </Box>
+              </Collapse>
+            </TableCell>
+          </TableRow>
+        </Table>
+      </TableContainer>
+              
+    </>
+  )
+}
+
+const FlUlFounderRow = (props) => {
+  const {row} = props
+  const [open, setOpen] = useState(false)
+
+  return (
+    <>
+      <TableRow className="uitablerow" sx={{height:'10px',}} style={{borderBottom: 'hidden'}}>
+        <TableCell sx={{padding: 1}} style={{ fontSize: '12px', fontWeight: 500, color: "#FFFFFF"}}><a>{row.name || "---"}</a></TableCell>
+        <TableCell sx={{padding: 1}} style={{ fontSize: '12px', fontWeight: 500, color: "#FFFFFF" }} align="left"><a>{row.reg_date || "---"}</a></TableCell>
+        <TableCell sx={{padding: 1}} style={{ fontSize: '12px', fontWeight: 500, color: "#FFFFFF" }} align="left"><a>{row.bin_org || "---"}</a></TableCell>
+        <TableCell sx={{padding: 1}}>
+          <IconButton
+            aria-label="expand row"
+            size="small"
+            onClick={() => setOpen(!open)}
+          >
+            {open ? <KeyboardArrowUpIcon style={{ fill: '#ffffff' }}/> : <KeyboardArrowDownIcon style={{ fill: '#ffffff' }}/>}
+          </IconButton>
+        </TableCell>
+      </TableRow>
+      <TableRow style={{borderBottom: 'hidden'}}>
+        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={4}>
+          <Collapse in={open} timeout="auto" unmountOnExit>
+            <Box sx={{ margin: 1, marginLeft: '2.6%' }}>
+              <Table size="small" aria-label="purchases">
+                <TableHead>
+                  <TableRow style={{borderBottom: 'hidden'}}>
+                    <TableCell style={{ width: '30%', fontSize: '12px', color: "#6D6D6D" }}  align="left"><a>Идентификатор ЮЛ</a></TableCell>
+                    <TableCell style={{ width: '70%', fontSize: '12px', color: "#FFFFFF" }} align="left"><a>{row.id || "---"}</a></TableCell>
+                  </TableRow>
+                  <TableRow style={{borderBottom: 'hidden'}}>
+                    <TableCell style={{ width: '30%', fontSize: '12px', color: "#6D6D6D" }}  align="left"><a>Риски</a></TableCell>
+                    <TableCell style={{ width: '70%', fontSize: '12px', color: "#FFFFFF" }} align="left"><a>{row.risks || "---"}</a></TableCell>
+                  </TableRow>
+                </TableHead>
+              </Table>
+            </Box>
+          </Collapse>
+        </TableCell>
+      </TableRow>
+    </>
+  )
+}
+
+const UlLeaderBlock = (props) => {
+  let {uls} = props
+  const [open, setOpen] = useState(false)
+  if (uls != null) { 
+    return (
+      <>
+        <TableContainer sx={{marginTop: 0}}>
+          <Table aria-label="collapsible table" className="uitable">
+            <TableRow className="uitablerow" sx={{height:'10px',}} style={{borderBottom: 'hidden'}}>
+                <TableCell sx={{padding: 1}} style={{borderBottom: 'hidden', width: '90%', fontSize: '16px', fontWeight: 500, color: "#FFFFFF"}}><a>Сведения об участии в ЮЛ</a></TableCell>
+                <TableCell sx={{padding: 1}} style={{width: '10%'}} align='right'>
+                      <IconButton
+                      aria-label="expand row"
+                      size="small"
+                      onClick={() => setOpen(!open)}
+                      >
+                      {open ? <KeyboardArrowUpIcon style={{ fill: '#ffffff' }}/> : <KeyboardArrowDownIcon style={{ fill: '#ffffff' }}/>}
+                      </IconButton>
+                  </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell sx={{padding: 1}} style={{ paddingBottom: 0, paddingTop: 0}} colSpan={6}>
+                <Collapse in={open} timeout="auto" unmountOnExit>
+                  <Box sx={{ borderRadius: '3px', margin: 0, marginLeft: '0' }}>
+                    <TableHead sx={{ backgroundColor: '#ffffff0a'}}>
+                      <TableRow className="uitableHead">
+                          <TableCell sx={{padding: 1}} style={{ width: '30%',fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left"><a>Идентификатор ЮЛ</a></TableCell>
+                          <TableCell sx={{padding: 1}} style={{ width: '40%', fontSize: '12px', color: "rgb(199, 199, 199)" }} align="left"><a>Дата регистрации</a></TableCell>
+                          <TableCell sx={{padding: 1}} style={{ width: '30%', fontSize: '12px', color: "rgb(199, 199, 199)" }} align="left"><a>БИН</a></TableCell>
+                          <TableCell sx={{padding: 1}} style={{ width: '5%', color: "#fff" }} align="left"></TableCell>
+                      </TableRow>
+                    </TableHead> 
+                    <TableBody style={{borderBottom: 'hidden'}}>
+                    { uls.length > 0 ? uls.map((row, index) => (
+                        <UlLeaderRow row={row} />
+                    )): <TableCell  className="zeroResult" align="center" colSpan={4} style={{borderBottom: 'hidden'}}><a>Нет данных</a></TableCell>}
+                    </TableBody>
+                  </Box>
+                </Collapse>
+              </TableCell>
+            </TableRow>
+          </Table>
+        </TableContainer>
+      </>
+    )
+  }
+  else {
+    return null
+  }
+}
+
+const UlLeaderRow = (props) => {
+  let {row} = props
+
+  return (
+    <>
+        <TableRow className="uitableHead">
+          <TableCell sx={{padding: 1}} style={{ width: '33%',fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left"><a>{row.is_curr ? "Директор" : "Директор(исторический)"}</a></TableCell>
+          <TableCell sx={{padding: 1}} style={{ width: '33%', fontSize: '12px', color: "rgb(199, 199, 199)" }} align="left"><a>{row.reg_date.substring(0, 10)}</a></TableCell>
+          <TableCell sx={{padding: 1}} style={{ width: '33%', fontSize: '12px', color: "rgb(199, 199, 199)" }} align="left"><a>{row.bin_org}</a></TableCell>
+        </TableRow>
+    </>
+  )
+
 }
 
 const IpgoEmailBlock = (props) => {
@@ -160,7 +326,7 @@ const IpgoEmailBlock = (props) => {
             <TableRow>
               <TableCell sx={{padding: 1}} style={{ paddingBottom: 0, paddingTop: 0}} colSpan={6}>
                 <Collapse in={open} timeout="auto" unmountOnExit>
-                  <Box sx={{ margin: 0, marginLeft: '0' }}>
+                  <Box sx={{borderRadius: '3px', margin: 0, marginLeft: '0' }}>
                     <TableHead sx={{backgroundColor: '#ffffff0a'}}>
                       <TableRow className="uitableHead">
                           <TableCell sx={{padding: 1}} style={{ width: '30%',fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left"><a>Департамен</a></TableCell>
@@ -241,7 +407,7 @@ const ProfessionsBlock = (props) => {
             <TableRow style={{width: '100%'}}>
               <TableCell sx={{padding: 1}} style={{width: '100%', paddingBottom: 0, paddingTop: 0}} colSpan={2}>
                 <Collapse in={open} timeout="auto" unmountOnExit>
-                  <Box sx={{ margin: 0, marginLeft: '0'}}>
+                  <Box sx={{borderRadius: '3px', margin: 0, marginLeft: '0'}}>
                     <TableContainer>
                       <Table>
                         <TableHead sx={{backgroundColor: '#ffffff0a'}} >
@@ -313,7 +479,7 @@ const ProfessionsRow = (props) => {
       <TableRow style={{borderBottom: 'hidden'}}>
         <TableCell style={{ width: '100%', paddingBottom: 0, paddingTop: 0 }} colSpan={2}>
           <Collapse in={open} timeout="auto" unmountOnExit>
-            <Box sx={{ margin: 1, marginLeft: '2.6%' }}>
+            <Box sx={{borderRadius: '3px', margin: 1, marginLeft: '2.6%' }}>
               <Table size="small" aria-label="purchases">
                 <TableHead>
                   {
@@ -362,7 +528,7 @@ const EquipmentBlock = (props) => {
           <TableRow>
             <TableCell sx={{padding: 1}} style={{ paddingBottom: 0, paddingTop: 0}} colSpan={6}>
               <Collapse in={open} timeout="auto" unmountOnExit>
-                <Box sx={{ margin: 0, marginLeft: '0' }}>
+                <Box sx={{borderRadius: '3px', margin: 0, marginLeft: '0' }}>
                   <TableHead sx={{backgroundColor: '#ffffff0a'}}>
                     <TableRow className="uitableHead">
                         <TableCell sx={{padding: 1}} style={{ width: '15%',fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left"><a>Модель</a></TableCell>
@@ -414,7 +580,7 @@ const EquipmentRow = (props) => {
       <TableRow style={{borderBottom: 'hidden'}}>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={4}>
           <Collapse in={open} timeout="auto" unmountOnExit>
-            <Box sx={{ margin: 1, marginLeft: '2.6%' }}>
+            <Box sx={{borderRadius: '3px', margin: 1, marginLeft: '2.6%' }}>
               <Table size="small" aria-label="purchases">
                 <TableHead>
                   {/* <TableRow style={{borderBottom: 'hidden'}}>
@@ -487,7 +653,7 @@ const ContactsBlock = (props) => {
           <TableRow>
             <TableCell sx={{padding: 1}} style={{ paddingBottom: 0, paddingTop: 0}} colSpan={6}>
               <Collapse in={open} timeout="auto" unmountOnExit>
-                <Box sx={{ margin: 0, marginLeft: '0' }}>
+                <Box sx={{borderRadius: '3px', margin: 0, marginLeft: '0' }}>
                   <TableHead sx={{backgroundColor: '#ffffff0a'}}>
                     <TableRow className="uitableHead">
                         <TableCell sx={{padding: 1}} style={{ width: '15%',fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left"><a>Email</a></TableCell>
@@ -804,7 +970,7 @@ const SchoolsBlock = (props) => {
           <TableRow>
             <TableCell sx={{padding: 1}} style={{ paddingBottom: 0, paddingTop: 0}} colSpan={6}>
               <Collapse in={open} timeout="auto" unmountOnExit>
-                <Box sx={{ margin: 0, marginLeft: '0' }}>
+                <Box sx={{borderRadius: '3px', margin: 0, marginLeft: '0' }}>
                   <TableHead sx={{backgroundColor: '#ffffff0a'}}>
                     <TableRow className="uitableHead">
                         <TableCell sx={{padding: 1}} style={{ width: '20%',fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left"><a>БИН ШКОЛЫ</a></TableCell>
@@ -899,7 +1065,7 @@ const FlPensionBlock = (props) => {
           <TableRow>
             <TableCell sx={{padding: 1}} style={{ paddingBottom: 0, paddingTop: 0}} colSpan={6}>
               <Collapse in={open} timeout="auto" unmountOnExit>
-                <Box sx={{ margin: 0, marginLeft: '0' }}>
+                <Box sx={{borderRadius: '3px', margin: 0, marginLeft: '0' }}>
                   <TableHead sx={{backgroundColor: '#ffffff0a'}}>
                     <TableRow className="uitableHead">
                         <TableCell sx={{padding: 1}} style={{ width: '15%',fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left"><a>БИН</a></TableCell>
@@ -968,7 +1134,7 @@ const FlPensionRow = (props) => {
       <TableRow style={{borderBottom: 'hidden'}}>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={4}>
           <Collapse in={open} timeout="auto" unmountOnExit>
-            <Box sx={{ margin: 1, marginLeft: '2.6%' }}>
+            <Box sx={{borderRadius: '3px', margin: 1, marginLeft: '2.6%' }}>
               <Table size="small" aria-label="purchases">
                 <TableHead sx={{width: "60%"}}>
                   <TableRow style={{borderBottom: 'hidden'}}>
@@ -1020,7 +1186,7 @@ const UniversityBlock = (props) => {
           <TableRow>
             <TableCell sx={{padding: 1}} style={{ paddingBottom: 0, paddingTop: 0}} colSpan={6}>
               <Collapse in={open} timeout="auto" unmountOnExit>
-                <Box sx={{ margin: 0, marginLeft: '0' }}>
+                <Box sx={{borderRadius: '3px', margin: 0, marginLeft: '0' }}>
                   <TableHead sx={{backgroundColor: '#ffffff0a'}}>
                     <TableRow className="uitableHead">
                         <TableCell sx={{padding: 1}} style={{ width: '20%',fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left"><a>БИН ВУЗА</a></TableCell>
@@ -1123,7 +1289,7 @@ function TransportRow(props) {
               <TableCell sx={{padding: 1}} style={{ paddingBottom: 0, paddingTop: 0}} colSpan={6}>
                   
                   <Collapse in={open} timeout="auto" unmountOnExit>
-                  <Box sx={{ margin: 0, marginLeft: '0' }}>
+                  <Box sx={{borderRadius: '3px', margin: 0, marginLeft: '0' }}>
                               <TableHead>
                                 <TableRow className="uitableHead"  style={{borderBottom: 'hidden'}}>
                                     <TableCell sx={{padding: 1}} style={{ width: '1%',fontSize: '14px', color: "#6D6D6D"}} align="left"><a>№</a></TableCell>
@@ -1264,6 +1430,7 @@ function Row(props) {
   }
 
 function AddressRow(props) {
+  
   const { row } = props;
   const [open, setOpen] = useState(false);
 

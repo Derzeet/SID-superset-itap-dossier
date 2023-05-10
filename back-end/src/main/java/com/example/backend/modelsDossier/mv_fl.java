@@ -8,25 +8,25 @@ import javax.persistence.Table;
 @Table(name = "mv_fl", schema = "ser")
 
 public class mv_fl {
-    private String iin;
+    private String iin; //
     private String gender;
     @Id
 
-    private String birth_date;
-    private String last_name;
-    private String first_name;
-    private String patronymic;
+    private String birth_date; //
+    private String last_name; //
+    private String first_name;//
+    private String patronymic;//
     private String citizenship_id;
     private String citizenship_ru_name;
     private String nationality_id;
-    private String nationality_ru_name;
-    private boolean is_resident;
+    private String nationality_ru_name; //
+    private boolean is_resident;//
     private String life_status_id;
     private String life_status_ru_name;
 
-    private String death_date;
-    private String birth_region_id;
-    private String birth_region_name;
+    private String death_date;//
+    private String birth_region_id;//
+    private String birth_region_name;//
     private String birth_district_id;
     private String birth_district_name;
     private String region;

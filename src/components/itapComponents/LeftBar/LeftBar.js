@@ -205,14 +205,14 @@ const LeftBar = (props) => {
     const clearOptions = () => {
         setIIN1("")
         setIIN2("")
-        setLimit(0)
+        setLimit(20)
         setMode("")
 
         document.getElementById("input_IIN").value = "";
         document.getElementById("input_IIN2").value = "";
 
-        document.getElementById("input_date").value = "";
-        document.getElementById("input_date2").value = "";
+        // document.getElementById("input_date").value = "";
+        // document.getElementById("input_date2").value = "";
 
         document.querySelector("#file-upload").value = "";
     }
@@ -489,7 +489,7 @@ const LeftBar = (props) => {
                                 }
                             }
                         }}>
-                            <option value="iinOption">ИИН/БИН</option>
+                            <option value="iinOption">ИИН</option>
                             <option value="fioOption">ФИО</option>
                         </select>
                     </div>
@@ -505,7 +505,7 @@ const LeftBar = (props) => {
                         id="input_IIN" 
                         className="input_IIN" 
                         name="iin1" 
-                        placeholder="Введите ИИН первого объекта"
+                        placeholder="ИИН/БИН"
                         />
                 </div>
 
@@ -517,7 +517,7 @@ const LeftBar = (props) => {
                         <label htmlFor="accurateCheckbox1">Точный поиск</label>
                     </div>
                     <div className="formBlock">
-                        <label>Введите Фамилию первого объекта: </label>
+                        <label>Введите Фамилию первого объекта </label>
                         <select id='firstFamilia' style={{display: checks1?"none":"block"}}>
                             <option value="starts">Начинается с</option>
                             <option value="include">Включает</option>
@@ -537,7 +537,7 @@ const LeftBar = (props) => {
                     </div>
 
                     <div className="formBlock">
-                        <label>Введите Имя первого объекта: </label>
+                        <label>Введите Имя первого объекта </label>
                         <select id='firstName' style={{display: checks1?"none":"block"}}>
                             <option value="starts">Начинается с</option>
                             <option value="include">Включает</option>
@@ -557,7 +557,7 @@ const LeftBar = (props) => {
                     </div>
 
                     <div className="formBlock">
-                        <label>Введите Отчество первого объекта: </label>
+                        <label>Введите Отчество первого объекта </label>
                         <select id='firstFatherName' style={{display: checks1?"none":"block"}}>
                             <option value="starts">Начинается с</option>
                             <option value="include">Включает</option>
@@ -585,7 +585,7 @@ const LeftBar = (props) => {
                         id="input_IIN2"
                         className="input_IIN" 
                         name="iin2" 
-                        placeholder="Введите ИИН второго объекта"
+                        placeholder="ИИН/БИН"
                         />
                 </div>
 
@@ -597,7 +597,7 @@ const LeftBar = (props) => {
                         <label htmlFor="accurateCheckbox1">Точный поиск</label>
                     </div>
                     <div className="formBlock">
-                        <label>Введите Фамилию второго объекта: </label>
+                        <label>Введите Фамилию второго объекта </label>
                         <select id='secondFamilia' style={{display: checks2?"none":"block"}}>
                             <option value="starts">Начинается с</option>
                             <option value="include">Включает</option>
@@ -615,7 +615,7 @@ const LeftBar = (props) => {
                     </div>
 
                     <div className="formBlock">
-                        <label>Введите Имя второго объекта: </label>
+                        <label>Введите Имя второго объекта </label>
                         <select id='secondName' style={{display: checks2?"none":"block"}}>
                             <option value="starts">Начинается с</option>
                             <option value="include">Включает</option>
@@ -633,7 +633,7 @@ const LeftBar = (props) => {
                     </div>
 
                     <div className="formBlock">
-                        <label>Введите Отчество второго объекта: </label>
+                        <label>Введите Отчество второго объекта </label>
                         <select id='secondFatherName' style={{display: checks2?"none":"block"}}>
                             <option value="starts">Начинается с</option>
                             <option value="include">Включает</option>
@@ -652,7 +652,7 @@ const LeftBar = (props) => {
                 </div>      
 
                 <div className="formBlock" id="formLimit" style={{display: "none"}}>
-                    <label>Введите лимит:</label>
+                    <label>Введите лимит</label>
                     <input type="number" 
                         value={limit}
                         onChange={event => { setLimit(event.target.value) }} 
@@ -664,7 +664,7 @@ const LeftBar = (props) => {
                 </div>
 
                 <div className="formBlock" id="formDepth" style={{display: "none"}}>
-                    <label>Введите уровень:</label>
+                    <label>Введите уровень</label>
                     <input type="number" 
                         value={depth}
                         onChange={event => {setDepth(event.target.value)}} 

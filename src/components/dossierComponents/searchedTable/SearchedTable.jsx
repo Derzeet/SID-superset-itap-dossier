@@ -20,7 +20,7 @@ const tdStyle = {
     fontStyle: 'normal',
     fontWeight: 500,
     fontSize: '15px',
-    lineHeight: '18px'
+    lineHeight: '10px'
 }
 
 const thStyle = {
@@ -28,7 +28,7 @@ const thStyle = {
     fontStyle: 'normal',
     fontWeight: 500,
     fontSize: "15px",
-    lineHeight: "18px",
+    lineHeight: "10px",
     color: "#6D6D6D",
 
     border: 0,
@@ -47,7 +47,7 @@ function SearchedTable(props) {
     if (props.result == null || props.result.length == 0) {
         return (
           <TableRow
-            sx={{ 'td, th': { border: 0}}}
+            sx={{ 'td, th': { border: 0},}}
           >
             <TableCell className="zeroResult" colSpan={4} align='center' style={{ borderBottom: 'hidden'}}><a>Нет результатов</a></TableCell>
           </TableRow>
@@ -56,34 +56,40 @@ function SearchedTable(props) {
     } else {
       return props.result.map((row, index) => (
         <TableRow hover
+          size="small"
           key={index}
-          sx={{ 'td, th': { border: 0 } }}
+          sx={{ 'td, th': { border: 0 }, height: '0px'}}
           onClick={() => props.selectPhoto(row.photo)}
         >
-          <TableCell sx={tdStyle} component="td" scope="row">
+          <TableCell sx={tdStyle} style= {{ borderRadius: '3px 0px 0 3px '}}component="td" scope="row">
             {index+1}
           </TableCell>
           <TableCell sx={tdStyle} align="left">{row.first_name} {row.last_name} {row.patronymic}</TableCell>
           <TableCell sx={tdStyle} align="left">{row.iin}</TableCell>
           <TableCell sx={tdStyle} align="left" style={{
-              display: 'flex',
-              flexDirection: 'row',
-              gap: '10px',
-              alignItems: 'center'
+              // display: 'flex',
+              // flexDirection: 'row',
+              // gap: '10px',
+              // alignItems: 'center',
+              borderRadius: '0 3px 3px 0'
           }}>
+            {row.iin != '' && row.iin != null ? (
               <ButtonGroup
-                  variant='outlined'
-                  aria-label='outlined-button-group'>
+              variant='outlined'
+              aria-label='outlined-button-group'>
                     <Button onClick={() => {
                       const url = `/profiler/person/` + row.iin
                       window.open(url, '_blank', 'noopener,noreferrer')
-                      }}>Досье</Button>
+                    }}>Profile</Button>
                     <Button onClick={() => {
                       const string = queryString.stringify({object: row.iin, type: "iin"})
                       const url = `/itap?${string}`
                       window.open(url, '_blank', 'noopener,noreferrer')
-                      }}>Itap</Button>
+                    }}>Relations</Button>
               </ButtonGroup>
+              ) : (
+                <></>
+              )}
             </TableCell>
         </TableRow>
       ))
@@ -91,11 +97,11 @@ function SearchedTable(props) {
   }
     return (
         <TableContainer component={Paper} sx={{border: 0, boxShadow: 'none', borderRadius: 0, backgroundColor: "#6D6D6D"}}>
-          <Table sx={{minWidth: 650, background: "#0D0F11"}} aria-label="simple table">
+          <Table sx={{minWidth: 650, background: "#0D0F11"}} style={{borderBottom: 'hidden'}} aria-label="simple table">
             <TableHead>
-              <TableRow >
+              <TableRow style={{height: '40px'}}>
                 <TableCell sx={thStyle} style={{width: '5%', fontWeight: 500, color: "#6D6D6D" }}>№</TableCell>
-                <TableCell sx={thStyle} style={{width: '60%', fontWeight: 500, color: "#6D6D6D"  }}align="left"><span style={{}}>ФИО</span></TableCell>
+                <TableCell sx={thStyle} style={{width: '60%', fontWeight: 500, color: "#6D6D6D"  }} align="left"><span>ФИО</span></TableCell>
                 <TableCell sx={thStyle} style={{width: '15%', fontWeight: 500, color: "#6D6D6D" }} align="left"><span>ИИН</span></TableCell>
                 <TableCell sx={thStyle} style={{width: '20%', fontWeight: 500, color: "#6D6D6D" }} align="left"><span>Действие</span></TableCell>
               </TableRow>
