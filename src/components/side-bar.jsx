@@ -4,6 +4,7 @@ import './side-bar/side-bar.scss'
 import { Link } from 'react-router-dom';
 import authService from '../services/auth.service';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import MenuIcon from '@mui/icons-material/Menu';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import IconButton from '@mui/material/IconButton';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
@@ -42,7 +43,7 @@ const SideBar = (props) => {
                         searchPage()
                         }}>
                     <IconButton aria-label="expand row" size="small" onClick={() => setMenuOpen(true)}>
-                        <MoreVertIcon style={{ fill: '#ffffff' }}/>
+                        <MenuIcon style={{ fill: '#ffffff' }}/>
                     </IconButton>
                 </div>
                 <div className='menu-bar'  

@@ -87,19 +87,25 @@ function LeftTopFrame(props) {
                 </div>
             </div>
                 <div className='person-main-info'>
-                    <div>
+                    <div style={{position: 'relative'}}>
                         <label htmlFor="pName">Имя</label>
                         <TextField sx={{ 
                             flex: 1, 
                             border: "1px solid #565656", 
                             borderRadius: "4px",
-                            height: '10px'
+                            height: '10px',
+                            width: '90%'
                         }}  
                         
                         id="filled-read-only-input" 
                         // inputProps={{'aria-label': 'Without label' }} 
                         value={first_name || '---'}
                         variant="outlined" />
+                        <div style={{position: 'absolute', top: '64%', right: 0, transform: 'translateY(-50%)' }}>
+                        <IconButton title="Скачать в PDF формате" aria-label="delete" onClick={downloadAsPdf}>
+                            <PictureAsPdfIcon />
+                        </IconButton>
+                        </div>
                         {/* <input readOnly type="text" name="pName" value={first_name || "---"} className={props.data.fName ? "" : "disabledInput"} id="pName" placeholder='Салтанат' /> */}
                     </div>
                     <div>
@@ -197,11 +203,8 @@ function LeftTopFrame(props) {
                     variant="outlined" />
                 </div>
             </div>  
-            <div className='pdfButton' style={{ position: 'absolute', zIndex: 9999, bottom: 0, right: 0, backgroundColor: '#0D0F11', borderRadius: '3px 0 0 0', borderLeft: '1px solid #3a3a3a', borderTop: '1px solid #3a3a3a' }}>
-            <IconButton aria-label="delete" onClick={downloadAsPdf}>
-                <PictureAsPdfIcon />
-            </IconButton>
-            </div>
+            {/* <div className='pdfButton' style={{ position: 'absolute', zIndex: 9999, bottom: 0, right: 0, backgroundColor: '#0D0F11', borderRadius: '3px 0 0 0', borderLeft: '1px solid #3a3a3a', borderTop: '1px solid #3a3a3a' }}> */}
+            {/* </div> */}
         </div>
         </> 
     );
