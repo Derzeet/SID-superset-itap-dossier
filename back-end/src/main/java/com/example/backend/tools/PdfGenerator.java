@@ -5,6 +5,7 @@ import com.example.backend.modelsDossier.NodesFL;
 import com.example.backend.modelsDossier.mv_auto_fl;
 import com.example.backend.photo.modelsPhot.*;
 import com.example.backend.photo.repositoryPhot.fl_pension_MiniRepo;
+import com.example.backend.photo.repositoryPhot.mv_ul_repo;
 import com.lowagie.text.*;
 import com.lowagie.text.pdf.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ import java.util.Map;
 
 public class PdfGenerator {
     fl_pension_MiniRepo flPensionMiniRepo;
+    private mv_ul_repo mvUlRepo;
     private PdfPTable tryAddCell(PdfPTable table, String add, String string) {
         if (string != null) {
             table.addCell(add + string);
@@ -256,34 +258,44 @@ public class PdfGenerator {
             autoTable.addCell(cell);
             int number = 1;
             for (mv_auto_fl r: autos) {
-                autoTable.addCell(number+"");
-                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-                try {
-                    if (formatter.format(r.getEnd_date()).compareTo(formatter.format(java.time.LocalDate.now())) > 0) {
-                        autoTable.addCell("Действителен");
-                    } else {
-                        autoTable.addCell("Не действителен");
+                if (r != null) {
+                    autoTable.addCell(number+"");
+                    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                    try {
+                        if (formatter.format(r.getEnd_date()).compareTo(formatter.format(java.time.LocalDate.now())) > 0) {
+                            autoTable.addCell("Действителен");
+                        } else {
+                            autoTable.addCell("Не действителен");
+                        }
+                    } catch (Exception e){
+                        autoTable.addCell("");
                     }
-                } catch (Exception e){
-                    autoTable.addCell("");
+                    try {
+                        autoTable.addCell(r.getReg_number());
+                    } catch (Exception e) {
+                        autoTable.addCell("");
+                    }
+                    try {
+                        autoTable.addCell(r.getBrand_model());
+                    } catch (Exception e) {
+                        autoTable.addCell("");
+                    }
+                    try {
+                        autoTable.addCell(r.getDate_certificate().toString());
+                    } catch (Exception e) {
+                        autoTable.addCell("");
+                    }
+                    try {
+                        autoTable.addCell(r.getEnd_date().toString());
+                    } catch (Exception e) {
+                        autoTable.addCell("");
+                    }
+                    autoTable.addCell(r.getRelease_year_tc());
+                    autoTable.addCell(r.getOwner_category());
+                    autoTable.addCell(r.getVin_kuzov_shassi());
+                    autoTable.addCell(r.getSeries_reg_number());
+                    number++;
                 }
-                autoTable.addCell(r.getReg_number());
-                autoTable.addCell(r.getBrand_model());
-                if (r.getDate_certificate() != null) {
-                    autoTable.addCell(r.getDate_certificate().toString());
-                } else {
-                    autoTable.addCell("");
-                }
-                if (r.getEnd_date() != null) {
-                    autoTable.addCell(r.getEnd_date().toString());
-                } else {
-                    autoTable.addCell("");
-                }
-                autoTable.addCell(r.getRelease_year_tc());
-                autoTable.addCell(r.getOwner_category());
-                autoTable.addCell(r.getVin_kuzov_shassi());
-                autoTable.addCell(r.getSeries_reg_number());
-                number++;
             }
             document.add(autoTable);
         }
@@ -293,6 +305,104 @@ public class PdfGenerator {
             for (Map<String, Object> e: r.getNakoplenya()) {
                 System.out.println(e);
             }
+        }
+        List<fl_relatives> fl_relatives = result.getFl_relatives();
+        if (fl_relatives.size()!=0 && fl_relatives != null) {
+            PdfPTable relatives = new PdfPTable(7);
+            relatives.setWidthPercentage(100f);
+            relatives.setWidths(new float[] {0.4f, 1, 1, 1, 1, 1, 1});
+            relatives.setSpacingBefore(5);
+            heading.setColspan(7);
+            heading.setPhrase(new Phrase("Родственные связи", font));
+            relatives.addCell(heading);
+            cell.setPhrase(new Phrase("№", font));
+            relatives.addCell(cell);
+            cell.setPhrase(new Phrase("Статус по отношению к родственнику", font));
+            relatives.addCell(cell);
+            cell.setPhrase(new Phrase("ФИО", font));
+            relatives.addCell(cell);
+            cell.setPhrase(new Phrase("ИИН", font));
+            relatives.addCell(cell);
+            cell.setPhrase(new Phrase("Дата рождения", font));
+            relatives.addCell(cell);
+            cell.setPhrase(new Phrase("Дата регистрации брака", font));
+            relatives.addCell(cell);
+            cell.setPhrase(new Phrase("Дата расторжения брака", font));
+            relatives.addCell(cell);
+            int number = 1;
+            for (fl_relatives r: fl_relatives) {
+                relatives.addCell(number+"");
+                relatives.addCell(r.getRelative_type());
+                relatives.addCell(r.getParent_fio());
+                if (r.getParent_iin() != null) {
+                    relatives.addCell(r.getParent_iin());
+                } else {
+                    relatives.addCell("");
+                }
+                if (r.getParent_birth_date() != null) {
+                    relatives.addCell(r.getParent_birth_date().substring(0, 10));
+                } else {
+                    relatives.addCell("");
+                }
+                relatives.addCell(r.getMarriage_reg_date());
+                relatives.addCell(r.getMarriage_divorce_date());
+                number++;
+            }
+            document.add(relatives);
+        }
+        List<fl_contacts> contacts = result.getContacts();
+        if (contacts.size()!= 0 && contacts != null) {
+            PdfPTable contactsTable = new PdfPTable(4);
+            contactsTable.setWidthPercentage(100f);
+            contactsTable.setWidths(new float[] {0.4f, 1, 1, 1});
+            contactsTable.setSpacingBefore(5);
+            heading.setColspan(4);
+            heading.setPhrase(new Phrase("Контактные данные ФЛ", font));
+            contactsTable.addCell(heading);
+            cell.setPhrase(new Phrase("№", font));
+            contactsTable.addCell(cell);
+            cell.setPhrase(new Phrase("Телефон", font));
+            contactsTable.addCell(cell);
+            cell.setPhrase(new Phrase("Почта", font));
+            contactsTable.addCell(cell);
+            cell.setPhrase(new Phrase("Источник", font));
+            contactsTable.addCell(cell);
+            int number = 1;
+            for (fl_contacts r: contacts) {
+                contactsTable.addCell(number+"");
+                contactsTable.addCell(r.getPhone());
+                contactsTable.addCell(r.getEmail());
+                contactsTable.addCell(r.getSource());
+                number++;
+            }
+            document.add(contactsTable);
+        }
+        List<MillitaryAccount> millitaryAccounts = result.getMillitaryAccounts();
+        if (millitaryAccounts.size() != 0 && millitaryAccounts != null) {
+            PdfPTable MATable = new PdfPTable(4);
+            MATable.setWidthPercentage(100f);
+            MATable.setWidths(new float[] {0.4f, 1, 1, 1});
+            MATable.setSpacingBefore(5);
+            heading.setColspan(4);
+            heading.setPhrase(new Phrase("Войнский учет", font));
+            MATable.addCell(heading);
+            cell.setPhrase(new Phrase("№", font));
+            MATable.addCell(cell);
+            cell.setPhrase(new Phrase("БИН воинской части", font));
+            MATable.addCell(cell);
+            cell.setPhrase(new Phrase("Дата службы с", font));
+            MATable.addCell(cell);
+            cell.setPhrase(new Phrase("Дата службы по", font));
+            MATable.addCell(cell);
+            int number = 1;
+            for (MillitaryAccount r: millitaryAccounts) {
+                MATable.addCell(number+"");
+                MATable.addCell(r.getBin());
+                MATable.addCell(r.getDate_start());
+                MATable.addCell(r.getDate_end());
+                number++;
+            }
+            document.add(MATable);
         }
         List<convicts_justified> convictsJustifieds = result.getConvictsJustifieds();
         if (convictsJustifieds.size() != 0 && convictsJustifieds != null) {
@@ -335,53 +445,119 @@ public class PdfGenerator {
             }
             document.add(convicts);
         }
-        List<fl_relatives> fl_relatives = result.getFl_relatives();
-        if (fl_relatives.size()!=0 && fl_relatives != null) {
-            PdfPTable relatives = new PdfPTable(7);
-            relatives.setWidthPercentage(100f);
-            relatives.setWidths(new float[] {0.4f, 1, 1, 1, 1, 1, 1});
-            relatives.setSpacingBefore(5);
-            heading.setColspan(7);
-            heading.setPhrase(new Phrase("Родственные связи", font));
-            relatives.addCell(heading);
+        List<convicts_terminated_by_rehab> convictsTerminatedByRehabs = result.getConvictsTerminatedByRehabs();
+        if (convictsTerminatedByRehabs.size()!=0 && convictsTerminatedByRehabs != null) {
+            PdfPTable ctbrTable = new PdfPTable(6);
+            ctbrTable.setWidthPercentage(100f);
+            ctbrTable.setWidths(new float[] {0.4f, 1, 1, 1, 1, 1});
+            ctbrTable.setSpacingBefore(5);
+            heading.setColspan(6);
+            heading.setPhrase(new Phrase("Административные штрафы", font));
+            ctbrTable.addCell(heading);
             cell.setPhrase(new Phrase("№", font));
-            relatives.addCell(cell);
-            cell.setPhrase(new Phrase("Статус по отношению к родственнику", font));
-            relatives.addCell(cell);
-            cell.setPhrase(new Phrase("ФИО", font));
-            relatives.addCell(cell);
-            cell.setPhrase(new Phrase("ИИН", font));
-            relatives.addCell(cell);
-            cell.setPhrase(new Phrase("Дата рождения", font));
-            relatives.addCell(cell);
-            cell.setPhrase(new Phrase("Дата регистрации брака", font));
-            relatives.addCell(cell);
-            cell.setPhrase(new Phrase("Дата расторжения брака", font));
-            relatives.addCell(cell);
+            ctbrTable.addCell(cell);
+            cell.setPhrase(new Phrase("Орган выявивший правонарушение", font));
+            ctbrTable.addCell(cell);
+            cell.setPhrase(new Phrase("Дата заведения", font));
+            ctbrTable.addCell(cell);
+            cell.setPhrase(new Phrase("Квалификация", font));
+            ctbrTable.addCell(cell);
+            cell.setPhrase(new Phrase("Решение", font));
+            ctbrTable.addCell(cell);
+            cell.setPhrase(new Phrase("Уровень тяжести", font));
+            ctbrTable.addCell(cell);
             int number = 1;
-            for (fl_relatives r: fl_relatives) {
-                relatives.addCell(number+"");
-                relatives.addCell(r.getRelative_type());
-                relatives.addCell(r.getParent_fio());
-                if (r.getParent_iin() != null) {
-                    relatives.addCell(r.getParent_iin());
-                } else {
-                    relatives.addCell("");
-                }
-                if (r.getParent_birth_date() != null) {
-                    relatives.addCell(r.getParent_birth_date().substring(0, 11));
-                } else {
-                    relatives.addCell("");
-                }
-                relatives.addCell(r.getMarriage_reg_date());
-                relatives.addCell(r.getMarriage_divorce_date());
+            for (convicts_terminated_by_rehab r: convictsTerminatedByRehabs) {
+                ctbrTable.addCell(number+"");
+                ctbrTable.addCell(r.getInvestigative_authority());
+                ctbrTable.addCell(r.getLast_solution_date());
+                ctbrTable.addCell(r.getQualification_desc());
+                ctbrTable.addCell(r.getLast_solution());
+                ctbrTable.addCell(r.getQualification_by_11());
                 number++;
             }
-            document.add(relatives);
+            document.add(ctbrTable);
+        }
+        List<block_esf> blockEsfs = result.getBlockEsfs();
+        if (blockEsfs.size()!=0 && blockEsfs != null) {
+            PdfPTable blockesfTable = new PdfPTable(4);
+            blockesfTable.setWidthPercentage(100f);
+            blockesfTable.setWidths(new float[] {0.4f, 1, 1, 1, 1, 1});
+            blockesfTable.setSpacingBefore(5);
+            heading.setColspan(6);
+            heading.setPhrase(new Phrase("Административные штрафы", font));
+            blockesfTable.addCell(heading);
+            cell.setPhrase(new Phrase("№", font));
+            blockesfTable.addCell(cell);
+            cell.setPhrase(new Phrase("Дата блокировки", font));
+            blockesfTable.addCell(cell);
+            cell.setPhrase(new Phrase("Дата востановления", font));
+            blockesfTable.addCell(cell);
+            cell.setPhrase(new Phrase("Дата обновления", font));
+            blockesfTable.addCell(cell);
+            int number = 1;
+            for (block_esf r: blockEsfs) {
+                blockesfTable.addCell(number+"");
+                if (r.getStart_dt() != null) {
+                    blockesfTable.addCell(r.getStart_dt().toString());
+                } else {
+                    blockesfTable.addCell("");
+                }
+                if (r.getEnd_dt() != null) {
+                    blockesfTable.addCell(r.getEnd_dt().toString());
+                } else {
+                    blockesfTable.addCell("");
+                }
+                if (r.getUpdate_dt() != null) {
+                    blockesfTable.addCell(r.getUpdate_dt().toString());
+                } else {
+                    blockesfTable.addCell("");
+                }
+                number++;
+            }
+            document.add(blockesfTable);
+        }
+        List<mv_ul_founder_fl> mvUlFounderFls = result.getMvUlFounderFls();
+        if (mvUlFounderFls.size()!=0 && mvUlFounderFls!=null) {
+            PdfPTable foundersTable = new PdfPTable(4);
+            foundersTable.setWidthPercentage(100f);
+            foundersTable.setWidths(new float[] {0.4f, 1, 1, 1});
+            foundersTable.setSpacingBefore(5);
+            heading.setColspan(4);
+            heading.setPhrase(new Phrase("Сведения об участниках ЮЛ", font));
+            foundersTable.addCell(heading);
+            cell.setPhrase(new Phrase("№", font));
+            foundersTable.addCell(cell);
+            cell.setPhrase(new Phrase("БИН", font));
+            foundersTable.addCell(cell);
+            cell.setPhrase(new Phrase("Наименование ЮЛ", font));
+            foundersTable.addCell(cell);
+            cell.setPhrase(new Phrase("Дата регистрации", font));
+            foundersTable.addCell(cell);
+            int number = 1;
+            for (mv_ul_founder_fl r: mvUlFounderFls) {
+                foundersTable.addCell(number+"");
+                if (r.getBin_org() != null) {
+                    foundersTable.addCell(r.getBin_org());
+                } else {
+                    foundersTable.addCell("");
+                }
+                try {
+                    foundersTable.addCell(mvUlRepo.getNameByBin(r.getBin_org()));
+                } catch (Exception e){
+                    foundersTable.addCell("");
+                }
+                if (r.getReg_date() != null) {
+                    foundersTable.addCell(r.getReg_date().toString());
+                } else {
+                    foundersTable.addCell("");
+                }
+                number++;
+            }
+            document.add(foundersTable);
         }
 
-
-        document.close();
+        document.close ();
         return document;
     }
 

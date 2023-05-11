@@ -15,7 +15,7 @@ import MainPage from './pages/mainPage/MainPage';
 import SearchPage from './pages/searchPage/SearchPage';
 import Navbar from './components/dossierComponents/nav-bar/Navbar';
 // import Navbar from './components/itapComponents/NavBar/Navbar';
-
+import GrayNavbar from './components/gray-navbar/gray-navbar';
 import { createTheme, ThemeProvider } from '@mui/material';
 
 function App() {
@@ -63,7 +63,7 @@ function App() {
           <Routes>
             <Route path='/' element={
               <>
-                <Navbar/>
+                <GrayNavbar/>
                 <MainPage/>
               </>
             }/>

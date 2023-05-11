@@ -22,37 +22,37 @@ body {
     display: flex;
     flex-direction: row !important;
 
-    .menu-open {
-        width: 40px;
-        height: 100%;
+    // .menu-open {
+    //     width: 40px;
+    //     height: 100%;
 
-        background-color: #0d0f1190;
-        transition: width .3s ease-in-out, background-color .5s ease-in-out;
+    //     background-color: #0d0f1190;
+    //     transition: width .3s ease-in-out, background-color .5s ease-in-out;
 
-        // &:hover {
-        //     background-color: #7b8593;
-        //     transition: background-color .5s ease-in-out;
-        // }
+    //     // &:hover {
+    //     //     background-color: #7b8593;
+    //     //     transition: background-color .5s ease-in-out;
+    //     // }
 
-        cursor: pointer;
+    //     cursor: pointer;
 
-        position: absolute;
-        // display: block;
-        left: 0px;
-    }
+    //     position: absolute;
+    //     // display: block;
+    //     left: 0px;
+    // }
 
-    .menu-bar {
-        position: relative;
-        border: 1px solid #3a3a3a;
-        width: 0;
-        margin-left: 20px;
-        margin-top: 20px;
-        margin-bottom: 20px;
+    // .menu-bar {
+    //     position: relative;
+    //     border: 1px solid #3a3a3a;
+    //     width: 0;
+    //     margin-left: 20px;
+    //     margin-top: 20px;
+    //     margin-bottom: 20px;
 
-        background-color: #0D0F11;
-        display: block;
+    //     background-color: #0D0F11;
+    //     display: block;
 
-        transition: width .3s ease-in-out, padding .3s ease-in-out;
+    //     transition: width .3s ease-in-out, padding .3s ease-in-out;
 
         .menu-body {
             display: flex;
@@ -113,7 +113,7 @@ body {
             cursor: pointer;
             
         }
-    }
+    
 
     .central-bar {
         display: flex;
