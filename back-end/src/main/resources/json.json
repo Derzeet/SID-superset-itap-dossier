@@ -2344,7 +2344,8 @@ MSH_TECHNICK FL / UL
         }],
         "companyBin": "361700000376"
     }],
-    "mshes": [{
+    "mshes": [
+        {
         "ownerIinBin": "690411300792",
         "equipmentType": null,
         "equipmentModel": "ЮМЗ-6Л",
