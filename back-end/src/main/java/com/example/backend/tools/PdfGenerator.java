@@ -310,7 +310,7 @@ public class PdfGenerator {
         if (fl_relatives.size()!=0 && fl_relatives != null) {
             PdfPTable relatives = new PdfPTable(7);
             relatives.setWidthPercentage(100f);
-            relatives.setWidths(new float[] {0.4f, 1, 1, 1, 1, 1, 1});
+            relatives.setWidths(new float[] {0.15f, 1, 1, 1, 1, 1, 1});
             relatives.setSpacingBefore(5);
             heading.setColspan(7);
             heading.setPhrase(new Phrase("Родственные связи", font));
@@ -354,7 +354,7 @@ public class PdfGenerator {
         if (contacts.size()!= 0 && contacts != null) {
             PdfPTable contactsTable = new PdfPTable(4);
             contactsTable.setWidthPercentage(100f);
-            contactsTable.setWidths(new float[] {0.4f, 1, 1, 1});
+            contactsTable.setWidths(new float[] {0.15f, 1, 1, 1});
             contactsTable.setSpacingBefore(5);
             heading.setColspan(4);
             heading.setPhrase(new Phrase("Контактные данные ФЛ", font));
@@ -521,7 +521,7 @@ public class PdfGenerator {
         if (mvUlFounderFls.size()!=0 && mvUlFounderFls!=null) {
             PdfPTable foundersTable = new PdfPTable(4);
             foundersTable.setWidthPercentage(100f);
-            foundersTable.setWidths(new float[] {0.4f, 1, 1, 1});
+            foundersTable.setWidths(new float[] {0.15f, 1, 1, 1});
             foundersTable.setSpacingBefore(5);
             heading.setColspan(4);
             heading.setPhrase(new Phrase("Сведения об участниках ЮЛ", font));
@@ -556,8 +556,93 @@ public class PdfGenerator {
             }
             document.add(foundersTable);
         }
+        List<NdsEntity> ndsEntities = result.getNdsEntities();
+        if (ndsEntities.size()!=0 && ndsEntities != null) {
+            PdfPTable ndsTable = new PdfPTable(5);
+            ndsTable.setWidthPercentage(100f);
+            ndsTable.setWidths(new float[] {0.15f, 1, 1, 1, 1});
+            ndsTable.setSpacingBefore(5);
+            heading.setColspan(5);
+            heading.setPhrase(new Phrase("НДС", font));
+            ndsTable.addCell(heading);
+            cell.setPhrase(new Phrase("№", font));
+            ndsTable.addCell(cell);
+            cell.setPhrase(new Phrase("Дата начала", font));
+            ndsTable.addCell(cell);
+            cell.setPhrase(new Phrase("Дата конца", font));
+            ndsTable.addCell(cell);
+            cell.setPhrase(new Phrase("Дата обновления", font));
+            ndsTable.addCell(cell);
+            cell.setPhrase(new Phrase("Причина", font));
+            ndsTable.addCell(cell);
+            int number = 1;
+            for (NdsEntity r: ndsEntities) {
+                ndsTable.addCell(number+"");
+                if (r.getStartDt() != null) {
+                    ndsTable.addCell(r.getStartDt().toString());
+                } else {
+                    ndsTable.addCell("");
+                }
+                try {
+                    ndsTable.addCell(r.getEndDt().toString());
+                } catch (Exception e){
+                    ndsTable.addCell("");
+                }
+                if (r.getUpdateDt() != null) {
+                    ndsTable.addCell(r.getUpdateDt().toString());
+                } else {
+                    ndsTable.addCell("");
+                }
+                try {
+                    ndsTable.addCell(r.getReason());
+                } catch (Exception e){
+                    ndsTable.addCell("");
+                }
+                number++;
+            }
+            document.add(ndsTable);
+        }
+        List<IpgoEmailEntity> ipgoEmailEntities = result.getIpgoEmailEntities();
+        if (ipgoEmailEntities.size() != 0 && ipgoEmailEntities != null) {
+            PdfPTable ipgoTable = new PdfPTable(4);
+            ipgoTable.setWidthPercentage(100f);
+            ipgoTable.setWidths(new float[] {0.15f, 1, 1, 1});
+            ipgoTable.setSpacingBefore(5);
+            heading.setColspan(4);
+            heading.setPhrase(new Phrase("Сведения по ИПГО", font));
+            ipgoTable.addCell(heading);
+            cell.setPhrase(new Phrase("№", font));
+            ipgoTable.addCell(cell);
+            cell.setPhrase(new Phrase("Департамент", font));
+            ipgoTable.addCell(cell);
+            cell.setPhrase(new Phrase("Должность", font));
+            ipgoTable.addCell(cell);
+            cell.setPhrase(new Phrase("ИПГО почта", font));
+            ipgoTable.addCell(cell);
+            int number = 1;
+            for (IpgoEmailEntity r: ipgoEmailEntities) {
+                ipgoTable.addCell(number+"");
+                if (r.getOrgan() != null) {
+                    ipgoTable.addCell(r.getOrgan().toString());
+                } else {
+                    ipgoTable.addCell("");
+                }
+                try {
+                    ipgoTable.addCell(r.getPosition());
+                } catch (Exception e){
+                    ipgoTable.addCell("");
+                }
+                if (r.getEmail() != null) {
+                    ipgoTable.addCell(r.getEmail().toString());
+                } else {
+                    ipgoTable.addCell("");
+                }
+                number++;
+            }
+            document.add(ipgoTable);
+        }
 
-        document.close ();
+        document.close();
         return document;
     }
 
