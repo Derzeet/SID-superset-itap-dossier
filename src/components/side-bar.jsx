@@ -61,7 +61,7 @@ const SideBar = (props) => {
                     <div className='menu-body'>
                         
                         <div className="menu-name">
-                            <span>{userSession.email}</span>
+                            <span>{userSession?userSession.email:"No userSession"}</span>
                         </div>
                         <div className='menu-buttons'>
                             <div><Link className="menu-text" to='/'>Главная страница</Link></div>

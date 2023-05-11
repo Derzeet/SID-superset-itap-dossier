@@ -26,6 +26,7 @@ import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 
+import GrayNavbar from './../../components/gray-navbar/gray-navbar';
 import Navbar from '../../components/dossierComponents/nav-bar/Navbar';
 
 
@@ -49,32 +50,56 @@ const MainPage = (props) => {
     }
 
     return (
-        <div className='mainPageBlock'>
-         <SideBar/>
-            <div className='blockdiv'>
-                <div className='block' onClick={() => {
-                    navigate("/itap")
-                }}>
-                    <img src={itap} className='block-img'></img>
-                    <a></a>
-                    <p>Инструмент для поиска взаимосвязей</p>
+        <>
+            <div className='mainPageBlock'>
+                <SideBar/>
+                <div className='central-bar'>
+                    <div className='blockdiv'>
+                        <div className='block' onClick={() => {
+                            navigate("/itap")
+                        }}>
+                            <img src={itap} className='block-img'></img>
+                            <a></a>
+                            <p>Инструмент для поиска взаимосвязей</p>
+                        </div>
+                        <div className='block' onClick={() => {
+                            navigate("/superset")
+                        }}>
+                            <img src={superset} className='block-img'></img>
+                            <a></a>
+                            <p>Инструмент для аналитических отчетов</p>
+                        </div>
+                        <div className='block' onClick={() => {
+                            navigate("/profiler")
+                        }}>
+                            <img src={profiler} className='block-img'></img>
+                            <a></a>
+                            <p>Инструмент для поиска объектов</p>
+                        </div>
+                    </div>
+                    <GrayNavbar/>
+                    <div className='blockdiv2'>
+                        <div className='block' onClick={() => {
+                            navigate("/itap")
+                        }}>
+                            <img src={itap} className='block-img'></img>
+                            <a></a>
+                            <p>Инструмент для поиска взаимосвязей</p>
+                        </div>
+                        <div className='block' onClick={() => {
+                            navigate("/superset")
+                        }}>
+                            <img src={superset} className='block-img'></img>
+                            <a></a>
+                            <p>Инструмент для аналитических отчетов</p>
+                        </div>
+                    </div>
                 </div>
-                <div className='block' onClick={() => {
-                    navigate("/superset")
-                }}>
-                    <img src={superset} className='block-img'></img>
-                    <a></a>
-                    <p>Инструмент для аналитических отчетов</p>
-                </div>
-                <div className='block' onClick={() => {
-                    navigate("/profiler")
-                }}>
-                    <img src={profiler} className='block-img'></img>
-                    <a></a>
-                    <p>Инструмент для поиска объектов</p>
-                </div>
+                
+                
             </div>
-        </div>
+        </>
+        
     );
 }
 
