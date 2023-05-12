@@ -17,7 +17,7 @@ import Navbar from './components/dossierComponents/nav-bar/Navbar';
 // import Navbar from './components/itapComponents/NavBar/Navbar';
 import GrayNavbar from './components/gray-navbar/gray-navbar';
 import { createTheme, ThemeProvider } from '@mui/material';
-
+import OracleTable from "./pages/OracleTable/OracleTable";
 function App() {
   const userSession = JSON.parse(localStorage.getItem("user"))
 
@@ -58,7 +58,7 @@ function App() {
   })
   return (
     <div className="App">
-      <ThemeProvider theme={theme}>
+          <ThemeProvider theme={theme}>
         <Router>
           <Routes>
             <Route path='/' element={
@@ -153,9 +153,15 @@ function App() {
             </>
           }/>
 
-          </Routes>
+            <Route path='/oracle' element={
+              <>
+              <Navbar/>
+              <OracleTable/>
+              </>
+            }/>
+            </Routes>
         </Router>
-      </ThemeProvider>
+        </ThemeProvider>
     </div>
   )
 }
