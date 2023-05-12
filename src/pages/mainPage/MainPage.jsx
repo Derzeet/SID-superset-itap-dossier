@@ -74,6 +74,7 @@ const MainPage = (props) => {
                     <p>Инструмент для поиска объектов</p>
                 </div>
             </div>
+            
         </div>
     );
 }

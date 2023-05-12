@@ -67,6 +67,8 @@ public class PdfGenerator {
         heading.setPadding(4);
         heading.setColspan(6);
         heading.setHorizontalAlignment(Element.ALIGN_CENTER);
+
+        // ОСНОВНАЯ ИНФА ОБ ФЛ
         heading.setPhrase(new Phrase("Сведения о физическом лице", font));
         table.addCell(heading);
         font.setColor(CMYKColor.BLACK);
@@ -83,7 +85,6 @@ public class PdfGenerator {
         table.addCell(cell);
         cell.setPhrase(new Phrase("Дата смерти", font));
         table.addCell(cell);
-
         table.addCell(Image.getInstance(result.getPhotoDbf().get(0).getPhoto()));
         table.addCell(result.getMvFls().get(0).getIin());
         table.addCell(result.getMvFls().get(0).getLast_name() + "\n" + result.getMvFls().get(0).getFirst_name() + "\n" + result.getMvFls().get(0).getPatronymic());
@@ -99,6 +100,7 @@ public class PdfGenerator {
             table.addCell(result.getMvFls().get(0).getDeath_date());
         }
         document.add(table);
+        // АДДРЕСА ФЛ
         List<reg_address_fl> addressFls = result.getRegAddressFls();
         if (addressFls.size()!=0 && addressFls != null) {
 
@@ -128,6 +130,7 @@ public class PdfGenerator {
             }
             document.add(addresses);
         }
+        // ДОКУМЕНТЫ ФЛ
         List<mv_iin_doc> docs = result.getMvIinDocs();
         if (docs.size() != 0 && docs != null) {
             PdfPTable docTable = new PdfPTable(5);
@@ -156,6 +159,7 @@ public class PdfGenerator {
             }
             document.add(docTable);
         }
+        //ШКОЛЫ ФЛ
         List<school> schools = result.getSchools();
         if (schools.size() != 0 && schools != null) {
             PdfPTable schoolTable = new PdfPTable(5);
@@ -184,6 +188,7 @@ public class PdfGenerator {
             }
             document.add(schoolTable);
         }
+        //УНИВЕРСИТЕТЫ ФЛ
         List<universities> universities = result.getUniversities();
         if (universities.size()!=0 && universities != null) {
             PdfPTable uniTable = new PdfPTable(7);
@@ -226,7 +231,7 @@ public class PdfGenerator {
             }
             document.add(uniTable);
         }
-
+        //ТРАНСПОРТ ФЛ
         List<mv_auto_fl> autos = result.getMvAutoFls();
         if (autos.size()!=0 && autos != null) {
             PdfPTable autoTable = new PdfPTable(10);
@@ -299,6 +304,7 @@ public class PdfGenerator {
             }
             document.add(autoTable);
         }
+        //ПЕНСИОННЫЕ НАКОПЛЕНИЯ НЕДОДЕЛАННАЯ
         List<FL_PENSION_FINAL> pensions = result.getFlPensionContrs();
         for (FL_PENSION_FINAL r: pensions) {
             System.out.println(r.getCompanyBin());
@@ -306,6 +312,7 @@ public class PdfGenerator {
                 System.out.println(e);
             }
         }
+        //РОДСТВЕННЫЕ СВЯЗИ
         List<fl_relatives> fl_relatives = result.getFl_relatives();
         if (fl_relatives.size()!=0 && fl_relatives != null) {
             PdfPTable relatives = new PdfPTable(7);
@@ -350,6 +357,7 @@ public class PdfGenerator {
             }
             document.add(relatives);
         }
+        //КОНТАКТНЫЕ ДАННЫЕ ФЛ
         List<fl_contacts> contacts = result.getContacts();
         if (contacts.size()!= 0 && contacts != null) {
             PdfPTable contactsTable = new PdfPTable(4);
@@ -377,6 +385,7 @@ public class PdfGenerator {
             }
             document.add(contactsTable);
         }
+        //ВОЕННЫЙ УЧЕТ
         List<MillitaryAccount> millitaryAccounts = result.getMillitaryAccounts();
         if (millitaryAccounts.size() != 0 && millitaryAccounts != null) {
             PdfPTable MATable = new PdfPTable(4);
@@ -404,6 +413,7 @@ public class PdfGenerator {
             }
             document.add(MATable);
         }
+        //ОПРАВДАННЫЕ ПРЕСТУПЛЕНИЯ
         List<convicts_justified> convictsJustifieds = result.getConvictsJustifieds();
         if (convictsJustifieds.size() != 0 && convictsJustifieds != null) {
             PdfPTable convicts = new PdfPTable(6);
@@ -445,6 +455,7 @@ public class PdfGenerator {
             }
             document.add(convicts);
         }
+        //ЕЩЕ КАКИЕТО ПРЕСТУЛПЛЕНИЯ
         List<convicts_terminated_by_rehab> convictsTerminatedByRehabs = result.getConvictsTerminatedByRehabs();
         if (convictsTerminatedByRehabs.size()!=0 && convictsTerminatedByRehabs != null) {
             PdfPTable ctbrTable = new PdfPTable(6);
@@ -478,6 +489,7 @@ public class PdfGenerator {
             }
             document.add(ctbrTable);
         }
+        //БЛОКИРОВКА ЭСФ
         List<block_esf> blockEsfs = result.getBlockEsfs();
         if (blockEsfs.size()!=0 && blockEsfs != null) {
             PdfPTable blockesfTable = new PdfPTable(4);
@@ -517,6 +529,7 @@ public class PdfGenerator {
             }
             document.add(blockesfTable);
         }
+        //СВЯЗИ С ЮЛ
         List<mv_ul_founder_fl> mvUlFounderFls = result.getMvUlFounderFls();
         if (mvUlFounderFls.size()!=0 && mvUlFounderFls!=null) {
             PdfPTable foundersTable = new PdfPTable(4);
@@ -556,6 +569,7 @@ public class PdfGenerator {
             }
             document.add(foundersTable);
         }
+        //НДС
         List<NdsEntity> ndsEntities = result.getNdsEntities();
         if (ndsEntities.size()!=0 && ndsEntities != null) {
             PdfPTable ndsTable = new PdfPTable(5);
@@ -602,6 +616,7 @@ public class PdfGenerator {
             }
             document.add(ndsTable);
         }
+        //СВЕДЕНИЯ ИПГО
         List<IpgoEmailEntity> ipgoEmailEntities = result.getIpgoEmailEntities();
         if (ipgoEmailEntities.size() != 0 && ipgoEmailEntities != null) {
             PdfPTable ipgoTable = new PdfPTable(4);
