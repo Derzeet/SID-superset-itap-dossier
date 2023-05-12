@@ -64,6 +64,7 @@ function App() {
             <Route path='/' element={
               <>
                 <GrayNavbar/>
+                {/* <Navbar /> */}
                 <MainPage/>
               </>
             }/>
