@@ -207,7 +207,7 @@ const GraphNetnew = (props) => {
         });
     }
     //for local usage
-    const LocalGet = () => {
+    const LocalGet = (params) => {
         console.log("sdfsd")
         setNodes([])
         setEdges([])
@@ -216,7 +216,7 @@ const GraphNetnew = (props) => {
 
         setIsLoading(true)
     
-        if (object == '890724350918') {
+        if (params == '890724350918') {
             const res = iin890724350918
             console.log("works")
             let _nodes = []
@@ -235,7 +235,7 @@ const GraphNetnew = (props) => {
             )
             
             res.nodes.filter(item => !nodes.includes(item)).map(item => {
-                setNodeSettings(item, object, "")
+                setNodeSettings(item, params, "")
             })
 
             _nodes = res.nodes.filter((value, index, self) =>
@@ -258,7 +258,7 @@ const GraphNetnew = (props) => {
             setShowActionBtn(true)
 
             return graJSON
-        } else if (object == '811006300996') {
+        } else if (params == '811006300996') {
             const res = JSON.parse(JSON.stringify(iin811006300996))
             let _nodes = []
             let _edges = [];
@@ -276,7 +276,7 @@ const GraphNetnew = (props) => {
             )
             
             res.nodes.filter(item => !nodes.includes(item)).map(item => {
-                setNodeSettings(item, object, "")
+                setNodeSettings(item, params, "")
             })
 
             _nodes = res.nodes.filter((value, index, self) =>
@@ -299,7 +299,7 @@ const GraphNetnew = (props) => {
             setShowActionBtn(true)
 
             return graJSON
-        } else if (object == '770712302729') {
+        } else if (params == '770712302729') {
             const res = JSON.parse(JSON.stringify(iin770712302729))
             let _nodes = []
             let _edges = [];
@@ -317,7 +317,7 @@ const GraphNetnew = (props) => {
             )
             
             res.nodes.filter(item => !nodes.includes(item)).map(item => {
-                setNodeSettings(item, object, "")
+                setNodeSettings(item, params, "")
             })
 
             _nodes = res.nodes.filter((value, index, self) =>
@@ -340,11 +340,11 @@ const GraphNetnew = (props) => {
             setShowActionBtn(true)
 
             return graJSON
-        }
+        } 
     }
 
     const Submit = async (options) => {
-        LocalGet()
+        LocalGet(options.iin)
         // setPhysicsEnable(true)
         // setIsLoading(true)
         // setNodes([])
