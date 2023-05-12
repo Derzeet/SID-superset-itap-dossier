@@ -1,8 +1,6 @@
 package com.example.backend.controller;
 
 
-import com.lowagie.text.Document;
-import com.lowagie.text.DocumentException;
 import com.example.backend.modelsDossier.*;
 import com.example.backend.photo.modelsPhot.fl_pension_contr;
 import com.example.backend.photo.modelsPhot.photoDb;
@@ -11,6 +9,8 @@ import com.example.backend.repositoryDossier.esf_all2Repo;
 import com.example.backend.repositoryDossier.mv_auto_fl_repo;
 import com.example.backend.service.MyService;
 import com.example.backend.tools.PdfGenerator;
+//import com.lowagie.text.DocumentException;
+import com.lowagie.text.*;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -106,8 +106,7 @@ public class DoseirController {
 //    }
 
     @GetMapping(value = "/download/{iin}", produces = MediaType.APPLICATION_PDF_VALUE)
-    public @ResponseBody byte[] generatePdfFile(HttpServletResponse response, @PathVariable("iin")String iin) throws DocumentException, IOException
-    {
+    public @ResponseBody byte[] generatePdfFile(HttpServletResponse response, @PathVariable("iin")String iin) throws IOException, DocumentException {
         response.setContentType("application/pdf");
         String headerkey = "Content-Disposition";
         String headervalue = "attachment; filename=doc" + ".pdf";

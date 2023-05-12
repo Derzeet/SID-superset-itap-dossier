@@ -88,11 +88,11 @@ const MainPage = (props) => {
                     {/* <GrayNavbar/> */}
                     <div className='blockdiv2'>
                         <div className='block' onClick={() => {
-                            navigate("/itap")
+                            navigate("/oracle")
                         }}>
                             <img src={itap} className='block-img'></img>
                             <a></a>
-                            <p>Новости</p>
+                            <p>Oracle</p>
                         </div>
                         <div className='block' onClick={() => {
                             navigate("/superset")

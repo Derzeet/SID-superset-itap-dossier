@@ -1,11 +1,11 @@
-package com.example.backend.modelsDossier;
+package com.example.backend.photo.modelsPhot;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "orphans", schema = "ser")
+@Table(name = "orphans", schema = "imp_risk")
 public class orphans {
     private String iin;
     private String region;

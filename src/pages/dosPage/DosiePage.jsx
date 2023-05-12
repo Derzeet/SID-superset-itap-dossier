@@ -16,7 +16,7 @@ import RightBottomFrame from '../../components/dossierComponents/right-bottom-fr
 import SearchBar from '../../components/dossierComponents/search-bar/SearchBar';
 import axios from 'axios';
 import SideBar from '../../components/side-bar';
-const baseURL = 'http://localhost:9095/'
+const baseURL = 'http://192.168.30.24:9095/'
 const DosiePage = (props) => {
     const [leftTopFrameData, setLeftTopFrameData] = useState({});
     const [docs, setDocs] = useState([])
