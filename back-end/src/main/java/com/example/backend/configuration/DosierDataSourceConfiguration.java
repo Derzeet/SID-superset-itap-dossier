@@ -1,6 +1,7 @@
 package com.example.backend.configuration;
 
 import com.example.backend.modelsDossier.*;
+import com.example.backend.photo.modelsPhot.mv_fl;
 import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
@@ -10,7 +11,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -45,7 +45,7 @@ public class DosierDataSourceConfiguration {
             EntityManagerFactoryBuilder builder) {
         return builder
                 .dataSource(dossierDataSource())
-                .packages(esf_all2.class, TaxOutEntity.class, mv_auto_fl.class,FL_PENSION_FINAL.class, dormant.class, equipment.class, mv_fl.class, omn.class, orphans.class)
+                .packages(esf_all2.class, TaxOutEntity.class, mv_auto_fl.class,FL_PENSION_FINAL.class)
                 .build();
     }
 

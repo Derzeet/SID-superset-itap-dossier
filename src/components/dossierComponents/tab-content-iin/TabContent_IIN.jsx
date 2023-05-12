@@ -22,7 +22,7 @@ const inputStyle = {
     // width: '300px',
 }
 
-const baseURL = 'http://localhost:9095/'
+const baseURL = 'http://192.168.30.24:9095/'
 
 function TabConent_IIN(props) {
     const [iin, setIIN] = React.useState('');

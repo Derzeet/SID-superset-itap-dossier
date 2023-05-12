@@ -1,6 +1,6 @@
 package com.example.backend.extractor;
 
-import com.example.backend.modelsDossier.mv_fl;
+import com.example.backend.photo.modelsPhot.mv_fl;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 

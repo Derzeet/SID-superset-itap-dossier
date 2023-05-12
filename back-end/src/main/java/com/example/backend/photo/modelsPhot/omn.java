@@ -1,13 +1,15 @@
-package com.example.backend.modelsDossier;
+package com.example.backend.photo.modelsPhot;
+
+import org.junit.jupiter.api.Tags;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "dormant", schema = "ser")
-public class dormant {
-
+@Table(name = "omn", schema = "imp_risk")
+public class omn {
+    @Id
     private String iin_bin;
     private String rnn;
     private String taxpayer_name;
@@ -15,10 +17,8 @@ public class dormant {
     private String leader_fio;
     private String leader_iin;
     private String leader_rnn;
-    private String order_number;
-    @Id
-
-    private String order_date;
+    private String decision_number;
+    private String decision_date;
     private Integer id;
 
     public String getIin_bin() {
@@ -77,20 +77,20 @@ public class dormant {
         this.leader_rnn = leader_rnn;
     }
 
-    public String getOrder_number() {
-        return order_number;
+    public String getDecision_number() {
+        return decision_number;
     }
 
-    public void setOrder_number(String order_number) {
-        this.order_number = order_number;
+    public void setDecision_number(String decision_number) {
+        this.decision_number = decision_number;
     }
 
-    public String getOrder_date() {
-        return order_date;
+    public String getDecision_date() {
+        return decision_date;
     }
 
-    public void setOrder_date(String order_date) {
-        this.order_date = order_date;
+    public void setDecision_date(String decision_date) {
+        this.decision_date = decision_date;
     }
 
     public Integer getId() {

@@ -41,7 +41,7 @@ public class PhotoDataSourceConfiguration {
             EntityManagerFactoryBuilder builder) {
         return builder
                 .dataSource(photDataSource())
-                .packages(photoDb.class, fl_relatives.class, mv_rn_old.class,fl_pension_contr.class, mv_ul.class,adm.class,pdl.class, immoral_lifestyle.class, lawyers.class, bankrot.class, block_esf.class, mv_iin_doc.class)
+                .packages(photoDb.class, omn.class,dormant.class, equipment.class,orphans.class, mv_fl.class, fl_relatives.class, mv_rn_old.class,fl_pension_contr.class, mv_ul.class,adm.class,pdl.class, immoral_lifestyle.class, lawyers.class, bankrot.class, block_esf.class, mv_iin_doc.class)
                 .build();
     }
 

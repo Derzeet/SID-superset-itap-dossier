@@ -1,7 +1,6 @@
 package com.example.backend.modelsDossier;
 
 import com.example.backend.photo.modelsPhot.*;
-import com.example.backend.repositoryDossier.TaxOutEntityRepo;
 
 import java.util.List;
 
@@ -196,11 +195,11 @@ public class NodesUL {
         this.omns = omns;
     }
 
-    public List<com.example.backend.modelsDossier.equipment> getEquipment() {
+    public List<com.example.backend.photo.modelsPhot.equipment> getEquipment() {
         return equipment;
     }
 
-    public void setEquipment(List<com.example.backend.modelsDossier.equipment> equipment) {
+    public void setEquipment(List<com.example.backend.photo.modelsPhot.equipment> equipment) {
         this.equipment = equipment;
     }
 
