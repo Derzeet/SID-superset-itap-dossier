@@ -1,15 +1,18 @@
-.NavbarItems a {
+.NavbarItems a,
+.NavbarItems2 a {
     text-decoration: none; 
     color: rgba(255, 255, 255, 0.3);
     transition: all ease 0.1s;
 
     overflow: hidden;
 }
-.NavbarItems * {
+.NavbarItems *,
+.NavbarItems2 * {
     overflow: hidden;
 }
 
-.NavbarItems {
+.NavbarItems,
+.NavbarItems2 {
     overflow: hidden;
 }
 
@@ -18,7 +21,8 @@
     color: rgba(255, 255, 255, 0.3);
     cursor: pointer;
 }
-.NavbarItems > div > div > a:hover {
+.NavbarItems > div > div > a:hover,
+.NavbarItems2 > div > div > a:hover {
     color: rgb(176, 176, 176);
     transition: all ease 0.1s;
 }
@@ -29,6 +33,7 @@
 
     /* overflow-x: hidden; */
     z-index: 2;
+    /* margin-top: 20px; */
 }
 
 .logo {
@@ -38,7 +43,8 @@
     margin-left: 100px;
 }
 
-.NavbarItems {
+.NavbarItems,
+.NavbarItems2 {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -48,7 +54,17 @@
     position: relative;
     left: 50%;
     transform: translate(-50%);
+}
+
+.NavbarItems {
     height: 90px;
+}
+
+.NavbarItems2 {
+    height: 90px;
+}
+.NavbarItems3 {
+    height: 30px;
 }
 
 .nav-menu {
@@ -83,7 +99,8 @@
     color: rgb(176, 176, 176);
     transition: all ease 0.1s;
 }
-.NavbarItems > div {
+.NavbarItems > div,
+.NavbarItems2 > div {
     display: flex;
     align-items: center;
     

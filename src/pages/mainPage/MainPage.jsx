@@ -77,6 +77,14 @@ const MainPage = (props) => {
                             <p>Инструмент для поиска объектов</p>
                         </div>
                     </div>
+                    <div className='nav-back' style={{
+                marginTop: '5px',
+                background: 'radial-gradient(110.65% 7956.71% at 10.63% 20.65%, rgba(255, 255, 255, 0.201) 0%, rgba(255, 255, 255, 0) 100%)', 
+                border: '0.2px solid #868686',
+                backdropFilter: ' blur(27.5px)',
+                }}>
+                    <div className="NavbarItems3"></div>
+                </div>
                     {/* <GrayNavbar/> */}
                     <div className='blockdiv2'>
                         <div className='block' onClick={() => {
@@ -84,14 +92,14 @@ const MainPage = (props) => {
                         }}>
                             <img src={itap} className='block-img'></img>
                             <a></a>
-                            <p>Инструмент для поиска взаимосвязей</p>
+                            <p>Новости</p>
                         </div>
                         <div className='block' onClick={() => {
                             navigate("/superset")
                         }}>
                             <img src={superset} className='block-img'></img>
                             <a></a>
-                            <p>Инструмент для аналитических отчетов</p>
+                            <p>Об</p>
                         </div>
                     </div>
                 </div>

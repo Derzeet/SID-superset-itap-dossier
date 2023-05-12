@@ -639,14 +639,8 @@ const GraphNetnew = (props) => {
                     "ФИО": sp.FIO || "Нет ФИО",
                     "Отчество": sp.Otchestvo || "Нет отчества",
                     "Дата рождения": sp.Data_Rozhdenya || "Нет даты рождения",
+                    "Дата смерти": sp.Date_of_Death || "Нет даты смерти",
                 }, '#nodeInfoInner')
-
-                // assignInfoBlock({
-                //     "class": "Person",
-                //     "PersonID": sp.PersonID,
-                //     "Label": sp.Label,
-                //     "Source": sp.Source,
-                // }, '#nodeAddInfoInner')
 
                 assignInfoBlock({"Аудитор": sp.Autditor}, '#nodeAddInfoInner')
                 assignInfoBlock({"Нотариус": sp.Notarius}, '#nodeAddInfoInner')
