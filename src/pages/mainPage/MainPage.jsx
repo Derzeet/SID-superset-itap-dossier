@@ -95,11 +95,11 @@ const MainPage = (props) => {
                         </div>
                     </div>
                 </div>
-                
-                
+
+
             </div>
         </>
-        
+
     );
 }
 
