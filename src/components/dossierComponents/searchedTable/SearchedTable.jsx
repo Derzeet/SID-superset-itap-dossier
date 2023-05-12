@@ -64,7 +64,7 @@ function SearchedTable(props) {
           <TableCell sx={tdStyle} style= {{ borderRadius: '3px 0px 0 3px '}}component="td" scope="row">
             {index+1}
           </TableCell>
-          <TableCell sx={tdStyle} align="left">{row.first_name} {row.last_name} {row.patronymic}</TableCell>
+          <TableCell sx={tdStyle} align="left">{row.last_name} {row.first_name} {row.patronymic}</TableCell>
           <TableCell sx={tdStyle} align="left">{row.iin}</TableCell>
           <TableCell sx={tdStyle} align="left" style={{
               // display: 'flex',
