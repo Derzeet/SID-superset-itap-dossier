@@ -77,7 +77,7 @@ const MainPage = (props) => {
                             <p>Инструмент для поиска объектов</p>
                         </div>
                     </div>
-                    <GrayNavbar/>
+                    {/* <GrayNavbar/> */}
                     <div className='blockdiv2'>
                         <div className='block' onClick={() => {
                             navigate("/itap")
