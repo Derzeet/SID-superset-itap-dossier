@@ -1,7 +1,6 @@
 package com.example.backend.controller;
 
 
-import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
 import com.example.backend.modelsDossier.*;
 import com.example.backend.photo.modelsPhot.fl_pension_contr;

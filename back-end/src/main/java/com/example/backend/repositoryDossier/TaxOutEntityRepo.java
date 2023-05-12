@@ -1,7 +1,6 @@
 package com.example.backend.repositoryDossier;
 
 import com.example.backend.modelsDossier.TaxOutEntity;
-import com.example.backend.modelsDossier.orphans;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

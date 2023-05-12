@@ -1,11 +1,11 @@
-package com.example.backend.modelsDossier;
+package com.example.backend.photo.modelsPhot;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "equipment", schema = "esf")
+@Table(name = "equipment", schema = "imp_kfm_fl")
 
 public class equipment {
 

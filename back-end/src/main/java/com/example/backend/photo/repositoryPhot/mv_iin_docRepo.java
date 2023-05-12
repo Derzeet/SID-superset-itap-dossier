@@ -1,7 +1,5 @@
 package com.example.backend.photo.repositoryPhot;
 
-import com.example.backend.modelsDossier.mv_fl;
-import com.example.backend.photo.modelsPhot.fl_relatives;
 import com.example.backend.photo.modelsPhot.mv_iin_doc;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
