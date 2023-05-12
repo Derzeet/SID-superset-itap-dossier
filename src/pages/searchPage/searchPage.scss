@@ -4,7 +4,7 @@ body {
 
 .searchPage {
     // border: 1px red solid;
-
+    overflow: hidden;
     width: 100%;
     height: 100%;
 
@@ -14,12 +14,17 @@ body {
     background: 100%;
     background-position: top left;
     background-repeat: no-repeat;
+
+    display: flex;
+    flex-direction: row;
+    // gap: 20px;
     
 }
 
 
 
 .searchtabs {
+    position: relative;
     width: 90%;
     margin: 0 auto;
     margin-top: 2%;

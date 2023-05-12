@@ -15,6 +15,7 @@ import LeftBottomFrame from '../../components/dossierComponents/left-bottom-fram
 import RightBottomFrame from '../../components/dossierComponents/right-bottom-frame/RightBottomFrame';
 import SearchBar from '../../components/dossierComponents/search-bar/SearchBar';
 import axios from 'axios';
+import SideBar from '../../components/side-bar';
 const baseURL = 'http://localhost:9095/'
 const DosiePage = (props) => {
     const [leftTopFrameData, setLeftTopFrameData] = useState({});
@@ -418,27 +419,7 @@ const DosiePage = (props) => {
         return (  
             <>
                 <div className='dosiePage'>
-                    <div className="menu-open" style={{display: menuOpen?"none":"block", zIndex: 100}} onClick={() => setMenuOpen(true)}>
-                        {/* <IconButton aria-label="expand row" size="small" onClick={() => setMenuOpen(true)}>
-                            <KeyboardArrowUpIcon style={{ fill: '#ffffff' }}/>
-                        </IconButton> */}
-                    </div>
-                    <div className='menu-bar'  style={{width: menuOpen?"200px":"0", padding: menuOpen?"20px 60px":"0"}}>
-                        <div className="menu-close" style={{display: !menuOpen?"none":"block"}}>
-                            <IconButton aria-label="expand row" size="small" onClick={() => setMenuOpen(false)}>
-                                <KeyboardArrowLeftIcon style={{ fill: '#ffffff' }}/>
-                            </IconButton>
-                        </div>
-                        <div className='menu-body'>
-                            
-                            <div className="menu-logo">SID</div>
-                            <div className='menu-buttons'>
-                                <div>HOME</div>
-                                <div>HOME</div>
-                                <div>HOME</div>
-                            </div>
-                        </div>
-                    </div>
+                 <SideBar/>
                     <div className="central-bar">
                         <div className="frames">
                             <LeftTopFrame photo={base} photos={photos} data={leftTopFrameData}/>

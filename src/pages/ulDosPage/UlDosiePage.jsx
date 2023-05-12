@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
+import { Link } from 'react-router-dom';
+
+import IconButton from '@mui/material/IconButton';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
+
+import authService from "../../services/auth.service";
 
 import './dosiePage.scss'
 import './loader.scss'
@@ -21,6 +28,8 @@ const UlDosiePage = (props) => {
     const [founders, setFounders] = useState([{}, {}])
     const [taxes, setTaxes] = useState([])
     const [mshes, setMshes] = useState([])
+
+    const [menuOpen, setMenuOpen] = useState(false)
 
     useEffect(() => {
         const searchIIN = () => {
@@ -44,10 +53,62 @@ const UlDosiePage = (props) => {
         searchIIN()
     }, [bin])
 
+    const logoutHandler = () => {
+        authService.logout();
+        // navigate('/login');
+    }
+
     if (fullName != '') {
         return (  
             <>
                 <div className='dosiePage'>
+                    <div className="menu-open" 
+                        style={{
+                            width: menuOpen?"0":"40px", 
+                            zIndex: 100
+                        }} onClick={() => setMenuOpen(true)}>
+                        <IconButton aria-label="expand row" size="small" onClick={() => setMenuOpen(true)}>
+                            <KeyboardArrowRightIcon style={{ fill: '#ffffff' }}/>
+                        </IconButton>
+                    </div>
+                    <div className='menu-bar'  
+                        style={{
+                            width: menuOpen?"200px":"0", 
+                            padding: menuOpen?"20px 20px":"0", 
+                            border: menuOpen?"1px solid #3a3a3a":"none"
+                        }}>
+                        <div className="menu-close" style={{display: !menuOpen?"none":"block"}}>
+                            <IconButton aria-label="expand row" size="small" onClick={() => setMenuOpen(false)}>
+                                <KeyboardArrowLeftIcon style={{ fill: '#ffffff' }}/>
+                            </IconButton>
+                        </div>
+                        <div className='menu-body'>
+                            
+                            <div className="menu-name">
+                                <span>Мадияр Куанышбеков</span>
+                            </div>
+                            <div className='menu-buttons'>
+                                <div><Link to='/'>Главная страница</Link></div>
+                                <div><Link to='/'>KPI и отчеты</Link></div>
+                                <div><Link to='/'>Сотрудники</Link></div>
+                                <div><Link to='/'>Все новости</Link></div>
+                                <div><Link to='/'>Тестирование</Link></div>
+                                <div><Link to='/'>Календарь</Link></div>
+                                <div><Link to='/'>Информационные ресурсы</Link></div>
+                                <div><Link to='/'>База знаний</Link></div>
+                                <div><Link to='/'>Согласование</Link></div>
+                                <div><Link to='/'>Мессенджер</Link></div>
+                                <div><Link to='/'>Предложения</Link></div>
+                                <div><Link to='/'>Заявления</Link></div>
+                                <div><Link to='/'>Бюро пропусков</Link></div>
+                                <div><Link to='/'>Взаимная оценка</Link></div>
+                                <div><Link to='/'>Служба поддержки</Link></div>
+                            </div>
+                            <div className="menu-logout">
+                                <Link to='/login' onClick={logoutHandler}>Выйти</Link>
+                            </div>
+                        </div>
+                    </div>
                     <div className="central-bar">
                         <div className="frames">
                             <LeftTopFrame fullName={fullName} bin={ulBin}/>

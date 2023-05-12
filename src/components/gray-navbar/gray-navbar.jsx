@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import './navbar.scss'
+// import './navbar.scss'
 import { Component, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Route, Routes, useNavigate } from 'react-router-dom';
-import './NavBar.css'
-import authService from "../../../services/auth.service";
-const Navbar = (props) => {
+// import './NavBar.css'
+import authService from '../../services/auth.service';
+const GrayNavbar = (props) => {
     const userSession = JSON.parse(localStorage.getItem("user"))
     const navigate = useNavigate()    
 
@@ -27,16 +27,21 @@ const Navbar = (props) => {
     }
     return ( 
         <>
-            <div className="nav-back">
+            <div className="nav-back" style={{
+                marginTop: '5px',
+                background: 'radial-gradient(110.65% 7956.71% at 10.63% 20.65%, rgba(255, 255, 255, 0.201) 0%, rgba(255, 255, 255, 0) 100%)', 
+                border: '0.2px solid #868686',
+                backdropFilter: ' blur(27.5px)'
+                }}>
             <nav className="NavbarItems">
-                <h1 className="logoNav"><Link to='/'>SID</Link></h1>
+                <h1 className="logoNav"><Link style={{}} to='/'>SID</Link></h1>
                 <div>
                     {userSession &&
                     userSession.roles.includes("ADMIN")
                     ?  (
                         <>
-                        <div className="admin"><a onClick={() => toAdmin()}>Админ панель</a></div>
-                        <div className="admin"><Link to="/registration">Регистрация</Link></div>
+                        <div className="admin"><a style={{ fontWeight: 500}} onClick={() => toAdmin()}>Админ панель</a></div>
+                        <div className="admin"><Link style={{ fontWeight: 500}} to="/registration">Регистрация</Link></div>
                         </>
                     ) : ("")}
 
@@ -51,7 +56,7 @@ const Navbar = (props) => {
                                     <span>{userSession.email}</span>
                                 </a>
                             </li> */}
-                            <li><Link className={"nav-links"} to={"/login"} onClick={logoutHandler}>Выйти</Link></li>
+                            <li><Link style={{ fontWeight: 600}} className={"nav-links"} to={"/login"} onClick={logoutHandler}>Выйти</Link></li>
                         </> 
                         :
                         <>
@@ -68,4 +73,4 @@ const Navbar = (props) => {
      );
 }
 
-export default Navbar;
+export default GrayNavbar;

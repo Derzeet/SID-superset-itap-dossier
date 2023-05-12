@@ -5,6 +5,14 @@ import TextField from '@mui/material/TextField';
 import FormControl from '@mui/material/FormControl';
 import Button from '@mui/material/Button';
 
+import { Link } from 'react-router-dom';
+
+import IconButton from '@mui/material/IconButton';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
+
+import authService from "../../services/auth.service";
+import SideBar from '../../components/side-bar';
 import Navbar from '../../components/dossierComponents/nav-bar/Navbar';
 import TabContent_IIN from '../../components/dossierComponents/tab-content-iin/TabContent_IIN';
 import TabContent_FIO from '../../components/dossierComponents/tab-content-fio/TabContent_FIO';
@@ -22,10 +30,17 @@ const Search = (props) => {
     const [fioTab, setFIOTab] = useState(false)
     const [binTab, setBINTab] = useState(false)
     const [ulTab, setUlTab] = useState(false)
+    const [menuOpen, setMenuOpen] = useState(false)
+
+    const logoutHandler = () => {
+        authService.logout();
+        // navigate('/login');
+    }
 
     return (
         <>
             <div className='searchPage'>
+              <SideBar/>
                 <div className='searchtabs'>
                     <div className="tab-wrap">
                         <input type="radio" id="tab0" name="tabGroup2" className="tab" disabled style={{cursor: 'default'}}/>

@@ -16,7 +16,6 @@ import List from '@mui/material/List';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
@@ -27,37 +26,80 @@ import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 
-
+import GrayNavbar from './../../components/gray-navbar/gray-navbar';
 import Navbar from '../../components/dossierComponents/nav-bar/Navbar';
+
+
+import { Link } from 'react-router-dom';
+
+import IconButton from '@mui/material/IconButton';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
+
+import authService from "../../services/auth.service";
+import SideBar from '../../components/side-bar';
 
 const MainPage = (props) => {
     const navigate = useNavigate();
+
+    const [menuOpen, setMenuOpen] = useState(false)
+
+    const logoutHandler = () => {
+        authService.logout();
+        // navigate('/login');
+    }
+
     return (
-        <div className='mainPageBlock'>
-            <div className='blockdiv'>
-                <div className='block' onClick={() => {
-                    navigate("/itap")
-                }}>
-                    <img src={itap} className='block-img'></img>
-                    <a></a>
-                    <p>Инструмент по поиску связей</p>
+        <>
+            <div className='mainPageBlock'>
+                <SideBar/>
+                <div className='central-bar'>
+                    <div className='blockdiv'>
+                        <div className='block' onClick={() => {
+                            navigate("/itap")
+                        }}>
+                            <img src={itap} className='block-img'></img>
+                            <a></a>
+                            <p>Инструмент для поиска взаимосвязей</p>
+                        </div>
+                        <div className='block' onClick={() => {
+                            navigate("/superset")
+                        }}>
+                            <img src={superset} className='block-img'></img>
+                            <a></a>
+                            <p>Инструмент для аналитических отчетов</p>
+                        </div>
+                        <div className='block' onClick={() => {
+                            navigate("/profiler")
+                        }}>
+                            <img src={profiler} className='block-img'></img>
+                            <a></a>
+                            <p>Инструмент для поиска объектов</p>
+                        </div>
+                    </div>
+                    {/* <GrayNavbar/> */}
+                    <div className='blockdiv2'>
+                        <div className='block' onClick={() => {
+                            navigate("/itap")
+                        }}>
+                            <img src={itap} className='block-img'></img>
+                            <a></a>
+                            <p>Инструмент для поиска взаимосвязей</p>
+                        </div>
+                        <div className='block' onClick={() => {
+                            navigate("/superset")
+                        }}>
+                            <img src={superset} className='block-img'></img>
+                            <a></a>
+                            <p>Инструмент для аналитических отчетов</p>
+                        </div>
+                    </div>
                 </div>
-                <div className='block' onClick={() => {
-                    navigate("/superset")
-                }}>
-                    <img src={superset} className='block-img'></img>
-                    <a></a>
-                    <p>Инструмент для аналитических расчетов</p>
-                </div>
-                <div className='block' onClick={() => {
-                    navigate("/profiler")
-                }}>
-                    <img src={profiler} className='block-img'></img>
-                    <a></a>
-                    <p>Инструмент для поиска объектов</p>
-                </div>
+                
+                
             </div>
-        </div>
+        </>
+        
     );
 }
 
