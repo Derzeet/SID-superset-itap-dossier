@@ -99,7 +99,7 @@ const MainPage = (props) => {
                         }}>
                             <img src={superset} className='block-img'></img>
                             <a></a>
-                            <p>Об</p>
+                            <p>Объявления</p>
                         </div>
                     </div>
                 </div>

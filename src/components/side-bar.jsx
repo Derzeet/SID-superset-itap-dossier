@@ -30,63 +30,69 @@ const SideBar = (props) => {
         }
         
     }
-        return (  
-            <>
-                    <div className="menu-open" 
-                    style={{
-                        width: menuOpen?"0":"40px", 
-                        zIndex: 100,
-                        height: 'min-content', 
-                        display: menuOpen? "none": "unset"
-                    }} onClick={() => {
-                        setMenuOpen(true) 
-                        searchPage()
-                        }}>
-                    <IconButton aria-label="expand row" size="small" onClick={() => setMenuOpen(true)}>
-                        <MenuIcon style={{ fill: '#ffffff' }}/>
+
+    const sideBarButtons = [
+        {name: "Главная страница", to: "/"},
+        {name: "Сотрудники", to: "/"},
+        {name: "Все новости", to: "/"},
+        {name: "Календарь", to: "/"},
+        {name: "Информационные ресурсы", to: "/"},
+        {name: "База знаний", to: "/"},
+        {name: "Мессенджер", to: "/"},
+        {name: "Заявления", to: "/"},
+        {name: "Бюро пропусков", to: "/"},
+        {name: "Служба поддержки", to: "/"},
+    ]
+
+    return (  
+        <>
+            <div className="menu-open" 
+                style={{
+                    width: menuOpen?"0":"40px", 
+                    zIndex: 100,
+                    height: 'min-content', 
+                    display: menuOpen? "none": "unset"
+                }} onClick={() => {
+                    setMenuOpen(true) 
+                    searchPage()
+                    }}>
+                <IconButton aria-label="expand row" size="small" onClick={() => setMenuOpen(true)}>
+                    <MenuIcon style={{ fill: '#949494' }}/>
+                </IconButton>
+            </div>
+            <div className='menu-bar'  
+                style={{
+                    width: menuOpen?"200px":"0", 
+                    padding: menuOpen?"0px 20px":"0", 
+                    border: menuOpen?"1px solid #3a3a3a":"none",
+                    marginRight: menuOpen?"20px":"0",
+                }}>
+                <div className="menu-close" style={{display: !menuOpen?"none":"block"}}>
+                    <IconButton aria-label="expand row" size="small" onClick={() => setMenuOpen(false)}>
+                        <KeyboardArrowLeftIcon style={{ fill: '#ffffff' }}/>
                     </IconButton>
                 </div>
-                <div className='menu-bar'  
-                    style={{
-                        width: menuOpen?"200px":"0", 
-                        padding: menuOpen?"0px 20px":"0", 
-                        border: menuOpen?"1px solid #3a3a3a":"none",
-                        marginRight: menuOpen?"20px":"0",
-                    }}>
-                    <div className="menu-close" style={{display: !menuOpen?"none":"block"}}>
-                        <IconButton aria-label="expand row" size="small" onClick={() => setMenuOpen(false)}>
-                            <KeyboardArrowLeftIcon style={{ fill: '#ffffff' }}/>
-                        </IconButton>
-                    </div>
-                    <div className='menu-body'>
-                        
+                <div className='menu-body'>
+                    <div>
                         <div className="menu-name">
                             <span>{userSession?userSession.email:"No userSession"}</span>
                         </div>
                         <div className='menu-buttons'>
-                            <div><Link className="menu-text" to='/'>Главная страница</Link></div>
-                            <div><Link className="menu-text" to='/'>KPI и отчеты</Link></div>
-                            <div><Link className="menu-text" to='/'>Сотрудники</Link></div>
-                            <div><Link className="menu-text" to='/'>Все новости</Link></div>
-                            <div><Link className="menu-text" to='/'>Тестирование</Link></div>
-                            <div><Link className="menu-text" to='/'>Календарь</Link></div>
-                            <div><Link className="menu-text" to='/'>Информационные ресурсы</Link></div>
-                            <div><Link className="menu-text" to='/'>База знаний</Link></div>
-                            <div><Link className="menu-text" to='/'>Согласование</Link></div>
-                            <div><Link className="menu-text" to='/'>Мессенджер</Link></div>
-                            <div><Link className="menu-text" to='/'>Предложения</Link></div>
-                            <div><Link className="menu-text" to='/'>Заявления</Link></div>
-                            <div><Link className="menu-text" to='/'>Бюро пропусков</Link></div>
-                            <div><Link className="menu-text" to='/'>Взаимная оценка</Link></div>
-                            <div><Link className="menu-text" to='/'>Служба поддержки</Link></div>
-                        </div>
-                        <div className="menu-logout">
-                            <Link to='/login' onClick={logoutHandler}>Выйти</Link>
+                            {sideBarButtons.map((button, index) => (
+                                <Link className="menu-text" to={button.to} key={index}>
+                                    <div>{button.name}</div>
+                                </Link>
+                                
+                            ))}
                         </div>
                     </div>
+                    <div className="menu-logout">
+                        <Link to='/login' onClick={logoutHandler}>Выйти</Link>
+                    </div>
                 </div>
-            </>
-        );
+            </div>
+        </>
+    );
 }
 
 export default SideBar;

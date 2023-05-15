@@ -22,6 +22,22 @@ const inputStyle = {
     // width: '300px',
 }
 
+const zaprosButtonStyle = {
+    height: '34px', 
+    backgroundColor: "#757575", 
+    color: 'white', 
+    width: 'fit-content', 
+    marginLeft: 3,
+     
+    ":hover": {
+        backgroundColor: "#a3a3a3", 
+    },
+
+    ":active": {
+        backgroundColor: "#525252",
+    }
+}
+
 function TabConent_BIN(props) {
     const [bin, setBIN] = useState('')
     const [result, setResult] = useState([])
@@ -62,13 +78,7 @@ function TabConent_BIN(props) {
                         id="outlined-basic" 
                         inputProps={{ style: inputStyle,'aria-label': 'Without label' }} 
                         variant="outlined" />
-                    <Button sx={{
-                            height: '34px', 
-                            backgroundColor: "#33B6FF", 
-                            color: 'white', 
-                            width: 'fit-content', 
-                            marginLeft: 3 
-                        }} onClick={() => searchBIN()} variant="contained">
+                    <Button sx={zaprosButtonStyle} onClick={() => searchBIN()} variant="contained">
                         <span className='buttonSearch'>Запрос</span>
                     </Button>
                 </div>
@@ -93,13 +103,7 @@ function TabConent_BIN(props) {
                         }} id="outlined-basic"
                         inputProps={{ style: inputStyle, 'aria-label': 'Without label' }} 
                         variant="outlined" />
-                    <Button sx={{
-                            height: '34px', 
-                            backgroundColor: "#33B6FF", 
-                            color: 'white', 
-                            width: 'fit-content', 
-                            marginLeft: 3 
-                        }} variant="contained">
+                    <Button sx={zaprosButtonStyle} variant="contained">
                         <span className='buttonSearch'>Запрос</span>
                     </Button>
                 </div>
@@ -125,13 +129,7 @@ function TabConent_BIN(props) {
                         id="outlined-basic" 
                         inputProps={{ style: inputStyle,'aria-label': 'Without label' }} 
                         variant="outlined" />
-                    <Button sx={{
-                            height: '34px', 
-                            backgroundColor: "#33B6FF", 
-                            color: 'white', 
-                            width: 'fit-content', 
-                            marginLeft: 3 
-                        }} variant="contained">
+                    <Button sx={zaprosButtonStyle} variant="contained">
                         <span className='buttonSearch'>Запрос</span>
                     </Button>
                 </div>

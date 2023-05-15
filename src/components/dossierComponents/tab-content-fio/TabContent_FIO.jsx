@@ -55,6 +55,22 @@ const inputStyle = {
     // width: '300px',
 }
 
+const zaprosButtonStyle = {
+    height: '34px', 
+    backgroundColor: "#757575", 
+    color: 'white', 
+    width: 'fit-content', 
+    marginLeft: 3,
+     
+    ":hover": {
+        backgroundColor: "#a3a3a3", 
+    },
+
+    ":active": {
+        backgroundColor: "#525252",
+    }
+}
+
 function TabContent_FIO(props) {
     const [showDopInfo, setShowDopInfo] = useState(false)
     const [loading, setLoading] = useState(false)
@@ -269,13 +285,7 @@ function TabContent_FIO(props) {
             </div>
 
             <div style={{display: "flex", justifyContent: "flex-start", paddingLeft: "70%"}}>
-                <Button sx={{
-                        height: '34px', 
-                        backgroundColor: "#33B6FF", 
-                        color: 'white', 
-                        width: 'fit-content', 
-                        marginLeft: 3 
-                    }} variant="contained" onClick={searchFIO}>
+                <Button sx={zaprosButtonStyle} variant="contained" onClick={searchFIO}>
                     <span className='buttonSearch'>Запрос</span>
                 </Button>
             </div>

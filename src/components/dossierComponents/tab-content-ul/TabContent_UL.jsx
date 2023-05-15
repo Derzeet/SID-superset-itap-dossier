@@ -43,6 +43,22 @@ const inputStyle = {
     // width: '300px',
 }
 
+const zaprosButtonStyle = {
+    height: '34px', 
+    backgroundColor: "#757575", 
+    color: 'white', 
+    width: 'fit-content', 
+    marginLeft: 3,
+     
+    ":hover": {
+        backgroundColor: "#a3a3a3", 
+    },
+
+    ":active": {
+        backgroundColor: "#525252",
+    }
+}
+
 function TabContent_UL(props) {
     const [ulName, setULName] = useState("")
     const [ulNameType, setULNameType] = useState("begin")
@@ -123,13 +139,7 @@ function TabContent_UL(props) {
                     </div>
                 </div>
                 <div style={{display: "flex", justifyContent: "flex-end"}}>
-                    <Button sx={{
-                            height: '34px', 
-                            backgroundColor: "#33B6FF", 
-                            color: 'white', 
-                            width: 'fit-content', 
-                            marginLeft: 3 
-                        }} onClick={()=> searchName()} variant="contained">
+                    <Button sx={zaprosButtonStyle} onClick={()=> searchName()} variant="contained">
                         <span className='buttonSearch'>Запрос</span>
                     </Button>
                 </div>

@@ -71,26 +71,26 @@ function App() {
             }/>
             <Route path='/profiler' element={
               <>
-                <Navbar/>
+                <GrayNavbar/>
                 <SearchPage/>
               </>
             }/>
 
             <Route path='/profiler/person/:iin' element={
               <>
-                <Navbar/>
+                <GrayNavbar/>
                 <DosiePage/>
               </>
             }/>
             <Route path='/profiler/ul/:bin' element={
               <>
-                <Navbar/>
+                <GrayNavbar/>
                 <UlDosiePage/>
               </>
             }/>
             <Route path="/itap" element={
               <>
-                <Navbar/>
+                <GrayNavbar/>
 
                   <Suspense fallback={<span class="loader"></span>}>
                     <motion.div initial={{opacity: 0}} animate={{opacity: 1}} transition={{ duration: 0.2 }}>
@@ -103,7 +103,7 @@ function App() {
             <Route path="/registration" element={
               <>
 
-                <Navbar/>
+                <GrayNavbar/>
                   <Suspense fallback={<span class="loader"></span>}>
                     <motion.div initial={{opacity: 0}} animate={{opacity: 1}} transition={{ duration: 0.2 }}>
                       <RegistrationPage/>
@@ -125,7 +125,7 @@ function App() {
           <Route path="/table" element={
             <>
               {/* {!userSession ? navigate('/login', {replace: true}) : ""}  */}
-              <Navbar/>
+              <GrayNavbar/>
               <Suspense fallback={<span className="loader"></span>}>
               <motion.div initial={{opacity: 0}} animate={{opacity: 1}} transition={{ duration: 0.2 }}>
               <TableLog/>
@@ -135,7 +135,7 @@ function App() {
           } />
           <Route path="/admin" element={
                 <>
-                  <Navbar/>
+                  <GrayNavbar/>
                   <Suspense fallback={<span class="loader"></span>}>
                     <motion.div initial={{opacity: 0}} animate={{opacity: 1}} transition={{ duration: 0.2 }}>
                       <AdminPage/>
@@ -145,7 +145,7 @@ function App() {
               }/>
           <Route path="/users/:username" element={
             <>
-              <Navbar/>
+              <GrayNavbar/>
               <Suspense fallback={<span class="loader"></span>}>
                 <motion.div initial={{opacity: 0}} animate={{opacity: 1}} transition={{ duration: 0.2 }}>
                   <UserDetails/>
@@ -156,7 +156,7 @@ function App() {
 
             <Route path='/oracle' element={
               <>
-              <Navbar/>
+              <GrayNavbar/>
               <OracleTable/>
               </>
             }/>

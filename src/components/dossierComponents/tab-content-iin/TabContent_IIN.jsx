@@ -22,6 +22,22 @@ const inputStyle = {
     // width: '300px',
 }
 
+const zaprosButtonStyle = {
+    height: '34px', 
+    backgroundColor: "#757575", 
+    color: 'white', 
+    width: 'fit-content', 
+    marginLeft: 3,
+     
+    ":hover": {
+        backgroundColor: "#a3a3a3", 
+    },
+
+    ":active": {
+        backgroundColor: "#525252",
+    }
+}
+
 const baseURL = 'http://192.168.30.24:9095/'
 
 function TabConent_IIN(props) {
@@ -91,13 +107,7 @@ function TabConent_IIN(props) {
                                 value={iin}
                                 onChange={handleIIN}
                                 variant="outlined" />
-                            <Button sx={{
-                                    height: '34px', 
-                                    backgroundColor: "#33B6FF", 
-                                    color: 'white', 
-                                    width: 'fit-content', 
-                                    marginLeft: 3 
-                                }} variant="contained"
+                            <Button sx={zaprosButtonStyle} variant="contained"
                                 onClick={() => {
                                     searchIIN()}}>
                                 <span className='buttonSearch'>Запрос</span>
@@ -127,13 +137,7 @@ function TabConent_IIN(props) {
                                        value={doc}
                                        onChange={(e) => setDoc(e.target.value)}
                                 variant="outlined" />
-                            <Button sx={{
-                                    height: '34px', 
-                                    backgroundColor: "#33B6FF", 
-                                    color: 'white', 
-                                    width: 'fit-content', 
-                                    marginLeft: 3 
-                                }} onClick= {() => searchDoc()} variant="contained">
+                            <Button sx={zaprosButtonStyle} onClick= {() => searchDoc()} variant="contained">
                                 <span className='buttonSearch'>Запрос</span>
                             </Button>
                         </div>
@@ -160,13 +164,7 @@ function TabConent_IIN(props) {
                                 id="outlined-basic" 
                                 inputProps={{ style: inputStyle,'aria-label': 'Without label' }} 
                                 variant="outlined" />
-                            <Button sx={{
-                                    height: '34px', 
-                                    backgroundColor: "#33B6FF", 
-                                    color: 'white', 
-                                    width: 'fit-content', 
-                                    marginLeft: 3 
-                                }} variant="contained">
+                            <Button sx={zaprosButtonStyle} variant="contained">
                                 <span className='buttonSearch'>Запрос</span>
                             </Button>
                         </div>
@@ -193,13 +191,7 @@ function TabConent_IIN(props) {
                                 id="outlined-basic" 
                                 inputProps={{ style: inputStyle,'aria-label': 'Without label' }} 
                                 variant="outlined" />
-                            <Button sx={{
-                                    height: '34px', 
-                                    backgroundColor: "#33B6FF", 
-                                    color: 'white', 
-                                    width: 'fit-content', 
-                                    marginLeft: 3 
-                                }} variant="contained">
+                            <Button sx={zaprosButtonStyle} variant="contained">
                                 <span className='buttonSearch'>Запрос</span>
                             </Button>
                         </div>
