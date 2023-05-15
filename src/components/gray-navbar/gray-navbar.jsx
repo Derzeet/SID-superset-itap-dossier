@@ -6,6 +6,9 @@ import { useForm } from "react-hook-form";
 import { Route, Routes, useNavigate } from 'react-router-dom';
 // import './NavBar.css'
 import authService from '../../services/auth.service';
+
+
+
 const GrayNavbar = (props) => {
     const userSession = JSON.parse(localStorage.getItem("user"))
     const navigate = useNavigate()    
@@ -31,9 +34,9 @@ const GrayNavbar = (props) => {
                 marginTop: '5px',
                 background: 'radial-gradient(110.65% 7956.71% at 10.63% 20.65%, rgba(255, 255, 255, 0.201) 0%, rgba(255, 255, 255, 0) 100%)', 
                 border: '0.2px solid #868686',
-                backdropFilter: ' blur(27.5px)'
+                backdropFilter: ' blur(27.5px)',
                 }}>
-            <nav className="NavbarItems">
+            <nav className="NavbarItems2">
                 <h1 className="logoNav"><Link style={{}} to='/'>SID</Link></h1>
                 <div>
                     {userSession &&
