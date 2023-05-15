@@ -17,13 +17,22 @@ import LeftBottomFrame from '../../components/dossierComponents/ul-left-bottom-f
 import RightBottomFrame from '../../components/dossierComponents/ul-right-bottom-frame/UlRightBottomFrame';
 import axios from 'axios';
 
-const baseURL = 'http://192.168.30.24:9095/'
+// const baseURL = 'http://192.168.30.24:9095/'
+const baseURL = 'http://localhost:9095/'
 const UlDosiePage = (props) => {
     const { bin } = useParams();
     const [loading, isLoading] = useState(null)
     const [fullName, setFullName] = useState('')
     const [ulBin, setUlBin] = useState(0)
     const [nedvijimost, setNedvijimost] = useState([])
+    const [address, setAddress] = useState({})
+    const [pdl, setPdl] = useState([])
+
+    //RISKS
+    const [opg, setOpg] = useState([])
+    const [BlockEsfBlock, setBlockESF] = useState([])
+    const [nds, setNds] = useState([])
+    const [bankrot, setBankrot] = useState([])
 
     const [founders, setFounders] = useState([{}, {}])
     const [taxes, setTaxes] = useState([])
@@ -34,10 +43,16 @@ const UlDosiePage = (props) => {
     useEffect(() => {
         const searchIIN = () => {
             isLoading(true)
-            const params = {iin: bin}
+            const params = {bin: bin}
 
             axios.get(baseURL+'cc', {params: params}).then(res => {
                 setFullName(res.data.mvUls[0].full_name_rus)
+                setAddress(res.data.regAddressUlEntities)
+                setPdl(res.data.pdls)
+                setOpg(res.data.opgEntities)
+                setBlockESF(res.data.blockEsfs)
+                setNds(res.data.ndsEntities)
+                setBankrot(res.data.bankrots)
                 setUlBin(bin)
                 console.log(res.data)
                 setFounders(res.data.mvUlFounderFls)
@@ -111,10 +126,10 @@ const UlDosiePage = (props) => {
                     </div>
                     <div className="central-bar">
                         <div className="frames">
-                            <LeftTopFrame fullName={fullName} bin={ulBin}/>
-                            <RightTopFrame founders={founders}/>
+                            <LeftTopFrame fullName={fullName} bin={ulBin} address = {address}/>
+                            <RightTopFrame founders={founders} pdls={pdl}/>
                             <LeftBottomFrame mshes={mshes} taxes={taxes} nedvijimost={nedvijimost}/>
-                            <RightBottomFrame />
+                            <RightBottomFrame opg={opg} esf={BlockEsfBlock} nds={nds} bankrot={bankrot}/>
                         </div>
                     </div>
                 </div>

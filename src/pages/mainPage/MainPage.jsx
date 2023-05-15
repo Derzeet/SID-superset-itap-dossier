@@ -92,7 +92,7 @@ const MainPage = (props) => {
                         }}>
                             <img src={itap} className='block-img'></img>
                             <a></a>
-                            <p>Oracle</p>
+                            <p>ФМ</p>
                         </div>
                         <div className='block' onClick={() => {
                             navigate("/superset")
