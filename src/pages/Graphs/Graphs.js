@@ -344,170 +344,170 @@ const GraphNetnew = (props) => {
     }
 
     const Submit = async (options) => {
-        LocalGet(options.iin)
-        // setPhysicsEnable(true)
-        // setIsLoading(true)
-        // setNodes([])
-        // setEdges([])
-        // setCounter(currCounter => currCounter + 1)
+        // LocalGet(options.iin)
+        setPhysicsEnable(true)
+        setIsLoading(true)
+        setNodes([])
+        setEdges([])
+        setCounter(currCounter => currCounter + 1)
 
-        // const userSession = JSON.parse(localStorage.getItem("user"))
+        const userSession = JSON.parse(localStorage.getItem("user"))
 
-        // let url = "";
-        // let params = {};
+        let url = "";
+        let params = {};
 
-        // axios.defaults.headers.common['Authorization'] = 'Bearer ' + userSession.accessToken
-        // switch(options.mode) {
-        //     case "con1":
-        //         graJSON.typeOfSearch = "con1"
-        //         if (options.searchOption == "iinOption") {
-        //             url = "/fltree"
-        //             params = {person: options.iin1, relations: options.relString, depth: options.depth, limit: options.limit}
-        //             graJSON.params = params
-        //         } else {
-        //             url = "/flFIOtree"
-        //             params = {
-        //                 check1: options.checks1,
-        //                 firstName1: options.nam1, 
-        //                 lastName1: options.fam1, 
-        //                 fatherName1: options.fath1, 
-        //                 relations: options.relString, depth: options.depth, limit: options.limit
-        //             }
-        //             graJSON.params = params
-        //             graJSON.iin = false
-        //         }
-        //         break;
-        //     case "con2":
-        //         graJSON.typeOfSearch = "con2"
-        //         if (options.searchOption == "iinOption") {
-        //             url = "/shortestpaths";
-        //             params = {person: options.iin1, person2: options.iin2, relations: options.relString}
-        //             graJSON.params = params
-        //         } else {
-        //             url = "/shortestpathsByFIO";
-        //             params = {
-        //                 check1: options.checks1,
-        //                 firstName1: options.nam1, 
-        //                 lastName1: options.fam1, 
-        //                 fatherName1: options.fath1,
-        //                 check2: options.checks2,
-        //                 firstName2: options.nam2, 
-        //                 lastName2: options.fam2, 
-        //                 fatherName2: options.fath2, 
-        //                 relations: options.relString
-        //             }
-        //             graJSON.params = params
-        //             graJSON.iin = false
-        //         }
-        //         break;
-        //     case "con3":
-        //         graJSON.typeOfSearch = "con3"
-        //         if (options.searchOption == "iinOption") {
-        //             url = "/flulpath";
-        //             params = {person: options.iin1, ul: options.iin2, relations: options.relString}
-        //             graJSON.params = params
-        //         } else {
-        //             url = "/flulpathByFIO";
-        //             params = {
-        //                 check1: options.checks1,
-        //                 firstName1: options.nam1, 
-        //                 lastName1: options.fam1, 
-        //                 fatherName1: options.fath1, 
-        //                 ul: options.iin2, 
-        //                 relations: options.relString
-        //             }
-        //             graJSON.params = params
-        //             graJSON.iin = false
-        //         }
-        //         break;
-        //     case "con4":
-        //         graJSON.typeOfSearch = "con4"
-        //         url = "/ultree";
-        //         params = {ul: options.iin1, relations: options.relString, depth: options.depth, limit: options.limit }
-        //         graJSON.params = params
-        //         break;
-        //     case "con5":
-        //         graJSON.typeOfSearch = "con5"
-        //         url = "/ululpath";
-        //         params = {ul1: options.iin1, ul2: options.iin2, relations: options.relString}
-        //         graJSON.params = params
-        //         break;
-        // }
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + userSession.accessToken
+        switch(options.mode) {
+            case "con1":
+                graJSON.typeOfSearch = "con1"
+                if (options.searchOption == "iinOption") {
+                    url = "/fltree"
+                    params = {person: options.iin1, relations: options.relString, depth: options.depth, limit: options.limit}
+                    graJSON.params = params
+                } else {
+                    url = "/flFIOtree"
+                    params = {
+                        check1: options.checks1,
+                        firstName1: options.nam1, 
+                        lastName1: options.fam1, 
+                        fatherName1: options.fath1, 
+                        relations: options.relString, depth: options.depth, limit: options.limit
+                    }
+                    graJSON.params = params
+                    graJSON.iin = false
+                }
+                break;
+            case "con2":
+                graJSON.typeOfSearch = "con2"
+                if (options.searchOption == "iinOption") {
+                    url = "/shortestpaths";
+                    params = {person: options.iin1, person2: options.iin2, relations: options.relString}
+                    graJSON.params = params
+                } else {
+                    url = "/shortestpathsByFIO";
+                    params = {
+                        check1: options.checks1,
+                        firstName1: options.nam1, 
+                        lastName1: options.fam1, 
+                        fatherName1: options.fath1,
+                        check2: options.checks2,
+                        firstName2: options.nam2, 
+                        lastName2: options.fam2, 
+                        fatherName2: options.fath2, 
+                        relations: options.relString
+                    }
+                    graJSON.params = params
+                    graJSON.iin = false
+                }
+                break;
+            case "con3":
+                graJSON.typeOfSearch = "con3"
+                if (options.searchOption == "iinOption") {
+                    url = "/flulpath";
+                    params = {person: options.iin1, ul: options.iin2, relations: options.relString}
+                    graJSON.params = params
+                } else {
+                    url = "/flulpathByFIO";
+                    params = {
+                        check1: options.checks1,
+                        firstName1: options.nam1, 
+                        lastName1: options.fam1, 
+                        fatherName1: options.fath1, 
+                        ul: options.iin2, 
+                        relations: options.relString
+                    }
+                    graJSON.params = params
+                    graJSON.iin = false
+                }
+                break;
+            case "con4":
+                graJSON.typeOfSearch = "con4"
+                url = "/ultree";
+                params = {ul: options.iin1, relations: options.relString, depth: options.depth, limit: options.limit }
+                graJSON.params = params
+                break;
+            case "con5":
+                graJSON.typeOfSearch = "con5"
+                url = "/ululpath";
+                params = {ul1: options.iin1, ul2: options.iin2, relations: options.relString}
+                graJSON.params = params
+                break;
+        }
 
-        // params["approvement_type"] = options.approvementObject ? options.approvementObject.approvement_type : ''
-        // params["orderNum"] = options.approvementObject ? options.approvementObject.orderNum : ''
-        // params["orderDate"] = options.approvementObject ? options.approvementObject.orderDate : ''
-        // params["articleName"] = options.approvementObject ? options.approvementObject.articleName : ''
-        // params["caseNum"] = options.approvementObject ?options.approvementObject.caseNum : ''
-        // params["checkingName"] = options.approvementObject ? options.approvementObject.checkingName : ''
-        // params["otherReasons"] = options.approvementObject ? options.approvementObject.other : ''
-        // params["organName"] = options.approvementObject ? options.approvementObject.organName : ''
-        // params["rukName"] = options.approvementObject ? options.approvementObject.rukName : ''
-        // params["sphereName"] = options.approvementObject ? options.approvementObject.sphereName : ''
-        // params["tematikName"] = options.approvementObject ? options.approvementObject.tematikName : ''
+        params["approvement_type"] = options.approvementObject ? options.approvementObject.approvement_type : ''
+        params["orderNum"] = options.approvementObject ? options.approvementObject.orderNum : ''
+        params["orderDate"] = options.approvementObject ? options.approvementObject.orderDate : ''
+        params["articleName"] = options.approvementObject ? options.approvementObject.articleName : ''
+        params["caseNum"] = options.approvementObject ?options.approvementObject.caseNum : ''
+        params["checkingName"] = options.approvementObject ? options.approvementObject.checkingName : ''
+        params["otherReasons"] = options.approvementObject ? options.approvementObject.other : ''
+        params["organName"] = options.approvementObject ? options.approvementObject.organName : ''
+        params["rukName"] = options.approvementObject ? options.approvementObject.rukName : ''
+        params["sphereName"] = options.approvementObject ? options.approvementObject.sphereName : ''
+        params["tematikName"] = options.approvementObject ? options.approvementObject.tematikName : ''
 
-        // console.log(params)
-        // axios.get(baseURL + url, {params: params}).then(res => {
-        //     let _nodes = []
-        //     const _edges = res.data.edges;
+        console.log(params)
+        axios.get(baseURL + url, {params: params}).then(res => {
+            let _nodes = []
+            const _edges = res.data.edges;
             
-        //     _edges.map(item => {
-        //         setEdgeSettings(item);
-        //     })
+            _edges.map(item => {
+                setEdgeSettings(item);
+            })
         
-        //     res.data.nodes.map(item => {
-        //         setNodeSettings(item, options.iin1, options.iin2)
-        //         _nodes.push(item);
-        //     })
+            res.data.nodes.map(item => {
+                setNodeSettings(item, options.iin1, options.iin2)
+                _nodes.push(item);
+            })
             
-        //     setNodes(_nodes)
-        //     setEdges(_edges)
+            setNodes(_nodes)
+            setEdges(_edges)
 
-        //     graJSON.nodes = _nodes
-        //     graJSON.edges = _edges
+            graJSON.nodes = _nodes
+            graJSON.edges = _edges
             
-        //     setIsLoading(false)
+            setIsLoading(false)
 
-        //     const fileInput = document.getElementById('file-upload')
-        //     fileInput.value = ""
+            const fileInput = document.getElementById('file-upload')
+            fileInput.value = ""
 
-        //     setShowActionBtn(true)
-        //     if(Network) Network.stabilize()  
-        // }).catch(() => {
-        //     // let res = []
-        //     // if (params.person == '890724350918') {
-        //     //     res = iin890724350918
-        //     // } else if (params.person == '770712302729') {
-        //     //     res = iin770712302729
-        //     // } else if (params.person == '811006300996') {
-        //     //     res = iin811006300996
-        //     // }
-        //     // let _nodes = []
-        //     // const _edges = res.edges;
+            setShowActionBtn(true)
+            if(Network) Network.stabilize()  
+        }).catch(() => {
+            let res = []
+            if (params.person == '890724350918') {
+                res = iin890724350918
+            } else if (params.person == '770712302729') {
+                res = iin770712302729
+            } else if (params.person == '811006300996') {
+                res = iin811006300996
+            }
+            let _nodes = []
+            const _edges = res.edges;
             
-        //     // _edges.map(item => {
-        //     //     setEdgeSettings(item);
-        //     // })
+            _edges.map(item => {
+                setEdgeSettings(item);
+            })
             
-        //     // res.nodes.map(item => {
-        //     //     setNodeSettings(item, options.iin1, options.iin2)
-        //     //     _nodes.push(item);
-        //     // })
+            res.nodes.map(item => {
+                setNodeSettings(item, options.iin1, options.iin2)
+                _nodes.push(item);
+            })
             
-        //     // setNodes(_nodes)
-        //     // setEdges(_edges)
+            setNodes(_nodes)
+            setEdges(_edges)
             
-        //     // graJSON.nodes = _nodes
-        //     // graJSON.edges = _edges
+            graJSON.nodes = _nodes
+            graJSON.edges = _edges
             
-        //     // setIsLoading(false)
+            setIsLoading(false)
             
-        //     // const fileInput = document.getElementById('file-upload')
-        //     // fileInput.value = ""
+            const fileInput = document.getElementById('file-upload')
+            fileInput.value = ""
             
-        //     // setShowActionBtn(true)
-        //     // if(Network) Network.stabilize()
-        // })
+            setShowActionBtn(true)
+            if(Network) Network.stabilize()
+        })
     };
 
     const mergeWithoutDuplicates = (arr1, arr2) => {

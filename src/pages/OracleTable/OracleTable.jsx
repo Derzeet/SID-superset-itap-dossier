@@ -317,7 +317,7 @@ function OracleTable(props) {
                 console.log(res.data)
                 setMainList(res.data.rows)
                 setLoading(false)
-                setCount(10000)
+                setCount(res.data.rows.length)
                 // countGet()
             })
 
@@ -356,7 +356,7 @@ function OracleTable(props) {
             page
         }
         console.log(req)
-        axios.get('http://192.168.30.24:1415/count', {params: req}, {
+        axios.get('http://localhost:1415/count', {params: req}, {
                 cancelToken: request.token
             }).then(res => {
                 setCount(res.data)
