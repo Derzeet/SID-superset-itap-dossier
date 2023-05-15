@@ -16,13 +16,14 @@ public class mv_auto_fl {
     private String series_reg_number;
     private String reg_number;
     private String category_control_tc;
+    @Id
+
     private String vin_kuzov_shassi;
 
     private String engine_volume;
     private String weight;
     private String max_weight;
     private String owner_category;
-    @Id
 
     private String end_date;
     private String color;

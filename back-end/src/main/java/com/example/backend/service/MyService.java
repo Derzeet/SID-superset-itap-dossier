@@ -658,6 +658,21 @@ public class MyService {
              myNode.setMvRnOlds(mvRnOlds);
          } catch (Exception e) {
              System.out.println("Error: " + e);
+         }try {
+             List<TaxOutEntity> taxOutEntitiest = taxOutEntityRepo.getUsersByLike(BIN);
+             myNode.setTaxOutEntities(taxOutEntitiest);
+         } catch (Exception e) {
+             System.out.println("Error: " + e);
+         } try {
+             List<mv_auto_fl> mvAutoFls = mvAutoFlRepo.getUsersByLike(BIN);
+             myNode.setMvAutoFls(mvAutoFls);
+         } catch (Exception e) {
+             System.out.println("Error: " + e);
+         } try {
+             List<adm> adms = admRepo.getUsersByLikeBin(BIN);
+             myNode.setAdms(adms);
+         } catch (Exception e) {
+             System.out.println("Error: " + e);
          }
 
 //         List<TaxOutEntity> taxOutEntities = taxOutEntityRepo.getUsersByLike(BIN);

@@ -25,6 +25,8 @@ public class adm {
     private String language_prod;
     @Nullable
     private String reg_date;
+    @Id
+
     @Nullable
     private String protocol_num;
     @Nullable
@@ -79,7 +81,6 @@ public class adm {
     @Nullable
     private String nationality;
     @Nullable
-    @Id
 
     private String iin;
     @Nullable

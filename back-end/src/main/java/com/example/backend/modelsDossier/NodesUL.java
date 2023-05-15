@@ -35,6 +35,7 @@ public class NodesUL {
     private List<SvedenyaObUchastnikovUlEntity> svedenyaObUchastnikovUlEntities;
     private List<fl_contacts> fl_contacts;
 
+    private List<mv_auto_fl> mvAutoFls;
 
     public List<com.example.backend.photo.modelsPhot.fl_contacts> getFl_contacts() {
         return fl_contacts;
@@ -42,6 +43,14 @@ public class NodesUL {
 
     public void setFl_contacts(List<com.example.backend.photo.modelsPhot.fl_contacts> fl_contacts) {
         this.fl_contacts = fl_contacts;
+    }
+
+    public List<mv_auto_fl> getMvAutoFls() {
+        return mvAutoFls;
+    }
+
+    public void setMvAutoFls(List<mv_auto_fl> mvAutoFls) {
+        this.mvAutoFls = mvAutoFls;
     }
 
     private boolean Person_with_risk;
