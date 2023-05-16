@@ -31,7 +31,7 @@ public class NodesUL {
     private List<pdl> pdls;
     private List<QoldauSubsidy> QoldauSubsidy;
     private List<CommodityProducer> commodityProducers;
-    private List<RegAddressUlEntity> regAddressUlEntities;
+    private RegAddressUlEntity regAddressUlEntities;
     private List<SvedenyaObUchastnikovUlEntity> svedenyaObUchastnikovUlEntities;
     private List<fl_contacts> fl_contacts;
 
@@ -45,6 +45,7 @@ public class NodesUL {
     public void setFlPensionContrs(List<FL_PENSION_FINAL> flPensionContrs) {
         this.flPensionContrs = flPensionContrs;
     }
+
 
     public List<com.example.backend.photo.modelsPhot.fl_contacts> getFl_contacts() {
         return fl_contacts;
@@ -80,11 +81,11 @@ public class NodesUL {
         this.svedenyaObUchastnikovUlEntities = svedenyaObUchastnikovUlEntities;
     }
 
-    public List<RegAddressUlEntity> getRegAddressUlEntities() {
+    public RegAddressUlEntity getRegAddressUlEntities() {
         return regAddressUlEntities;
     }
 
-    public void setRegAddressUlEntities(List<RegAddressUlEntity> regAddressUlEntities) {
+    public void setRegAddressUlEntities(RegAddressUlEntity regAddressUlEntities) {
         this.regAddressUlEntities = regAddressUlEntities;
     }
 

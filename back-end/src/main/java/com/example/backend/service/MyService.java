@@ -118,6 +118,8 @@ public class MyService {
     mv_iin_docRepo mv_iin_docRepo;
     @Autowired
     private mv_ul_leaderRepository mvUlLeaderRepository;
+    @Autowired
+    private RegAddressUlEntityRepo regAddressUlEntityRepo;
 
 
     public List<searchResultModelUl> searchUlByName(String name) {
@@ -208,7 +210,8 @@ public class MyService {
         }
         List<searchResultModelFL> result = findWithPhoto(fls);
         return result;
-    } public List<searchResultModelFL> getByDoc_photo(String IIN) {
+    }
+    public List<searchResultModelFL> getByDoc_photo(String IIN) {
         List<mv_iin_doc> fls = mv_iin_docRepo.getByDoc_number(IIN);
         List<mv_fl> fls1 = new ArrayList<>();
         for(mv_iin_doc flss : fls){
@@ -583,6 +586,12 @@ public class MyService {
          try {
              List<dormant> myDormant =  dormantRepo.getUsersByLike(BIN);
              myNode.setDormants(myDormant);
+         } catch (Exception e) {
+             System.out.println("Error: " + e);
+         }
+         try {
+             RegAddressUlEntity address =  regAddressUlEntityRepo.findByBin(BIN);
+             myNode.setRegAddressUlEntities(address);
          } catch (Exception e) {
              System.out.println("Error: " + e);
          }
