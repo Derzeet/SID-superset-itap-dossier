@@ -89,6 +89,13 @@ public class DoseirController {
     @GetMapping("/byphone")
     public List<searchResultModelFL> getByPhone(@RequestParam String phone) {
         return myService.getByPhone(phone);
+    }   @GetMapping("/byvinkuzov")
+    public List<searchResultModelFL> getByVinKuzov(@RequestParam String vin) {
+        return myService.getByVinFl(vin);
+    }
+     @GetMapping("/byvinkuzovul")
+    public List<searchResultModelUl> getByVinKuzovUl(@RequestParam String vin) {
+        return myService.getByVinUl(vin);
     }
 
     @GetMapping("/fio")

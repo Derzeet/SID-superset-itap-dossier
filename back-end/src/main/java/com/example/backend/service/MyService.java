@@ -214,6 +214,36 @@ public class MyService {
         List<searchResultModelFL> result = findWithPhoto(fls);
         return result;
     }
+    public List<searchResultModelFL> getByVinFl(String vin) {
+        List<String> iin = mvAutoFlRepo.getByVin(vin);
+        List<mv_fl> fls = new ArrayList<>();
+        for (String ii: iin) {
+            mv_fl person = mv_FlRepo.getUserByIin(ii);
+            fls.add(person);
+        }
+        try {
+            List<searchResultModelFL> result = findWithPhoto(fls);
+            return result;
+
+        }catch (Exception e){
+            System.out.println(e);
+        }
+        return null;
+    }
+    public List<searchResultModelUl> getByVinUl(String vin) {
+        List<String> iin = mvAutoFlRepo.getByVin(vin);
+        List<mv_ul> mvUls = mv_ul_repo.getUsersByLike(iin.get(0));
+        List<searchResultModelUl> list = new ArrayList<>();
+        for (mv_ul l: mvUls) {
+            searchResultModelUl res = new searchResultModelUl();
+            res.setBin(l.getBin());
+            res.setName(l.getFull_name_rus());
+            list.add(res);
+        }
+
+        return list;
+    }
+
     public List<searchResultModelFL> getByDoc_photo(String IIN) {
         List<mv_iin_doc> fls = mv_iin_docRepo.getByDoc_number(IIN);
         List<mv_fl> fls1 = new ArrayList<>();
