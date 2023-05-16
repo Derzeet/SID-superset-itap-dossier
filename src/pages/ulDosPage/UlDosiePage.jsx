@@ -33,6 +33,7 @@ const UlDosiePage = (props) => {
     const [BlockEsfBlock, setBlockESF] = useState([])
     const [nds, setNds] = useState([])
     const [bankrot, setBankrot] = useState([])
+    const [omn, setOMN] = useState([])
 
     const [founders, setFounders] = useState([{}, {}])
     const [taxes, setTaxes] = useState([])
@@ -53,6 +54,7 @@ const UlDosiePage = (props) => {
                 setBlockESF(res.data.blockEsfs)
                 setNds(res.data.ndsEntities)
                 setBankrot(res.data.bankrots)
+                setOMN(res.data.omns)
                 setUlBin(bin)
                 console.log(res.data)
                 setFounders(res.data.mvUlFounderFls)
@@ -129,7 +131,7 @@ const UlDosiePage = (props) => {
                             <LeftTopFrame fullName={fullName} bin={ulBin} address = {address}/>
                             <RightTopFrame founders={founders} pdls={pdl}/>
                             <LeftBottomFrame mshes={mshes} taxes={taxes} nedvijimost={nedvijimost}/>
-                            <RightBottomFrame opg={opg} esf={BlockEsfBlock} nds={nds} bankrot={bankrot}/>
+                            <RightBottomFrame opg={opg} esf={BlockEsfBlock} nds={nds} bankrot={bankrot} omn={omn}/>
                         </div>
                     </div>
                 </div>
