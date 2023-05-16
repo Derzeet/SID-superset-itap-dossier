@@ -13,6 +13,8 @@ import com.example.backend.tools.PdfGenerator;
 import com.lowagie.text.*;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -54,6 +56,15 @@ public class DoseirController {
     public NodesUL getChfc(@RequestParam String bin) {
         NodesUL ss = myService.getNodeUL(bin);
         return ss;
+    }
+    @GetMapping("/taxpage")
+    public List<TaxOutEntity> getTax(@RequestParam String bin, @RequestParam(required = false,defaultValue = "0") int page, @RequestParam(required = false,defaultValue = "10") int size) {
+        return myService.taxOutEntities(bin,PageRequest.of(page,size));
+    }
+    @GetMapping("/pensionUl")
+    public List<Map<String, Object>> pensionUl(@RequestParam Integer year,@RequestParam String bin, @RequestParam(required = false,defaultValue = "0") int page, @RequestParam(required = false,defaultValue = "10") int size) {
+//        return myService.taxOutEntities(bin,PageRequest.of(page,size));
+        return myService.pensionEntityUl(year,bin,PageRequest.of(page,size));
     }
 
     @GetMapping("/iin")

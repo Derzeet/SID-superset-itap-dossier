@@ -1,9 +1,12 @@
 package com.example.backend.photo.repositoryPhot;
 
 import com.example.backend.photo.modelsPhot.fl_pension_contr;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import java.awt.print.Pageable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,7 +27,7 @@ public interface fl_pension_contrRepo extends JpaRepository<fl_pension_contr, Lo
     List<Map<String,Object>> findAmountOfAmountByKNP(String iin, String bin);
     @Query(value= "SELECT  DISTINCT \"IIN\",cast(SUM(\"AMOUNT\") as text) AS AMOUNT, \"KNP\" FROM imp_kfm_fl.fl_pension_contr \n" +
             "WHERE extract(year from \"PAY_DATE\") = ?1 and \"P_RNN\" = ?2 GROUP BY \"KNP\", \"IIN\" ", nativeQuery = true)
-    List<Map<String,Object>> findAmountOfAmountByKNPUL(Integer year, String bin);
+    Page<Map<String,Object>> findAmountOfAmountByKNPUL(Integer year, String bin, PageRequest pageRequest);
     @Query(value = "SELECT extract(year from \"PAY_DATE\"), COUNT(DISTINCT \"IIN\") AS iin_count\n" +
             "FROM imp_kfm_fl.fl_pension_contr\n" +
             "WHERE \"P_RNN\" = ?1 \n" +
