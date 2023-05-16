@@ -559,8 +559,8 @@ public class MyService {
         Page<TaxOutEntity> taxOutEntityPage = taxOutEntityRepo.getUsersByLike(bin,pageRequest);
         return taxOutEntityPage.getContent();
     }
-    public List<Map<String, Object>> pensionEntityUl(Integer year, String bin, PageRequest pageRequest){
-        Page<Map<String,Object>> pens = flPensionContrRepo.findAmountOfAmountByKNPUL(year,bin,pageRequest);
+    public List<Map<String, Object>> pensionEntityUl(PageRequest pageRequest){
+        Page<Map<String,Object>> pens = flPensionContrRepo.fffdsafs(pageRequest);
         return pens.getContent();
     }
 

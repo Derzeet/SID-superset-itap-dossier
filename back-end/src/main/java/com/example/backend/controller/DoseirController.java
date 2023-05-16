@@ -62,9 +62,9 @@ public class DoseirController {
         return myService.taxOutEntities(bin,PageRequest.of(page,size));
     }
     @GetMapping("/pensionUl")
-    public List<Map<String, Object>> pensionUl(@RequestParam Integer year,@RequestParam String bin, @RequestParam(required = false,defaultValue = "0") int page, @RequestParam(required = false,defaultValue = "10") int size) {
+    public List<Map<String, Object>> pensionUl(@RequestParam(required = false,defaultValue = "0") int page, @RequestParam(required = false,defaultValue = "10") int size) {
 //        return myService.taxOutEntities(bin,PageRequest.of(page,size));
-        return myService.pensionEntityUl(year,bin,PageRequest.of(page,size));
+        return myService.pensionEntityUl(PageRequest.of(page,size));
     }
 
     @GetMapping("/iin")
