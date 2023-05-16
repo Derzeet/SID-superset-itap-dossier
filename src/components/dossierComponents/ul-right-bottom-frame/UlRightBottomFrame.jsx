@@ -18,19 +18,89 @@ function UlRightBottomFrame(props) {
     const [esf, setEsf] = useState(props.esf ? props.esf : [])
     const [nds, setNds] = useState(props.nds ? props.nds : [])
     const [bankrot, setBankrot] = useState(props.bankrot ? props.bankrot : [])
+    const [omn, setOMN] = useState(props.omn ? props.omn : [])
+    const [count, setCount] = useState(opg.length + esf.length + nds.length + bankrot.length + omn.length)
 
     return (
 
         <div className="right-bottom-section">
+            <h3>Риски - {count}</h3>
             <div className="other-line">
                 <OPGTable array={opg} />
                 <BlockEsfBlock array={esf} />
                 <NdsTable array={nds} />
                 <BankrotTable array={bankrot} />
+                <OmnTable array={omn} />
             </div>
         </div>
 
     );
+}
+
+const OmnTable = (props) => {
+    const {array} = props
+    const [open, setOpen] = useState(array.length > 0)
+
+    return (
+        <>
+        <TableContainer sx={{marginTop: 0}}>
+            <Table aria-label="collapsible table" className="uitable">
+
+            <TableRow className="uitablerow" sx={{height:'10px',}} style={{borderBottom: 'hidden'}}>
+                <TableCell sx={{padding: 1}} style={{borderBottom: 'hidden', width: '90%', fontSize: '12px', fontWeight: 500, color: "#FFFFFF"}}><a>Отсутствие по месту нахождения(ОМН) - {array.length}</a></TableCell>
+                <TableCell sx={{padding: 1}} style={{width: '10%'}} align='right'>
+                    <IconButton
+                    aria-label="expand row"
+                    size="small"
+                    onClick={() => setOpen(!open)}
+                    >
+                    {open ? <KeyboardArrowUpIcon style={{ fill: '#ffffff' }}/> : <KeyboardArrowDownIcon style={{ fill: '#ffffff' }}/>}
+                    </IconButton>
+                </TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell sx={{padding: 1}} style={{ paddingBottom: 0, paddingTop: 0}} colSpan={6}>
+                <Collapse in={open} timeout="auto" unmountOnExit>
+                    <Box sx={{ margin: 0, marginLeft: '0' }}>
+                    <TableHead sx={{backgroundColor: '#ffffff0a'}}>
+                        <TableRow className="uitableHead">
+                            {/* <TableCell sx={{padding: 1}} style={{ width: '30%',fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left"><a>Наименование ИП</a></TableCell> */}
+                            <TableCell sx={{padding: 1}} style={{ width: '20%', fontSize: '12px', color: "rgb(199, 199, 199)" }} align="left"><a>ИИН идентификатора ЮЛ</a></TableCell>
+                            <TableCell sx={{padding: 1}} style={{ width: '40%', fontSize: '12px', color: "rgb(199, 199, 199)" }} align="left"><a>ФИО идентификатора ЮЛ</a></TableCell>
+                            <TableCell sx={{padding: 1}} style={{ width: '20%', fontSize: '12px', color: "rgb(199, 199, 199)" }} align="left"><a>Номер решения</a></TableCell>
+                            <TableCell sx={{padding: 1}} style={{ width: '20%', fontSize: '12px', color: "rgb(199, 199, 199)" }} align="left"><a>Дата решения</a></TableCell>
+                            {/* <TableCell sx={{padding: 1}} style={{ width: '20%', fontSize: '12px', color: "rgb(199, 199, 199)" }} align="left"></TableCell> */}
+                        </TableRow>
+                    </TableHead> 
+                    <TableBody style={{borderBottom: 'hidden'}}>
+                    {array.length > 0 ? array.map((row, index) => (
+                        <OmnRow row={row} />
+                    )): <TableCell  className="zeroResult" align="center" colSpan={4} style={{borderBottom: 'hidden'}}><a>Нет данных</a></TableCell>}
+                    </TableBody>
+                    </Box>
+                </Collapse>
+                </TableCell>
+            </TableRow>
+            </Table>
+        </TableContainer>
+        </>
+    )
+}
+
+const OmnRow = (props) => {
+    const {row} = props
+
+
+    return (
+        <>
+        <TableRow className="uitablerow" sx={{height:'10px',}} style={{borderBottom: 'hidden'}}>
+            <TableCell sx={{padding: 1}} style={{ fontSize: '12px', fontWeight: 500, color: "#FFFFFF"}}><a>{row.leader_iin || "---"}</a></TableCell>
+            <TableCell sx={{padding: 1}} style={{ fontSize: '12px', fontWeight: 500, color: "#FFFFFF" }} align="left"><a>{row.leader_fio || "---"}</a></TableCell>
+            <TableCell sx={{padding: 1}} style={{ fontSize: '12px', fontWeight: 500, color: "#FFFFFF" }} align="left"><a>{row.decision_number || "---"}</a></TableCell>
+            <TableCell sx={{padding: 1}} style={{ fontSize: '12px', fontWeight: 500, color: "#FFFFFF" }} align="left"><a>{row.decision_date || "---"}</a></TableCell>
+        </TableRow>
+        </>
+    )
 }
 
 const BankrotTable = (props) => {

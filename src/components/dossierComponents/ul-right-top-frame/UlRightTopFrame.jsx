@@ -164,7 +164,7 @@ const PdlRow = (props) => {
 
 const FoundersBlock = (props) => {
     const {array, exist} = props
-    const [open, setOpen] = useState(false)
+    const [open, setOpen] = useState(true)
 
     return (
         <>
@@ -189,7 +189,7 @@ const FoundersBlock = (props) => {
                     <Box sx={{ margin: 0, marginLeft: '0' }}>
                     <TableHead sx={{backgroundColor: '#ffffff0a'}}>
                         <TableRow className="uitableHead">
-                            <TableCell sx={{padding: 1}} style={{ width: '15%',fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left"><a>ФИО</a></TableCell>
+                            <TableCell sx={{padding: 1}} style={{ width: '50%',fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left"><a>ФИО</a></TableCell>
                             <TableCell sx={{padding: 1}} style={{ width: '50%', fontSize: '12px', color: "rgb(199, 199, 199)" }} align="left"><a>Дата регистрации</a></TableCell>
                             <TableCell sx={{padding: 1}} style={{ width: '5%', color: "#fff" }} align="left"></TableCell>
                         </TableRow>
@@ -197,7 +197,8 @@ const FoundersBlock = (props) => {
                     <TableBody style={{borderBottom: 'hidden'}}>
                     {exist ? array.map((row, index) => (
                         <FounderRow row={row} />
-                    )): <TableCell  className="zeroResult" align="center" colSpan={4} style={{borderBottom: 'hidden'}}><a>Нет данных</a></TableCell>}
+                    )): 
+                    <TableCell  className="zeroResult" align="center" colSpan={4} style={{borderBottom: 'hidden'}}><a>Нет данных</a></TableCell>}
                     </TableBody>
                     </Box>
                 </Collapse>
@@ -238,7 +239,7 @@ const FounderRow = (props) => {
                       <TableCell style={{ width: '70%', fontSize: '12px', color: "#FFFFFF" }} align="left"><a>{row.deposit || "---"}</a></TableCell>
                     </TableRow>
                     <TableRow style={{borderBottom: 'hidden'}}>
-                      <TableCell style={{ width: '30%', fontSize: '12px', color: "#6D6D6D" }}  align="left"><a>share</a></TableCell>
+                      <TableCell style={{ width: '30%', fontSize: '12px', color: "#6D6D6D" }}  align="left"><a>Доля</a></TableCell>
                       <TableCell style={{ width: '70%', fontSize: '12px', color: "#FFFFFF" }} align="left"><a>{row.share || "---"}</a></TableCell>
                     </TableRow>
                   </TableHead>

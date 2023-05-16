@@ -44,85 +44,83 @@ function UlLeftTopFrame(props) {
                         value={bin || '---'}
                         variant="outlined" />
                     </div>
-                        <label htmlFor="pName">Юридический адрес</label>
-                    <div className='addressLine'>
+                    <div className='adressBlock'>
                         <div>
-                            <label htmlFor="pName">Область</label>
-                            <TextField sx={{ 
-                                flex: 1, 
-                                border: "1px solid #565656", 
-                                borderRadius: "4px",
-                                height: '10px'
-                            }}  
-                            
-                            id="filled-read-only-input" 
-                            value={address.regAddrRegionRu || '---'}
-                            variant="outlined" />
+                            <label htmlFor="pName">Юридический адрес</label>
                         </div>
-                        <div>
-                            <label htmlFor="pName">Улица</label>
-                            <TextField sx={{ 
-                                flex: 1, 
-                                border: "1px solid #565656", 
-                                borderRadius: "4px",
-                                height: '10px'
-                            }}  
-                            
-                            id="filled-read-only-input" 
-                            value={address.regAddrStreetRu || '---'}
-                            variant="outlined" />
-                        </div>
-                        <div>
-                            <label htmlFor="pName">Город</label>
-                            <TextField sx={{ 
-                                flex: 1, 
-                                border: "1px solid #565656", 
-                                borderRadius: "4px",
-                                height: '10px'
-                            }}  
-                            
-                            id="filled-read-only-input" 
-                            value={address.regAddrLocalityRu || '---'}
-                            variant="outlined" />
-                        </div>
-                        <div>
-                            <label htmlFor="pName">Номер дома</label>
-                            <TextField sx={{ 
-                                flex: 1, 
-                                border: "1px solid #565656", 
-                                borderRadius: "4px",
-                                height: '10px'
-                            }}  
-                            
-                            id="filled-read-only-input" 
-                            value={address.regAddrBuildingNum || '---'}
-                            variant="outlined" />
-                        </div>
-                        <div>
-                            <label htmlFor="pName">Район</label>
-                            <TextField sx={{ 
-                                flex: 1, 
-                                border: "1px solid #565656", 
-                                borderRadius: "4px",
-                                height: '10px'
-                            }}  
-                            
-                            id="filled-read-only-input" 
-                            value={address.regAddrDistrictRu || '---'}
-                            variant="outlined" />
-                        </div>
-                        <div>
-                            <label htmlFor="pName">Наименование ОКЭД</label>
-                            <TextField sx={{ 
-                                flex: 1, 
-                                border: "1px solid #565656", 
-                                borderRadius: "4px",
-                                height: '10px'
-                            }}  
-                            
-                            id="filled-read-only-input" 
-                            value={address.okedNameRu || '---'}
-                            variant="outlined" />
+                        <div className='addressLine'>
+                            <div>
+                                <label htmlFor="pName">Область</label>
+                                <TextField sx={{ 
+                                    flex: 1, 
+                                    borderRadius: "4px",
+                                    height: '30px'
+                                }}  
+                                
+                                id="filled-read-only-input" 
+                                value={address.regAddrRegionRu || '---'}
+                                variant="outlined" />
+                            </div>
+                            <div>
+                                <label htmlFor="pName">Улица</label>
+                                <TextField sx={{ 
+                                    flex: 1, 
+                                    borderRadius: "4px",
+                                    height: '10px'
+                                }}  
+                                
+                                id="filled-read-only-input" 
+                                value={address.regAddrStreetRu || '---'}
+                                variant="outlined" />
+                            </div>
+                            <div>
+                                <label htmlFor="pName">Город</label>
+                                <TextField sx={{ 
+                                    flex: 1, 
+                                    borderRadius: "4px",
+                                    height: '10px'
+                                }}  
+                                
+                                id="filled-read-only-input" 
+                                value={address.regAddrLocalityRu || '---'}
+                                variant="outlined" />
+                            </div>
+                            <div>
+                                <label htmlFor="pName">Номер дома</label>
+                                <TextField sx={{ 
+                                    flex: 1, 
+                                    borderRadius: "4px",
+                                    height: '10px'
+                                }}  
+                                
+                                id="filled-read-only-input" 
+                                value={address.regAddrBuildingNum || '---'}
+                                variant="outlined" />
+                            </div>
+                            <div>
+                                <label htmlFor="pName">Район</label>
+                                <TextField sx={{ 
+                                    flex: 1, 
+                                    borderRadius: "4px",
+                                    height: '10px'
+                                }}  
+                                
+                                id="filled-read-only-input" 
+                                value={address.regAddrDistrictRu || '---'}
+                                variant="outlined" />
+                            </div>
+                            <div>
+                                <label htmlFor="pName">Наименование ОКЭД</label>
+                                <TextField sx={{ 
+                                    flex: 1, 
+                                    borderRadius: "4px",
+                                    height: '10px'
+                                }}  
+                                
+                                id="filled-read-only-input" 
+                                value={address.okedNameRu || '---'}
+                                variant="outlined" />
+                            </div>
                         </div>
                     </div>
                 </div>
