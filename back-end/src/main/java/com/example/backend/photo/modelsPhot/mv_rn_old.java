@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "mv_rn_old", schema = "imp_rn")
+@Table(name = "mv_rn", schema = "imp_rn")
 public class mv_rn_old {
     @Nullable
     @Id

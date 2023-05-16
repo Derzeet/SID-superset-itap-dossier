@@ -10,6 +10,26 @@ public class FL_PENSION_FINAL {
     private List<String> years;
     private List<Map<String,Object>> nakoplenya;
     private List<flPensionMini> flPensionMinis;
+    private Integer AmountOfEmp;
+    private Integer year;
+
+    public Integer getYear() {
+        return year;
+    }
+
+    public void setYear(Integer year) {
+        this.year = year;
+    }
+
+    public Integer getAmountOfEmp() {
+        return AmountOfEmp;
+    }
+
+    public void setAmountOfEmp(Integer amountOfEmp) {
+        AmountOfEmp = amountOfEmp;
+    }
+
+
 
     public String getCompanyBin() {
         return CompanyBin;

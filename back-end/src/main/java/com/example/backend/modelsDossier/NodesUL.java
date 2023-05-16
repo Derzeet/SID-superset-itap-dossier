@@ -36,6 +36,15 @@ public class NodesUL {
     private List<fl_contacts> fl_contacts;
 
     private List<mv_auto_fl> mvAutoFls;
+    private List<FL_PENSION_FINAL> flPensionContrs;
+
+    public List<FL_PENSION_FINAL> getFlPensionContrs() {
+        return flPensionContrs;
+    }
+
+    public void setFlPensionContrs(List<FL_PENSION_FINAL> flPensionContrs) {
+        this.flPensionContrs = flPensionContrs;
+    }
 
     public List<com.example.backend.photo.modelsPhot.fl_contacts> getFl_contacts() {
         return fl_contacts;

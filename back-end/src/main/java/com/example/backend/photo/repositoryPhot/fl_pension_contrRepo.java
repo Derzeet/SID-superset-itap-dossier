@@ -22,6 +22,24 @@ public interface fl_pension_contrRepo extends JpaRepository<fl_pension_contr, Lo
             "            WHERE \"IIN\" = ?1 and \"P_RNN\" = ?2\n" +
             "                GROUP BY \"KNP\" ", nativeQuery = true)
     List<Map<String,Object>> findAmountOfAmountByKNP(String iin, String bin);
+    @Query(value= "SELECT  DISTINCT \"IIN\",cast(SUM(\"AMOUNT\") as text) AS AMOUNT, \"KNP\" FROM imp_kfm_fl.fl_pension_contr \n" +
+            "WHERE extract(year from \"PAY_DATE\") = ?1 and \"P_RNN\" = ?2 GROUP BY \"KNP\", \"IIN\" ", nativeQuery = true)
+    List<Map<String,Object>> findAmountOfAmountByKNPUL(Integer year, String bin);
+    @Query(value = "SELECT extract(year from \"PAY_DATE\"), COUNT(DISTINCT \"IIN\") AS iin_count\n" +
+            "FROM imp_kfm_fl.fl_pension_contr\n" +
+            "WHERE \"P_RNN\" = ?1 \n" +
+            "GROUP BY extract(year from \"PAY_DATE\")", nativeQuery = true)
+    List<Map<String,Object>> findAmountOfEmployeesOfEveryYear(String Bin);
+
+    @Query(value = "SELECT distinct (extract(year from \"PAY_DATE\"))\n" +
+            "FROM imp_kfm_fl.fl_pension_contr where \"P_RNN\" = '091040009041'  group by \"PAY_DATE\"", nativeQuery = true)
+    List<Integer> amountOfYears(String BIN);
+    @Query(value = "SELECT  COUNT(DISTINCT \"IIN\") AS iin_count\n" +
+            "FROM imp_kfm_fl.fl_pension_contr\n" +
+            "WHERE \"P_RNN\" = ?1 and extract(year from \"PAY_DATE\") = ?2 \n" +
+            "GROUP BY extract(year from \"PAY_DATE\")", nativeQuery = true)
+    Integer amountOfEmp(String BIN, Integer year);
+
 
     @Query(value = "SELECT EXTRACT(YEAR FROM \"PAY_DATE\") AS year,\n" +
             "       \"P_NAME\", \"KNP\",\n" +

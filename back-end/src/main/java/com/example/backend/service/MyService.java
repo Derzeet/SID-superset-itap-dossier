@@ -406,7 +406,7 @@ public class MyService {
                 flPensionFinal.setFlPensionMinis(fl_pension_contrss);
                 flPensionFinal.setNakoplenya(r);
                 flPensionFinal.setYears(fff);
-                flPensionFinal.setCompanyBin(flPension);
+//                flPensionFinal.setCompanyBin(flPension);
                 flPensionFinals.add(flPensionFinal);
 //            System.out.println(findAmountOfAmountByKNPf);
             }
@@ -570,6 +570,11 @@ public class MyService {
              System.out.println("Error: " + e);
          }
          try {
+             myNode.setFl_contacts(flContactsRepo.findAllByIin(BIN));
+         } catch (Exception e){
+             System.out.println("Error:" + e);
+         }
+         try {
              List<adm> MyAdm =  admRepo.getUsersByLikeBin(BIN);
              myNode.setAdms(MyAdm);
          } catch (Exception e) {
@@ -668,13 +673,79 @@ public class MyService {
              myNode.setMvAutoFls(mvAutoFls);
          } catch (Exception e) {
              System.out.println("Error: " + e);
-         } try {
-             List<adm> adms = admRepo.getUsersByLikeBin(BIN);
-             myNode.setAdms(adms);
-         } catch (Exception e) {
-             System.out.println("Error: " + e);
          }
+         List<MvUlFounderUl> mvUlFounderUls = mvUlFounderUlRepo.getUsersByLike(BIN);
+         List<SvedenyaObUchastnikovUlEntity> svedenyaObUchastnikovUlEntities = new ArrayList<>();
+         for(MvUlFounderUl mvUlFUl : mvUlFounderUls){
+             SvedenyaObUchastnikovUlEntity svedenyaObUchastnikovUlEntity = new SvedenyaObUchastnikovUlEntity();
+             svedenyaObUchastnikovUlEntity.setIin_bin(mvUlFUl.getFounderBin());
+             svedenyaObUchastnikovUlEntity.setFIOorUlName(mvUlFUl.getFounderNameRu());
+             svedenyaObUchastnikovUlEntity.setReg_date(mvUlFUl.getRegDate());
+             if(mvUlFUl.isCurrent()){
+                 svedenyaObUchastnikovUlEntity.setIdentificator("Учредитель ЮЛ");
+             } else {
+                 svedenyaObUchastnikovUlEntity.setIdentificator("Учредитель ЮЛ (исторический)");
+             }
+             svedenyaObUchastnikovUlEntities.add(svedenyaObUchastnikovUlEntity);
+         }
+         List<MvUlLeaderEntity> mvUlLeaderEntities = mvUlLeaderEntityRepo.getUsersByLike(BIN);
+         for(MvUlLeaderEntity mvUlFUl : mvUlLeaderEntities){
+             SvedenyaObUchastnikovUlEntity svedenyaObUchastnikovUlEntity = new SvedenyaObUchastnikovUlEntity();
+             svedenyaObUchastnikovUlEntity.setIin_bin(mvUlFUl.getIin());
+             svedenyaObUchastnikovUlEntity.setFIOorUlName(mvUlFUl.getLastName() + " " + mvUlFUl.getFirstName()+ " " + mvUlFUl.getPatronymic());
+             svedenyaObUchastnikovUlEntity.setReg_date(mvUlFUl.getRegDate());
+             if(mvUlFUl.getCurrent() == true){
+                 svedenyaObUchastnikovUlEntity.setIdentificator("Директор");
+             } else {
+                 svedenyaObUchastnikovUlEntity.setIdentificator("Директор (исторический)");
+             }
+             svedenyaObUchastnikovUlEntities.add(svedenyaObUchastnikovUlEntity);
 
+         }
+         myNode.setSvedenyaObUchastnikovUlEntities(svedenyaObUchastnikovUlEntities);
+         if(myNode.getOmns().size()== 0
+                 & myNode.getBankrots().size()== 0
+                 & myNode.getAdms().size()== 0
+                 & myNode.getOpgEntities().size()== 0
+                 & myNode.getCriminals().size()== 0
+                 & myNode.getBlockEsfs().size()== 0
+                 & myNode.getFpgTempEntities().size()== 0){
+             myNode.setPerson_with_risk(false);
+         }else {
+             myNode.setPerson_with_risk(true);
+         }
+//         List<FL_PENSION_FINAL> flPensionFinals = new ArrayList<>();
+//         FL_PENSION_FINAL flPensionFinal = new FL_PENSION_FINAL();
+//         flPensionFinal.setNakoplenya(flPensionContrRepo.findAmountOfEmployeesOfEveryYear(BIN));
+//         flPensionFinals.add(flPensionFinal);
+//         myNode.setFlPensionContrs(flPensionFinals);
+         List<FL_PENSION_FINAL> flPensionFinals = new ArrayList<>();
+         List<Integer> adad = flPensionContrRepo.amountOfYears(BIN);
+         for(Integer add : adad){
+             FL_PENSION_FINAL flPensionFinal = new FL_PENSION_FINAL();
+             System.out.println(add);
+             flPensionFinal.setAmountOfEmp(flPensionContrRepo.amountOfEmp(BIN,add));
+             List<Map<String, Object>> r = flPensionContrRepo.findAmountOfAmountByKNPUL(add,BIN);
+             flPensionFinal.setNakoplenya(r);
+             flPensionFinal.setYear(add);
+             flPensionFinals.add(flPensionFinal);
+         }
+         myNode.setFlPensionContrs(flPensionFinals);
+//         for(String flPension : flPensionContrs){
+//             List<flPensionMini> fl_pension_contrss = new ArrayList<>();
+//             fl_pension_contrss = flPensionMiniRepo.getAllByCompanies(IIN,flPension);
+//             List<String> fff = flPensionMiniRepo.getAllByCompaniesYear(IIN,flPension);
+////            System.out.println(flPensionContrRepo.findAmountOfAmountByKNP(IIN,flPension));
+////            Object findAmountOfAmountByKNPf = flPensionContrRepo.findAmountOfAmountByKNP(IIN,flPension);
+////            System.out.printf(String.valueOf(findAmountOfAmountByKNPf.getClass().getName()));
+//             flPensionFinal.setFlPensionMinis(fl_pension_contrss);
+//             flPensionFinal.setNakoplenya(r);
+//             flPensionFinal.setYears(fff);
+//             flPensionFinal.setCompanyBin(flPension);
+//             flPensionFinals.add(flPensionFinal);
+////            System.out.println(findAmountOfAmountByKNPf);
+//         }
+//         myNode.setFlPensionContrs(flPensionFinals);
 //         List<TaxOutEntity> taxOutEntities = taxOutEntityRepo.getUsersByLike(BIN);
          //     myNode.setTaxOutEntities(taxOutEntities);
             return myNode;
