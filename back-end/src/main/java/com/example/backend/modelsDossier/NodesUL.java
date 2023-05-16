@@ -3,6 +3,7 @@ package com.example.backend.modelsDossier;
 import com.example.backend.photo.modelsPhot.*;
 
 import java.util.List;
+import java.util.Map;
 
 public class NodesUL {
     private List<mv_ul> mvUls;
@@ -37,6 +38,15 @@ public class NodesUL {
 
     private List<mv_auto_fl> mvAutoFls;
     private List<FL_PENSION_FINAL> flPensionContrs;
+    private List<Map<String, Object>> PensionYearAndEmpNum;
+
+    public List<Map<String, Object>> getPensionYearAndEmpNum() {
+        return PensionYearAndEmpNum;
+    }
+
+    public void setPensionYearAndEmpNum(List<Map<String, Object>> pensionYearAndEmpNum) {
+        PensionYearAndEmpNum = pensionYearAndEmpNum;
+    }
 
     public List<FL_PENSION_FINAL> getFlPensionContrs() {
         return flPensionContrs;

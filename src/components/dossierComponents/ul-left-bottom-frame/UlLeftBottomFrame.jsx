@@ -320,9 +320,9 @@ const TaxesBlock = (props) => {
                 <Box sx={{ margin: 0, marginLeft: '0' }}>
                   <TableHead sx={{backgroundColor: '#ffffff0a'}}>
                     <TableRow className="uitableHead">
-                        <TableCell sx={{padding: 1}} style={{ width: '15%',fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left"><a>ogdName</a></TableCell>
+                        <TableCell sx={{padding: 1}} style={{ width: '20%',fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left"><a>Наименование</a></TableCell>
                         <TableCell sx={{padding: 1}} style={{ width: '50%', fontSize: '12px', color: "rgb(199, 199, 199)" }} align="left"><a>Название налога</a></TableCell>
-                        <TableCell sx={{padding: 1}} style={{ width: '30%', fontSize: '12px', color: "rgb(199, 199, 199)" }} align="left"><a>paymentAmount</a></TableCell>
+                        <TableCell sx={{padding: 1}} style={{ width: '15%', fontSize: '12px', color: "rgb(199, 199, 199)" }} align="left"><a>Сумма платежа</a></TableCell>
                         <TableCell sx={{padding: 1}} style={{ width: '5%', color: "#fff" }} align="left"></TableCell>
                     </TableRow>
                   </TableHead> 
@@ -372,19 +372,19 @@ const TaxesRow = (props) => {
                     <TableCell style={{ width: '70%', fontSize: '12px', color: "#FFFFFF" }} align="left"><a>{row.paymentDocumentNumber || "---"}</a></TableCell>
                   </TableRow>
                   <TableRow style={{borderBottom: 'hidden'}}>
-                    <TableCell style={{ width: '30%', fontSize: '12px', color: "#6D6D6D" }}  align="left"><a>budgetClassificationCode</a></TableCell>
+                    <TableCell style={{ width: '30%', fontSize: '12px', color: "#6D6D6D" }}  align="left"><a>Классификация бюджета</a></TableCell>
                     <TableCell style={{ width: '70%', fontSize: '12px', color: "#FFFFFF" }} align="left"><a>{row.budgetClassificationCode || "---"}</a></TableCell>
                   </TableRow>
                   <TableRow style={{borderBottom: 'hidden'}}>
-                    <TableCell style={{ width: '30%', fontSize: '12px', color: "#6D6D6D" }}  align="left"><a>dateOfBudgetEnrollment</a></TableCell>
+                    <TableCell style={{ width: '30%', fontSize: '12px', color: "#6D6D6D" }}  align="left"><a>Дата зачисления в бюджет</a></TableCell>
                     <TableCell style={{ width: '70%', fontSize: '12px', color: "#FFFFFF" }} align="left"><a>{row.dateOfBudgetEnrollment || "---"}</a></TableCell>
                   </TableRow>
                   <TableRow style={{borderBottom: 'hidden'}}>
-                    <TableCell style={{ width: '30%', fontSize: '12px', color: "#6D6D6D" }}  align="left"><a>transactionType</a></TableCell>
+                    <TableCell style={{ width: '30%', fontSize: '12px', color: "#6D6D6D" }}  align="left"><a>Тип транзакции</a></TableCell>
                     <TableCell style={{ width: '70%', fontSize: '12px', color: "#FFFFFF" }} align="left"><a>{row.transactionType || "---"}</a></TableCell>
                   </TableRow>
                   <TableRow style={{borderBottom: 'hidden'}}>
-                    <TableCell style={{ width: '30%', fontSize: '12px', color: "#6D6D6D" }}  align="left"><a>dateOfAccountDebit</a></TableCell>
+                    <TableCell style={{ width: '30%', fontSize: '12px', color: "#6D6D6D" }}  align="left"><a>Дата списания средств</a></TableCell>
                     <TableCell style={{ width: '70%', fontSize: '12px', color: "#FFFFFF" }} align="left"><a>{row.dateOfAccountDebit || "---"}</a></TableCell>
                   </TableRow>
                 </TableHead>

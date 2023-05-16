@@ -13,6 +13,8 @@ import com.example.backend.tools.PdfGenerator;
 import com.lowagie.text.*;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -55,6 +57,15 @@ public class DoseirController {
         NodesUL ss = myService.getNodeUL(bin);
         return ss;
     }
+    @GetMapping("/taxpage")
+    public List<TaxOutEntity> getTax(@RequestParam String bin, @RequestParam(required = false,defaultValue = "0") int page, @RequestParam(required = false,defaultValue = "10") int size) {
+        return myService.taxOutEntities(bin,PageRequest.of(page,size));
+    }
+    @GetMapping("/pensionUl")
+    public List<Map<String, Object>> pensionUl(@RequestParam(required = false,defaultValue = "0") int page, @RequestParam(required = false,defaultValue = "10") int size) {
+//        return myService.taxOutEntities(bin,PageRequest.of(page,size));
+        return myService.pensionEntityUl(PageRequest.of(page,size));
+    }
 
     @GetMapping("/iin")
     public List<searchResultModelFL> getByIIN(@RequestParam String iin) {
@@ -78,6 +89,13 @@ public class DoseirController {
     @GetMapping("/byphone")
     public List<searchResultModelFL> getByPhone(@RequestParam String phone) {
         return myService.getByPhone(phone);
+    }   @GetMapping("/byvinkuzov")
+    public List<searchResultModelFL> getByVinKuzov(@RequestParam String vin) {
+        return myService.getByVinFl(vin);
+    }
+     @GetMapping("/byvinkuzovul")
+    public List<searchResultModelUl> getByVinKuzovUl(@RequestParam String vin) {
+        return myService.getByVinUl(vin);
     }
 
     @GetMapping("/fio")

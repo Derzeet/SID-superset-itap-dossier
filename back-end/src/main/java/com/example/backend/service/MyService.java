@@ -10,6 +10,9 @@ import com.example.backend.photo.repositoryPhot.reg_address_fl_Repo;
 import com.example.backend.photo.repositoryPhot.*;
 import com.example.backend.repositoryDossier.*;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
@@ -211,6 +214,36 @@ public class MyService {
         List<searchResultModelFL> result = findWithPhoto(fls);
         return result;
     }
+    public List<searchResultModelFL> getByVinFl(String vin) {
+        List<String> iin = mvAutoFlRepo.getByVin(vin);
+        List<mv_fl> fls = new ArrayList<>();
+        for (String ii: iin) {
+            mv_fl person = mv_FlRepo.getUserByIin(ii);
+            fls.add(person);
+        }
+        try {
+            List<searchResultModelFL> result = findWithPhoto(fls);
+            return result;
+
+        }catch (Exception e){
+            System.out.println(e);
+        }
+        return null;
+    }
+    public List<searchResultModelUl> getByVinUl(String vin) {
+        List<String> iin = mvAutoFlRepo.getByVin(vin);
+        List<mv_ul> mvUls = mv_ul_repo.getUsersByLike(iin.get(0));
+        List<searchResultModelUl> list = new ArrayList<>();
+        for (mv_ul l: mvUls) {
+            searchResultModelUl res = new searchResultModelUl();
+            res.setBin(l.getBin());
+            res.setName(l.getFull_name_rus());
+            list.add(res);
+        }
+
+        return list;
+    }
+
     public List<searchResultModelFL> getByDoc_photo(String IIN) {
         List<mv_iin_doc> fls = mv_iin_docRepo.getByDoc_number(IIN);
         List<mv_fl> fls1 = new ArrayList<>();
@@ -552,6 +585,16 @@ public class MyService {
 
         return list;
     }
+    public List<TaxOutEntity> taxOutEntities(String bin, PageRequest pageRequest){
+        Page<TaxOutEntity> taxOutEntityPage = taxOutEntityRepo.getUsersByLike(bin,pageRequest);
+        return taxOutEntityPage.getContent();
+    }
+    public List<Map<String, Object>> pensionEntityUl(PageRequest pageRequest){
+        Page<Map<String,Object>> pens = flPensionContrRepo.fffdsafs(pageRequest);
+        return pens.getContent();
+    }
+
+
      public NodesUL getNodeUL(String BIN){
          NodesUL myNode = new NodesUL();
          try {
@@ -672,11 +715,11 @@ public class MyService {
              myNode.setMvRnOlds(mvRnOlds);
          } catch (Exception e) {
              System.out.println("Error: " + e);
-         }try {
-             List<TaxOutEntity> taxOutEntitiest = taxOutEntityRepo.getUsersByLike(BIN);
-             myNode.setTaxOutEntities(taxOutEntitiest);
-         } catch (Exception e) {
-             System.out.println("Error: " + e);
+//         }try {
+//             List<TaxOutEntity> taxOutEntitiest = taxOutEntityRepo.getUsersByLike(BIN);
+//             myNode.setTaxOutEntities(taxOutEntitiest);
+//         } catch (Exception e) {
+//             System.out.println("Error: " + e);
          } try {
              List<mv_auto_fl> mvAutoFls = mvAutoFlRepo.getUsersByLike(BIN);
              myNode.setMvAutoFls(mvAutoFls);
@@ -728,18 +771,7 @@ public class MyService {
 //         flPensionFinal.setNakoplenya(flPensionContrRepo.findAmountOfEmployeesOfEveryYear(BIN));
 //         flPensionFinals.add(flPensionFinal);
 //         myNode.setFlPensionContrs(flPensionFinals);
-         List<FL_PENSION_FINAL> flPensionFinals = new ArrayList<>();
-         List<Integer> adad = flPensionContrRepo.amountOfYears(BIN);
-         for(Integer add : adad){
-             FL_PENSION_FINAL flPensionFinal = new FL_PENSION_FINAL();
-             System.out.println(add);
-             flPensionFinal.setAmountOfEmp(flPensionContrRepo.amountOfEmp(BIN,add));
-             List<Map<String, Object>> r = flPensionContrRepo.findAmountOfAmountByKNPUL(add,BIN);
-             flPensionFinal.setNakoplenya(r);
-             flPensionFinal.setYear(add);
-             flPensionFinals.add(flPensionFinal);
-         }
-         myNode.setFlPensionContrs(flPensionFinals);
+
 //         for(String flPension : flPensionContrs){
 //             List<flPensionMini> fl_pension_contrss = new ArrayList<>();
 //             fl_pension_contrss = flPensionMiniRepo.getAllByCompanies(IIN,flPension);
@@ -757,6 +789,20 @@ public class MyService {
 //         myNode.setFlPensionContrs(flPensionFinals);
 //         List<TaxOutEntity> taxOutEntities = taxOutEntityRepo.getUsersByLike(BIN);
          //     myNode.setTaxOutEntities(taxOutEntities);
+//         List<FL_PENSION_FINAL> flPensionFinals = new ArrayList<>();
+//         List<Integer> adad = flPensionContrRepo.amountOfYears(BIN);
+//         for(Integer add : adad){
+//             FL_PENSION_FINAL flPensionFinal = new FL_PENSION_FINAL();
+//             System.out.println(add);
+//             flPensionFinal.setAmountOfEmp(flPensionContrRepo.amountOfEmp(BIN,add));
+             List<Map<String, Object>> r = flPensionContrRepo.findAmountOfEmployeesOfEveryYear(BIN);
+         myNode.setPensionYearAndEmpNum(r);
+//             flPensionFinal.setNakoplenya(r);
+//             flPensionFinal.setYear(add);
+//             flPensionFinals.add(flPensionFinal);
+//         }
+//         myNode.setFlPensionContrs(flPensionFinals);
             return myNode;
         }
+
 }
