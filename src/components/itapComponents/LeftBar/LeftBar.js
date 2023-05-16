@@ -7,6 +7,10 @@ import RelationBlock from "../Relation/RelationBlock";
 import ApprovementModalWindow from "../ApprovementModal/ApprovementModalWindow";
 import LayoutController from "../LayoutController/LayoutController";
 
+import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
+import IconButton from '@mui/material/IconButton';
+
+
 const LeftBar = (props) => {
     const navigate = useNavigate()
     const reader = new FileReader()
@@ -307,7 +311,12 @@ const LeftBar = (props) => {
     }
 
     return (
-        <div className='leftBar'>
+        <div className={`leftBar ${props.openLeft?'leftBar20':'leftBar0'}`}>
+            <div className="leftBarClose">
+                <IconButton aria-label="expand row" size="small" onClick={() => props.handleLeftOpen(false)}>
+                    <KeyboardArrowLeftIcon style={{ fill: '#ffffff' }}/>
+                </IconButton>
+            </div>
             <form >
                 <div className="formBlock">
                     <label htmlFor="connections">Найти связи между</label>

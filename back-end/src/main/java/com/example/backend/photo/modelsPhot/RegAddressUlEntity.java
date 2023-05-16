@@ -7,7 +7,6 @@ import java.util.Date;
 @Entity
 @Table(name = "imp_kfm_ul.mv_reg_address_ul")
 public class RegAddressUlEntity {
-    @Id
     @Nullable
     @Column(name = "subject_id")
     private Integer subjectId;
@@ -26,6 +25,8 @@ public class RegAddressUlEntity {
     @Nullable
 
     @Column(name = "reg_date")
+    @Id
+
     private Date regDate;
     @Nullable
 

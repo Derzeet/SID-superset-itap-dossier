@@ -9,6 +9,9 @@ import html2canvas from 'html2canvas';
 import {useLocation} from 'react-router-dom'
 import queryString from 'query-string';
 
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import IconButton from '@mui/material/IconButton';
+
 import './../../Loader.css'
 import './Graphs.css'
 
@@ -67,6 +70,7 @@ const GraphNetnew = (props) => {
 
     const [showRels, setShowRels] = useState("")
     const [openLimit, setOpenLimit] = useState(0)
+    const [openLeft, setOpenLeft] = useState(true)
     
     useEffect(() => {
         console.log(openLimit, showRels)
@@ -1090,6 +1094,10 @@ const GraphNetnew = (props) => {
         })
     }
 
+    const handleLeftOpen = (value) => {
+      setOpenLeft(value)
+    }
+
     const handleLayout = (layout) => {
         setLayoutOptions(prev => ({
             ...prev,
@@ -1235,8 +1243,13 @@ const GraphNetnew = (props) => {
     if (counter === 0 && !isLoading) {
         return (
             <div className='mainSection'>
-                <LeftBar object={object} type={type} handleLayout={handleLayout} update={update} importBt={importBt} exportBt={exportBt} handleSubmit={Submit}></LeftBar>
-                <div className='centralBar'>
+                <div className="leftBarOpen" style={{display: openLeft?'none':'block', transition: 'display .8s ease'}}>
+                  <IconButton aria-label="expand row" size="small" onClick={() => handleLeftOpen(true)}>
+                      <KeyboardArrowRightIcon style={{ fill: '#ffffff' }}/>
+                  </IconButton>
+                </div>
+                <LeftBar openLeft={openLeft} handleLeftOpen={handleLeftOpen} object={object} type={type} handleLayout={handleLayout} update={update} importBt={importBt} exportBt={exportBt} handleSubmit={Submit}></LeftBar>
+                <div className={`centralBar ${openLeft?'centralBar60':'centralBar80'}`}>
                     <div className="waiterBox">
                         <i id="waiter" className="fa-solid fa-magnifying-glass"></i>
                     </div>
@@ -1246,75 +1259,90 @@ const GraphNetnew = (props) => {
 
     } else if (counter !== 0 && nodes.length === 0 && !isLoading) {
         return (
-            <div className='mainSection'>
-                <LeftBar  object={object} type={type} handleLayout={handleLayout} update={update} importBt={importBt} exportBt={exportBt} handleSubmit={Submit}></LeftBar>
-                <div className='centralBar'>
-                    <div className="waiterBox">
-                        <a>No objects found</a>
-                    </div>
+            <div className='mainSection '>
+              <div className="leftBarOpen" style={{display: openLeft?'none':'block', transition: 'display .8s ease'}}>
+                <IconButton aria-label="expand row" size="small" onClick={() => handleLeftOpen(true)}>
+                  <KeyboardArrowRightIcon style={{ fill: '#ffffff' }}/>
+                </IconButton>
+              </div>
+              <LeftBar openLeft={openLeft} handleLeftOpen={handleLeftOpen} object={object} type={type} handleLayout={handleLayout} update={update} importBt={importBt} exportBt={exportBt} handleSubmit={Submit}></LeftBar>
+              <div className={`centralBar ${openLeft?'centralBar60':'centralBar80'}`}>
+                <div className="waiterBox">
+                    <a>No objects found</a>
                 </div>
+              </div>
             </div>
         )
 
     } else if (isLoading && nodes.length === 0) {
         return (
             <div className='mainSection'>
-                <LeftBar  object={object} type={type} handleLayout={handleLayout} update={update} importBt={importBt} exportBt={exportBt} handleSubmit={Submit}></LeftBar>
-                <div className='centralBar'>
-                    <div className="loader">
-                        <div className="inner one"></div>
-                        <div className="inner two"></div>
-                        <div className="inner three"></div>
-                    </div>
+              <div className="leftBarOpen" style={{display: openLeft?'none':'block', transition: 'display .8s ease'}}>
+                <IconButton aria-label="expand row" size="small" onClick={() => handleLeftOpen(true)}>
+                  <KeyboardArrowRightIcon style={{ fill: '#ffffff' }}/>
+                </IconButton>
+              </div>
+              <LeftBar openLeft={openLeft} handleLeftOpen={handleLeftOpen} object={object} type={type} handleLayout={handleLayout} update={update} importBt={importBt} exportBt={exportBt} handleSubmit={Submit}></LeftBar>
+              <div className={`centralBar ${openLeft?'centralBar60':'centralBar80'}`}>
+                <div className="loader">
+                  <div className="inner one"></div>
+                  <div className="inner two"></div>
+                  <div className="inner three"></div>
                 </div>
+              </div>
             </div>
         )
 
     } else { 
         return (
             <div className='mainSection'>
-                <LeftBar handleLayout={handleLayout} params={graJSON} update={update} downloadScheme={download} exportBt={exportBt} handleSubmit={Submit}></LeftBar>
-                <div className='centralBar' id="centralBar">
-                    <div className="nodeSearch">
-                        <div>
-                            <input type="text" id="nodeSearchInput" placeholder="Поиск по схеме" 
-                                onKeyDown={event => {
-                                    if (event.key === 'Enter') {
-                                        if(event.target.value != "") search(event.target.value) 
-                                        else Network.fit({});
-                                    }
-                                }}
-                                onChange={event => {
-                                    if (event.target.value == "") Network.fit({});
-                                }}
-                            />
+              <div className="leftBarOpen" style={{display: openLeft?'none':'block', transition: 'display .8s ease'}}>
+                <IconButton aria-label="expand row" size="small" onClick={() => handleLeftOpen(true)}>
+                  <KeyboardArrowRightIcon style={{ fill: '#ffffff' }}/>
+                </IconButton>
+              </div>
+              <LeftBar openLeft={openLeft} handleLeftOpen={handleLeftOpen} handleLayout={handleLayout} params={graJSON} update={update} downloadScheme={download} exportBt={exportBt} handleSubmit={Submit}></LeftBar>
+              <div className={`centralBar ${openLeft?'centralBar60':'centralBar80'}`}>
+                  <div className="nodeSearch">
+                      <div>
+                          <input type="text" id="nodeSearchInput" placeholder="Поиск по схеме" 
+                              onKeyDown={event => {
+                                  if (event.key === 'Enter') {
+                                      if(event.target.value != "") search(event.target.value) 
+                                      else Network.fit({});
+                                  }
+                              }}
+                              onChange={event => {
+                                  if (event.target.value == "") Network.fit({});
+                              }}
+                          />
 
-                            <i className="fa-solid fa-magnifying-glass"
-                                onClick={() => search()}>
-                            </i>
-                            
+                          <i className="fa-solid fa-magnifying-glass"
+                              onClick={() => search()}>
+                          </i>
+                          
 
-                        </div>
-                        <div>
-                            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAACXBIWXMAAAsTAAALEwEAmpwYAAAA4UlEQVR4nK3UMUoDQRSH8V2wiDaWCvZ24hHEVgjewCt4hO//hl3YZk9gZ+0NAiktUwqW6dOl0sInKw6kyIqZfV85xY/h8WaqKqY6yKkq4E7SUwR0DjxLckmLKVYNPACbX8yLwZTSFfC6A3kR2Pf9MSBJH3swPwg0s1tJ7yOQ/xts2/ZsZ+g+Baz3DL0MBC6B5QGQj4Jd150CqwLM/7rhkaRHSdsQMNc0zQXwEgbmzGwuaR0GDgEnw1IDnyFgLqV0PfLsfMrnMLaji1Lwp/yKgK8QMGdmN8BbGDgEzMzsPh98A4cThMeOLdocAAAAAElFTkSuQmCC"
-                                onClick={() => searchPrev()}/>
-                            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAzUlEQVR4nK3UPQ4BURiF4RFKKjW1hFZiEaKhtg3le+5MMsmUSq1yWguwA7EIYgNEITHiLxTCNfOd5LRPMnPy3SB4pRRYBuhLmiVJUrMCB5IySVtgZAlmjy6ApiWYAXtJkzRNyyagXvDKOdc1A3XvSdLUezR+g89unXNDSzB7jhZFUcMS/D4aOcBHjx9/QU5wCbQsPnkHjL/ePx4gcAbmcRzXC68MrIHeT8gDPFyXBCrBP+EzmP+B4A0ENl7X4AHe7hWoFsKuCcOwDXSKQhcGtZXbAfm2YgAAAABJRU5ErkJggg=="
-                                onClick={() => searchNext()}/>
-                        </div>
-                    </div>
-                    <Graph
-                        graph={{nodes: nodes, edges: edges}}
-                        options={graphOptions}
-                        events={events}
-                        getNetwork={network => {
-                            Network = network;
-                        }}
-                        manipulation={manipulation}
-                        className={"graph"}
-                        updateGraph={updateGraph}
-                    />
-                </div>
-                <RightBar setShowRels={setShowRels} setOpenLimit={setOpenLimit} Network={Network} showAction={showActionBtn} shortOpen={shortOpen} shortHide={shortHide} isOnSelectNode={showNodeInfo} isOnSelectEdge={showEdgeInfo} showImage={showNodeImage} showSudInfo={showSudInfo}></RightBar>
+                      </div>
+                      <div>
+                          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAACXBIWXMAAAsTAAALEwEAmpwYAAAA4UlEQVR4nK3UMUoDQRSH8V2wiDaWCvZ24hHEVgjewCt4hO//hl3YZk9gZ+0NAiktUwqW6dOl0sInKw6kyIqZfV85xY/h8WaqKqY6yKkq4E7SUwR0DjxLckmLKVYNPACbX8yLwZTSFfC6A3kR2Pf9MSBJH3swPwg0s1tJ7yOQ/xts2/ZsZ+g+Baz3DL0MBC6B5QGQj4Jd150CqwLM/7rhkaRHSdsQMNc0zQXwEgbmzGwuaR0GDgEnw1IDnyFgLqV0PfLsfMrnMLaji1Lwp/yKgK8QMGdmN8BbGDgEzMzsPh98A4cThMeOLdocAAAAAElFTkSuQmCC"
+                              onClick={() => searchPrev()}/>
+                          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAzUlEQVR4nK3UPQ4BURiF4RFKKjW1hFZiEaKhtg3le+5MMsmUSq1yWguwA7EIYgNEITHiLxTCNfOd5LRPMnPy3SB4pRRYBuhLmiVJUrMCB5IySVtgZAlmjy6ApiWYAXtJkzRNyyagXvDKOdc1A3XvSdLUezR+g89unXNDSzB7jhZFUcMS/D4aOcBHjx9/QU5wCbQsPnkHjL/ePx4gcAbmcRzXC68MrIHeT8gDPFyXBCrBP+EzmP+B4A0ENl7X4AHe7hWoFsKuCcOwDXSKQhcGtZXbAfm2YgAAAABJRU5ErkJggg=="
+                              onClick={() => searchNext()}/>
+                      </div>
+                  </div>
+                  <Graph
+                      graph={{nodes: nodes, edges: edges}}
+                      options={graphOptions}
+                      events={events}
+                      getNetwork={network => {
+                          Network = network;
+                      }}
+                      manipulation={manipulation}
+                      className={"graph"}
+                      updateGraph={updateGraph}
+                  />
+              </div>
+              <RightBar setShowRels={setShowRels} setOpenLimit={setOpenLimit} Network={Network} showAction={showActionBtn} shortOpen={shortOpen} shortHide={shortHide} isOnSelectNode={showNodeInfo} isOnSelectEdge={showEdgeInfo} showImage={showNodeImage} showSudInfo={showSudInfo}></RightBar>
             </div>
 
         )

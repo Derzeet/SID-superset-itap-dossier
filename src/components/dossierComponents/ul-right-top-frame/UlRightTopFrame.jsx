@@ -21,9 +21,10 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 function UlRightTopFrame(props) {
   const soc = ''
   const [founders, setFounders] = useState([]);
-
+  const [pdl, setPdl] = useState([])
   useEffect(() => {
     setFounders(props.founders)
+    setPdl(props.pdls)
     console.log(props.founders)
   }, [soc])
 
@@ -40,11 +41,126 @@ function UlRightTopFrame(props) {
         <div className="right-top-section">
             <div className="other-line">
                 <FoundersBlock array={founders} exist={founders != null}/>
+                <PdlTable array={pdl} />
             </div>  
         </div>
 
     );
 }
+
+
+const PdlTable = (props) => {
+    const {array} = props
+    const [open, setOpen] = useState(true)
+
+    return (
+        <>
+        <TableContainer sx={{marginTop: 0}}>
+            <Table aria-label="collapsible table" className="uitable">
+
+            <TableRow className="uitablerow" sx={{height:'10px',}} style={{borderBottom: 'hidden'}}>
+                <TableCell sx={{padding: 1}} style={{borderBottom: 'hidden', width: '90%', fontSize: '12px', fontWeight: 500, color: "#FFFFFF"}}><a>ПДЛ (Публичные должностые лица)</a></TableCell>
+                <TableCell sx={{padding: 1}} style={{width: '10%'}} align='right'>
+                        <IconButton
+                        aria-label="expand row"
+                        size="small"
+                        onClick={() => setOpen(!open)}
+                        >
+                        {open ? <KeyboardArrowUpIcon style={{ fill: '#ffffff' }}/> : <KeyboardArrowDownIcon style={{ fill: '#ffffff' }}/>}
+                        </IconButton>
+                    </TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell sx={{padding: 1}} style={{ paddingBottom: 0, paddingTop: 0}} colSpan={6}>
+                <Collapse in={open} timeout="auto" unmountOnExit>
+                    <Box sx={{ margin: 0, marginLeft: '0' }}>
+                    <TableHead sx={{backgroundColor: '#ffffff0a'}}>
+                        <TableRow className="uitableHead">
+                            <TableCell sx={{padding: 1}} style={{ width: '15%',fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left"><a>ИИН</a></TableCell>
+                            <TableCell sx={{padding: 1}} style={{ width: '50%', fontSize: '12px', color: "rgb(199, 199, 199)" }} align="left"><a>ФИО</a></TableCell>
+                            <TableCell sx={{padding: 1}} style={{ width: '50%', fontSize: '12px', color: "rgb(199, 199, 199)" }} align="left"><a>Должность</a></TableCell>
+                            {/* <TableCell sx={{padding: 1}} style={{ width: '50%', fontSize: '12px', color: "rgb(199, 199, 199)" }} align="left"><a>Область</a></TableCell>
+                            <TableCell sx={{padding: 1}} style={{ width: '50%', fontSize: '12px', color: "rgb(199, 199, 199)" }} align="left"><a>Орган</a></TableCell> */}
+                            <TableCell sx={{padding: 1}} style={{ width: '5%', color: "#fff" }} align="left"></TableCell>
+                        </TableRow>
+                    </TableHead> 
+                    <TableBody style={{borderBottom: 'hidden'}}>
+                    {array.length != 0 ? array.map((row, index) => (
+                        <PdlRow row={row} />
+                    )): <TableCell  className="zeroResult" align="center" colSpan={4} style={{borderBottom: 'hidden'}}><a>Нет данных</a></TableCell>}
+                    </TableBody>
+                    </Box>
+                </Collapse>
+                </TableCell>
+            </TableRow>
+            </Table>
+        </TableContainer>
+        </>
+    )
+}
+
+const PdlRow = (props) => {
+  const {row} = props
+    const [open, setOpen] = useState(false)
+  
+    return (
+      <>
+        <TableRow className="uitablerow" sx={{height:'10px',}} style={{borderBottom: 'hidden'}}>
+          <TableCell sx={{padding: 1}} style={{ fontSize: '12px', fontWeight: 500, color: "#FFFFFF"}}><a>{row.iin}</a></TableCell>
+          <TableCell sx={{padding: 1}} style={{ fontSize: '12px', fontWeight: 500, color: "#FFFFFF" }} align="left"><a>{row.fio}</a></TableCell>
+          <TableCell sx={{padding: 1}} style={{ fontSize: '12px', fontWeight: 500, color: "#FFFFFF" }} align="left"><a>{row.position}</a></TableCell>
+          {/* <TableCell sx={{padding: 1}} style={{ fontSize: '12px', fontWeight: 500, color: "#FFFFFF" }} align="left"><a>{row.oblast}</a></TableCell>
+          <TableCell sx={{padding: 1}} style={{ fontSize: '12px', fontWeight: 500, color: "#FFFFFF" }} align="left"><a>{row.organ}</a></TableCell> */}
+          <TableCell sx={{padding: 1}}>
+            <IconButton
+              aria-label="expand row"
+              size="small"
+              onClick={() => setOpen(!open)}
+            >
+              {open ? <KeyboardArrowUpIcon style={{ fill: '#ffffff' }}/> : <KeyboardArrowDownIcon style={{ fill: '#ffffff' }}/>}
+            </IconButton>
+          </TableCell>
+        </TableRow>
+        <TableRow style={{borderBottom: 'hidden'}}>
+          <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={4}>
+            <Collapse in={open} timeout="auto" unmountOnExit>
+              <Box sx={{ margin: 1, marginLeft: '2.6%' }}>
+                <Table size="small" aria-label="purchases">
+                  <TableHead>
+                    <TableRow style={{borderBottom: 'hidden'}}>
+                      <TableCell style={{ width: '30%', fontSize: '12px', color: "#6D6D6D" }}  align="left"><a>Область</a></TableCell>
+                      <TableCell style={{ width: '70%', fontSize: '12px', color: "#FFFFFF" }} align="left"><a>{row.oblast || "---"}</a></TableCell>
+                    </TableRow>
+                    <TableRow style={{borderBottom: 'hidden'}}>
+                      <TableCell style={{ width: '30%', fontSize: '12px', color: "#6D6D6D" }}  align="left"><a>Орган</a></TableCell>
+                      <TableCell style={{ width: '70%', fontSize: '12px', color: "#FFFFFF" }} align="left"><a>{row.organ || "---"}</a></TableCell>
+                    </TableRow>
+                    <TableRow style={{borderBottom: 'hidden'}}>
+                      <TableCell style={{ width: '30%', fontSize: '12px', color: "#6D6D6D" }}  align="left"><a>ИИН супруги</a></TableCell>
+                      <TableCell style={{ width: '70%', fontSize: '12px', color: "#FFFFFF" }} align="left"><a>{row.spouse_iin || "---"}</a></TableCell>
+                    </TableRow>
+                    <TableRow style={{borderBottom: 'hidden'}}>
+                      <TableCell style={{ width: '30%', fontSize: '12px', color: "#6D6D6D" }}  align="left"><a>ФИО супруги</a></TableCell>
+                      <TableCell style={{ width: '70%', fontSize: '12px', color: "#FFFFFF" }} align="left"><a>{row.spouse_fio || "---"}</a></TableCell>
+                    </TableRow>
+                    <TableRow style={{borderBottom: 'hidden'}}>
+                      <TableCell style={{ width: '30%', fontSize: '12px', color: "#6D6D6D" }}  align="left"><a>Госорган супруги</a></TableCell>
+                      <TableCell style={{ width: '70%', fontSize: '12px', color: "#FFFFFF" }} align="left"><a>{row.spouse_organ || "---"}</a></TableCell>
+                    </TableRow>
+                    <TableRow style={{borderBottom: 'hidden'}}>
+                      <TableCell style={{ width: '30%', fontSize: '12px', color: "#6D6D6D" }}  align="left"><a>Должность супруги</a></TableCell>
+                      <TableCell style={{ width: '70%', fontSize: '12px', color: "#FFFFFF" }} align="left"><a>{row.spouse_position || "---"}</a></TableCell>
+                    </TableRow>
+                  </TableHead>
+                </Table>
+              </Box>
+            </Collapse>
+          </TableCell>
+        </TableRow>
+      </>
+    )
+}
+
 
 const FoundersBlock = (props) => {
     const {array, exist} = props
@@ -92,7 +208,6 @@ const FoundersBlock = (props) => {
         </>
     )
 }
-
 const FounderRow = (props) => {
     const {row} = props
     const [open, setOpen] = useState(false)

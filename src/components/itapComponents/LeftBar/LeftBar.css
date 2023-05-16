@@ -1,4 +1,6 @@
 .leftBar {
+    position: relative;
+
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -6,7 +8,6 @@
 
     padding-top: 20px;
 
-    width: 20%;
     border-right: 2px var(--bar-border-color) solid;
     background-color: #0D0F11;
 
@@ -14,6 +15,23 @@
 
     overflow-y: scroll;
     overflow-x: hidden;
+}
+
+.leftBarClose {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    
+}
+
+.leftBar0 {
+    width: 0;
+    transition: width .8s ease;
+}
+
+.leftBar20 {
+    width: 20%;
+    transition: width .8s ease;
 }
 
 .leftBar form {

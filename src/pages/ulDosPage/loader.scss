@@ -1,5 +1,5 @@
 .loadComponent {
-  height: 100vh;
+  height: calc(100vh - 100px);
   width: 100vw;
 
   .dim {
@@ -23,8 +23,6 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-
-  height: 100vh;
 
   width: 97%;
   height: 100%;
@@ -85,7 +83,7 @@
 .loader {
   overflow: visible !important;
   position: absolute;
-  top: calc(50% + 25px);
+  top: calc(50% - 21px);
   left: calc(50% - 21px);
   width: 100px;
   height: 100px;

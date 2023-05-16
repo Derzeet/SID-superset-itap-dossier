@@ -68,10 +68,12 @@
 }
 
 .nav-menu {
+
     display: flex;
     flex-direction: row;
-    /* justify-content: flex-end; */
-    /* align-items: center; */
+
+    justify-content: flex-end;
+    align-items: center;
     
     gap: 3rem;
     margin-right: 40px;
@@ -83,6 +85,26 @@
     font-size: 1.2rem;
     font-family: 'Montserrat';
     font-weight: 400;
+
+    overflow: hidden !important;
+}
+
+.nav-menu li {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+
+}
+
+.nav-dropdown {
+    position: absolute;
+
+    width: 100px;
+    height: 1000px;
+
+    top: 100;
+    left: 0;
 }
 
 .nav-links span {
@@ -99,6 +121,15 @@
     color: rgb(176, 176, 176);
     transition: all ease 0.1s;
 }
+
+.NavbarItems2 {
+    overflow: visible !important;
+
+    * {
+        overflow: hidden !important;
+    }
+}
+
 .NavbarItems > div,
 .NavbarItems2 > div {
     display: flex;
