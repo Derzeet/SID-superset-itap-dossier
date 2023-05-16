@@ -38,6 +38,7 @@ const UlDosiePage = (props) => {
     const [founders, setFounders] = useState([{}, {}])
     const [taxes, setTaxes] = useState([])
     const [mshes, setMshes] = useState([])
+    const [pension, setPension] = useState([])
 
     const [menuOpen, setMenuOpen] = useState(false)
 
@@ -61,13 +62,15 @@ const UlDosiePage = (props) => {
                 setNedvijimost(res.data.mvRnOlds)
                 setTaxes(res.data.taxOutEntities)
                 setMshes(res.data.mshes)
-
+                setPension((curr) => res.data.pensionYearAndEmpNum)
+                // console.log(res.data.pensionYearAndEmpNum)
                 isLoading(false)
-
+                
             })
         }
-
+        
         searchIIN()
+        // console.log(pension)
     }, [bin])
 
     const logoutHandler = () => {
@@ -130,7 +133,7 @@ const UlDosiePage = (props) => {
                         <div className="frames">
                             <LeftTopFrame fullName={fullName} bin={ulBin} address = {address}/>
                             <RightTopFrame founders={founders} pdls={pdl}/>
-                            <LeftBottomFrame mshes={mshes} taxes={taxes} nedvijimost={nedvijimost}/>
+                            <LeftBottomFrame mshes={mshes} taxes={taxes} nedvijimost={nedvijimost} pension={pension} bin={bin}/>
                             <RightBottomFrame opg={opg} esf={BlockEsfBlock} nds={nds} bankrot={bankrot} omn={omn}/>
                         </div>
                     </div>

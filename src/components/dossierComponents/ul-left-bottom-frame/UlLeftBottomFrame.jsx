@@ -21,6 +21,7 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import { useTheme } from '@mui/material/styles';
+import axios from 'axios';
 
 function UlLeftBottomFrame(props) {
     const soc = ''
@@ -28,19 +29,23 @@ function UlLeftBottomFrame(props) {
     const [nedvijimost, setNedvijimost] = useState([])
     const [taxes, setTaxes] = useState([])
     const [mshes, setMshes] = useState([])
+    const [pension, setPension] = useState([])
+    const [bin, setBin] = useState('')
 
     useEffect(()=> {
         setNedvijimost(props.nedvijimost)
-        setTaxes(props.taxes)
+        // setTaxes(props.taxes)
         setMshes(props.mshes)
-
+        setPension(props.pension)
+        setBin(props.bin)
+        console.log(pension)
     }, [soc])
     return ( 
 
         <div className="left-bottom-section">
             <div className="other-line">
               <NedvijimostBlock array={nedvijimost} exist={nedvijimost != null}/>
-              <PensionBlock/>
+              <PensionBlock array={pension} bin={bin}/>
               <TaxesBlock array={taxes} exist={taxes.length>0}/>
               {mshes && mshes.length > 0? <MshesBlock array={mshes} exist={mshes && mshes.length > 0 ? true : false}/> : ""}
 
@@ -398,6 +403,7 @@ const TaxesRow = (props) => {
 }
 
 const PensionBlock = (props) => {
+  const {array, bin} = props
   const [open, setOpen] = useState(false)
   return (
     <>
@@ -420,7 +426,9 @@ const PensionBlock = (props) => {
             <TableCell sx={{padding: 1}} style={{ paddingBottom: 0, paddingTop: 0}} colSpan={6}>
               <Collapse in={open} timeout="auto" unmountOnExit>
                 <Box sx={{ margin: 0, marginLeft: '0' }}>
-                  <PensionYear/>
+                  {array.length> 0 ? array.map((row, index) => (
+                       <PensionYear year={row.date_part} number={row.iin_count} bin={bin}/>
+                  )): <TableCell  className="zeroResult" align="center" colSpan={4} style={{borderBottom: 'hidden'}}><a>Нет данных</a></TableCell>}
                 </Box>
               </Collapse>
             </TableCell>
@@ -431,9 +439,31 @@ const PensionBlock = (props) => {
   )
 }
 const PensionYear = (props) => {
+  const baseURL = 'http://localhost:9095/'
+  const {year, number, bin} = props
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const [count, setCount] = React.useState(0)
+  const [curr, setCurr] = useState([])
+  const [isLoading, setLoading] = useState(false)
+  const [open, setOpen] = useState(false)
+  useEffect(() => {
+    const searchIIN = () => {
+      if (open) {
+
+        setLoading(true)
+        const params = {bin, year, page}
+        
+        axios.get(baseURL+'pensionsbyyear', {params: params}).then(res => {
+          setCurr(res.data)
+          console.log(res.data)
+          setLoading(false)
+        })
+      }
+    }
+      
+      searchIIN()
+
+  }, [page, open])
   const emptyRows =
       page > 0 ? Math.max(0, (1 + page) * rowsPerPage - 15) : 0;
   
@@ -447,14 +477,13 @@ const PensionYear = (props) => {
       setRowsPerPage(parseInt(event.target.value, 10));
       setPage(0);
   };
-  const [open, setOpen] = useState(false)
   return (
     <>
       <TableContainer>
         <Table colSpan={2} style={{borderBottom: 'hidden'}} sx={{backgroundColor: '#ffffff0a', borderRadius: '3px'}} aria-label="collapsible table" className="uitable">
           <TableHead>
               <TableRow className="uitableHead">
-                  <TableCell colSpan={1} sx={{padding: 2}} style={{ fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left">Год</TableCell>
+                  <TableCell colSpan={1} sx={{padding: 2}} style={{ fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left">Год: {year} - {number}(Сотрудники)</TableCell>
                   <TableCell colSpan={1} sx={{padding: 1}} style={{ color: "#fff" }} align="right">
                       <IconButton
                         aria-label="expand row"
@@ -476,25 +505,33 @@ const PensionYear = (props) => {
                                   <Table sx={{m: 0}}>
                                     <TableHead>
                                       <TableRow className="uitableHead">
-                                        <TableCell style={{ width: '20%',fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left">ИИН</TableCell>
-                                        <TableCell style={{ width: '40%',fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left">ФИО</TableCell>
-                                        <TableCell style={{ width: '20%',fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left">Общая сумма (010)</TableCell>
-                                        <TableCell style={{ width: '20%',fontSize: '12px', color: "rgb(199, 199, 199)"}} align="right">Общая сумма (012)</TableCell>
+                                        <TableCell style={{ width: '25%',fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left">ИИН</TableCell>
+                                        <TableCell style={{ width: '45%',fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left">ФИО</TableCell>
+                                        <TableCell style={{ width: '15%',fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left">КНП 010</TableCell>
+                                        <TableCell style={{ width: '15%',fontSize: '12px', color: "rgb(199, 199, 199)"}} align="right">КНП 012</TableCell>
                                       </TableRow>
                                     </TableHead>
                                     <TableBody>
-                                      {/* <TableRow sx={{borderBottom: 'hidden'}}>
-                                        <TableCell style={{ width: '20%',fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left">02</TableCell>
-                                        <TableCell style={{ width: '40%',fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left">ФИО</TableCell>
-                                        <TableCell style={{ width: '20%',fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left">Общая сумма (010)</TableCell>
-                                        <TableCell style={{ width: '20%',fontSize: '12px', color: "rgb(199, 199, 199)"}} align="right">Общая сумма (012)</TableCell>
-                                      </TableRow> */}
+                                        {console.log(curr)}
+                                      { !isLoading ? curr.map((row) => (
+                                        
+                                        <TableRow sx={{borderBottom: 'hidden'}}>
+                                          <TableCell style={{fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left">{row.IIN}</TableCell>
+                                          <TableCell style={{fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left">{row.fio}</TableCell>
+                                          <TableCell style={{fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left">{row.zeroten}</TableCell>
+                                          <TableCell style={{fontSize: '12px', color: "rgb(199, 199, 199)"}} align="right">{row.zerotwelve}</TableCell>
+                                        </TableRow> 
+                                      )) : [1,2,3,4,5,6,7,8,9,10].map(key => (
+                                        <TableRow sx={{borderBottom: 'hidden'}}>
+                                          <TableCell align="center" colSpan={4} style={{fontSize: '12px', color: "rgb(199, 199, 199)"}}>Подождите...</TableCell>
+                                        </TableRow> 
+                                      ))}
                                     </TableBody>
                                     <TableFooter >
                                       <TableRow >
                                           <TablePagination style={{borderBottom: 'hidden'}}
                                               colSpan={4}
-                                              count={count}
+                                              count={number}
                                               rowsPerPage={10}
                                               page={page}
                                               onPageChange={handleChangePage}

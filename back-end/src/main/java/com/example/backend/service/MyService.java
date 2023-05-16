@@ -589,13 +589,19 @@ public class MyService {
         Page<TaxOutEntity> taxOutEntityPage = taxOutEntityRepo.getUsersByLike(bin,pageRequest);
         return taxOutEntityPage.getContent();
     }
-    public List<Map<String, Object>> pensionEntityUl(PageRequest pageRequest){
-        Page<Map<String,Object>> pens = flPensionContrRepo.fffdsafs(pageRequest);
+    public List<Map<String, Object>> pensionEntityUl(String bin, String year, PageRequest pageRequest){
+        Page<Map<String,Object>> pens = flPensionContrRepo.getPension(bin, year, pageRequest);
         return pens.getContent();
+    }
+    public List<Map<String,Object>> pensionEntityUl1(String bin, Double year, Integer page){
+        Integer offset = page * 10;
+        List<Map<String,Object>> pens = flPensionContrRepo.getPension1(bin, year, offset);
+        return pens;
     }
 
 
-     public NodesUL getNodeUL(String BIN){
+
+    public NodesUL getNodeUL(String BIN){
          NodesUL myNode = new NodesUL();
          try {
              List<mv_ul_founder_fl> mvUlFounderFls = mvUlFounderFlRepo.getUsersByLike(BIN);
@@ -754,6 +760,8 @@ public class MyService {
              svedenyaObUchastnikovUlEntities.add(svedenyaObUchastnikovUlEntity);
 
          }
+         List<Map<String, Object>> r = flPensionContrRepo.findAmountOfEmployeesOfEveryYear(BIN);
+         myNode.setPensionYearAndEmpNum(r);
          myNode.setSvedenyaObUchastnikovUlEntities(svedenyaObUchastnikovUlEntities);
          if(myNode.getOmns().size()== 0
                  & myNode.getBankrots().size()== 0
@@ -795,8 +803,7 @@ public class MyService {
 //             FL_PENSION_FINAL flPensionFinal = new FL_PENSION_FINAL();
 //             System.out.println(add);
 //             flPensionFinal.setAmountOfEmp(flPensionContrRepo.amountOfEmp(BIN,add));
-             List<Map<String, Object>> r = flPensionContrRepo.findAmountOfEmployeesOfEveryYear(BIN);
-         myNode.setPensionYearAndEmpNum(r);
+
 //             flPensionFinal.setNakoplenya(r);
 //             flPensionFinal.setYear(add);
 //             flPensionFinals.add(flPensionFinal);
