@@ -9,7 +9,7 @@ public class FL_PENSION_FINAL {
     private String CompanyBin;
     private List<String> years;
     private List<Map<String,Object>> nakoplenya;
-    private List<flPensionMini> flPensionMinis;
+    private List<Map<String,Object>> flPensionMinis;
     private Integer AmountOfEmp;
     private Integer year;
 
@@ -55,11 +55,11 @@ public class FL_PENSION_FINAL {
         this.nakoplenya = nakoplenya;
     }
 
-    public List<flPensionMini> getFlPensionMinis() {
+    public List<Map<String, Object>> getFlPensionMinis() {
         return flPensionMinis;
     }
 
-    public void setFlPensionMinis(List<flPensionMini> flPensionMinis) {
+    public void setFlPensionMinis(List<Map<String, Object>> flPensionMinis) {
         this.flPensionMinis = flPensionMinis;
     }
 }

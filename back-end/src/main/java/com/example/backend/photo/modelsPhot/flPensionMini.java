@@ -1,14 +1,17 @@
 package com.example.backend.photo.modelsPhot;
 
+import org.hibernate.annotations.Immutable;
+
 import javax.annotation.Nullable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.UUID;
 
 @Entity
 @Table(name = "fl_pension_contr", schema = "imp_kfm_fl")
+@Immutable
 public class flPensionMini {
+
+
     @Column(name = "PAY_DATE")
     @Nullable
 
@@ -16,18 +19,13 @@ public class flPensionMini {
 
     @Column(name = "P_NAME")
     @Nullable
+    @Id
     private String pName;
-
-
 
     @Column(name = "KNP")
     @Nullable
-
     private String knp;
-
-
     @Nullable
-    @Id
 
     @Column(name = "AMOUNT")
     private Double amount;

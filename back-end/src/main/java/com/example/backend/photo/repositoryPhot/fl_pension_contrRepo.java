@@ -49,6 +49,13 @@ public interface fl_pension_contrRepo extends JpaRepository<fl_pension_contr, Lo
             "WHERE \"P_RNN\" = ?1 \n" +
             "GROUP BY extract(year from \"PAY_DATE\")", nativeQuery = true)
     List<Map<String,Object>> findAmountOfEmployeesOfEveryYear(String Bin);
+    @Query(value = "SELECT EXTRACT(YEAR FROM \"PAY_DATE\") AS PAY_DATE,\n" +
+            "       \"P_NAME\", \"KNP\",\n" +
+            "    SUM(\"AMOUNT\") AS \"AMOUNT\"\n" +
+            "    FROM imp_kfm_fl.fl_pension_contr\n" +
+            "    WHERE \"IIN\" = ?1 and \"P_RNN\" = ?2 \n" +
+            "    GROUP BY EXTRACT(YEAR FROM \"PAY_DATE\"), \"P_NAME\", \"KNP\"  ", nativeQuery = true)
+    List<Map<String,Object>> getAllByCompanies(String iin , String bin);
 
     @Query(value = "SELECT distinct (extract(year from \"PAY_DATE\"))\n" +
             "FROM imp_kfm_fl.fl_pension_contr where \"P_RNN\" = '091040009041'  group by \"PAY_DATE\"", nativeQuery = true)
@@ -60,13 +67,6 @@ public interface fl_pension_contrRepo extends JpaRepository<fl_pension_contr, Lo
     Integer amountOfEmp(String BIN, Integer year);
 
 
-    @Query(value = "SELECT EXTRACT(YEAR FROM \"PAY_DATE\") AS year,\n" +
-            "       \"P_NAME\", \"KNP\",\n" +
-            "    SUM(\"AMOUNT\") AS total_amount\n" +
-            "    FROM imp_kfm_fl.fl_pension_contr\n" +
-            "    WHERE \"IIN\" = ?1 and \"P_RNN\" = ?2 \n" +
-            "    GROUP BY EXTRACT(YEAR FROM \"PAY_DATE\"), \"P_NAME\", \"KNP\"  ", nativeQuery = true)
-    fl_pension_contr getAllByCompanies(String iin , String bin);
 
     @Query(value = "select distinct (extract (year from fpc.\"PAY_DATE\")) from imp_kfm_fl.fl_pension_contr fpc where \"P_RNN\" = ?1", nativeQuery = true)
     List<Integer> getYearThatExist(String bin);

@@ -39,6 +39,15 @@ public class NodesUL {
     private List<mv_auto_fl> mvAutoFls;
     private List<FL_PENSION_FINAL> flPensionContrs;
     private List<Map<String, Object>> PensionYearAndEmpNum;
+    private RegAddressUlEntity RegUlNaOdnomMeste;
+
+    public RegAddressUlEntity getRegUlNaOdnomMeste() {
+        return RegUlNaOdnomMeste;
+    }
+
+    public void setRegUlNaOdnomMeste(RegAddressUlEntity regUlNaOdnomMeste) {
+        RegUlNaOdnomMeste = regUlNaOdnomMeste;
+    }
 
     public List<Map<String, Object>> getPensionYearAndEmpNum() {
         return PensionYearAndEmpNum;

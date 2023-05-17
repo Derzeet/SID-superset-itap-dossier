@@ -36,6 +36,7 @@ public class fl_pension_contr {
 
     @Column(name = "PAY_DATE")
     @Nullable
+
     private String payDate;
 
     @Column(name = "P_NAME")
@@ -48,6 +49,7 @@ public class fl_pension_contr {
 
     @Column(name = "KNP")
     @Nullable
+
     private String knp;
     @Column(name = "PERIOD")
     @Nullable
@@ -61,9 +63,9 @@ public class fl_pension_contr {
     @Column(name = "year")
     private String year;
 
-    @Nullable
+    @Nullable @Column(name = "id")
     @Id
-    @Column(name = "id")
+
     private Long id;
 
     @Nullable

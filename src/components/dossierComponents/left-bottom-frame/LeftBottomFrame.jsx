@@ -1101,15 +1101,14 @@ const FlPensionRow = (props) => {
   }
 
   const getNakoplenie = (year, knp) => {
-
     let nakoplenie = pension.flPensionMinis.filter(item => {
-      if (item && item.payDate === year.substring(0, 4) && item.knp === knp) return true
-    })
 
+      if (item && item.pay_date+"" === year.substring(0, 4) && item.KNP === knp) return true
+    })
 
     let sum = 0
     for (let i=0; i<nakoplenie.length; i++) {
-        sum += parseInt(nakoplenie[i].amount)
+        sum += parseInt(nakoplenie[i].AMOUNT)
     }
 
     return sum
@@ -1119,7 +1118,7 @@ const FlPensionRow = (props) => {
     <>
       <TableRow className="uitablerow" sx={{height:'10px',}} style={{borderBottom: 'hidden'}}>
         <TableCell sx={{padding: 1}} style={{ fontSize: '12px', fontWeight: 500, color: "#FFFFFF"}}><a>{pension.companyBin}</a></TableCell>
-        <TableCell sx={{padding: 1}} style={{ fontSize: '12px', fontWeight: 500, color: "#FFFFFF" }} align="left"><a>{pension.flPensionMinis && pension.flPensionMinis[0] && pension.flPensionMinis[0].pName || "---"}</a></TableCell>
+        <TableCell sx={{padding: 1}} style={{ fontSize: '12px', fontWeight: 500, color: "#FFFFFF" }} align="left"><a>{pension.flPensionMinis && pension.flPensionMinis[0] && pension.flPensionMinis[0].P_NAME || "---"}</a></TableCell>
         <TableCell sx={{padding: 1}} style={{ fontSize: '12px', fontWeight: 500, color: "#FFFFFF" }}><a>{getPensionYears()}</a></TableCell>
         <TableCell sx={{padding: 1}}>
           <IconButton
@@ -1146,8 +1145,8 @@ const FlPensionRow = (props) => {
                     return (
                       <TableRow key={year} style={{borderBottom: 'hidden'}}>
                         <TableCell style={{ width: '10%', fontSize: '12px', color: "#FFFFFF" }}  align="left"><a>{year.substring(0, 4)}</a></TableCell>
-                        <TableCell style={{ width: '45%', fontSize: '12px', color: "#FFFFFF" }} align="left"><a>{getNakoplenie(year, "012")}</a></TableCell>
-                        <TableCell style={{ width: '45%', fontSize: '12px', color: "#FFFFFF" }} align="left"><a>{getNakoplenie(year, "010")}</a></TableCell>
+                        <TableCell style={{ width: '45%', fontSize: '12px', color: "#FFFFFF" }} align="left"><a>{getNakoplenie(year.substring(0, 4), "012")}</a></TableCell>
+                        <TableCell style={{ width: '45%', fontSize: '12px', color: "#FFFFFF" }} align="left"><a>{getNakoplenie(year.substring(0, 4), "010")}</a></TableCell>
                       </TableRow>
                     )
                   })}
