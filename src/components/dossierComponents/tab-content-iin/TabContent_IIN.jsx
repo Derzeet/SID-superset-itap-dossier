@@ -6,6 +6,7 @@ import FormControl from '@mui/material/FormControl';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import LinearProgress from '@mui/material/LinearProgress';
+import default_host from '../../../config/config';
 
 import SearchedTable from '../searchedTable/SearchedTable';
 
@@ -38,8 +39,6 @@ const zaprosButtonStyle = {
     }
 }
 
-const baseURL = 'http://192.168.30.24:9095/'
-
 function TabConent_IIN(props) {
     const [iin, setIIN] = React.useState('');
     const [doc, setDoc] = useState('')
@@ -60,7 +59,7 @@ function TabConent_IIN(props) {
         const params = {iin: iin}
         setLoading(true)
         console.log(params)
-        axios.get(baseURL+'iin', {params: params}).then(res => {
+        axios.get(default_host+'iin', {params: params}).then(res => {
             console.log(res.data)
             setResult(res.data)
             setLoading(false)
@@ -72,7 +71,7 @@ function TabConent_IIN(props) {
         const params = {doc_number: doc}
         setLoading(true)
         console.log(params)
-        axios.get(baseURL+'bydoc_number', {params: params}).then(res => {
+        axios.get(default_host+'bydoc_number', {params: params}).then(res => {
             console.log(res.data)
             setResult(res.data)
             setLoading(false)

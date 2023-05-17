@@ -8,8 +8,11 @@ section {
     margin: 0 auto;
 
     padding-top: 70px;
+    overflow-y: hidden;
 }
-
+/* * {
+    border: 1px solid red
+} */
 .countStats {
 
     display: flex;

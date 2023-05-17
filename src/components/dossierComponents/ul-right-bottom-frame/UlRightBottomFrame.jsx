@@ -61,7 +61,7 @@ const OmnTable = (props) => {
             <TableRow>
                 <TableCell sx={{padding: 1}} style={{ paddingBottom: 0, paddingTop: 0}} colSpan={6}>
                 <Collapse in={open} timeout="auto" unmountOnExit>
-                    <Box sx={{ margin: 0, marginLeft: '0' }}>
+                    <Box sx={{borderRadius: '3px', margin: 0, marginLeft: '0' }}>
                     <TableHead sx={{backgroundColor: '#ffffff0a'}}>
                         <TableRow className="uitableHead">
                             {/* <TableCell sx={{padding: 1}} style={{ width: '30%',fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left"><a>Наименование ИП</a></TableCell> */}
@@ -127,7 +127,7 @@ const BankrotTable = (props) => {
             <TableRow>
                 <TableCell sx={{padding: 1}} style={{ paddingBottom: 0, paddingTop: 0}} colSpan={6}>
                 <Collapse in={open} timeout="auto" unmountOnExit>
-                    <Box sx={{ margin: 0, marginLeft: '0' }}>
+                    <Box sx={{borderRadius: '3px', margin: 0, marginLeft: '0' }}>
                     <TableHead sx={{backgroundColor: '#ffffff0a'}}>
                         <TableRow className="uitableHead">
                             <TableCell sx={{padding: 1}} style={{ width: '40%',fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left"><a>Документ</a></TableCell>
@@ -190,7 +190,7 @@ const NdsTable = (props) => {
             <TableRow>
                 <TableCell sx={{padding: 1}} style={{ paddingBottom: 0, paddingTop: 0}} colSpan={6}>
                 <Collapse in={open} timeout="auto" unmountOnExit>
-                    <Box sx={{ margin: 0, marginLeft: '0' }}>
+                    <Box sx={{borderRadius: '3px', margin: 0, marginLeft: '0' }}>
                     <TableHead sx={{backgroundColor: '#ffffff0a'}}>
                         <TableRow className="uitableHead">
                             {/* <TableCell sx={{padding: 1}} style={{ width: '30%',fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left"><a>Наименование ИП</a></TableCell> */}
@@ -256,7 +256,7 @@ const OPGTable = (props) => {
             <TableRow>
                 <TableCell sx={{padding: 1}} style={{ paddingBottom: 0, paddingTop: 0}} colSpan={6}>
                 <Collapse in={open} timeout="auto" unmountOnExit>
-                    <Box sx={{ margin: 0, marginLeft: '0' }}>
+                    <Box sx={{borderRadius: '3px', margin: 0, marginLeft: '0' }}>
                     <TableHead sx={{backgroundColor: '#ffffff0a'}}>
                         <TableRow className="uitableHead">
                             <TableCell sx={{padding: 1}} style={{ width: '30%',fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left"><a>Регион</a></TableCell>
@@ -321,7 +321,7 @@ const BlockEsfBlock = (props) => {
             <TableRow>
                 <TableCell sx={{padding: 1}} style={{ paddingBottom: 0, paddingTop: 0}} colSpan={6}>
                 <Collapse in={open} timeout="auto" unmountOnExit>
-                    <Box sx={{ margin: 0, marginLeft: '0' }}>
+                    <Box sx={{borderRadius: '3px', margin: 0, marginLeft: '0' }}>
                     <TableHead sx={{backgroundColor: '#ffffff0a'}}>
                         <TableRow className="uitableHead">
                             <TableCell sx={{padding: 1}} style={{ width: '40%',fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left"><a>Дата начала</a></TableCell>

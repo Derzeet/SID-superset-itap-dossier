@@ -1,13 +1,15 @@
 .App {
   height: 100%;
   width: 100vw;
-
+  // padding-left: 0 auto;
+  
   display: flex;
   flex-direction: column;
-
+  
 }
 
 body {
+  overflow-x: hidden !important;
   // background-image: url(./images/bg-image.png);
 }
 

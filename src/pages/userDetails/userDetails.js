@@ -170,19 +170,20 @@ class UserDetails extends Component {
                     <div>
                     <input value={this.state.value} onChange={e=> this.onChangeHandler(e)} type="text" className="searchUsers" placeholder="Поиск по запросам"></input>
                     <TableContainer>
-                        <Table aria-label="collapsible table" className="uitable">
+                        <Table aria-label="collapsible table" className="userDetailsTable">
                             <TableHead>
-                            <TableRow className="uitableHead">
-                                <TableCell style={{ width: '5%' }} align="left"><a>#</a></TableCell>
-                                <TableCell style={{ width: '20%' }} align="left"><a>Дата и время</a></TableCell>
-                                <TableCell style={{ width: '60%' }} align="left"><a>Запрос</a></TableCell>
-                                <TableCell></TableCell>
+                            <TableRow className="uitableHead" colSpan={4}>
+                                <TableCell style={{ width: '5%' }} align="left"><a className="userDetailsTable">#</a></TableCell>
+                                <TableCell style={{ width: '20%' }} align="left"><a className="userDetailsTable">Дата и время</a></TableCell>
+                                <TableCell style={{ width: '60%' }} align="left"><a className="userDetailsTable">Запрос</a></TableCell>
+                                <TableCell style={{ width: '15%' }} colSpan={2}></TableCell>
+                                {/* <TableCell style={{ width: '15%' }} ></TableCell> */}
                             </TableRow>
                             </TableHead>
                             <TableBody>
                             { this.state.logs.length>0 ? this.state.logs.map((row, index) => (
                                 <Row row={row} index={index} />
-                            )): <TableCell  className="zeroResult" align="center" colSpan={4} style={{borderBottom: 'hidden'}}><a>Нет данных</a></TableCell>}
+                            )): <TableCell  className="zeroResult" align="center" colSpan={4} style={{borderBottom: 'hidden'}}><a className="noUserDetails">Нет данных</a></TableCell>}
                             </TableBody>
                         </Table>
                     </TableContainer>
@@ -224,14 +225,14 @@ function Row(props) {
   
     return (
       <>
-        <TableRow hover className="uitablerow">
+        <TableRow hover className="userDetailsRow">
             <TableCell><a>{props.index + 1}</a></TableCell>
-          <TableCell style={{ width: '20%' }} align="left"><a>
+          <TableCell style={{}} align="left"><a>
             {row.date.slice(0, 10)} {row.date.slice(11, 19)}
             </a></TableCell>
-          <TableCell style={{ width: '60%' }} align="left"><a>{row.obwii}</a></TableCell>
+          <TableCell style={{ }} align="left"><a>{row.obwii}</a></TableCell>
           <TableCell ><a>{row.fat}</a></TableCell>
-          <TableCell ><a>{row.carbs}</a></TableCell>
+          {/* <TableCell ><a>{row.carbs} sda</a></TableCell> */}
           <TableCell>
             <IconButton
               aria-label="expand row"
@@ -247,7 +248,7 @@ function Row(props) {
             <Collapse in={open} timeout="auto" unmountOnExit>
               <Box sx={{ margin: 1 }}>
                 <Typography variant="h6" gutterBottom component="div">
-                <a>Информация о запросе</a>
+                <a style={{fontSize: '15px'}}>Информация о запросе</a>
                 </Typography>
                 <Table size="small" aria-label="purchases">
                   <TableHead>

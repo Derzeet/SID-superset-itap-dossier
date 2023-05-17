@@ -20,6 +20,11 @@ import MenuList from '@mui/material/MenuList';
 const GrayNavbar = (props) => {
     const userSession = JSON.parse(localStorage.getItem("user"))
     const navigate = useNavigate()    
+    useEffect(() => {
+        if (userSession == null) {
+            navigate('/login')
+        }
+    })
 
     const logoutHandler = () => {
         authService.logout();

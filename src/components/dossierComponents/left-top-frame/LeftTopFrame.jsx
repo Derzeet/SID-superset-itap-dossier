@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import default_host from '../../../config/config'
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import IconButton from '@mui/material/IconButton';
@@ -7,7 +8,10 @@ import './leftTopFrame.scss'
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import axios from 'axios';
+
 const baseURL = 'http://192.168.30.24:9095/'
+
+
 function LeftTopFrame(props) {
     const [photo, setPhoto] = useState('')
     const [photos, setPhotos] = useState([{photo: ''}, {photo: ''}])
@@ -42,7 +46,7 @@ function LeftTopFrame(props) {
     //     }
     // }
     const downloadAsPdf = () => {
-        axios.get(baseURL+'download/' + iin, {responseType: 'blob'}).then(res => {
+        axios.get(default_host+'download/' + iin, {responseType: 'blob'}).then(res => {
             const url = window.URL.createObjectURL(new Blob([res.data]))
             const link = document.createElement('a')
             link.href = url

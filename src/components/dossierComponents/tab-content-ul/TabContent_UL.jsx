@@ -12,8 +12,9 @@ import Select from '@mui/material/Select';
 import './tabContent_ul.scss'
 
 import SearchedTable from '../searchedTableUL/SearchedTableUL';
+import default_host from '../../../config/config';
 
-const baseURL = 'http://192.168.30.24:9095/'
+
 const selectStyle = {
     width: '200px',
     height: '35px',
@@ -79,7 +80,7 @@ function TabContent_UL(props) {
             name: resName
         }
         console.log(req)
-        axios.get(baseURL+'binname', {params: req}).then(res => {
+        axios.get(default_host+'binname', {params: req}).then(res => {
             console.log(res.data)
             setResult(res.data)
             setLoading(false)
