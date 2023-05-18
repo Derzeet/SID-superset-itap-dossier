@@ -94,7 +94,7 @@ const GrayNavbar = (props) => {
                     ) : ("")}
 
                     <ul className="nav-menu">
-                    {userSession ? 
+                    {!userSession ? 
                         <>
                             {/* <style>
                                 
