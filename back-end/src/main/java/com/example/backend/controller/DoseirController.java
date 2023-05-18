@@ -78,8 +78,6 @@ public class DoseirController {
 //        return myService.taxOutEntities(bin,PageRequest.of(page,size));
         return myService.pensionEntityUl1(bin, year, page);
     }
-
-
     @GetMapping("/iin")
     public List<searchResultModelFL> getByIIN(@RequestParam String iin) {
         return myService.getByIIN_photo(iin);

@@ -62,6 +62,7 @@ const zaprosButtonStyle = {
 
 function TabContent_UL(props) {
     const [ulName, setULName] = useState("")
+    const [vin, setVin] = useState('')
     const [ulNameType, setULNameType] = useState("begin")
     const [loading, setLoading] = useState(false)
     const [result, setResult] = useState([])
@@ -69,22 +70,31 @@ function TabContent_UL(props) {
     const searchName = async () => {
         setLoading(true)
         let resName = ""
-        if (ulNameType == 'begin') {
-            resName = ulName.toUpperCase() + '$'
-        } else if (ulNameType == 'have') {
-            resName = '$' + ulName.toUpperCase() + '$'
+        if (vin == '') {
+            if (ulNameType == 'begin') {
+                resName = ulName.toUpperCase() + '$'
+            } else if (ulNameType == 'have') {
+                resName = '$' + ulName.toUpperCase() + '$'
+            } else {
+                resName = '$' + ulName.toUpperCase()
+            }
+            const req = {
+                name: resName
+            }
+            
+            console.log(req)
+            axios.get(default_host+'binname', {params: req}).then(res => {
+                console.log(res.data)
+                setResult(res.data)
+                setLoading(false)
+            })
         } else {
-            resName = '$' + ulName.toUpperCase()
+            axios.get(default_host+'byvinkuzovul', {params: {vin: vin}}).then(res => {
+                console.log(res.data)
+                setResult(res.data)
+                setLoading(false)
+            })
         }
-        const req = {
-            name: resName
-        }
-        console.log(req)
-        axios.get(default_host+'binname', {params: req}).then(res => {
-            console.log(res.data)
-            setResult(res.data)
-            setLoading(false)
-        })
     }
     return ( 
         <div className="tab__content tab_ul">
@@ -136,6 +146,8 @@ function TabContent_UL(props) {
                             height: '16px'
                         }}  
                         id='transport'
+                        value={vin}
+                        onChange={(e) => setVin(e.target.value)}
                         variant="outlined" />
                     </div>
                 </div>

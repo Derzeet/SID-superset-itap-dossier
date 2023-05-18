@@ -16,6 +16,6 @@ public interface mv_auto_fl_repo extends JpaRepository<mv_auto_fl, Long> {
 
     @Query(value= "select * from ser.mv_auto_fl where vin_kuzov_shassi = ?1", nativeQuery = true)
     List<mv_auto_fl> findBYVIN(String Vin_kuzov_shassi);
-    @Query(value = "SELECT iin from ser.mv_auto_fl where vin_kuzov_shassi = ?1", nativeQuery = true)
+    @Query(value = "SELECT iin from ser.mv_auto_fl where vin_kuzov_shassi = ?1 and iin != ''", nativeQuery = true)
     List<String> getByVin(String vin);
 }

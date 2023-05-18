@@ -251,17 +251,22 @@ public class MyService {
         return null;
     }
     public List<searchResultModelUl> getByVinUl(String vin) {
-        List<String> iin = mvAutoFlRepo.getByVin(vin);
-        List<mv_ul> mvUls = mv_ul_repo.getUsersByLike(iin.get(0));
+        String VIN_upper = vin.toUpperCase();
+        List<String> iin = mvAutoFlRepo.getByVin(VIN_upper);
         List<searchResultModelUl> list = new ArrayList<>();
-        for (mv_ul l: mvUls) {
-            searchResultModelUl res = new searchResultModelUl();
-            res.setBin(l.getBin());
-            res.setName(l.getFull_name_rus());
-            list.add(res);
+        if (iin.size() > 0) {
+            List<mv_ul> mvUls = mv_ul_repo.getUsersByLike(iin.get(0));
+            for (mv_ul l: mvUls) {
+                searchResultModelUl res = new searchResultModelUl();
+                res.setBin(l.getBin());
+                res.setName(l.getFull_name_rus());
+                list.add(res);
+            }
+            return list;
+        } else {
+            return list;
         }
 
-        return list;
     }
 
     public List<searchResultModelFL> getByDoc_photo(String IIN) {
