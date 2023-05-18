@@ -48,7 +48,7 @@ function SearchedTable(props) {
             sx={{ 'td, th': { border: 0 } }}
             // onClick={() => props.selectPhoto(row.photo)}
           >
-          <TableCell  className="zeroResult" colSpan={4} align='center' style={{ borderBottom: 'hidden'}}><a>Нет результатов</a></TableCell>
+          <TableCell  className="zeroResult" colSpan={4} align='center' style={{ borderBottom: 'hidden'}}><a style={{fontSize: '14px', fontWeight: 400}}>Нет результатов</a></TableCell>
           </TableRow>
             
           )

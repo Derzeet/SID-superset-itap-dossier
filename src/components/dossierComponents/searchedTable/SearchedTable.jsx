@@ -49,7 +49,7 @@ function SearchedTable(props) {
           <TableRow
             sx={{ 'td, th': { border: 0},}}
           >
-            <TableCell className="zeroResult" colSpan={4} align='center' style={{ borderBottom: 'hidden'}}><a>Нет результатов</a></TableCell>
+            <TableCell className="zeroResult" colSpan={4} align='center' style={{ borderBottom: 'hidden'}}><a style={{fontSize: '14px',  fontWeight: 400, color: 'white'}}>Нет результатов</a></TableCell>
           </TableRow>
           
         )

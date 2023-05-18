@@ -25,7 +25,7 @@ import SearchedTable from '../searchedTable/SearchedTable';
 import './tabContent_fio.scss'
 
 import DopInfoBlock from '../dop-info-block/DopInfoBlock';
-const baseURL = 'http://192.168.30.24:9095/'
+import default_host from '../../../config/config';
 // const baseURL = 'http://localhost:9095/'
 const selectStyle = {
     width: '200px',
@@ -137,7 +137,7 @@ function TabContent_FIO(props) {
             vin
         }
         console.log(req)
-        axios.get(baseURL+'additionalfio', {params: req}).then(res => {
+        axios.get(default_host+'additionalfio', {params: req}).then(res => {
             console.log(res.data)
             setResult(res.data)
             setLoading(false)
@@ -246,7 +246,7 @@ function TabContent_FIO(props) {
                     <div>{showDopInfo ? "HideIcon" : "ShowIcon"}</div>
                 </div>
                 <DopInfoBlock show={showDopInfo}/> */}
-                <TableContainer sx={{marginTop: 0, backgroundColor: '#0D0F11'}} style={{overflow: 'unset'}}>
+                <TableContainer sx={{marginTop: 0, backgroundColor: '#0D0F11'}} style={{ overflow: 'unset'}}>
                     <Table aria-label="collapsible table" className="uitable">
                         <TableRow className="uitablerow" sx={{height:'10px',}} style={{borderBottom: 'hidden'}}>
                         <TableCell sx={{padding: 1}} style={{width: '90%', fontSize: '12px', fontWeight: 500, color: "#FFFFFF"}}><a style={{marginLeft: '15px', fontSize: '15px'}}>Дополнительные данные</a></TableCell>

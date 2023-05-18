@@ -67,22 +67,22 @@
 }
 
 .tab__content .dopInfa {
-    background-color: #060607;
+    // background-color: #060607;
     border-radius: 4px;
 
-    width: 57%;
+    width: 57% !important;
 
-    margin-top: 30px;
-    margin-left: 64px;
+    margin-top: 30px !important;
+    margin-left: 64px !important;
     // padding: 10px 10px 10px 0;
 
-    color: #fff;
+    color: #fff !important;
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 500;
     font-size: 14px;
     line-height: 13px;
-    overflow: hidden;
+    overflow: hidden !important;
 
     > div:nth-child(1) {
 

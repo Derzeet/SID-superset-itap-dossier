@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
 import { Link } from 'react-router-dom';
+import default_host from '../../config/config';
 
 import IconButton from '@mui/material/IconButton';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
@@ -22,6 +23,9 @@ const baseURL = 'http://localhost:9095/'
 const UlDosiePage = (props) => {
     const { bin } = useParams();
     const [loading, isLoading] = useState(null)
+    const [uchreditel, setUchreditel] = useState([])
+
+
     const [fullName, setFullName] = useState('')
     const [ulBin, setUlBin] = useState(0)
     const [nedvijimost, setNedvijimost] = useState([])
@@ -38,6 +42,11 @@ const UlDosiePage = (props) => {
     const [founders, setFounders] = useState([{}, {}])
     const [taxes, setTaxes] = useState([])
     const [mshes, setMshes] = useState([])
+    const [pension, setPension] = useState([])
+    const [autos, setAutos] = useState([])
+    const [commodityProducers, setCommodityProducers] = useState([])
+    const [accountant, setAccountant] = useState([])
+
 
     const [menuOpen, setMenuOpen] = useState(false)
 
@@ -46,7 +55,7 @@ const UlDosiePage = (props) => {
             isLoading(true)
             const params = {bin: bin}
 
-            axios.get(baseURL+'cc', {params: params}).then(res => {
+            axios.get(default_host+'cc', {params: params}).then(res => {
                 setFullName(res.data.mvUls[0].full_name_rus)
                 setAddress(res.data.regAddressUlEntities)
                 setPdl(res.data.pdls)
@@ -61,13 +70,18 @@ const UlDosiePage = (props) => {
                 setNedvijimost(res.data.mvRnOlds)
                 setTaxes(res.data.taxOutEntities)
                 setMshes(res.data.mshes)
-
+                setAutos(res.data.mvAutoFls)
+                setPension((curr) => res.data.pensionYearAndEmpNum)
+                setCommodityProducers(res.data.commodityProducers)
+                setAccountant(res.data.accountantListEntities)
+                setUchreditel(res.data.svedenyaObUchastnikovUlEntities)
                 isLoading(false)
-
+                
             })
         }
-
+        
         searchIIN()
+        // console.log(pension)
     }, [bin])
 
     const logoutHandler = () => {
@@ -129,8 +143,8 @@ const UlDosiePage = (props) => {
                     <div className="central-bar">
                         <div className="frames">
                             <LeftTopFrame fullName={fullName} bin={ulBin} address = {address}/>
-                            <RightTopFrame founders={founders} pdls={pdl}/>
-                            <LeftBottomFrame mshes={mshes} taxes={taxes} nedvijimost={nedvijimost}/>
+                            <RightTopFrame uchreditel={uchreditel} founders={founders} pdls={pdl}/>
+                            <LeftBottomFrame  accountant={accountant} commodityProducers={commodityProducers} mshes={mshes} taxes={taxes} nedvijimost={nedvijimost} pension={pension} bin={bin} autos={autos}/>
                             <RightBottomFrame opg={opg} esf={BlockEsfBlock} nds={nds} bankrot={bankrot} omn={omn}/>
                         </div>
                     </div>

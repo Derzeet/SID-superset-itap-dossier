@@ -62,6 +62,8 @@
 
 .NavbarItems2 {
     height: 90px;
+
+    overflow-y: visible !important;
 }
 .NavbarItems3 {
     height: 30px;
@@ -86,7 +88,8 @@
     font-family: 'Montserrat';
     font-weight: 400;
 
-    overflow: hidden !important;
+    overflow: visible !important;
+    z-index: 30;
 }
 
 .nav-menu li {

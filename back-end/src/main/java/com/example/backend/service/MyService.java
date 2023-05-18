@@ -432,8 +432,8 @@ public class MyService {
             List<FL_PENSION_FINAL> flPensionFinals = new ArrayList<>();
             for(String flPension : flPensionContrs){
                 FL_PENSION_FINAL flPensionFinal = new FL_PENSION_FINAL();
-                List<flPensionMini> fl_pension_contrss = new ArrayList<>();
-                fl_pension_contrss = flPensionMiniRepo.getAllByCompanies(IIN,flPension);
+                List<Map<String, Object>> fl_pension_contrss = new ArrayList<>();
+                fl_pension_contrss = flPensionContrRepo.getAllByCompanies(IIN,flPension);
                 List<Map<String, Object>> r = flPensionContrRepo.findAmountOfAmountByKNP(IIN,flPension);
                 List<String> fff = flPensionMiniRepo.getAllByCompaniesYear(IIN,flPension);
 //            System.out.println(flPensionContrRepo.findAmountOfAmountByKNP(IIN,flPension));
@@ -442,7 +442,7 @@ public class MyService {
                 flPensionFinal.setFlPensionMinis(fl_pension_contrss);
                 flPensionFinal.setNakoplenya(r);
                 flPensionFinal.setYears(fff);
-//                flPensionFinal.setCompanyBin(flPension);
+                flPensionFinal.setCompanyBin(flPension);
                 flPensionFinals.add(flPensionFinal);
 //            System.out.println(findAmountOfAmountByKNPf);
             }
@@ -589,183 +589,201 @@ public class MyService {
         Page<TaxOutEntity> taxOutEntityPage = taxOutEntityRepo.getUsersByLike(bin,pageRequest);
         return taxOutEntityPage.getContent();
     }
-    public List<Map<String, Object>> pensionEntityUl(PageRequest pageRequest){
-        Page<Map<String,Object>> pens = flPensionContrRepo.fffdsafs(pageRequest);
+    public List<Map<String, Object>> pensionEntityUl(String bin, String year, PageRequest pageRequest){
+        Page<Map<String,Object>> pens = flPensionContrRepo.getPension(bin, year, pageRequest);
         return pens.getContent();
+    }
+    public List<Map<String,Object>> pensionEntityUl1(String bin, Double year, Integer page){
+        Integer offset = page * 10;
+        List<Map<String,Object>> pens = flPensionContrRepo.getPension1(bin, year, offset);
+        return pens;
     }
 
 
-     public NodesUL getNodeUL(String BIN){
-         NodesUL myNode = new NodesUL();
-         try {
-             List<mv_ul_founder_fl> mvUlFounderFls = mvUlFounderFlRepo.getUsersByLike(BIN);
-             myNode.setMvUlFounderFls(mvUlFounderFls);
-         } catch (Exception e) {
-             System.out.println("Error6: " + e);
-         }
-         try {
-             List<bankrot> bankrots = bankrotRepo.getbankrotByByIIN(BIN);
-             myNode.setBankrots(bankrots);
-         } catch (Exception e) {
-             System.out.println("Error: " + e);
-         }
-         try {
-             List<mv_ul> mvUls = mv_ul_repo.getUsersByLike(BIN);
-             myNode.setMvUls(mvUls);
-         } catch (Exception e) {
-             System.out.println("Error: " + e);
-         }
-         try {
-             myNode.setFl_contacts(flContactsRepo.findAllByIin(BIN));
-         } catch (Exception e){
-             System.out.println("Error:" + e);
-         }
-         try {
-             List<adm> MyAdm =  admRepo.getUsersByLikeBin(BIN);
-             myNode.setAdms(MyAdm);
-         } catch (Exception e) {
-             System.out.println("Error: " + e);
-         }
-         try {
-             List<dormant> myDormant =  dormantRepo.getUsersByLike(BIN);
-             myNode.setDormants(myDormant);
-         } catch (Exception e) {
-             System.out.println("Error: " + e);
-         }
-         try {
-             RegAddressUlEntity address =  regAddressUlEntityRepo.findByBin(BIN);
-             myNode.setRegAddressUlEntities(address);
-         } catch (Exception e) {
-             System.out.println("Error: " + e);
-         }
-         try {
-             List<equipment> myEquipment =  equipment_repo.getUsersByLike(BIN);
-             myNode.setEquipment(myEquipment);
-         } catch (Exception e) {
-             System.out.println("Error: " + e);
-         }
-         try {
-             List<omn> myOmns =  omn_repos.getUsersByLikeIin_bin(BIN);
-             myNode.setOmns(myOmns);
-         } catch (Exception e) {
-             System.out.println("Error: " + e);
-         }
-         try {
-             List<msh> mshes = mshRepo.getUsersByLike(BIN);
-             myNode.setMshes(mshes);
-         } catch (Exception e) {
-             System.out.println("Error: " + e);
-         }
-         try {
-             List<criminals> criminals = criminalsRepo.getcriminalsByByIIN(BIN);
-             myNode.setCriminals(criminals);
-         } catch (Exception e) {
-             System.out.println("Error: " + e);
-         }
-         try {
-             List<block_esf> blockEsfs = block_esfRepo.getblock_esfByIIN(BIN);
-             myNode.setBlockEsfs(blockEsfs);
-         } catch (Exception e) {
-             System.out.println("Error: " + e);
-         }
-         try {
-             List<OpgEntity> opgEntities = opgRepo.getopgByIIN(BIN);
-             myNode.setOpgEntities(opgEntities);
-         } catch (Exception e) {
-             System.out.println("Error: " + e);
-         }
-         try {
-             List<AccountantListEntity> accountantListEntities = accountantListEntityRepo.getUsersByLikeBIN(BIN);
-             myNode.setAccountantListEntities(accountantListEntities);
-         } catch (Exception e) {
-             System.out.println("Error: " + e);
-         }
-         try {
-             List<NdsEntity> ndsEntities = ndsEntityRepo.getUsersByLike(BIN);
-             myNode.setNdsEntities(ndsEntities);
-         } catch (Exception e) {
-             System.out.println("Error: " + e);
-         }
-         try {
-             List<FpgTempEntity> fpgTempEntities = fpgTempEntityRepo.getUsersByLike(BIN);
-             myNode.setFpgTempEntities(fpgTempEntities);
-         } catch (Exception e) {
-             System.out.println("Error: " + e);
-         }
-         try {
-             List<pdl> pdls = pdlReposotory.getByBin(BIN);
-             myNode.setPdls(pdls);
-         } catch (Exception e) {
-             System.out.println("Error: " + e);
-         }
-         try {
-             List<QoldauSubsidy> q = QoldauRepo.getByIIN(BIN);
-             myNode.setQoldauSubsidy(q);
-         } catch (Exception e) {
-             System.out.println("Error: " + e);
-         }
-         try {
-             List<CommodityProducer> commodityProducers = commodityProducerRepo.getiin_binByIIN(BIN);
-             myNode.setCommodityProducers(commodityProducers);
-         } catch (Exception e) {
-             System.out.println("Error: " + e);
-         }
-         try {
-             List<mv_rn_old> mvRnOlds = mv_rn_oldRepo.getUsersByLike(BIN);
-             myNode.setMvRnOlds(mvRnOlds);
-         } catch (Exception e) {
-             System.out.println("Error: " + e);
+
+    public NodesUL getNodeUL(String BIN) {
+        NodesUL myNode = new NodesUL();
+        try {
+            List<mv_ul_founder_fl> mvUlFounderFls = mvUlFounderFlRepo.getUsersByLike(BIN);
+            myNode.setMvUlFounderFls(mvUlFounderFls);
+        } catch (Exception e) {
+            System.out.println("Error6: " + e);
+        }
+        try {
+            List<bankrot> bankrots = bankrotRepo.getbankrotByByIIN(BIN);
+            myNode.setBankrots(bankrots);
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+        }
+        try {
+            List<mv_ul> mvUls = mv_ul_repo.getUsersByLike(BIN);
+            myNode.setMvUls(mvUls);
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+        }
+        try {
+            myNode.setFl_contacts(flContactsRepo.findAllByIin(BIN));
+        } catch (Exception e) {
+            System.out.println("Error:" + e);
+        }
+        try {
+            List<adm> MyAdm = admRepo.getUsersByLikeBin(BIN);
+            myNode.setAdms(MyAdm);
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+        }
+        try {
+            List<dormant> myDormant = dormantRepo.getUsersByLike(BIN);
+            myNode.setDormants(myDormant);
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+        }
+        try {
+            RegAddressUlEntity address = regAddressUlEntityRepo.findByBin(BIN);
+            myNode.setRegAddressUlEntities(address);
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+        }
+        try {
+            List<equipment> myEquipment = equipment_repo.getUsersByLike(BIN);
+            myNode.setEquipment(myEquipment);
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+        }
+        try {
+            List<omn> myOmns = omn_repos.getUsersByLikeIin_bin(BIN);
+            myNode.setOmns(myOmns);
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+        }
+        try {
+            List<msh> mshes = mshRepo.getUsersByLike(BIN);
+            myNode.setMshes(mshes);
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+        }
+        try {
+            List<criminals> criminals = criminalsRepo.getcriminalsByByIIN(BIN);
+            myNode.setCriminals(criminals);
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+        }
+        try {
+            List<block_esf> blockEsfs = block_esfRepo.getblock_esfByIIN(BIN);
+            myNode.setBlockEsfs(blockEsfs);
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+        }
+        try {
+            List<OpgEntity> opgEntities = opgRepo.getopgByIIN(BIN);
+            myNode.setOpgEntities(opgEntities);
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+        }
+        try {
+            List<AccountantListEntity> accountantListEntities = accountantListEntityRepo.getUsersByLikeBIN(BIN);
+            myNode.setAccountantListEntities(accountantListEntities);
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+        }
+        try {
+            List<NdsEntity> ndsEntities = ndsEntityRepo.getUsersByLike(BIN);
+            myNode.setNdsEntities(ndsEntities);
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+        }
+        try {
+            List<FpgTempEntity> fpgTempEntities = fpgTempEntityRepo.getUsersByLike(BIN);
+            myNode.setFpgTempEntities(fpgTempEntities);
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+        }
+        try {
+            List<pdl> pdls = pdlReposotory.getByBin(BIN);
+            myNode.setPdls(pdls);
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+        }
+        try {
+            List<QoldauSubsidy> q = QoldauRepo.getByIIN(BIN);
+            myNode.setQoldauSubsidy(q);
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+        }
+        try {
+            List<CommodityProducer> commodityProducers = commodityProducerRepo.getiin_binByIIN(BIN);
+            myNode.setCommodityProducers(commodityProducers);
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+        }
+        try {
+            List<mv_rn_old> mvRnOlds = mv_rn_oldRepo.getUsersByLike(BIN);
+            myNode.setMvRnOlds(mvRnOlds);
+        } catch (Exception e) {
+            System.out.println("Error: " + e);}
+            try {
+                RegAddressUlEntity address = regAddressUlEntityRepo.findByBin(BIN);
+                RegAddressUlEntity setRegUlNaOdnom = regAddressUlEntityRepo.regAddressNaOdnomMeste(address.getRegAddrRegionRu(), address.getRegAddrDistrictRu()
+                        , address.getRegAddrLocalityRu(), address.getRegAddrStreetRu(), address.getRegAddrBuildingNum(), BIN);
+                myNode.setRegUlNaOdnomMeste(setRegUlNaOdnom);
+                System.out.println(address.getRegAddrRegionKz() + " " + address.getRegAddrDistrictKz() + " " + address.getRegAddrBuildingNum() );
+            } catch (Exception e) {
+                System.out.println("Error: " + e);
+
 //         }try {
 //             List<TaxOutEntity> taxOutEntitiest = taxOutEntityRepo.getUsersByLike(BIN);
 //             myNode.setTaxOutEntities(taxOutEntitiest);
 //         } catch (Exception e) {
 //             System.out.println("Error: " + e);
-         } try {
-             List<mv_auto_fl> mvAutoFls = mvAutoFlRepo.getUsersByLike(BIN);
-             myNode.setMvAutoFls(mvAutoFls);
-         } catch (Exception e) {
-             System.out.println("Error: " + e);
-         }
-         List<MvUlFounderUl> mvUlFounderUls = mvUlFounderUlRepo.getUsersByLike(BIN);
-         List<SvedenyaObUchastnikovUlEntity> svedenyaObUchastnikovUlEntities = new ArrayList<>();
-         for(MvUlFounderUl mvUlFUl : mvUlFounderUls){
-             SvedenyaObUchastnikovUlEntity svedenyaObUchastnikovUlEntity = new SvedenyaObUchastnikovUlEntity();
-             svedenyaObUchastnikovUlEntity.setIin_bin(mvUlFUl.getFounderBin());
-             svedenyaObUchastnikovUlEntity.setFIOorUlName(mvUlFUl.getFounderNameRu());
-             svedenyaObUchastnikovUlEntity.setReg_date(mvUlFUl.getRegDate());
-             if(mvUlFUl.isCurrent()){
-                 svedenyaObUchastnikovUlEntity.setIdentificator("Учредитель ЮЛ");
-             } else {
-                 svedenyaObUchastnikovUlEntity.setIdentificator("Учредитель ЮЛ (исторический)");
-             }
-             svedenyaObUchastnikovUlEntities.add(svedenyaObUchastnikovUlEntity);
-         }
-         List<MvUlLeaderEntity> mvUlLeaderEntities = mvUlLeaderEntityRepo.getUsersByLike(BIN);
-         for(MvUlLeaderEntity mvUlFUl : mvUlLeaderEntities){
-             SvedenyaObUchastnikovUlEntity svedenyaObUchastnikovUlEntity = new SvedenyaObUchastnikovUlEntity();
-             svedenyaObUchastnikovUlEntity.setIin_bin(mvUlFUl.getIin());
-             svedenyaObUchastnikovUlEntity.setFIOorUlName(mvUlFUl.getLastName() + " " + mvUlFUl.getFirstName()+ " " + mvUlFUl.getPatronymic());
-             svedenyaObUchastnikovUlEntity.setReg_date(mvUlFUl.getRegDate());
-             if(mvUlFUl.getCurrent() == true){
-                 svedenyaObUchastnikovUlEntity.setIdentificator("Директор");
-             } else {
-                 svedenyaObUchastnikovUlEntity.setIdentificator("Директор (исторический)");
-             }
-             svedenyaObUchastnikovUlEntities.add(svedenyaObUchastnikovUlEntity);
+            }
+            try {
+                List<mv_auto_fl> mvAutoFls = mvAutoFlRepo.getUsersByLike(BIN);
+                myNode.setMvAutoFls(mvAutoFls);
+            } catch (Exception e) {
+                System.out.println("Error: " + e);
+            }
+            List<MvUlFounderUl> mvUlFounderUls = mvUlFounderUlRepo.getUsersByLike(BIN);
+            List<SvedenyaObUchastnikovUlEntity> svedenyaObUchastnikovUlEntities = new ArrayList<>();
+            for (MvUlFounderUl mvUlFUl : mvUlFounderUls) {
+                SvedenyaObUchastnikovUlEntity svedenyaObUchastnikovUlEntity = new SvedenyaObUchastnikovUlEntity();
+                svedenyaObUchastnikovUlEntity.setIin_bin(mvUlFUl.getFounderBin());
+                svedenyaObUchastnikovUlEntity.setFIOorUlName(mvUlFUl.getFounderNameRu());
+                svedenyaObUchastnikovUlEntity.setReg_date(mvUlFUl.getRegDate());
+                if (mvUlFUl.isCurrent()) {
+                    svedenyaObUchastnikovUlEntity.setIdentificator("Учредитель ЮЛ");
+                } else {
+                    svedenyaObUchastnikovUlEntity.setIdentificator("Учредитель ЮЛ (исторический)");
+                }
+                svedenyaObUchastnikovUlEntities.add(svedenyaObUchastnikovUlEntity);
+            }
+            List<MvUlLeaderEntity> mvUlLeaderEntities = mvUlLeaderEntityRepo.getUsersByLike(BIN);
+            for (MvUlLeaderEntity mvUlFUl : mvUlLeaderEntities) {
+                SvedenyaObUchastnikovUlEntity svedenyaObUchastnikovUlEntity = new SvedenyaObUchastnikovUlEntity();
+                svedenyaObUchastnikovUlEntity.setIin_bin(mvUlFUl.getIin());
+                svedenyaObUchastnikovUlEntity.setFIOorUlName(mvUlFUl.getLastName() + " " + mvUlFUl.getFirstName() + " " + mvUlFUl.getPatronymic());
+                svedenyaObUchastnikovUlEntity.setReg_date(mvUlFUl.getRegDate());
+                if (mvUlFUl.getCurrent() == true) {
+                    svedenyaObUchastnikovUlEntity.setIdentificator("Директор");
+                } else {
+                    svedenyaObUchastnikovUlEntity.setIdentificator("Директор (исторический)");
+                }
+                svedenyaObUchastnikovUlEntities.add(svedenyaObUchastnikovUlEntity);
 
-         }
-         myNode.setSvedenyaObUchastnikovUlEntities(svedenyaObUchastnikovUlEntities);
-         if(myNode.getOmns().size()== 0
-                 & myNode.getBankrots().size()== 0
-                 & myNode.getAdms().size()== 0
-                 & myNode.getOpgEntities().size()== 0
-                 & myNode.getCriminals().size()== 0
-                 & myNode.getBlockEsfs().size()== 0
-                 & myNode.getFpgTempEntities().size()== 0){
-             myNode.setPerson_with_risk(false);
-         }else {
-             myNode.setPerson_with_risk(true);
-         }
+            }
+            List<Map<String, Object>> r = flPensionContrRepo.findAmountOfEmployeesOfEveryYear(BIN);
+            myNode.setPensionYearAndEmpNum(r);
+            myNode.setSvedenyaObUchastnikovUlEntities(svedenyaObUchastnikovUlEntities);
+            if (myNode.getOmns().size() == 0
+                    & myNode.getBankrots().size() == 0
+                    & myNode.getAdms().size() == 0
+                    & myNode.getOpgEntities().size() == 0
+                    & myNode.getCriminals().size() == 0
+                    & myNode.getBlockEsfs().size() == 0
+                    & myNode.getFpgTempEntities().size() == 0) {
+                myNode.setPerson_with_risk(false);
+            } else {
+                myNode.setPerson_with_risk(true);
+            }
 //         List<FL_PENSION_FINAL> flPensionFinals = new ArrayList<>();
 //         FL_PENSION_FINAL flPensionFinal = new FL_PENSION_FINAL();
 //         flPensionFinal.setNakoplenya(flPensionContrRepo.findAmountOfEmployeesOfEveryYear(BIN));
@@ -788,15 +806,14 @@ public class MyService {
 //         }
 //         myNode.setFlPensionContrs(flPensionFinals);
 //         List<TaxOutEntity> taxOutEntities = taxOutEntityRepo.getUsersByLike(BIN);
-         //     myNode.setTaxOutEntities(taxOutEntities);
+            //     myNode.setTaxOutEntities(taxOutEntities);
 //         List<FL_PENSION_FINAL> flPensionFinals = new ArrayList<>();
 //         List<Integer> adad = flPensionContrRepo.amountOfYears(BIN);
 //         for(Integer add : adad){
 //             FL_PENSION_FINAL flPensionFinal = new FL_PENSION_FINAL();
 //             System.out.println(add);
 //             flPensionFinal.setAmountOfEmp(flPensionContrRepo.amountOfEmp(BIN,add));
-             List<Map<String, Object>> r = flPensionContrRepo.findAmountOfEmployeesOfEveryYear(BIN);
-         myNode.setPensionYearAndEmpNum(r);
+
 //             flPensionFinal.setNakoplenya(r);
 //             flPensionFinal.setYear(add);
 //             flPensionFinals.add(flPensionFinal);
@@ -805,4 +822,4 @@ public class MyService {
             return myNode;
         }
 
-}
+    }

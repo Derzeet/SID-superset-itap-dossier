@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
+import default_host from '../../config/config';
 
 import './dosiePage.scss'
 import './loader.scss'
@@ -55,6 +56,11 @@ const DosiePage = (props) => {
     const [adms, setAdms] = useState([])
     const [ulLeaders, setUlLeaders] = useState([]) // Ul svedenia ob uchastiy
     const [flUlFounders, setFlUlFounders] = useState([])
+    const [wantedList, setWantedList] = useState([])
+
+    const [commodityProducers, setCommodityProducers] = useState([])
+
+    const [pdl, setPdl] = useState([])
 
     const [menuOpen, setMenuOpen] = useState(false)
 
@@ -367,7 +373,7 @@ const DosiePage = (props) => {
 
             //     isLoading(false)
 
-            axios.get(baseURL+'profile', {params: params}).then(res => {
+            axios.get(default_host+'profile', {params: params}).then(res => {
                 console.log(res.data)
 
                 setPhoto(res.data.photoDbf)
@@ -399,13 +405,17 @@ const DosiePage = (props) => {
                 setAdvocateListEntities(res.data.advocateListEntities)
                 setAuditorsListEntities(res.data.auditorsListEntities)
                 setBailiffListEntities(res.data.bailiffListEntities)
-                
+                setWantedList(res.data.wantedListEntities)
+
                 setIpgoEmailEntities(res.data.ipgoEmailEntities)
                 setDetdom(res.data.orphans)
                 setAdms(res.data.adms)
 
                 setUlLeaders(res.data.ul_leaderList)
                 setFlUlFounders(res.data.mvUlFounderFls)
+                setCommodityProducers(res.data.commodityProducers)
+
+                setPdl(res.data.pdls)
 
 
                 isLoading(false)
@@ -426,8 +436,8 @@ const DosiePage = (props) => {
                             <RightTopFrame relatives={relatives}/>
                             <LeftBottomFrame flUlFounders={flUlFounders} ulLeaders={ulLeaders} docs={docs} addresses={addresses} transport={transport} 
                                 schools={schools} universities={universities} pensions={pensions} military={military} militaryEntities={militaryEntities}
-                                nedvijimost={nedvijimost} contacts={contacts} equipment={equipment} accountantListEntities={accountantListEntities} advocateListEntities={advocateListEntities} auditorsListEntities={auditorsListEntities} bailiffListEntities={bailiffListEntities} ipgoEmailEntities={ipgoEmailEntities}/>
-                            <RightBottomFrame convictsTerminatedByRehabs={convictsTerminatedByRehabs} criminals={criminals} convicts={convicts} firstCreditBureauEntities={firstCreditBureauEntities} blockEsf={blockEsf} mzEntities={mzEntities} detdom={detdom} adms={adms}/>
+                                nedvijimost={nedvijimost} contacts={contacts} equipment={equipment} accountantListEntities={accountantListEntities} advocateListEntities={advocateListEntities} auditorsListEntities={auditorsListEntities} bailiffListEntities={bailiffListEntities} ipgoEmailEntities={ipgoEmailEntities} commodityProducers={commodityProducers}/>
+                            <RightBottomFrame wantedList={wantedList} pdl={pdl} convictsTerminatedByRehabs={convictsTerminatedByRehabs} criminals={criminals} convicts={convicts} firstCreditBureauEntities={firstCreditBureauEntities} blockEsf={blockEsf} mzEntities={mzEntities} detdom={detdom} adms={adms}/>
                         </div>
                     </div>
                 </div>

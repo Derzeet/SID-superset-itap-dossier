@@ -32,6 +32,7 @@ function LeftBottomFrame(props) {
     const [ipgoEmailEntities, setIpgoEmailEntities] = useState([])
     const [ulLeaders, setUlLeaders] = useState([])
     const [flUlFounders, setFlUlFounders] = useState([])
+    const [commodityProducers, setCommodityProducers] = useState([])
     
     const [professions, setProfessions] = useState({
       accountant: [],
@@ -64,6 +65,8 @@ function LeftBottomFrame(props) {
         setEquipment(props.equipment)
         setUlLeaders(props.ulLeaders)
 
+        setCommodityProducers(props.commodityProducers)
+
         setProfessions({
           accountant: props.accountantListEntities,
           advocate: props.advocateListEntities,
@@ -82,7 +85,7 @@ function LeftBottomFrame(props) {
                 <div>
                     {/* <label htmlFor="born-city" style={{fontSize: '16px', fontWeight: '500', color: "#FFFFFF"}}>Адресы прописки</label> */}
                     <TableRow className="uitablerow" sx={{height:'10px',}} style={{borderBottom: 'hidden'}}>
-                        <TableCell sx={{padding: 1}} style={{borderBottom: 'hidden', width: '90%', fontSize: '16px', fontWeight: 500, color: "#FFFFFF"}}><a>Адресы прописки</a></TableCell>
+                        <TableCell sx={{padding: 1}} style={{borderBottom: 'hidden', width: '90%', fontSize: '16px', fontWeight: 500, color: "#FFFFFF"}}><a>Адресы прописки - {addresses != null ? addresses.length : 0}</a></TableCell>
                     </TableRow>
                     <TableContainer sx={{backgroundColor: '#ffffff0a', borderRadius: '3px',  marginTop: '10px'}}>
                         <Table aria-label="collapsible table" className="uitable">
@@ -117,7 +120,6 @@ function LeftBottomFrame(props) {
                     {equipment && equipment.length > 0? <EquipmentBlock array={equipment}/> : ""}
                     <SchoolsBlock schools={schools} exist={schools && schools.length > 0 ? true : false}/>
                     <UniversityBlock universities={universities} exist={universities && universities.length > 0 ? true : false}/>
-                    {pensions && pensions.length > 0? <FlPensionBlock pensions={pensions} exist={pensions.length > 0 ? true : false}/> : ""}
                     {military && military.length > 0? <MilitaryBlock military={military} militaryEntities={militaryEntities} exist={military && military.length > 0 ? true : false}/> : ""}
                     {nedvijimost && nedvijimost.length > 0? <NedvijimostBlock nedvijimost={nedvijimost} exist={nedvijimost.length > 0 ? true : false}/> : ""}
                     {contacts && contacts.length > 0? <ContactsBlock array={contacts} exist={contacts.length > 0? true : false}/> : ""}
@@ -125,6 +127,7 @@ function LeftBottomFrame(props) {
                     {ulLeaders ? <UlLeaderBlock uls={ulLeaders}/> : "" }
                     {flUlFounders && flUlFounders.length > 0? <FlUlFounderBlock array={flUlFounders}/> : "" }
                     {<IpgoEmailBlock array={ipgoEmailEntities}/>}
+                    {pensions && pensions.length > 0? <FlPensionBlock pensions={pensions} exist={pensions.length > 0 ? true : false}/> : ""}
                 </div>
                 {/* TRANSPORT */}
                 <div style={{width: '100%'}}>
@@ -133,6 +136,8 @@ function LeftBottomFrame(props) {
         </div>
     );
 }
+
+
 
 const FlUlFounderBlock = (props) => {
   const {array} = props
@@ -145,7 +150,7 @@ const FlUlFounderBlock = (props) => {
         <Table aria-label="collapsible table" className="uitable">
 
           <TableRow className="uitablerow" sx={{height:'10px',}} style={{borderBottom: 'hidden'}}>
-              <TableCell sx={{padding: 1}} style={{borderBottom: 'hidden', width: '90%', fontSize: '16px', fontWeight: 500, color: "#FFFFFF"}}><a>Сведения об участии в ЮЛ</a></TableCell>
+              <TableCell sx={{padding: 1}} style={{borderBottom: 'hidden', width: '90%', fontSize: '16px', fontWeight: 500, color: "#FFFFFF"}}><a>Сведения об участии в ЮЛ - {array != null ? array.length : 0}</a></TableCell>
               <TableCell sx={{padding: 1}} style={{width: '10%'}} align='right'>
                     <IconButton
                     aria-label="expand row"
@@ -237,7 +242,7 @@ const UlLeaderBlock = (props) => {
         <TableContainer sx={{marginTop: 0}}>
           <Table aria-label="collapsible table" className="uitable">
             <TableRow className="uitablerow" sx={{height:'10px',}} style={{borderBottom: 'hidden'}}>
-                <TableCell sx={{padding: 1}} style={{borderBottom: 'hidden', width: '90%', fontSize: '16px', fontWeight: 500, color: "#FFFFFF"}}><a>Сведения об участии в ЮЛ</a></TableCell>
+                <TableCell sx={{padding: 1}} style={{borderBottom: 'hidden', width: '90%', fontSize: '16px', fontWeight: 500, color: "#FFFFFF"}}><a>Сведения об участии в ЮЛ - {uls != null ? uls.length : 0}</a></TableCell>
                 <TableCell sx={{padding: 1}} style={{width: '10%'}} align='right'>
                       <IconButton
                       aria-label="expand row"
@@ -312,7 +317,7 @@ const IpgoEmailBlock = (props) => {
           <Table aria-label="collapsible table" className="uitable">
 
             <TableRow className="uitablerow" sx={{height:'10px',}} style={{borderBottom: 'hidden'}}>
-                <TableCell sx={{padding: 1}} style={{borderBottom: 'hidden', width: '90%', fontSize: '16px', fontWeight: 500, color: "#FFFFFF"}}><a>Сведения по ИПГО</a></TableCell>
+                <TableCell sx={{padding: 1}} style={{borderBottom: 'hidden', width: '90%', fontSize: '16px', fontWeight: 500, color: "#FFFFFF"}}><a>Сведения по ИПГО - {array != null ? array.length : 0}</a></TableCell>
                 <TableCell sx={{padding: 1}} style={{width: '10%'}} align='right'>
                       <IconButton
                       aria-label="expand row"
@@ -514,7 +519,7 @@ const EquipmentBlock = (props) => {
         <Table aria-label="collapsible table" className="uitable">
 
           <TableRow className="uitablerow" sx={{height:'10px',}} style={{borderBottom: 'hidden'}}>
-              <TableCell sx={{padding: 1}} style={{borderBottom: 'hidden', width: '90%', fontSize: '16px', fontWeight: 500, color: "#FFFFFF"}}><a>Техника</a></TableCell>
+              <TableCell sx={{padding: 1}} style={{borderBottom: 'hidden', width: '90%', fontSize: '16px', fontWeight: 500, color: "#FFFFFF"}}><a>Техника - {array != null ? array.length : 0}</a></TableCell>
               <TableCell sx={{padding: 1}} style={{width: '10%'}} align='right'>
                     <IconButton
                     aria-label="expand row"
@@ -639,7 +644,7 @@ const ContactsBlock = (props) => {
         <Table aria-label="collapsible table" className="uitable">
 
           <TableRow className="uitablerow" sx={{height:'10px',}} style={{borderBottom: 'hidden'}}>
-              <TableCell sx={{padding: 1}} style={{borderBottom: 'hidden', width: '90%', fontSize: '16px', fontWeight: 500, color: "#FFFFFF"}}><a>Контактные данные</a></TableCell>
+              <TableCell sx={{padding: 1}} style={{borderBottom: 'hidden', width: '90%', fontSize: '16px', fontWeight: 500, color: "#FFFFFF"}}><a>Контактные данные - {array != null ? array.length : 0}</a></TableCell>
               <TableCell sx={{padding: 1}} style={{width: '10%'}} align='right'>
                     <IconButton
                     aria-label="expand row"
@@ -729,7 +734,7 @@ const NedvijimostBlock = (props) => {
         <Table aria-label="collapsible table" className="uitable">
 
           <TableRow className="uitablerow" sx={{height:'10px',}} style={{borderBottom: 'hidden'}}>
-              <TableCell sx={{padding: 1}} style={{borderBottom: 'hidden', width: '90%', fontSize: '16px', fontWeight: 500, color: "#FFFFFF"}}><a>Недвижимости</a></TableCell>
+              <TableCell sx={{padding: 1}} style={{borderBottom: 'hidden', width: '90%', fontSize: '16px', fontWeight: 500, color: "#FFFFFF"}}><a>Недвижимости - {nedvijimost != null ? nedvijimost.length : 0}</a></TableCell>
               <TableCell sx={{padding: 1}} style={{width: '10%'}} align='right'>
                     <IconButton
                     aria-label="expand row"
@@ -743,7 +748,7 @@ const NedvijimostBlock = (props) => {
           <TableRow>
             <TableCell sx={{padding: 1}} style={{ paddingBottom: 0, paddingTop: 0}} colSpan={6}>
               <Collapse in={open} timeout="auto" unmountOnExit>
-                <Box sx={{ margin: 0, marginLeft: '0' }}>
+                <Box sx={{borderRadius: '3px', margin: 0, marginLeft: '0' }}>
                   <TableHead sx={{backgroundColor: '#ffffff0a'}}>
                     <TableRow className="uitableHead">
                         <TableCell sx={{padding: 1}} style={{ width: '15%',fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left"><a>Кадастровый номер №</a></TableCell>
@@ -861,7 +866,7 @@ const MilitaryBlock = (props) => {
         <Table aria-label="collapsible table" className="uitable">
 
           <TableRow className="uitablerow" sx={{height:'10px',}} style={{borderBottom: 'hidden'}}>
-              <TableCell sx={{padding: 1}} style={{borderBottom: 'hidden', width: '90%', fontSize: '16px', fontWeight: 500, color: "#FFFFFF"}}><a>Воинский учет</a></TableCell>
+              <TableCell sx={{padding: 1}} style={{borderBottom: 'hidden', width: '90%', fontSize: '16px', fontWeight: 500, color: "#FFFFFF"}}><a>Воинский учет - {military != null ? military.length : 0}</a></TableCell>
               <TableCell sx={{padding: 1}} style={{width: '10%'}} align='right'>
                     <IconButton
                     aria-label="expand row"
@@ -875,7 +880,7 @@ const MilitaryBlock = (props) => {
           <TableRow>
             <TableCell sx={{padding: 1}} style={{ paddingBottom: 0, paddingTop: 0}} colSpan={6}>
               <Collapse in={open} timeout="auto" unmountOnExit>
-                <Box sx={{ margin: 0, marginLeft: '0' }}>
+                <Box sx={{borderRadius: '3px', margin: 0, marginLeft: '0' }}>
                   <TableHead sx={{backgroundColor: '#ffffff0a'}}>
                     <TableRow className="uitableHead">
                         <TableCell sx={{padding: 1}} style={{ width: '15%',fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left"><a>БИН</a></TableCell>
@@ -956,7 +961,7 @@ const SchoolsBlock = (props) => {
         <Table aria-label="collapsible table" className="uitable">
 
           <TableRow className="uitablerow" sx={{height:'10px',}} style={{borderBottom: 'hidden'}}>
-              <TableCell sx={{padding: 1}} style={{borderBottom: 'hidden', width: '90%', fontSize: '16px', fontWeight: 500, color: "#FFFFFF"}}><a>Школы</a></TableCell>
+              <TableCell sx={{padding: 1}} style={{borderBottom: 'hidden', width: '90%', fontSize: '16px', fontWeight: 500, color: "#FFFFFF"}}><a>Школы - {schools != null ? schools.length : 0}</a></TableCell>
               <TableCell sx={{padding: 1}} style={{width: '10%'}} align='right'>
                     <IconButton
                     aria-label="expand row"
@@ -1101,15 +1106,14 @@ const FlPensionRow = (props) => {
   }
 
   const getNakoplenie = (year, knp) => {
-
     let nakoplenie = pension.flPensionMinis.filter(item => {
-      if (item && item.payDate === year.substring(0, 4) && item.knp === knp) return true
-    })
 
+      if (item && item.pay_date+"" === year.substring(0, 4) && item.KNP === knp) return true
+    })
 
     let sum = 0
     for (let i=0; i<nakoplenie.length; i++) {
-        sum += parseInt(nakoplenie[i].amount)
+        sum += parseInt(nakoplenie[i].AMOUNT)
     }
 
     return sum
@@ -1119,7 +1123,7 @@ const FlPensionRow = (props) => {
     <>
       <TableRow className="uitablerow" sx={{height:'10px',}} style={{borderBottom: 'hidden'}}>
         <TableCell sx={{padding: 1}} style={{ fontSize: '12px', fontWeight: 500, color: "#FFFFFF"}}><a>{pension.companyBin}</a></TableCell>
-        <TableCell sx={{padding: 1}} style={{ fontSize: '12px', fontWeight: 500, color: "#FFFFFF" }} align="left"><a>{pension.flPensionMinis && pension.flPensionMinis[0] && pension.flPensionMinis[0].pName || "---"}</a></TableCell>
+        <TableCell sx={{padding: 1}} style={{ fontSize: '12px', fontWeight: 500, color: "#FFFFFF" }} align="left"><a>{pension.flPensionMinis && pension.flPensionMinis[0] && pension.flPensionMinis[0].P_NAME || "---"}</a></TableCell>
         <TableCell sx={{padding: 1}} style={{ fontSize: '12px', fontWeight: 500, color: "#FFFFFF" }}><a>{getPensionYears()}</a></TableCell>
         <TableCell sx={{padding: 1}}>
           <IconButton
@@ -1146,8 +1150,8 @@ const FlPensionRow = (props) => {
                     return (
                       <TableRow key={year} style={{borderBottom: 'hidden'}}>
                         <TableCell style={{ width: '10%', fontSize: '12px', color: "#FFFFFF" }}  align="left"><a>{year.substring(0, 4)}</a></TableCell>
-                        <TableCell style={{ width: '45%', fontSize: '12px', color: "#FFFFFF" }} align="left"><a>{getNakoplenie(year, "012")}</a></TableCell>
-                        <TableCell style={{ width: '45%', fontSize: '12px', color: "#FFFFFF" }} align="left"><a>{getNakoplenie(year, "010")}</a></TableCell>
+                        <TableCell style={{ width: '45%', fontSize: '12px', color: "#FFFFFF" }} align="left"><a>{getNakoplenie(year.substring(0, 4), "012")}</a></TableCell>
+                        <TableCell style={{ width: '45%', fontSize: '12px', color: "#FFFFFF" }} align="left"><a>{getNakoplenie(year.substring(0, 4), "010")}</a></TableCell>
                       </TableRow>
                     )
                   })}
@@ -1172,7 +1176,7 @@ const UniversityBlock = (props) => {
         <Table aria-label="collapsible table" className="uitable">
 
           <TableRow className="uitablerow" sx={{height:'10px',}} style={{borderBottom: 'hidden'}}>
-              <TableCell sx={{padding: 1}} style={{borderBottom: 'hidden', width: '90%', fontSize: '16px', fontWeight: 500, color: "#FFFFFF"}}><a>ВУЗЫ</a></TableCell>
+              <TableCell sx={{padding: 1}} style={{borderBottom: 'hidden', width: '90%', fontSize: '16px', fontWeight: 500, color: "#FFFFFF"}}><a>ВУЗЫ - {universities != null ? universities.length : 0}</a></TableCell>
               <TableCell sx={{padding: 1}} style={{width: '10%'}} align='right'>
                     <IconButton
                     aria-label="expand row"
@@ -1274,7 +1278,7 @@ function TransportRow(props) {
         <TableContainer sx={{marginTop: 0}}>
         <Table aria-label="collapsible table" className="uitable">
             <TableRow className="uitablerow" sx={{height:'10px',}} style={{borderBottom: 'hidden'}}>
-              <TableCell sx={{padding: 1}} style={{width: '90%', fontSize: '16px', fontWeight: 500, color: "#FFFFFF"}}><a>Транспорт</a></TableCell>
+              <TableCell sx={{padding: 1}} style={{width: '90%', fontSize: '16px', fontWeight: 500, color: "#FFFFFF"}}><a>Транспорт - {row != null ? row.length : 0}</a></TableCell>
               <TableCell sx={{padding: 1}} style={{width: '10%'}} align='right'>
                   <IconButton
                   aria-label="expand row"

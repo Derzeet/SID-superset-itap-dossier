@@ -10,7 +10,7 @@ import LinearProgress from '@mui/material/LinearProgress';
 
 import SearchedTable from '../searchedTableUL/SearchedTableUL';
 // const baseURL = 'http://192.168.30.24:9095/'
-const baseURL = 'http://localhost:9095/'
+import default_host from '../../../config/config';
 
 const inputStyle = {
     height: "3px", 
@@ -48,7 +48,7 @@ function TabConent_BIN(props) {
         const params = {bin: bin}
         setLoading(true)
         console.log(params)
-        axios.get(baseURL+'bin', {params: params}).then(res => {
+        axios.get(default_host+'bin', {params: params}).then(res => {
             console.log(res.data)
             setResult(res.data)
             setLoading(false)

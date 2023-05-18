@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
 import './leftBottomFrame.scss'
+import default_host from '../../../config/config';
 
 
 import TableFooter from '@mui/material/TableFooter';
@@ -21,6 +22,7 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import { useTheme } from '@mui/material/styles';
+import axios from 'axios';
 
 function UlLeftBottomFrame(props) {
     const soc = ''
@@ -28,26 +30,332 @@ function UlLeftBottomFrame(props) {
     const [nedvijimost, setNedvijimost] = useState([])
     const [taxes, setTaxes] = useState([])
     const [mshes, setMshes] = useState([])
+    const [pension, setPension] = useState([])
+    const [autos, setAutos] = useState([])
+    const [bin, setBin] = useState('')
+    const [commodityProducers, setCommodityProducers] = useState([])
+    const [professions, setProfessions] = useState({
+      accountant: []
+      // advocate: [],
+      // auditors: [],
+      // bailiff: []
+    })
+
 
     useEffect(()=> {
         setNedvijimost(props.nedvijimost)
-        setTaxes(props.taxes)
+        // setTaxes(props.taxes)
         setMshes(props.mshes)
-
+        setPension(props.pension)
+        setBin(props.bin)
+        setAutos(props.autos)
+        setCommodityProducers(props.commodityProducers)
+        // setAccountant(props.accountant)
+        setProfessions({
+          accountant: props.accountant
+          // advocate: props.advocate,
+          // auditors: props.auditor,
+          // bailiff: props.bailiff
+        })
     }, [soc])
     return ( 
 
         <div className="left-bottom-section">
             <div className="other-line">
               <NedvijimostBlock array={nedvijimost} exist={nedvijimost != null}/>
-              <PensionBlock/>
+              <PensionBlock array={pension} bin={bin}/>
               <TaxesBlock array={taxes} exist={taxes.length>0}/>
               {mshes && mshes.length > 0? <MshesBlock array={mshes} exist={mshes && mshes.length > 0 ? true : false}/> : ""}
-
+              <TransportRow row={autos} />
+              <CommodityProducersTable array={commodityProducers} />
+              {professions && Object.keys(professions).length > 0? <ProfessionsBlock professions={professions}/> : ""}
             </div>   
         </div>
 
     );
+}
+
+
+const ProfessionsBlock = (props) => {
+  const {accountant} = props.professions
+  const [open, setOpen] = useState(false)
+
+  let blockTitle = [
+    accountant && accountant.length > 0 ? "Бухгалтер" : '',
+    // advocate && advocate.length > 0 ? "Адвокат" : '',
+    // auditors && auditors.length > 0 ? "Аудитор" : '',
+    // bailiff && bailiff.length > 0 ? "Частный судебный исполнитель" : ''
+  ]
+
+  // blockTitle = blockTitle.filter(value => value != '').join(', ')
+
+  // if (blockTitle === undefined)
+    return (
+      <>
+        <TableContainer sx={{marginTop: 0}}>
+          <Table aria-label="collapsible table" className="uitable">
+
+            <TableRow className="uitablerow" sx={{height:'10px',}} style={{borderBottom: 'hidden'}}>
+                <TableCell sx={{padding: 1}} style={{borderBottom: 'hidden', width: '90%', fontSize: '13px', fontWeight: 500, color: "#FFFFFF"}}>
+                  <a>
+                    {blockTitle}
+                  </a>
+                </TableCell>
+                <TableCell sx={{padding: 1}} style={{width: '10%'}} align='right'>
+                      <IconButton
+                      aria-label="expand row"
+                      size="small"
+                      onClick={() => setOpen(!open)}
+                      >
+                      {open ? <KeyboardArrowUpIcon style={{ fill: '#ffffff' }}/> : <KeyboardArrowDownIcon style={{ fill: '#ffffff' }}/>}
+                      </IconButton>
+                  </TableCell>
+            </TableRow>
+            <TableRow style={{width: '100%'}}>
+              <TableCell sx={{padding: 1}} style={{width: '100%', paddingBottom: 0, paddingTop: 0}} colSpan={3}>
+                <Collapse in={open} timeout="auto" unmountOnExit>
+                  <Box sx={{borderRadius: '3px', margin: 0, marginLeft: '0'}}>
+                    <TableContainer>
+                      <Table>
+                        <TableHead sx={{backgroundColor: '#ffffff0a'}} >
+                          <TableRow className="uitableHead">
+                              <TableCell sx={{padding: 1}} style={{ width: '30%', fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left"><a>Профессия</a></TableCell>
+                              <TableCell sx={{padding: 1}} style={{ width: '40%', fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left"><a>ФИО</a></TableCell>
+                              <TableCell sx={{padding: 1}} style={{ width: '20%', fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left"><a>ИИН</a></TableCell>
+                              {/* <TableCell sx={{padding: 1}} style={{ width: '10%', fontSize: '12px', color: "rgb(199, 199, 199)"}} align="right"><a> </a></TableCell> */}
+                          </TableRow>
+                        </TableHead>
+                        <TableBody style={{borderBottom: 'hidden'}}>
+                          {accountant.length  > 0
+                          ?
+                          <>
+                          {accountant.map(row => (
+                            <ProfessionsRow row={row} />
+                          ))}
+                          {/* {advocate.map(row => (
+                            <ProfessionsRow row={row} />
+                          ))}
+                          {auditors.map(row => (
+                            <ProfessionsRow row={row} />
+                          ))}
+                          {bailiff.map(row => (
+                            <ProfessionsRow row={row} />
+                          ))} */}
+                          </>
+                          : <TableCell className="zeroResult" align="center" colSpan={3} style={{borderBottom: 'hidden'}}><a>Нет данных</a></TableCell>}
+                        </TableBody>
+                      </Table>
+                    </TableContainer>
+                  </Box>
+                </Collapse>
+              </TableCell>
+            </TableRow>
+          </Table>
+        </TableContainer>
+      </>
+    )
+  // else return null
+}
+
+const ProfessionsRow = (props) => {
+  const {row} = props
+  const [open, setOpen] = useState(false)
+
+  const rus_headers = {
+    bin: 'БИН Организации',
+    lilicenseDate: 'Дата выдачи лицензии',
+    licenseNumber: 'Номер лицензии',
+    auditorNumber: 'Номер аудитора',
+  }
+
+  let profName = row.prof || row.status || "---"
+  profName = profName.toUpperCase()
+
+  return (
+    <>
+      <TableRow className="uitablerow" sx={{height:'10px',}} style={{borderBottom: 'hidden'}}>
+        <TableCell colSpan={1} sx={{padding: 1}} style={{fontSize: '12px', fontWeight: 500, color: "#FFFFFF"}}><a>{profName}</a></TableCell>
+        <TableCell colSpan={1} sx={{padding: 1}} style={{fontSize: '12px', fontWeight: 500, color: "#FFFFFF"}}><a>{row.lname} {row.fname}</a></TableCell>
+        <TableCell colSpan={1} sx={{padding: 1}} style={{fontSize: '12px', fontWeight: 500, color: "#FFFFFF"}}><a>{row.iin}</a></TableCell>
+      </TableRow>
+    </>
+  )
+}
+
+const CommodityProducersTable = (props) => {
+  const {array, exist} = props
+  const [open, setOpen] = useState(false)
+
+  return (
+    <>
+      <TableContainer sx={{marginTop: 0}}>
+        <Table aria-label="collapsible table" className="uitable">
+
+          <TableRow className="uitablerow" sx={{height:'10px',}} style={{borderBottom: 'hidden'}}>
+              <TableCell sx={{padding: 1}} style={{borderBottom: 'hidden', width: '90%', fontSize: '13px', fontWeight: 500, color: "#FFFFFF"}}><a>Отечественные товаропроизводители</a></TableCell>
+              <TableCell sx={{padding: 1}} style={{width: '10%'}} align='right'>
+                    <IconButton
+                    aria-label="expand row"
+                    size="small"
+                    onClick={() => setOpen(!open)}
+                    >
+                    {open ? <KeyboardArrowUpIcon style={{ fill: '#ffffff' }}/> : <KeyboardArrowDownIcon style={{ fill: '#ffffff' }}/>}
+                    </IconButton>
+                </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell sx={{padding: 1}} style={{ paddingBottom: 0, paddingTop: 0}} colSpan={4}>
+              <Collapse in={open} timeout="auto" unmountOnExit>
+                <Box sx={{borderRadius: '3px', margin: 0, marginLeft: '0' }}>
+                  <TableHead sx={{backgroundColor: '#ffffff0a'}}>
+                    <TableRow className="uitableHead">
+                        <TableCell sx={{padding: 1}} style={{ width: '30%',fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left"><a>Товар</a></TableCell>
+                        <TableCell sx={{padding: 1}} style={{ width: '30%', fontSize: '12px', color: "rgb(199, 199, 199)" }} align="left"><a >Статус</a></TableCell>
+                        <TableCell sx={{padding: 1}} style={{ width: '50%', fontSize: '12px', color: "rgb(199, 199, 199)" }} align="left"><a >Регион</a></TableCell>
+                        <TableCell sx={{padding: 1}} style={{ width: '10%', color: "#fff" }} align="left"></TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody style={{borderBottom: 'hidden'}}>
+                  {array.filter((x) => x!= null).length > 0 ? array.map((row, index) => (
+                      <CommodityProducersRow row={row} />
+                  )): <TableCell  className="zeroResult" align="center" colSpan={4} style={{borderBottom: 'hidden'}}><a>Нет данных</a></TableCell>}
+                  </TableBody>
+                </Box>
+              </Collapse>
+            </TableCell>
+          </TableRow>
+        </Table>
+      </TableContainer>
+    </>
+  )
+}
+
+const CommodityProducersRow = (props) => {
+  const {row} = props
+  const [open, setOpen] = useState(false)
+
+  // {
+  //   "ownerIinBin": "690411300792",
+  //   "equipmentType": null,
+  //   "equipmentModel": "ЮМЗ-6Л",
+  //   "vin": "627471",
+  //   "govNumber": "7139ЖЗ",
+  //   "regSeriesNum": "10665",
+  //   "regDate": "1998-05-10T17:00:00.000+00:00"
+  // }
+
+  let regDate = new Date(row.regDate)
+  regDate = ('0' + regDate.getDate()).slice(-2) + '/'
+            + ('0' + (regDate.getMonth()+1)).slice(-2) + '/'
+            + regDate.getFullYear();
+
+  return (
+    <>
+      <TableRow className="uitablerow" sx={{height:'10px',}} style={{borderBottom: 'hidden'}}>
+        <TableCell sx={{padding: 1}} style={{ fontSize: '12px', fontWeight: 500, color: "#FFFFFF"}}><a>{row.sspName || "---"}</a></TableCell>
+        <TableCell sx={{padding: 1}} style={{ fontSize: '12px', fontWeight: 500, color: "#FFFFFF" }} align="left"><a>{row.status || "---"}</a></TableCell>
+        <TableCell sx={{padding: 1}} style={{ fontSize: '12px', fontWeight: 500, color: "#FFFFFF" }} align="left"><a>{row.region || "---"}</a></TableCell>
+        <TableCell sx={{padding: 1}}>
+          <IconButton
+            aria-label="expand row"
+            size="small"
+            onClick={() => setOpen(!open)}
+          >
+            {open ? <KeyboardArrowUpIcon style={{ fill: '#ffffff' }}/> : <KeyboardArrowDownIcon style={{ fill: '#ffffff' }}/>}
+          </IconButton>
+        </TableCell>
+      </TableRow>
+      <TableRow style={{borderBottom: 'hidden'}}>
+        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={4}>
+          <Collapse in={open} timeout="auto" unmountOnExit>
+            <Box sx={{ margin: 1, marginLeft: '2.6%' }}>
+              <Table size="small" aria-label="purchases">
+                <TableHead>
+                  <TableRow style={{borderBottom: 'hidden'}}>
+                    <TableCell style={{ width: '30%', fontSize: '12px', color: "#6D6D6D" }}  align="left"><a>Количество</a></TableCell>
+                    <TableCell style={{ width: '70%', fontSize: '12px', color: "#FFFFFF" }} align="left"><a>{row.count || "---"}</a></TableCell>
+                  </TableRow>
+                  <TableRow style={{borderBottom: 'hidden'}}>
+                    <TableCell style={{ width: '30%', fontSize: '12px', color: "#6D6D6D" }}  align="left"><a>Производитель</a></TableCell>
+                    <TableCell style={{ width: '70%', fontSize: '12px', color: "#FFFFFF" }} align="left"><a>{row.producer || "---"}</a></TableCell>
+                  </TableRow>
+                </TableHead>
+              </Table>
+            </Box>
+          </Collapse>
+        </TableCell>
+      </TableRow>
+    </>
+  )
+}
+
+
+function TransportRow(props) {
+  const {row} = props;
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <TableContainer sx={{marginTop: 0}}>
+      <Table aria-label="collapsible table" className="uitable">
+          <TableRow className="uitablerow" sx={{height:'10px',}} style={{borderBottom: 'hidden'}}>
+            <TableCell sx={{padding: 1}} style={{width: '90%', fontSize: '13px', fontWeight: 500, color: "#FFFFFF"}}><a>Транспорт</a></TableCell>
+            <TableCell sx={{padding: 1}} style={{width: '10%'}} align='right'>
+                <IconButton
+                aria-label="expand row"
+                size="small"
+                onClick={() => setOpen(!open)}
+                >
+                {open ? <KeyboardArrowUpIcon style={{ fill: '#ffffff' }}/> : <KeyboardArrowDownIcon style={{ fill: '#ffffff' }}/>}
+                </IconButton>
+            </TableCell>
+          </TableRow>
+          <TableRow style={{}}>
+            <TableCell sx={{padding: 1}} style={{ paddingBottom: 0, paddingTop: 0}} colSpan={6}>
+
+                <Collapse in={open} timeout="auto" unmountOnExit>
+                <Box sx={{borderRadius: '3px', margin: 0, marginLeft: '0' }}>
+                            <TableHead>
+                              <TableRow className="uitableHead"  style={{borderBottom: 'hidden'}}>
+                                  <TableCell sx={{padding: 1}} style={{ width: '1%',fontSize: '14px', color: "#6D6D6D"}} align="left"><a>№</a></TableCell>
+                                  <TableCell sx={{padding: 1}} style={{ width: '13%', fontSize: '14px', color: "#6D6D6D" }} align="left">Модель</TableCell>
+                                  <TableCell sx={{padding: 1}} style={{ width: '13%', fontSize: '14px', color: "#6D6D6D" }} align="left">Серийный номер</TableCell>
+                                  <TableCell sx={{padding: 1}} style={{ width: '5%',fontSize: '14px', color: "#6D6D6D" }} align="left">Номер</TableCell>
+                                  <TableCell sx={{padding: 1}} style={{ width: '10%',fontSize: '14px', color: "#6D6D6D" }} align="left">Дата с</TableCell>
+                                  <TableCell sx={{padding: 1}} style={{ width: '10%',fontSize: '14px', color: "#6D6D6D" }} align="left">До</TableCell>
+                              </TableRow>
+                            </TableHead>
+                              <TableBody style={{borderBottom: 'hidden'}}>
+                              {
+                                  row.length > 0 ? row.map((car, index) => {
+                                      return (
+                                          <>
+                                          <TableRow className="uitableHead"  style={{borderBottom: 'hidden'}}>
+                                              <TableCell sx={{padding: 1}} style={{ fontSize: '14px', color: "#FFFFFF"}} align="left">{index+1}</TableCell>
+                                              <TableCell sx={{padding: 1}} style={{  fontSize: '14px', color: "#FFFFFF" }} align="left">{car.brand_model}</TableCell>
+                                              <TableCell sx={{padding: 1}} style={{  fontSize: '14px', color: "#FFFFFF" }} align="left">{car.series_reg_number}</TableCell>
+                                              <TableCell sx={{padding: 1}} style={{  fontSize: '14px', color: "#FFFFFF" }} align="left">{car.reg_number}</TableCell>
+                                              <TableCell sx={{padding: 1}} style={{ fontSize: '14px', color: "#FFFFFF" }} align="left">{car.date_certificate}</TableCell>
+                                              <TableCell sx={{padding: 1}} style={{  fontSize: '14px', color: "#FFFFFF" }} align="left">{car.end_date}</TableCell>
+                                          </TableRow>
+                                          </>
+                                          )
+                                      })
+                                      :
+                                      <TableCell  className="zeroResult" colSpan={6} align='center' style={{ borderBottom: 'hidden'}}><a >Нет данных</a></TableCell>
+                              }
+                            </TableBody>
+
+                            <div style={{height: '10px'}}></div>
+
+                </Box>
+                </Collapse>
+            </TableCell>
+          </TableRow>
+      </Table>
+      </TableContainer>
+    </>
+  );
 }
 
 const MshesBlock = (props) => {
@@ -60,7 +368,7 @@ const MshesBlock = (props) => {
         <Table aria-label="collapsible table" className="uitable">
 
           <TableRow className="uitablerow" sx={{height:'10px',}} style={{borderBottom: 'hidden'}}>
-              <TableCell sx={{padding: 1}} style={{borderBottom: 'hidden', width: '90%', fontSize: '12px', fontWeight: 500, color: "#FFFFFF"}}><a>Техника</a></TableCell>
+              <TableCell sx={{padding: 1}} style={{borderBottom: 'hidden', width: '90%', fontSize: '13px', fontWeight: 500, color: "#FFFFFF"}}><a>Техника</a></TableCell>
               <TableCell sx={{padding: 1}} style={{width: '10%'}} align='right'>
                     <IconButton
                     aria-label="expand row"
@@ -74,7 +382,7 @@ const MshesBlock = (props) => {
           <TableRow>
             <TableCell sx={{padding: 1}} style={{ paddingBottom: 0, paddingTop: 0}} colSpan={6}>
               <Collapse in={open} timeout="auto" unmountOnExit>
-                <Box sx={{ margin: 0, marginLeft: '0' }}>
+                <Box sx={{borderRadius: '3px', margin: 0, marginLeft: '0' }}>
                   <TableHead sx={{backgroundColor: '#ffffff0a'}}>
                     <TableRow className="uitableHead">
                         <TableCell sx={{padding: 1}} style={{ width: '15%',fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left"><a>Модель</a></TableCell>
@@ -171,7 +479,7 @@ const NedvijimostBlock = (props) => {
         <Table aria-label="collapsible table" className="uitable">
 
           <TableRow className="uitablerow" sx={{height:'10px',}} style={{borderBottom: 'hidden'}}>
-              <TableCell sx={{padding: 1}} style={{borderBottom: 'hidden', width: '90%', fontSize: '12px', fontWeight: 500, color: "#FFFFFF"}}><a>Недвижимости</a></TableCell>
+              <TableCell sx={{padding: 1}} style={{borderBottom: 'hidden', width: '90%', fontSize: '13px', fontWeight: 500, color: "#FFFFFF"}}><a>Недвижимости</a></TableCell>
               <TableCell sx={{padding: 1}} style={{width: '10%'}} align='right'>
                     <IconButton
                     aria-label="expand row"
@@ -185,7 +493,7 @@ const NedvijimostBlock = (props) => {
           <TableRow>
             <TableCell sx={{padding: 1}} style={{ paddingBottom: 0, paddingTop: 0}} colSpan={6}>
               <Collapse in={open} timeout="auto" unmountOnExit>
-                <Box sx={{ margin: 0, marginLeft: '0' }}>
+                <Box sx={{borderRadius: '3px', margin: 0, marginLeft: '0' }}>
                   <TableHead sx={{backgroundColor: '#ffffff0a'}}>
                     <TableRow className="uitableHead">
                         <TableCell sx={{padding: 1}} style={{ width: '15%',fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left"><a>Кадастровый номер №</a></TableCell>
@@ -303,7 +611,7 @@ const TaxesBlock = (props) => {
         <Table aria-label="collapsible table" className="uitable">
 
           <TableRow className="uitablerow" sx={{height:'10px',}} style={{borderBottom: 'hidden'}}>
-              <TableCell sx={{padding: 1}} style={{borderBottom: 'hidden', width: '90%', fontSize: '12px', fontWeight: 500, color: "#FFFFFF"}}><a>Налоги</a></TableCell>
+              <TableCell sx={{padding: 1}} style={{borderBottom: 'hidden', width: '90%', fontSize: '13px', fontWeight: 500, color: "#FFFFFF"}}><a>Налоги</a></TableCell>
               <TableCell sx={{padding: 1}} style={{width: '10%'}} align='right'>
                   <IconButton
                     aria-label="expand row"
@@ -317,7 +625,7 @@ const TaxesBlock = (props) => {
           <TableRow>
             <TableCell sx={{padding: 1}} style={{ paddingBottom: 0, paddingTop: 0}} colSpan={6}>
               <Collapse in={open} timeout="auto" unmountOnExit>
-                <Box sx={{ margin: 0, marginLeft: '0' }}>
+                <Box sx={{borderRadius: '3px', margin: 0, marginLeft: '0' }}>
                   <TableHead sx={{backgroundColor: '#ffffff0a'}}>
                     <TableRow className="uitableHead">
                         <TableCell sx={{padding: 1}} style={{ width: '20%',fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left"><a>Наименование</a></TableCell>
@@ -398,6 +706,7 @@ const TaxesRow = (props) => {
 }
 
 const PensionBlock = (props) => {
+  const {array, bin} = props
   const [open, setOpen] = useState(false)
   return (
     <>
@@ -405,7 +714,7 @@ const PensionBlock = (props) => {
         <Table sx={{ borderRadius: '3px'}} aria-label="collapsible table" className="uitable">
 
           <TableRow className="uitablerow" sx={{height:'10px',}} style={{borderBottom: 'hidden'}}>
-              <TableCell sx={{padding: 1}} style={{borderBottom: 'hidden', width: '90%', fontSize: '12px', fontWeight: 500, color: "#FFFFFF"}}>Пенсионные отчисления</TableCell>
+              <TableCell sx={{padding: 1}} style={{borderBottom: 'hidden', width: '90%', fontSize: '13px', fontWeight: 500, color: "#FFFFFF"}}>Пенсионные отчисления</TableCell>
               <TableCell sx={{padding: 1}} style={{width: '10%'}} align='right'>
                     <IconButton
                     aria-label="expand row"
@@ -419,8 +728,10 @@ const PensionBlock = (props) => {
           <TableRow>
             <TableCell sx={{padding: 1}} style={{ paddingBottom: 0, paddingTop: 0}} colSpan={6}>
               <Collapse in={open} timeout="auto" unmountOnExit>
-                <Box sx={{ margin: 0, marginLeft: '0' }}>
-                  <PensionYear/>
+                <Box sx={{borderRadius: '3px', margin: 0, marginLeft: '0' }}>
+                  {array.length> 0 ? array.map((row, index) => (
+                       <PensionYear year={row.date_part} number={row.iin_count} bin={bin}/>
+                  )): <TableCell  className="zeroResult" align="center" colSpan={4} style={{borderBottom: 'hidden'}}><a>Нет данных</a></TableCell>}
                 </Box>
               </Collapse>
             </TableCell>
@@ -431,9 +742,30 @@ const PensionBlock = (props) => {
   )
 }
 const PensionYear = (props) => {
+  const {year, number, bin} = props
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const [count, setCount] = React.useState(0)
+  const [curr, setCurr] = useState([])
+  const [isLoading, setLoading] = useState(false)
+  const [open, setOpen] = useState(false)
+  useEffect(() => {
+    const searchIIN = () => {
+      if (open) {
+
+        setLoading(true)
+        const params = {bin, year, page}
+        
+        axios.get(default_host+'pensionsbyyear', {params: params}).then(res => {
+          setCurr(res.data)
+          console.log(res.data)
+          setLoading(false)
+        })
+      }
+    }
+      
+      searchIIN()
+
+  }, [page, open])
   const emptyRows =
       page > 0 ? Math.max(0, (1 + page) * rowsPerPage - 15) : 0;
   
@@ -447,14 +779,13 @@ const PensionYear = (props) => {
       setRowsPerPage(parseInt(event.target.value, 10));
       setPage(0);
   };
-  const [open, setOpen] = useState(false)
   return (
     <>
       <TableContainer>
         <Table colSpan={2} style={{borderBottom: 'hidden'}} sx={{backgroundColor: '#ffffff0a', borderRadius: '3px'}} aria-label="collapsible table" className="uitable">
           <TableHead>
               <TableRow className="uitableHead">
-                  <TableCell colSpan={1} sx={{padding: 2}} style={{ fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left">Год</TableCell>
+                  <TableCell colSpan={1} sx={{padding: 2}} style={{ fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left">Год: {year} - {number}(Сотрудники)</TableCell>
                   <TableCell colSpan={1} sx={{padding: 1}} style={{ color: "#fff" }} align="right">
                       <IconButton
                         aria-label="expand row"
@@ -476,25 +807,33 @@ const PensionYear = (props) => {
                                   <Table sx={{m: 0}}>
                                     <TableHead>
                                       <TableRow className="uitableHead">
-                                        <TableCell style={{ width: '20%',fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left">ИИН</TableCell>
-                                        <TableCell style={{ width: '40%',fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left">ФИО</TableCell>
-                                        <TableCell style={{ width: '20%',fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left">Общая сумма (010)</TableCell>
-                                        <TableCell style={{ width: '20%',fontSize: '12px', color: "rgb(199, 199, 199)"}} align="right">Общая сумма (012)</TableCell>
+                                        <TableCell style={{ width: '25%',fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left">ИИН</TableCell>
+                                        <TableCell style={{ width: '45%',fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left">ФИО</TableCell>
+                                        <TableCell style={{ width: '15%',fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left">КНП 010</TableCell>
+                                        <TableCell style={{ width: '15%',fontSize: '12px', color: "rgb(199, 199, 199)"}} align="right">КНП 012</TableCell>
                                       </TableRow>
                                     </TableHead>
                                     <TableBody>
-                                      {/* <TableRow sx={{borderBottom: 'hidden'}}>
-                                        <TableCell style={{ width: '20%',fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left">02</TableCell>
-                                        <TableCell style={{ width: '40%',fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left">ФИО</TableCell>
-                                        <TableCell style={{ width: '20%',fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left">Общая сумма (010)</TableCell>
-                                        <TableCell style={{ width: '20%',fontSize: '12px', color: "rgb(199, 199, 199)"}} align="right">Общая сумма (012)</TableCell>
-                                      </TableRow> */}
+                                        {console.log(curr)}
+                                      { !isLoading ? curr.map((row) => (
+                                        
+                                        <TableRow sx={{borderBottom: 'hidden'}}>
+                                          <TableCell style={{fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left">{row.IIN}</TableCell>
+                                          <TableCell style={{fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left">{row.fio}</TableCell>
+                                          <TableCell style={{fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left">{row.zeroten}</TableCell>
+                                          <TableCell style={{fontSize: '12px', color: "rgb(199, 199, 199)"}} align="right">{row.zerotwelve}</TableCell>
+                                        </TableRow> 
+                                      )) : [1,2,3,4,5,6,7,8,9,10].map(key => (
+                                        <TableRow sx={{borderBottom: 'hidden'}}>
+                                          <TableCell align="center" colSpan={4} style={{fontSize: '12px', color: "rgb(199, 199, 199)"}}>Подождите...</TableCell>
+                                        </TableRow> 
+                                      ))}
                                     </TableBody>
                                     <TableFooter >
                                       <TableRow >
                                           <TablePagination style={{borderBottom: 'hidden'}}
                                               colSpan={4}
-                                              count={count}
+                                              count={number}
                                               rowsPerPage={10}
                                               page={page}
                                               onPageChange={handleChangePage}
