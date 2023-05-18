@@ -839,6 +839,12 @@ public class MyService {
 //             flPensionFinals.add(flPensionFinal);
 //         }
 //         myNode.setFlPensionContrs(flPensionFinals);
+        try {
+            Integer number = taxOutEntityRepo.getTaxAmount(BIN);
+            myNode.setTaxCount(number);
+        } catch (Exception e) {
+            System.out.println("Tax error: " + e);
+        }
             return myNode;
         }
 

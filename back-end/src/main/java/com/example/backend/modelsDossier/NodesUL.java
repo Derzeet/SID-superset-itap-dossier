@@ -36,6 +36,8 @@ public class NodesUL {
     private List<SvedenyaObUchastnikovUlEntity> svedenyaObUchastnikovUlEntities;
     private List<fl_contacts> fl_contacts;
 
+    private Integer taxCount;
+
     private List<mv_auto_fl> mvAutoFls;
     private List<FL_PENSION_FINAL> flPensionContrs;
     private List<Map<String, Object>> PensionYearAndEmpNum;
@@ -43,6 +45,14 @@ public class NodesUL {
 
     public RegAddressUlEntity getRegUlNaOdnomMeste() {
         return RegUlNaOdnomMeste;
+    }
+
+    public Integer getTaxCount() {
+        return taxCount;
+    }
+
+    public void setTaxCount(Integer taxCount) {
+        this.taxCount = taxCount;
     }
 
     public void setRegUlNaOdnomMeste(RegAddressUlEntity regUlNaOdnomMeste) {

@@ -109,11 +109,11 @@ const UchreditelRow = (props) => {
     return (
         <>
         <TableRow className="uitablerow" sx={{height:'10px',}} style={{borderBottom: 'hidden'}}>
-            <TableCell sx={{padding: 1}} style={{ fontSize: '12px', fontWeight: 500, color: "#FFFFFF"}}><a>{row.iin_bin || "---"}</a></TableCell>
-            <TableCell sx={{padding: 1}} style={{ fontSize: '12px', fontWeight: 500, color: "#FFFFFF" }} align="left"><a>{row.fioorUlName || "---"}</a></TableCell>
-            <TableCell sx={{padding: 1}} style={{ fontSize: '12px', fontWeight: 500, color: "#FFFFFF" }} align="left"><a>{row.identificator || "---"}</a></TableCell>
-            <TableCell sx={{padding: 1}} style={{ fontSize: '12px', fontWeight: 500, color: "#FFFFFF" }} align="left"><a>{row.reg_date || "---"}</a></TableCell>
-            <TableCell sx={{padding: 1}} style={{ fontSize: '12px', fontWeight: 500, color: "#FFFFFF" }} align="left"><a>{row.risk || "---"}</a></TableCell>
+            <TableCell sx={{padding: 1}} style={{verticalAlign: 'top', fontSize: '12px', fontWeight: 500, color: "#FFFFFF"}}><a>{row.iin_bin || "---"}</a></TableCell>
+            <TableCell sx={{padding: 1}} style={{verticalAlign: 'top', fontSize: '12px', fontWeight: 500, color: "#FFFFFF" }} align="left"><a>{row.fioorUlName || "---"}</a></TableCell>
+            <TableCell sx={{padding: 1}} style={{verticalAlign: 'top', fontSize: '12px', fontWeight: 500, color: "#FFFFFF" }} align="left"><a>{row.identificator || "---"}</a></TableCell>
+            <TableCell sx={{padding: 1}} style={{verticalAlign: 'top', fontSize: '12px', fontWeight: 500, color: "#FFFFFF" }} align="left"><a>{row.reg_date || "---"}</a></TableCell>
+            <TableCell sx={{padding: 1}} style={{verticalAlign: 'top', fontSize: '12px', fontWeight: 500, color: "#FFFFFF" }} align="left"><a>{row.risk || "---"}</a></TableCell>
         </TableRow>
         </>
     )
@@ -176,9 +176,9 @@ const PdlRow = (props) => {
     return (
       <>
         <TableRow className="uitablerow" sx={{height:'10px',}} style={{borderBottom: 'hidden'}}>
-          <TableCell sx={{padding: 1}} style={{ fontSize: '12px', fontWeight: 500, color: "#FFFFFF"}}><a>{row.iin}</a></TableCell>
-          <TableCell sx={{padding: 1}} style={{ fontSize: '12px', fontWeight: 500, color: "#FFFFFF" }} align="left"><a>{row.fio}</a></TableCell>
-          <TableCell sx={{padding: 1}} style={{ fontSize: '12px', fontWeight: 500, color: "#FFFFFF" }} align="left"><a>{row.position}</a></TableCell>
+          <TableCell sx={{padding: 1}} style={{verticalAlign: 'top', fontSize: '12px', fontWeight: 500, color: "#FFFFFF"}}><a>{row.iin}</a></TableCell>
+          <TableCell sx={{padding: 1}} style={{verticalAlign: 'top', fontSize: '12px', fontWeight: 500, color: "#FFFFFF" }} align="left"><a>{row.fio}</a></TableCell>
+          <TableCell sx={{padding: 1}} style={{verticalAlign: 'top', fontSize: '12px', fontWeight: 500, color: "#FFFFFF" }} align="left"><a>{row.position}</a></TableCell>
           {/* <TableCell sx={{padding: 1}} style={{ fontSize: '12px', fontWeight: 500, color: "#FFFFFF" }} align="left"><a>{row.oblast}</a></TableCell>
           <TableCell sx={{padding: 1}} style={{ fontSize: '12px', fontWeight: 500, color: "#FFFFFF" }} align="left"><a>{row.organ}</a></TableCell> */}
           <TableCell sx={{padding: 1}}>
@@ -198,28 +198,28 @@ const PdlRow = (props) => {
                 <Table size="small" aria-label="purchases">
                   <TableHead>
                     <TableRow style={{borderBottom: 'hidden'}}>
-                      <TableCell style={{ width: '30%', fontSize: '12px', color: "#6D6D6D" }}  align="left"><a>Область</a></TableCell>
-                      <TableCell style={{ width: '70%', fontSize: '12px', color: "#FFFFFF" }} align="left"><a>{row.oblast || "---"}</a></TableCell>
+                      <TableCell style={{verticalAlign: 'top', width: '30%', fontSize: '12px', color: "#6D6D6D" }}  align="left"><a>Область</a></TableCell>
+                      <TableCell style={{verticalAlign: 'top', width: '70%', fontSize: '12px', color: "#FFFFFF" }} align="left"><a>{row.oblast || "---"}</a></TableCell>
                     </TableRow>
                     <TableRow style={{borderBottom: 'hidden'}}>
-                      <TableCell style={{ width: '30%', fontSize: '12px', color: "#6D6D6D" }}  align="left"><a>Орган</a></TableCell>
-                      <TableCell style={{ width: '70%', fontSize: '12px', color: "#FFFFFF" }} align="left"><a>{row.organ || "---"}</a></TableCell>
+                      <TableCell style={{verticalAlign: 'top', width: '30%', fontSize: '12px', color: "#6D6D6D" }}  align="left"><a>Орган</a></TableCell>
+                      <TableCell style={{verticalAlign: 'top', width: '70%', fontSize: '12px', color: "#FFFFFF" }} align="left"><a>{row.organ || "---"}</a></TableCell>
                     </TableRow>
                     <TableRow style={{borderBottom: 'hidden'}}>
-                      <TableCell style={{ width: '30%', fontSize: '12px', color: "#6D6D6D" }}  align="left"><a>ИИН супруги</a></TableCell>
-                      <TableCell style={{ width: '70%', fontSize: '12px', color: "#FFFFFF" }} align="left"><a>{row.spouse_iin || "---"}</a></TableCell>
+                      <TableCell style={{verticalAlign: 'top', width: '30%', fontSize: '12px', color: "#6D6D6D" }}  align="left"><a>ИИН супруги</a></TableCell>
+                      <TableCell style={{verticalAlign: 'top', width: '70%', fontSize: '12px', color: "#FFFFFF" }} align="left"><a>{row.spouse_iin || "---"}</a></TableCell>
                     </TableRow>
                     <TableRow style={{borderBottom: 'hidden'}}>
-                      <TableCell style={{ width: '30%', fontSize: '12px', color: "#6D6D6D" }}  align="left"><a>ФИО супруги</a></TableCell>
-                      <TableCell style={{ width: '70%', fontSize: '12px', color: "#FFFFFF" }} align="left"><a>{row.spouse_fio || "---"}</a></TableCell>
+                      <TableCell style={{verticalAlign: 'top', width: '30%', fontSize: '12px', color: "#6D6D6D" }}  align="left"><a>ФИО супруги</a></TableCell>
+                      <TableCell style={{verticalAlign: 'top', width: '70%', fontSize: '12px', color: "#FFFFFF" }} align="left"><a>{row.spouse_fio || "---"}</a></TableCell>
                     </TableRow>
                     <TableRow style={{borderBottom: 'hidden'}}>
-                      <TableCell style={{ width: '30%', fontSize: '12px', color: "#6D6D6D" }}  align="left"><a>Госорган супруги</a></TableCell>
-                      <TableCell style={{ width: '70%', fontSize: '12px', color: "#FFFFFF" }} align="left"><a>{row.spouse_organ || "---"}</a></TableCell>
+                      <TableCell style={{verticalAlign: 'top', width: '30%', fontSize: '12px', color: "#6D6D6D" }}  align="left"><a>Госорган супруги</a></TableCell>
+                      <TableCell style={{verticalAlign: 'top', width: '70%', fontSize: '12px', color: "#FFFFFF" }} align="left"><a>{row.spouse_organ || "---"}</a></TableCell>
                     </TableRow>
                     <TableRow style={{borderBottom: 'hidden'}}>
-                      <TableCell style={{ width: '30%', fontSize: '12px', color: "#6D6D6D" }}  align="left"><a>Должность супруги</a></TableCell>
-                      <TableCell style={{ width: '70%', fontSize: '12px', color: "#FFFFFF" }} align="left"><a>{row.spouse_position || "---"}</a></TableCell>
+                      <TableCell style={{verticalAlign: 'top', width: '30%', fontSize: '12px', color: "#6D6D6D" }}  align="left"><a>Должность супруги</a></TableCell>
+                      <TableCell style={{verticalAlign: 'top', width: '70%', fontSize: '12px', color: "#FFFFFF" }} align="left"><a>{row.spouse_position || "---"}</a></TableCell>
                     </TableRow>
                   </TableHead>
                 </Table>
@@ -286,8 +286,8 @@ const FounderRow = (props) => {
     return (
       <>
         <TableRow className="uitablerow" sx={{height:'10px',}} style={{borderBottom: 'hidden'}}>
-          <TableCell sx={{padding: 1}} style={{ fontSize: '12px', fontWeight: 500, color: "#FFFFFF"}}><a>{row.lastname+' '+row.firstname+' '+row.patronymic || "---"}</a></TableCell>
-          <TableCell sx={{padding: 1}} style={{ fontSize: '12px', fontWeight: 500, color: "#FFFFFF" }} align="left"><a>{row.reg_date || "---"}</a></TableCell>
+          <TableCell sx={{padding: 1}} style={{verticalAlign: 'top', fontSize: '12px', fontWeight: 500, color: "#FFFFFF"}}><a>{row.lastname+' '+row.firstname+' '+row.patronymic || "---"}</a></TableCell>
+          <TableCell sx={{padding: 1}} style={{verticalAlign: 'top', fontSize: '12px', fontWeight: 500, color: "#FFFFFF" }} align="left"><a>{row.reg_date || "---"}</a></TableCell>
           <TableCell sx={{padding: 1}}>
             <IconButton
               aria-label="expand row"
@@ -305,12 +305,12 @@ const FounderRow = (props) => {
                 <Table size="small" aria-label="purchases">
                   <TableHead>
                     <TableRow style={{borderBottom: 'hidden'}}>
-                      <TableCell style={{ width: '30%', fontSize: '12px', color: "#6D6D6D" }}  align="left"><a>Депозит</a></TableCell>
-                      <TableCell style={{ width: '70%', fontSize: '12px', color: "#FFFFFF" }} align="left"><a>{row.deposit || "---"}</a></TableCell>
+                      <TableCell style={{verticalAlign: 'top', width: '30%', fontSize: '12px', color: "#6D6D6D" }}  align="left"><a>Депозит</a></TableCell>
+                      <TableCell style={{verticalAlign: 'top', width: '70%', fontSize: '12px', color: "#FFFFFF" }} align="left"><a>{row.deposit || "---"}</a></TableCell>
                     </TableRow>
                     <TableRow style={{borderBottom: 'hidden'}}>
-                      <TableCell style={{ width: '30%', fontSize: '12px', color: "#6D6D6D" }}  align="left"><a>Доля</a></TableCell>
-                      <TableCell style={{ width: '70%', fontSize: '12px', color: "#FFFFFF" }} align="left"><a>{row.share || "---"}</a></TableCell>
+                      <TableCell style={{verticalAlign: 'top', width: '30%', fontSize: '12px', color: "#6D6D6D" }}  align="left"><a>Доля</a></TableCell>
+                      <TableCell style={{verticalAlign: 'top', width: '70%', fontSize: '12px', color: "#FFFFFF" }} align="left"><a>{row.share || "---"}</a></TableCell>
                     </TableRow>
                   </TableHead>
                 </Table>
