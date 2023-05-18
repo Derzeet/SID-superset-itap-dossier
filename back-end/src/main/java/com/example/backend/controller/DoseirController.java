@@ -40,7 +40,7 @@ public class DoseirController {
     @Autowired
     MyService myService;
     @PostMapping(value = "/news/create", consumes = {"multipart/form-data"})
-    public news createVacancy(@RequestParam("file") MultipartFile file,  news news){
+    public news createVacancy(@RequestParam("file") MultipartFile file, @RequestParam news news){
         return myService.createNews(news,file);
     }
 
