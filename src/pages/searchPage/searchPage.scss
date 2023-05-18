@@ -10,10 +10,10 @@ body {
 
     font-family: 'Montserrat';
 
+    background-color: #0D0F11 !important;
     background-image: url(./../../images/bg-image.png) !important;
-    background: 100%;
-    background-position: top left;
-    background-repeat: no-repeat;
+    background-size: 110% !important;
+    background-position: center;
 
     display: flex;
     flex-direction: row;

@@ -23,6 +23,7 @@ const RegisterForm = () => {
             password: "",
             password_conf: "",
             fio: "",
+            user_photo: "",
         }
     });
     const handleRegistration = (data) => {
@@ -32,7 +33,8 @@ const RegisterForm = () => {
             data.email,
             data.fio,
             data.password,
-            data.level
+            data.level,
+            data.user_photo
         ).then(
             response => {
                 console.log(response)
@@ -88,12 +90,19 @@ const RegisterForm = () => {
                     return "Your passwords do not match"
                 }
             },
+        },
+        user_photo: {
+            required: "userphoto is required",
+            minLength: {
+                value: 1,
+                message: "userphoto"
+            }
         }
     };
 
     return (
         <div>
-            <form name="registrationForm" onSubmit={handleSubmit(handleRegistration, handleErrors)}>
+            <form name="registrationForm" onSubmit={handleSubmit(handleRegistration, handleErrors)} enctype="multipart/form-data">
 
                 <div className="inputs">
                     <div className="firstLine">
@@ -145,15 +154,23 @@ const RegisterForm = () => {
                     <div className="thirdLine">
                         <div>
                             <label >Подтверждение пароля</label>
-                            <input type="password" {...register("password_conf", registerOptions.password_conf)} id="password-conf" placeholder="Подтвердите пароль"/>
+                            <input type="password" {...register("password_conf", registerOptions.password_conf)} id="password-conf" placeholder="Подтвердите пароль" />
                         </div>
                     </div>
+                    <div className="thirdLine">
+
+                    <div className="custom-file mb-4">
+                        <label className="custom-file-label"
+                               htmlFor="customFile">Upload Resume:</label>
+                        <input type="file" name="user_photo" className="user_photo"
+                               id="user_photo" {...register("user_photo", registerOptions.user_photo)}/>
+                    </div></div>
                 </div>
 
                 <div className="actions">
                     {/* <Link to='/login'><a>Войти в аккаунт</a></Link> */}
-                    <input id="clear" type="button" value="Очистить"/>
-                    <input id="register" type="submit" value="Зарегистрировать"/>
+                    <input id="clear" type="button" value="Очистить" />
+                    <input id="register" type="submit" value="Зарегистрировать" />
                 </div>
 
                 {
@@ -167,6 +184,7 @@ const RegisterForm = () => {
                             {errors.level ? <span>{errors.level?.message}</span> : ""}
                             {errors.password ? <span>{errors.password?.message}</span>: ""}
                             {errors.password_conf ? <span>{errors.password_conf?.message}</span> : ""}
+                            {errors.user_photo ? <span>{errors.user_photo?.message}</span> : ""}
                         </div>
                     </div> 
                     : ""
