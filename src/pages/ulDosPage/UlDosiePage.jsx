@@ -47,6 +47,8 @@ const UlDosiePage = (props) => {
     const [commodityProducers, setCommodityProducers] = useState([])
     const [accountant, setAccountant] = useState([])
 
+    const [taxCount, setTaxCount] = useState(0) 
+
 
     const [menuOpen, setMenuOpen] = useState(false)
 
@@ -75,6 +77,7 @@ const UlDosiePage = (props) => {
                 setCommodityProducers(res.data.commodityProducers)
                 setAccountant(res.data.accountantListEntities)
                 setUchreditel(res.data.svedenyaObUchastnikovUlEntities)
+                setTaxCount(res.data.taxCount);
                 isLoading(false)
                 
             })
@@ -144,7 +147,7 @@ const UlDosiePage = (props) => {
                         <div className="frames">
                             <LeftTopFrame fullName={fullName} bin={ulBin} address = {address}/>
                             <RightTopFrame uchreditel={uchreditel} founders={founders} pdls={pdl}/>
-                            <LeftBottomFrame  accountant={accountant} commodityProducers={commodityProducers} mshes={mshes} taxes={taxes} nedvijimost={nedvijimost} pension={pension} bin={bin} autos={autos}/>
+                            <LeftBottomFrame taxCount={taxCount} accountant={accountant} commodityProducers={commodityProducers} mshes={mshes} taxes={taxes} nedvijimost={nedvijimost} pension={pension} bin={bin} autos={autos}/>
                             <RightBottomFrame opg={opg} esf={BlockEsfBlock} nds={nds} bankrot={bankrot} omn={omn}/>
                         </div>
                     </div>

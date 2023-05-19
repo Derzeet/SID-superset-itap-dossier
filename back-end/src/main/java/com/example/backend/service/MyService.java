@@ -1,6 +1,7 @@
 package com.example.backend.service;
 
 import com.example.backend.extractor.mv_fl_extractor;
+import com.example.backend.modelsAuth.news;
 import com.example.backend.modelsDossier.*;
 import com.example.backend.photo.modelsPhot.*;
 import com.example.backend.photo.repositoryPhot.fl_relativesRepository;
@@ -8,6 +9,7 @@ import com.example.backend.photo.repositoryPhot.mv_iin_docRepo;
 import com.example.backend.photo.repositoryPhot.pdlReposotory;
 import com.example.backend.photo.repositoryPhot.reg_address_fl_Repo;
 import com.example.backend.photo.repositoryPhot.*;
+import com.example.backend.repositoryAuth.NewsRepo;
 import com.example.backend.repositoryDossier.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -15,12 +17,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.time.LocalDateTime;
+import java.util.*;
 
 @Service
 public class MyService {
@@ -123,7 +126,24 @@ public class MyService {
     private mv_ul_leaderRepository mvUlLeaderRepository;
     @Autowired
     private RegAddressUlEntityRepo regAddressUlEntityRepo;
-
+    @Autowired
+    private NewsRepo newsRepo;
+    public news createNews(news news , MultipartFile file){
+        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+        if(fileName.contains(".."))
+        {
+            System.out.println("not a a valid file");
+        }
+        try {
+            news.setImage(Base64.getEncoder().encodeToString(file.getBytes()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println(news.getId());
+//        news.setCountry("LocalDateTime.now()");
+        news.setDateOfCreated(LocalDateTime.now());
+        return newsRepo.save(news);
+    }
 
     public List<searchResultModelUl> searchUlByName(String name) {
         List<mv_ul> mvUls = mv_ul_repo.getUlsByName(name.replace("$", "%"));
@@ -231,17 +251,22 @@ public class MyService {
         return null;
     }
     public List<searchResultModelUl> getByVinUl(String vin) {
-        List<String> iin = mvAutoFlRepo.getByVin(vin);
-        List<mv_ul> mvUls = mv_ul_repo.getUsersByLike(iin.get(0));
+        String VIN_upper = vin.toUpperCase();
+        List<String> iin = mvAutoFlRepo.getByVin(VIN_upper);
         List<searchResultModelUl> list = new ArrayList<>();
-        for (mv_ul l: mvUls) {
-            searchResultModelUl res = new searchResultModelUl();
-            res.setBin(l.getBin());
-            res.setName(l.getFull_name_rus());
-            list.add(res);
+        if (iin.size() > 0) {
+            List<mv_ul> mvUls = mv_ul_repo.getUsersByLike(iin.get(0));
+            for (mv_ul l: mvUls) {
+                searchResultModelUl res = new searchResultModelUl();
+                res.setBin(l.getBin());
+                res.setName(l.getFull_name_rus());
+                list.add(res);
+            }
+            return list;
+        } else {
+            return list;
         }
 
-        return list;
     }
 
     public List<searchResultModelFL> getByDoc_photo(String IIN) {
@@ -819,6 +844,12 @@ public class MyService {
 //             flPensionFinals.add(flPensionFinal);
 //         }
 //         myNode.setFlPensionContrs(flPensionFinals);
+        try {
+            Integer number = taxOutEntityRepo.getTaxAmount(BIN);
+            myNode.setTaxCount(number);
+        } catch (Exception e) {
+            System.out.println("Tax error: " + e);
+        }
             return myNode;
         }
 

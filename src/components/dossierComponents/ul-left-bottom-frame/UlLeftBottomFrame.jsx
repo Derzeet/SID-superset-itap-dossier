@@ -34,6 +34,7 @@ function UlLeftBottomFrame(props) {
     const [autos, setAutos] = useState([])
     const [bin, setBin] = useState('')
     const [commodityProducers, setCommodityProducers] = useState([])
+    const [taxCount, setTaxCount] = useState(0)
     const [professions, setProfessions] = useState({
       accountant: []
       // advocate: [],
@@ -50,6 +51,7 @@ function UlLeftBottomFrame(props) {
         setBin(props.bin)
         setAutos(props.autos)
         setCommodityProducers(props.commodityProducers)
+        setTaxCount(props.taxCount)
         // setAccountant(props.accountant)
         setProfessions({
           accountant: props.accountant
@@ -64,7 +66,7 @@ function UlLeftBottomFrame(props) {
             <div className="other-line">
               <NedvijimostBlock array={nedvijimost} exist={nedvijimost != null}/>
               <PensionBlock array={pension} bin={bin}/>
-              <TaxesBlock array={taxes} exist={taxes.length>0}/>
+              <TaxesBlock taxCount={taxCount} bin= {bin} array={taxes} exist={taxes.length>0}/>
               {mshes && mshes.length > 0? <MshesBlock array={mshes} exist={mshes && mshes.length > 0 ? true : false}/> : ""}
               <TransportRow row={autos} />
               <CommodityProducersTable array={commodityProducers} />
@@ -98,7 +100,7 @@ const ProfessionsBlock = (props) => {
             <TableRow className="uitablerow" sx={{height:'10px',}} style={{borderBottom: 'hidden'}}>
                 <TableCell sx={{padding: 1}} style={{borderBottom: 'hidden', width: '90%', fontSize: '13px', fontWeight: 500, color: "#FFFFFF"}}>
                   <a>
-                    {blockTitle}
+                    Бухгалтер
                   </a>
                 </TableCell>
                 <TableCell sx={{padding: 1}} style={{width: '10%'}} align='right'>
@@ -602,47 +604,112 @@ const NedvijimostRow = (props) => {
 }
 
 const TaxesBlock = (props) => {
-  const {array, exist} = props
+  const {bin, taxCount} = props
   const [open, setOpen] = useState(false)
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [curr, setCurr] = useState([])
+  const [isLoading, setLoading] = useState(false)
+  useEffect(() => {
+    const searchIIN = () => {
+      if (open) {
+
+        setLoading(true)
+        const params = {bin, page}
+        
+        axios.get(default_host+'taxpage', {params: params}).then(res => {
+          setCurr(res.data)
+          console.log(res.data)
+          setLoading(false)
+        })
+      }
+    }
+      
+      searchIIN()
+
+  }, [page, open])
+  const emptyRows =
+      page > 0 ? Math.max(0, (1 + page) * rowsPerPage - 15) : 0;
+  
+    const handleChangePage = (event, newPage) => {
+        console.log(newPage)
+        // getData()
+        setPage(newPage);
+    };
+  
+    const handleChangeRowsPerPage = (event) => {
+      setRowsPerPage(parseInt(event.target.value, 10));
+      setPage(0);
+  };
+  
 
   return (
     <>
-      <TableContainer sx={{marginTop: 0}}>
-        <Table aria-label="collapsible table" className="uitable">
+    <TableContainer>
+        <Table colSpan={2}  sx={{ borderRadius: '3px'}} aria-label="collapsible table" className="uitable">
+          <TableHead>
+              <TableRow className="uitableHead" style={{borderBottom: 'hidden'}}>
+                  <TableCell colSpan={1} sx={{padding:1}} style={{ width: '90%', fontSize: '13px', fontWeight: 500, color: "#FFFFFF"}} align="left">Налоги</TableCell>
+                  <TableCell colSpan={1} sx={{padding: 1}} style={{ color: "#fff" }} align="right">
+                      <IconButton
+                        aria-label="expand row"
+                        size="small"
+                        onClick={() => setOpen(!open)}
+                      >
+                        {open ? <KeyboardArrowUpIcon style={{ fill: '#ffffff' }}/> : <KeyboardArrowDownIcon style={{ fill: '#ffffff' }}/>}
+                      </IconButton>
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell colSpan={2} sx={{padding: 0}}>
+                    <Collapse in={open} timeout="auto" unmountOnExit>
+                      <TableContainer>
+                        <Table sx={{m: 0}}>
+                          <TableBody style={{borderBottom: 'hidden'}}>
+                              <TableRow>
+                                <TableContainer>
+                                  <Table sx={{m: 0}}>
+                                    <TableHead>
+                                    <TableRow className="uitableHead">
+                                        <TableCell sx={{padding: 1}} style={{ width: '30%',fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left"><a>Наименование</a></TableCell>
+                                        <TableCell sx={{padding: 1}} style={{ width: '50%', fontSize: '12px', color: "rgb(199, 199, 199)" }} align="left"><a>Название налога</a></TableCell>
+                                        <TableCell sx={{padding: 1}} style={{ width: '20%', fontSize: '12px', color: "rgb(199, 199, 199)" }} align="left"><a>Сумма платежа</a></TableCell>
+                                        <TableCell sx={{padding: 1}} style={{ width: '5%', color: "#fff" }} align="left"></TableCell>
+                                    </TableRow>
+                                    </TableHead>
+                                    <TableBody>
+                                      { !isLoading ? curr.map((row) => (
+                                          <TaxesRow row={row} />
+                                      )) : [1,2,3,4,5,6,7,8,9,10].map(key => (
+                                        <TableRow sx={{borderBottom: 'hidden'}}>
+                                          <TableCell align="center" colSpan={4} style={{fontSize: '12px', color: "rgb(199, 199, 199)"}}>Подождите...</TableCell>
+                                        </TableRow> 
+                                      ))}
+                                    </TableBody>
+                                    <TableFooter >
+                                      <TableRow >
+                                          <TablePagination style={{borderBottom: 'hidden'}}
+                                              colSpan={4}
+                                              count={taxCount}
+                                              rowsPerPage={10}
+                                              page={page}
+                                              onPageChange={handleChangePage}
+                                              ActionsComponent={TablePaginationActions}
+                                              rowsPerPageOptions={10}
+                                              />
+                                      </TableRow>
+                                    </TableFooter>
+                                  </Table>
+                                </TableContainer>
+                              </TableRow>
+                          </TableBody>
+                        </Table>
+                      </TableContainer>
+                    </Collapse>
+                  </TableCell>
+                </TableRow>
 
-          <TableRow className="uitablerow" sx={{height:'10px',}} style={{borderBottom: 'hidden'}}>
-              <TableCell sx={{padding: 1}} style={{borderBottom: 'hidden', width: '90%', fontSize: '13px', fontWeight: 500, color: "#FFFFFF"}}><a>Налоги</a></TableCell>
-              <TableCell sx={{padding: 1}} style={{width: '10%'}} align='right'>
-                  <IconButton
-                    aria-label="expand row"
-                    size="small"
-                    onClick={() => setOpen(!open)}
-                    >
-                    {open ? <KeyboardArrowUpIcon style={{ fill: '#ffffff' }}/> : <KeyboardArrowDownIcon style={{ fill: '#ffffff' }}/>}
-                  </IconButton>
-                </TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell sx={{padding: 1}} style={{ paddingBottom: 0, paddingTop: 0}} colSpan={6}>
-              <Collapse in={open} timeout="auto" unmountOnExit>
-                <Box sx={{borderRadius: '3px', margin: 0, marginLeft: '0' }}>
-                  <TableHead sx={{backgroundColor: '#ffffff0a'}}>
-                    <TableRow className="uitableHead">
-                        <TableCell sx={{padding: 1}} style={{ width: '20%',fontSize: '12px', color: "rgb(199, 199, 199)"}} align="left"><a>Наименование</a></TableCell>
-                        <TableCell sx={{padding: 1}} style={{ width: '50%', fontSize: '12px', color: "rgb(199, 199, 199)" }} align="left"><a>Название налога</a></TableCell>
-                        <TableCell sx={{padding: 1}} style={{ width: '15%', fontSize: '12px', color: "rgb(199, 199, 199)" }} align="left"><a>Сумма платежа</a></TableCell>
-                        <TableCell sx={{padding: 1}} style={{ width: '5%', color: "#fff" }} align="left"></TableCell>
-                    </TableRow>
-                  </TableHead> 
-                  <TableBody style={{borderBottom: 'hidden'}}>
-                  {exist ? array.map((row, index) => (
-                      <TaxesRow row={row} />
-                  )): <TableCell  className="zeroResult" align="center" colSpan={4} style={{borderBottom: 'hidden'}}><a>Нет данных</a></TableCell>}
-                  </TableBody>
-                </Box>
-              </Collapse>
-            </TableCell>
-          </TableRow>
+          </TableHead>
         </Table>
       </TableContainer>
     </>
@@ -655,10 +722,10 @@ const TaxesRow = (props) => {
 
   return (
     <>
-      <TableRow className="uitablerow" sx={{height:'10px',}} style={{borderBottom: 'hidden'}}>
-        <TableCell sx={{padding: 1}} style={{ fontSize: '12px', fontWeight: 500, color: "#FFFFFF"}}><a>{row.ogdName || "---"}</a></TableCell>
-        <TableCell sx={{padding: 1}} style={{ fontSize: '12px', fontWeight: 500, color: "#FFFFFF" }} align="left"><a>{row.kbkName}</a></TableCell>
-        <TableCell sx={{padding: 1}} style={{ fontSize: '12px', fontWeight: 500, color: "#FFFFFF" }} align="left"><a>{row.paymentAmount}</a></TableCell>
+      <TableRow className="uitablerow" sx={{height:'10px',}}>
+        <TableCell sx={{padding: 1}} style={{verticalAlign: 'top', fontSize: '12px', fontWeight: 500, color: "#FFFFFF"}}><a>{row.ogdName || "---"}</a></TableCell>
+        <TableCell sx={{padding: 1}} style={{verticalAlign: 'top', fontSize: '12px', fontWeight: 500, color: "#FFFFFF" }} align="left"><a>{row.kbkName}</a></TableCell>
+        <TableCell sx={{padding: 1}} style={{verticalAlign: 'top', fontSize: '12px', fontWeight: 500, color: "#FFFFFF" }} align="left"><a>{row.paymentAmount}</a></TableCell>
         <TableCell sx={{padding: 1}}>
           <IconButton
             aria-label="expand row"
@@ -732,6 +799,7 @@ const PensionBlock = (props) => {
                   {array.length> 0 ? array.map((row, index) => (
                        <PensionYear year={row.date_part} number={row.iin_count} bin={bin}/>
                   )): <TableCell  className="zeroResult" align="center" colSpan={4} style={{borderBottom: 'hidden'}}><a>Нет данных</a></TableCell>}
+                  <div style={{height: '10px'}}></div>
                 </Box>
               </Collapse>
             </TableCell>

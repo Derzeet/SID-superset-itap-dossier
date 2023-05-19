@@ -9,6 +9,7 @@ import LayoutController from "../LayoutController/LayoutController";
 
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import IconButton from '@mui/material/IconButton';
+import AttachFileIcon from '@mui/icons-material/AttachFile';
 
 
 const LeftBar = (props) => {
@@ -711,7 +712,7 @@ const LeftBar = (props) => {
                     </div>
                     
                     <div className="exportImportBtnBlock">
-                        <div id="importBlock">
+                        <div id="importBlock" >
                             <input type="file" id="file-upload" 
                                 onChange={event => importBt()} 
                             />

@@ -1,8 +1,8 @@
 package com.example.backend.controller;
 
 
+import com.example.backend.modelsAuth.news;
 import com.example.backend.modelsDossier.*;
-import com.example.backend.photo.modelsPhot.fl_pension_contr;
 import com.example.backend.photo.modelsPhot.photoDb;
 import com.example.backend.photo.repositoryPhot.newPhotoRepo;
 import com.example.backend.repositoryDossier.esf_all2Repo;
@@ -13,14 +13,16 @@ import com.example.backend.tools.PdfGenerator;
 import com.lowagie.text.*;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,6 +39,10 @@ public class DoseirController {
     mv_auto_fl_repo mvAutoFlRepo;
     @Autowired
     MyService myService;
+    @PostMapping(value = "/news/create", consumes = {"multipart/form-data"})
+    public news createVacancy(@RequestParam("file") MultipartFile file, @RequestParam news news){
+        return myService.createNews(news,file);
+    }
 
     @GetMapping("/ch")
     public List<photoDb> getCh() {
@@ -72,8 +78,6 @@ public class DoseirController {
 //        return myService.taxOutEntities(bin,PageRequest.of(page,size));
         return myService.pensionEntityUl1(bin, year, page);
     }
-
-
     @GetMapping("/iin")
     public List<searchResultModelFL> getByIIN(@RequestParam String iin) {
         return myService.getByIIN_photo(iin);
