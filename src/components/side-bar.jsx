@@ -33,9 +33,9 @@ const SideBar = (props) => {
 
     const sideBarButtons = [
         {name: "Главная страница", to: "/"},
-        {name: "Сотрудники", to: "/"},
+        {name: "Сотрудники", to: "/workers"},
         {name: "Все новости", to: "/"},
-        {name: "Календарь", to: "/"},
+        {name: "Календарь", to: "/calendar"},
         {name: "Информационные ресурсы", to: "/"},
         {name: "База знаний", to: "/"},
         {name: "Мессенджер", to: "/"},

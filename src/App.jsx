@@ -3,6 +3,7 @@ import React, { lazy, Suspense } from "react";
 
 import {motion} from 'framer-motion';
 
+import CalendarPage from './pages/CalendarPage/CalendarPage';
 import './App.scss'
 import {
   BrowserRouter as Router,
@@ -14,6 +15,7 @@ import UlDosiePage from './pages/ulDosPage/UlDosiePage'
 import MainPage from './pages/mainPage/MainPage';
 import SearchPage from './pages/searchPage/SearchPage';
 import Navbar from './components/dossierComponents/nav-bar/Navbar';
+import WorkersPage from './pages/WorkersPage/WorkersPage';
 // import Navbar from './components/itapComponents/NavBar/Navbar';
 import GrayNavbar from './components/gray-navbar/gray-navbar';
 import { createTheme, ThemeProvider } from '@mui/material';
@@ -63,14 +65,31 @@ function App() {
           <Routes>
             <Route path='/' element={
               <>
-                <div style={{height: "30px"}}></div>
+                <div style={{height: "12px"}}></div>
                 <GrayNavbar/>
                 {/* <Navbar /> */}
                 <MainPage/>
               </>
             }/>
+            <Route path='/workers' element={
+              <>
+                <div style={{height: "12px"}}></div>
+                <GrayNavbar/>
+                {/* <Navbar /> */}
+                <WorkersPage/>
+              </>
+            }/>
+            <Route path='/calendar' element={
+              <>
+                <div style={{height: "12px"}}></div>
+                <GrayNavbar/>
+                {/* <Navbar /> */}
+                <CalendarPage/>
+              </>
+            }/>
             <Route path='/profiler' element={
               <>
+                <div style={{height: "12px"}}></div>
                 <GrayNavbar/>
                 <SearchPage/>
               </>
@@ -78,18 +97,21 @@ function App() {
 
             <Route path='/profiler/person/:iin' element={
               <>
+                <div style={{height: "12px"}}></div>
                 <GrayNavbar/>
                 <DosiePage/>
               </>
             }/>
             <Route path='/profiler/ul/:bin' element={
               <>
+                <div style={{height: "12px"}}></div>
                 <GrayNavbar/>
                 <UlDosiePage/>
               </>
             }/>
             <Route path="/itap" element={
               <>
+                <div style={{height: "12px"}}></div>
                 <GrayNavbar/>
 
                   <Suspense fallback={<span class="loader"></span>}>
@@ -103,6 +125,7 @@ function App() {
             <Route path="/registration" element={
               <>
 
+                <div style={{height: "12px"}}></div>
                 <GrayNavbar/>
                   <Suspense fallback={<span class="loader"></span>}>
                     <motion.div initial={{opacity: 0}} animate={{opacity: 1}} transition={{ duration: 0.2 }}>
@@ -125,6 +148,7 @@ function App() {
           <Route path="/table" element={
             <>
               {/* {!userSession ? navigate('/login', {replace: true}) : ""}  */}
+              <div style={{height: "12px"}}></div>
               <GrayNavbar/>
               <Suspense fallback={<span className="loader"></span>}>
               <motion.div initial={{opacity: 0}} animate={{opacity: 1}} transition={{ duration: 0.2 }}>
@@ -134,7 +158,8 @@ function App() {
             </>
           } />
           <Route path="/admin" element={
-                <>
+            <>
+                  <div style={{height: "12px"}}></div>
                   <GrayNavbar/>
                   <Suspense fallback={<span class="loader"></span>}>
                     <motion.div initial={{opacity: 0}} animate={{opacity: 1}} transition={{ duration: 0.2 }}>
@@ -145,6 +170,7 @@ function App() {
               }/>
           <Route path="/users/:username" element={
             <>
+              <div style={{height: "12px"}}></div>
               <GrayNavbar/>
               <Suspense fallback={<span class="loader"></span>}>
                 <motion.div initial={{opacity: 0}} animate={{opacity: 1}} transition={{ duration: 0.2 }}>
@@ -156,6 +182,7 @@ function App() {
 
             <Route path='/oracle' element={
               <>
+              <div style={{height: "12px"}}></div>
               <GrayNavbar/>
               <OracleTable/>
               </>
