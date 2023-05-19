@@ -58,6 +58,8 @@
 
 .NavbarItems {
     height: 90px;
+
+    
 }
 
 .NavbarItems2 {
@@ -67,6 +69,16 @@
 }
 .NavbarItems3 {
     height: 30px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.NavbarItems3 > div {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+
+    text-transform: uppercase;
 }
 
 .nav-menu {

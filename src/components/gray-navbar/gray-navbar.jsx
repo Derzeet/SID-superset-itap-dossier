@@ -21,9 +21,9 @@ const GrayNavbar = (props) => {
     const userSession = JSON.parse(localStorage.getItem("user"))
     const navigate = useNavigate()    
     useEffect(() => {
-        if (userSession == null) {
-            navigate('/login')
-        }
+        // if (userSession == null) {
+        //     navigate('/login')
+        // }
     })
 
     const logoutHandler = () => {
@@ -99,7 +99,7 @@ const GrayNavbar = (props) => {
                     ) : ("")}
 
                     <ul className="nav-menu">
-                    {userSession ? 
+                    {!userSession ? 
                         <>
                             {/* <style>
                                 
