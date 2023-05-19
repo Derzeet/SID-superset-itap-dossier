@@ -1,13 +1,23 @@
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
+import React, { useEffect } from 'react';
+import FullCalendar from '@fullcalendar/react'; // must go before plugins
+import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin!
+import allLocales from '@fullcalendar/core/locales-all';
+import './Calendar.css'
 
 function CalendarPage(props) {
-    return (
-      <LocalizationProvider dateAdapter={AdapterDayjs} locale="ru-RU">
-        <DateCalendar sx={{height: '100%', width: '100%'}}/>
-      </LocalizationProvider>
-    );
+
+  return (
+    <>
+      <div style={{ width: '40%', marginLeft: '10%', paddingTop: '5%' }}>
+        <FullCalendar
+          locale={'ru-RU'}
+          plugins={[dayGridPlugin]}
+          initialView="dayGridMonth"
+          selectable={true}
+        />
+      </div>
+    </>
+  );
 }
 
 export default CalendarPage;

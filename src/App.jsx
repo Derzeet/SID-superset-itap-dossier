@@ -111,7 +111,7 @@ function App() {
             }/>
             <Route path="/itap" element={
               <>
-                <div style={{height: "12px"}}></div>
+                {/* <div style={{height: "12px"}}></div> */}
                 <GrayNavbar/>
 
                   <Suspense fallback={<span class="loader"></span>}>
