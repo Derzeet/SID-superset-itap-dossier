@@ -1,0 +1,132 @@
+.newsPage {
+
+    display: flex;
+    flex-direction: row;
+
+    .newsBody {
+        width: 80%;
+        // border: 1px solid deeppink;
+
+        margin: 0 auto;   
+        padding: 70px 0px;
+
+        display: flex;
+        flex-direction: column;
+
+        gap: 20px;
+
+    }
+
+    .newsBody .newsHeader {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+
+        > div:nth-child(1) {
+            font-family: 'Montserrat';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 32px;
+            line-height: 39px;
+        }
+    }
+
+    .mainNews {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        .mainNewsTitle {
+            font-family: 'Montserrat';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 31px;
+            line-height: 38px;
+        }
+
+        .mainNewsPoster {
+            width: 40%;
+
+            img {
+                width: 100%;
+            }
+        }
+
+        .mainNewsBody {
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+        }
+
+        .mainNewsDescBody {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            width: 60%;
+
+            .mainNewsDesc {
+                font-family: 'Montserrat';
+                font-style: normal;
+                font-weight: 500;
+                font-size: 18px;
+                line-height: 22px;
+
+                color: #969696;
+            }
+
+            > div:last-child a {
+                font-family: 'Montserrat';
+                font-style: normal;
+                font-weight: 500;
+                font-size: 18px;
+                line-height: 22px;
+                /* identical to box height */
+
+                color: #FFFFFF;
+            }
+        }
+    }
+
+    .otherNews {
+        display: flex;
+        flex-direction: row;
+        gap: 20px 30px;
+
+        flex-wrap: wrap;
+
+        margin-top: 40px;
+
+        .newsCard {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+
+            width: 25%;
+            padding: 40px;
+
+            border: #444444 solid 1px;
+            border-radius: 4px;
+
+            > div:nth-child(1) {
+                
+                img {
+                    width: 100%;
+                }
+            }
+
+            > div {
+                font-family: 'Montserrat';
+                font-style: normal;
+                font-weight: 700;
+                font-size: 21px;
+                line-height: 26px;
+
+                color: #FFFFFF;
+            }
+
+        }
+    }
+
+}

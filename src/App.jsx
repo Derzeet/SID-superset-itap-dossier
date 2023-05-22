@@ -20,6 +20,8 @@ import WorkersPage from './pages/WorkersPage/WorkersPage';
 import GrayNavbar from './components/gray-navbar/gray-navbar';
 import { createTheme, ThemeProvider } from '@mui/material';
 import OracleTable from "./pages/OracleTable/OracleTable";
+import NewsPage from './pages/NewsPage/NewsPage';
+import ArticlePage from './pages/ArticlePage/ArticlePage';
 function App() {
   const userSession = JSON.parse(localStorage.getItem("user"))
 
@@ -79,6 +81,19 @@ function App() {
                 <WorkersPage/>
               </>
             }/>
+            <Route path='/news/:id' element={
+              <>
+                <div style={{height: "12px"}}></div>
+                <GrayNavbar/>
+                <ArticlePage/>
+              </>
+            }/>
+            <Route path='/news' element={
+              <>
+                <GrayNavbar/>
+                <NewsPage/>
+              </>
+            }/> 
             <Route path='/calendar' element={
               <>
                 <div style={{height: "12px"}}></div>
@@ -109,6 +124,7 @@ function App() {
                 <UlDosiePage/>
               </>
             }/>
+            
             <Route path="/itap" element={
               <>
                 {/* <div style={{height: "12px"}}></div> */}

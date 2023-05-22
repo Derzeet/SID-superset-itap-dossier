@@ -7,14 +7,37 @@ import interactionPlugin from "@fullcalendar/interaction";
 import './Calendar.scss'
 
 function CalendarPage(props) {
-  let fc_today, fc_next, fc_prev;
-
   const calendarRef = useRef(null);
   const [events, setEvents] = useState([])
   const [showEvent, setShowEvent] = useState(true)
 
+  const [eventTitle, setEventTitle] = useState("")
+  const [eventStart, setEventStart] = useState("")
+  const [eventEnd, setEventEnd] = useState("")
+  const [eventDesc, setEventDesc] = useState("")
+
   useEffect(() => {
-    fc_today = document.querySelector('.fc-today-button[title="This month"]');
+
+    setEvents(
+      [
+        {
+          id: 1,
+          start: "2023-05-19",
+          end: "2023-05-19",
+          date: "2023-05-19",
+          title: "One",
+          desc: "lorem Ipsum lorem ipsum dolor sit amet"
+        },
+        {
+          id: 2,
+          start: "2023-05-20",
+          end: "2023-05-21",
+          title: "ttoooday",
+          desc: "lorem Ipsum lorem ipsum dolor sit amet"
+        },
+      ]
+    );
+
   }, [])
 
   const handleDateClick = (arg) => { 
@@ -23,17 +46,42 @@ function CalendarPage(props) {
     console.log(calendarRef)
   }
 
+  const handleEvents = (events) => {
+  }
+
+  const handleEventClick = (e) => {
+    let id = e.event.id - 0
+
+    let event = events.filter(item => {
+      return item.id === id
+    })[0]
+
+    console.log(event)
+
+    setEventTitle(event.title)
+    setEventDesc(event.desc)
+    setEventStart(event.start)
+    setEventEnd(event.end)
+  }
+
+  const handleEventDrop = (e) => {
+    console.log(e)
+  }
+
   return (
     <>
       <div style={{}} className='calendarPage'>
         <div className='calendar-container'>
           <FullCalendar
             ref={calendarRef}
+            events={events}
+            eventsSet={() => handleEvents(events)}
             locale={'ru-RU'}
             plugins={[dayGridPlugin, interactionPlugin]}
             initialView="dayGridMonth"
             selectable={true}
             dateClick={handleDateClick}
+            eventClick={handleEventClick}
             eventContent={renderEventContent}
 
             headerToolbar={{
@@ -48,45 +96,26 @@ function CalendarPage(props) {
               day: "День",
               list: "Список"
             }}
+            eventDrop={handleEventDrop}
             editable={true}
             // selectMirror={true}
             dayMaxEvents={true}
             weekends={true}
-            //
-            eventAdd={(e) => {
-              console.log("eventAdd", e);
-            }}
-            eventChange={(e) => {
-              console.log("eventChange", e);
-            }}
-            eventRemove={(e) => {
-              console.log("eventRemove", e);
-            }}
           />
         </div>
 
         {showEvent ? <div className="events-block">
-
           <div className='event-info'>
             <div className='event-header'>
-              <div className='event-date'>2023-08-11</div>
-              <div className='event-title'>Собрание</div>
+              <div className='event-date'>
+                {eventStart} - {eventEnd}
+              </div>
+              <div className='event-title'>{eventTitle}</div>
             </div>
             <div className="event-body">
-              <div className="event-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi voluptatibus alias ipsam nisi minus possimus odit facilis assumenda enim repudiandae. Minima velit officiis pariatur ut porro. Eveniet, voluptatem! Nobis, inventore?</div>
+              <div className="event-desc">{eventDesc}</div>
             </div>
           </div>
-
-          <div className='event-info'>
-            <div className='event-header'>
-              <div className='event-date'>2023-08-11</div>
-              <div className='event-title'>Собрание</div>
-            </div>
-            <div className="event-body">
-              <div className="event-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi voluptatibus alias ipsam nisi minus possimus odit facilis assumenda enim repudiandae. Minima velit officiis pariatur ut porro. Eveniet, voluptatem! Nobis, inventore?</div>
-            </div>
-          </div>
-
         </div> : ""}
       </div>
     </>
