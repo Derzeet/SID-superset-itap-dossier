@@ -30,7 +30,7 @@ const AdminPage = (props) => {
     })
 
     return (
-        <section>
+        <section style={{overflowX: 'hidden'}}>
             <div className="countStats">
                 <div className="lastQuery">
                     <div>Количество пользователей</div>
