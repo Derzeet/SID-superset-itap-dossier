@@ -25,18 +25,18 @@ function CreateArticlePage(props) {
         }
 
         let res = await axios.post(
-            'http://192.168.30.24:9095/', {
+            'http://192.168.30.24:9095/create/news', {
               // specify query parameters
-              params: {
-                paramOne: 'one',
-                paramTwo: 'two',
-                paramThree: 'three',
-              },
+              params,
             }
         );
 
             console.log(res)
 
+        navigate('/news')
+    }
+
+    const handleCancel = () => {
         navigate('/news')
     }
 
@@ -61,7 +61,10 @@ function CreateArticlePage(props) {
                     </div>
                 </div>
                 <div className="articleSave">
-                    <input type="button" name="save" id="saveButton" value={'Сохранить'} onClick={handleSave}/>
+                    <div>
+                        <input type="button" name="save" id="saveButton" value={'Отменить'} onClick={handleCancel}/>
+                        <input type="button" name="save" id="saveButton" value={'Сохранить'} onClick={handleSave}/>
+                    </div>
                 </div>
             </div>
         </div>

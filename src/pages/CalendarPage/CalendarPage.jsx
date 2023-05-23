@@ -5,6 +5,7 @@ import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin!
 import interactionPlugin from "@fullcalendar/interaction";
 // import allLocales from '@fullcalendar/core/locales-all';
 import './Calendar.scss'
+import SideBar from "../../components/side-bar";
 
 function CalendarPage(props) {
   const calendarRef = useRef(null);
@@ -70,6 +71,8 @@ function CalendarPage(props) {
 
   return (
     <>
+      <div className={'adminPage'} style={{display: "flex", flexDirection: 'row'}}>
+        <SideBar/>
       <div style={{}} className='calendarPage'>
         <div className='calendar-container'>
           <FullCalendar
@@ -117,7 +120,7 @@ function CalendarPage(props) {
             </div>
           </div>
         </div> : ""}
-      </div>
+      </div></div>
     </>
   );
 }

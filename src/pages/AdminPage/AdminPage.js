@@ -4,6 +4,7 @@ import axios from 'axios';
 import './AdminPage.css'
 import UsersTable from "../../components/itapComponents/UsersTable/UsersTable";
 import { useLocation, useNavigate } from "react-router-dom";
+import SideBar from "../../components/side-bar";
 
 const baseURL = "http://192.168.30.24:9091/api/finpol/main"
 
@@ -30,29 +31,33 @@ const AdminPage = (props) => {
     })
 
     return (
-        <section>
-            <div className="countStats">
-                <div className="lastQuery">
-                    <div>Количество пользователей</div>
-                    <div>{users}</div>
-                </div>
+        <div className={'adminPage'} style={{display: "flex", flexDirection: 'row'}}>
+            <SideBar/>
+            <section >
+                <div className="countStats">
 
-                <div>
-                    <div>Количество запросов</div>
-                    <div>{logs}</div>
-                </div>
+                    <div className="lastQuery">
 
-                <div>
-                    <div>Количество запросов за сегодня</div>
-                    <div>{todayLogs}</div>
+                        <div>Количество пользователей</div>
+                        <div>{users}</div>
+                    </div>
+
+                    <div>
+                        <div>Количество запросов</div>
+                        <div>{logs}</div>
+                    </div>
+
+                    <div>
+                        <div>Количество запросов за сегодня</div>
+                        <div>{todayLogs}</div>
+                    </div>
                 </div>
-            </div>
-            <div>
-                <UsersTable></UsersTable>
-            </div>
-            <div className="footer"></div>
-        </section>
-        
+                <div>
+                    <UsersTable></UsersTable>
+                </div>
+            </section>
+        </div>
+
     );
 }
 

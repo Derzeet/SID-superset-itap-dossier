@@ -1,4 +1,4 @@
-import { Component } from "react";
+import React, { Component } from "react";
 import { Link } from 'react-router-dom'
 import axios from 'axios';
 import { TableRow } from "@mui/material";
@@ -17,13 +17,17 @@ import Paper from '@mui/material/Paper';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { useEffect } from "react";
+import SideBar from "../../components/side-bar";
 
 function WorkersPage(props) {
     const places = ["Астана", "Алмата"]
 
-    return ( 
-        <div style={{width: '70%', margin: '0 auto', paddingTop: "5%"}}>
-            <h1 style={{marginBottom: '10px'}}>Сотрудники</h1>
+    return (
+        <div className={'adminPage'} style={{display: "flex", flexDirection: 'row'}}>
+            <SideBar/>
+    <div style={{width: '70%', margin: '0 auto', paddingTop: "5%"}}>
+
+        <h1 style={{marginBottom: '10px'}}>Сотрудники</h1>
             <TableContainer>
                 <Table className="table adminPanelTable uitable">
                     <TableHead>
@@ -46,7 +50,7 @@ function WorkersPage(props) {
                     </TableBody>
                 </Table>
             </TableContainer>
-        </div>
+        </div></div>
     );
 }
 function Row(props) {

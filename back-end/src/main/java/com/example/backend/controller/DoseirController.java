@@ -40,7 +40,8 @@ public class DoseirController {
     @Autowired
     MyService myService;
     @PostMapping(value = "/news/create", consumes = {"multipart/form-data"})
-    public news createVacancy(@RequestParam("file") MultipartFile file, @RequestParam news news){
+    public news createVacancy(@RequestParam("file") MultipartFile file, news news){
+        System.out.println(file);
         return myService.createNews(news,file);
     }
 
@@ -102,11 +103,11 @@ public class DoseirController {
         return myService.getByPhone(phone);
     }   @GetMapping("/byvinkuzov")
     public List<searchResultModelFL> getByVinKuzov(@RequestParam String vin) {
-        return myService.getByVinFl(vin);
+        return myService.getByVinFl(vin.toUpperCase());
     }
      @GetMapping("/byvinkuzovul")
     public List<searchResultModelUl> getByVinKuzovUl(@RequestParam String vin) {
-        return myService.getByVinUl(vin);
+        return myService.getByVinUl(vin.toUpperCase());
     }
 
     @GetMapping("/fio")

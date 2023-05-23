@@ -68,7 +68,7 @@ function App() {
           <Routes>
             <Route path='/' element={
               <>
-                <div style={{height: "12px"}}></div>
+                {/*<div style={{height: "30px"}}></div>*/}
                 <GrayNavbar/>
                 {/* <Navbar /> */}
                 <MainPage/>
@@ -76,7 +76,7 @@ function App() {
             }/>
             <Route path='/workers' element={
               <>
-                <div style={{height: "12px"}}></div>
+                {/*<div style={{height: "12px"}}></div>*/}
                 <GrayNavbar/>
                 {/* <Navbar /> */}
                 <WorkersPage/>
@@ -103,7 +103,7 @@ function App() {
             }/>
             <Route path='/calendar' element={
               <>
-                <div style={{height: "12px"}}></div>
+                {/*<div style={{height: "12px"}}></div>*/}
                 <GrayNavbar/>
                 {/* <Navbar /> */}
                 <CalendarPage/>
@@ -111,7 +111,7 @@ function App() {
             }/>
             <Route path='/profiler' element={
               <>
-                <div style={{height: "12px"}}></div>
+                {/*<div style={{height: "12px"}}></div>*/}
                 <GrayNavbar/>
                 <SearchPage/>
               </>
@@ -119,14 +119,14 @@ function App() {
 
             <Route path='/profiler/person/:iin' element={
               <>
-                <div style={{height: "12px"}}></div>
+                {/*<div style={{height: "12px"}}></div>*/}
                 <GrayNavbar/>
                 <DosiePage/>
               </>
             }/>
             <Route path='/profiler/ul/:bin' element={
               <>
-                <div style={{height: "12px"}}></div>
+                {/*<div style={{height: "12px"}}></div>*/}
                 <GrayNavbar/>
                 <UlDosiePage/>
               </>
@@ -148,7 +148,7 @@ function App() {
             <Route path="/registration" element={
               <>
 
-                <div style={{height: "12px"}}></div>
+                {/*<div style={{height: "12px"}}></div>*/}
                 <GrayNavbar/>
                   <Suspense fallback={<span class="loader"></span>}>
                     <motion.div initial={{opacity: 0}} animate={{opacity: 1}} transition={{ duration: 0.2 }}>
@@ -171,7 +171,7 @@ function App() {
           <Route path="/table" element={
             <>
               {/* {!userSession ? navigate('/login', {replace: true}) : ""}  */}
-              <div style={{height: "12px"}}></div>
+              {/*<div style={{height: "12px"}}></div>*/}
               <GrayNavbar/>
               <Suspense fallback={<span className="loader"></span>}>
               <motion.div initial={{opacity: 0}} animate={{opacity: 1}} transition={{ duration: 0.2 }}>
@@ -182,7 +182,7 @@ function App() {
           } />
           <Route path="/admin" element={
             <>
-                  <div style={{height: "12px"}}></div>
+                  {/*<div style={{height: "12px"}}></div>*/}
                   <GrayNavbar/>
                   <Suspense fallback={<span class="loader"></span>}>
                     <motion.div initial={{opacity: 0}} animate={{opacity: 1}} transition={{ duration: 0.2 }}>
@@ -193,7 +193,7 @@ function App() {
               }/>
           <Route path="/users/:username" element={
             <>
-              <div style={{height: "12px"}}></div>
+              {/*<div style={{height: "12px"}}></div>*/}
               <GrayNavbar/>
               <Suspense fallback={<span class="loader"></span>}>
                 <motion.div initial={{opacity: 0}} animate={{opacity: 1}} transition={{ duration: 0.2 }}>
@@ -205,7 +205,7 @@ function App() {
 
             <Route path='/oracle' element={
               <>
-              <div style={{height: "12px"}}></div>
+              {/*<div style={{height: "12px"}}></div>*/}
               <GrayNavbar/>
               <OracleTable/>
               </>
