@@ -26,6 +26,7 @@ import { createTheme, ThemeProvider } from '@mui/material';
 import OracleTable from "./pages/OracleTable/OracleTable";
 import NewsPage from './pages/NewsPage/NewsPage';
 import ArticlePage from './pages/ArticlePage/ArticlePage';
+import CreateArticlePage from './pages/CreateArticle/CreateArticlePage';
 function App() {
   const userSession = JSON.parse(localStorage.getItem("user"))
 
@@ -86,17 +87,24 @@ function App() {
                 <WorkersPage/>
               </>
             }/>
-            <Route path='/news/:id' element={
+            <Route path='/article/create' element={
               <>
-                <div style={{height: "12px"}}></div>
                 <GrayNavbar/>
-                <ArticlePage/>
+                <CreateArticlePage/>
               </>
             }/>
             <Route path='/news' element={
               <>
                 <GrayNavbar/>
                 <NewsPage/>
+              </>
+            }/>
+            }/>
+            <Route path='/article/:id' element={
+              <>
+                <div style={{height: "12px"}}></div>
+                <GrayNavbar/>
+                <ArticlePage/>
               </>
             }/>
             <Route path='/calendar' element={

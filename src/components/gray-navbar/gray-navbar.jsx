@@ -21,7 +21,7 @@ const GrayNavbar = (props) => {
     const userSession = JSON.parse(localStorage.getItem("user"))
     const navigate = useNavigate()    
     useEffect(() => {
-        if (userSession == null) {
+        if (userSession != null) {
             navigate('/login')
         }
     })
@@ -69,7 +69,7 @@ const GrayNavbar = (props) => {
     }, [open]);
 
     useEffect(() => {
-        const a = !userSession ? navigate('/login') : ""
+        // const a = !userSession ? navigate('/login') : ""
     })
 
     const toAdmin = () => {
