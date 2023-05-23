@@ -185,6 +185,7 @@ function CalendarPage(props) {
                       <div style={{marginTop: '20px', display: 'flex', flexDirection: 'column', gap: '5px'}}>
                         <a style={{fontSize: '16px', color: '#868686'}}>Время</a>
                         <TimeField
+                          format="HH:mm"
                           value={formData.dateTime}
                           onChange={(value) =>
                             setFormData((prevFormData) => ({
