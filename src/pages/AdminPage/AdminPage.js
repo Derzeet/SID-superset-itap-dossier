@@ -31,6 +31,12 @@ const AdminPage = (props) => {
     })
 
     return (
+        <section style={{overflowX: 'hidden'}}>
+            <div className="countStats">
+                <div className="lastQuery">
+                    <div>Количество пользователей</div>
+                    <div>{users}</div>
+                </div>
         <div className={'adminPage'} style={{display: "flex", flexDirection: 'row'}}>
             <SideBar/>
             <section >

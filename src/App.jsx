@@ -1,6 +1,10 @@
 import { useState } from 'react'
 import React, { lazy, Suspense } from "react";
 
+// import { ruRU as dataGridDeDE } from '@mui/x-data-grid';
+import { ruRU as coreDeDE } from '@mui/material/locale';
+import { ruRU } from '@mui/x-date-pickers/locales';
+
 import {motion} from 'framer-motion';
 
 import CalendarPage from './pages/CalendarPage/CalendarPage';
@@ -33,6 +37,7 @@ function App() {
   const TableLog = lazy(() => import('./components/itapComponents/TableLog/TableLog'));
   const UserDetails = lazy(() => import('./pages/userDetails/userDetails'));
   const theme = createTheme({
+
     palette: {
       mode: 'dark',
     },
@@ -93,7 +98,8 @@ function App() {
                 <GrayNavbar/>
                 <NewsPage/>
               </>
-            }/> 
+            }/>
+            }/>
             <Route path='/article/:id' element={
               <>
                 <div style={{height: "12px"}}></div>
@@ -131,7 +137,6 @@ function App() {
                 <UlDosiePage/>
               </>
             }/>
-            
             <Route path="/itap" element={
               <>
                 {/* <div style={{height: "12px"}}></div> */}
