@@ -133,6 +133,9 @@ public class MyService {
     @Autowired
     private NewsRepo newsRepo;
 
+    public void deleteEvent(Long id) {
+        eventsRepo.deleteById(id);
+    }
     public List<events> getAllEvents() {
         return eventsRepo.findAll();
     }

@@ -51,6 +51,11 @@ public class DoseirController {
         return myService.getAllEvents();
     }
 
+    @DeleteMapping(value="/event")
+    public void deleteEvent(@RequestParam Long id) {
+        myService.deleteEvent(id);
+    }
+
     @PostMapping(value = "/news/create", consumes = {"multipart/form-data"})
     public news createVacancy(@RequestParam("file") MultipartFile file, @RequestParam news news){
         return myService.createNews(news,file);

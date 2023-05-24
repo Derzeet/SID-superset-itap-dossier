@@ -66,6 +66,10 @@ function CalendarPage(props) {
     handleClose();
     get()
   };
+
+  const deleteEvent = async (id) => {
+    axios.delete(default_host + 'event', {params: {id}})
+  }
   //dialog window-----------
   const [open, setOpen] = React.useState(false);
 
@@ -87,6 +91,7 @@ function CalendarPage(props) {
   const [events, setEvents] = useState([])
   const [showEvent, setShowEvent] = useState(true)
 
+  const [id, setId] = useState(0)
   const [eventTitle, setEventTitle] = useState("")
   const [eventStart, setEventStart] = useState("")
   const [eventEnd, setEventEnd] = useState("")
@@ -140,7 +145,7 @@ function CalendarPage(props) {
     })[0]
 
     console.log(event)
-
+    setId(event.id)
     setEventTitle(event.title)
     setEventDesc(event.desc)
     setEventStart(event.start)
@@ -278,6 +283,11 @@ function CalendarPage(props) {
             </div>
             <div className="event-body">
               <div className="event-desc"><a style={{fontWeight: '300'}}>{eventDesc}</a></div>
+            </div>
+            <div className="event-footer">
+              {id != 0 ? 
+                <Button onClick={() => deleteEvent(id)}>Удалить событие</Button> : ""
+              }
             </div>
           </div>
         </div> : ""}
