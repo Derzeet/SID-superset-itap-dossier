@@ -1,6 +1,7 @@
 package com.example.backend.service;
 
 import com.example.backend.extractor.mv_fl_extractor;
+import com.example.backend.modelsAuth.events;
 import com.example.backend.modelsAuth.news;
 import com.example.backend.modelsDossier.*;
 import com.example.backend.photo.modelsPhot.*;
@@ -9,6 +10,7 @@ import com.example.backend.photo.repositoryPhot.mv_iin_docRepo;
 import com.example.backend.photo.repositoryPhot.pdlReposotory;
 import com.example.backend.photo.repositoryPhot.reg_address_fl_Repo;
 import com.example.backend.photo.repositoryPhot.*;
+import com.example.backend.repositoryAuth.EventsRepo;
 import com.example.backend.repositoryAuth.NewsRepo;
 import com.example.backend.repositoryDossier.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,8 @@ import java.util.*;
 
 @Service
 public class MyService {
+    @Autowired
+    EventsRepo eventsRepo;
     @Autowired
     QoldauRepo QoldauRepo;
     @Autowired
@@ -128,6 +132,10 @@ public class MyService {
     private RegAddressUlEntityRepo regAddressUlEntityRepo;
     @Autowired
     private NewsRepo newsRepo;
+
+    public events createEvent(events event) {
+        return eventsRepo.save(event);
+    }
     public news createNews(news news , MultipartFile file){
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
         if(fileName.contains(".."))
