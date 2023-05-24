@@ -21,6 +21,13 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import InputLabel from '@mui/material/InputLabel';
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+import { StaticDateTimePicker } from '@mui/x-date-pickers/StaticDateTimePicker';
+import { DesktopDateTimePicker } from '@mui/lab'
+import { MobileDateTimePicker } from '@mui/x-date-pickers/MobileDateTimePicker';
+
+import axios from 'axios';
+import default_host from '../../config/config';
 
 import './Calendar.scss'
 import { grey } from '@mui/material/colors';
@@ -29,7 +36,8 @@ import { grey } from '@mui/material/colors';
 const initialFormData = {
   title: '',
   description: '',
-  dateTime: dayjs(''),
+  start: dayjs(''),
+  end: dayjs('')
 };
 
 
@@ -42,16 +50,18 @@ function CalendarPage(props) {
     setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
   };
 
-  const handleSave = () => {
-    const { title, description, dateTime } = formData;
-    const eventObject = {
+  const handleSave = async () => {
+    const { title, description, start, end } = formData;
+    const event = {
       title,
       description,
-      dateTime: dateTime == '' ? null : dateTime.format('YYYY-MM-DD HH:mm'),
+      start,
+      end
     };
     // TODO: Handle saving the eventObject or perform further processing
-    console.log(eventObject);
+    console.log(event);
     setFormData(initialFormData);
+    axios.post(default_host + 'events', event)
     handleClose();
   };
   //dialog window-----------
@@ -60,7 +70,8 @@ function CalendarPage(props) {
   const handleClickOpen = () => {
     setFormData({title: '',
       description: '',
-      dateTime: ''});
+      start: dayjs(''),
+      end: dayjs('')});
     setOpen(true);
   };
 
@@ -154,45 +165,39 @@ function CalendarPage(props) {
                   value={formData.description}
                   onChange={handleChange}/>
               </div>
-              <div style={{display: 'flex'}}>
+              <div style={{display: 'flex', flexDirection: 'row', gap: '5px'}}>
                 <div style={{flex: '1'}}>
-                  <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DateCalendar
-                      // value={formData}
-                      onChange={(value) =>
-                        setFormData((prevFormData) => ({
-                          ...prevFormData,
-                          dateTime: value,
-                        }))
-                      }/>
-                  </LocalizationProvider>
-                </div>
-                <div  style={{flex: '1'}}>
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                       <div style={{marginTop: '20px', display: 'flex', flexDirection: 'column', gap: '5px'}}>
-                        <a style={{fontSize: '16px', color: '#868686'}}>Дата</a>
-                        <DateField
-                          value={formData.dateTime}
+                        <a style={{fontSize: '16px', color: '#868686'}}>Дата и время начала</a>
+                        <MobileDateTimePicker
+                          ampm={false}
+                          format='YYYY-MM-DD HH:mm'
+                          value={formData.start}
                           onChange={(value) =>
                             setFormData((prevFormData) => ({
                               ...prevFormData,
-                              dateTime: value,
+                              start: value,
                             }))
-                          }/>
+                          } />
                       </div>
                     </LocalizationProvider>
+                </div>
+                <div  style={{flex: '1'}}>
+                    
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                       <div style={{marginTop: '20px', display: 'flex', flexDirection: 'column', gap: '5px'}}>
-                        <a style={{fontSize: '16px', color: '#868686'}}>Время</a>
-                        <TimeField
-                          format="HH:mm"
-                          value={formData.dateTime}
+                        <a style={{fontSize: '16px', color: '#868686'}}>Дата и время конца</a>
+                        <MobileDateTimePicker
+                          ampm={false}
+                          format='YYYY-MM-DD HH:mm'
+                          value={formData.end}
                           onChange={(value) =>
                             setFormData((prevFormData) => ({
                               ...prevFormData,
-                              dateTime: value,
+                              end: value,
                             }))
-                          }/>
+                          } />
                       </div>
                     </LocalizationProvider>
                 </div>

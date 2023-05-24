@@ -99,7 +99,6 @@ function App() {
                 <NewsPage/>
               </>
             }/>
-            }/>
             <Route path='/article/:id' element={
               <>
                 <div style={{height: "12px"}}></div>

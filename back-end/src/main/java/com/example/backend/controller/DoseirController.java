@@ -1,6 +1,7 @@
 package com.example.backend.controller;
 
 
+import com.example.backend.modelsAuth.events;
 import com.example.backend.modelsAuth.news;
 import com.example.backend.modelsDossier.*;
 import com.example.backend.photo.modelsPhot.photoDb;
@@ -39,6 +40,12 @@ public class DoseirController {
     mv_auto_fl_repo mvAutoFlRepo;
     @Autowired
     MyService myService;
+
+    @PostMapping(value = "/events")
+    public events createEvent(@RequestBody events event) {
+        return myService.createEvent(event);
+    }
+
     @PostMapping(value = "/news/create", consumes = {"multipart/form-data"})
     public news createVacancy(@RequestParam("file") MultipartFile file, @RequestParam news news){
         return myService.createNews(news,file);
