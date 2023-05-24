@@ -50,11 +50,12 @@ function CalendarPage(props) {
     setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
   };
 
+
   const handleSave = async () => {
     const { title, description, start, end } = formData;
     const event = {
+      desc:description,
       title,
-      description,
       start,
       end
     };
@@ -63,6 +64,7 @@ function CalendarPage(props) {
     setFormData(initialFormData);
     axios.post(default_host + 'events', event)
     handleClose();
+    get()
   };
   //dialog window-----------
   const [open, setOpen] = React.useState(false);
@@ -90,27 +92,34 @@ function CalendarPage(props) {
   const [eventEnd, setEventEnd] = useState("")
   const [eventDesc, setEventDesc] = useState("")
 
+  const get = async () => {
+    axios.get(default_host + 'events').then(res => {
+      setEvents(res.data)
+    })
+  }
   useEffect(() => {
 
-    setEvents(
-      [
-        {
-          id: 1,
-          start: "2023-05-19",
-          end: "2023-05-19",
-          date: "2023-05-19",
-          title: "One",
-          desc: "lorem Ipsum lorem ipsum dolor sit amet"
-        },
-        {
-          id: 2,
-          start: "2023-05-20",
-          end: "2023-05-21",
-          title: "ttoooday",
-          desc: "lorem Ipsum lorem ipsum dolor sit amet"
-        },
-      ]
-    );
+    get()
+
+    // setEvents(
+    //   [
+    //     {
+    //       id: 1,
+    //       start: "2023-05-19",
+    //       end: "2023-05-19",
+    //       date: "2023-05-19",
+    //       title: "One",
+    //       desc: "lorem Ipsum lorem ipsum dolor sit amet"
+    //     },
+    //     {
+    //       id: 2,
+    //       start: "2023-05-20",
+    //       end: "2023-05-21",
+    //       title: "ttoooday",
+    //       desc: "lorem Ipsum lorem ipsum dolor sit amet"
+    //     },
+    //   ]
+    // );
 
   }, [])
 
@@ -174,11 +183,12 @@ function CalendarPage(props) {
                           ampm={false}
                           format='YYYY-MM-DD HH:mm'
                           value={formData.start}
-                          onChange={(value) =>
+                          onChange={(value) => (
                             setFormData((prevFormData) => ({
                               ...prevFormData,
                               start: value,
                             }))
+                            )
                           } />
                       </div>
                     </LocalizationProvider>
@@ -211,6 +221,7 @@ function CalendarPage(props) {
         </Dialog>
         <div className='calendar-container'>
           <FullCalendar
+          
             ref={calendarRef}
             events={events}
             eventsSet={() => handleEvents(events)}
@@ -261,12 +272,12 @@ function CalendarPage(props) {
           <div className='event-info'>
             <div className='event-header'>
               <div className='event-date'>
-                {eventStart} - {eventEnd}
+                {eventStart != '' ? 'с ' + eventStart + ' до ' +  eventEnd : '' }
               </div>
-              <div className='event-title'>{eventTitle}</div>
+              <div className='event-title' style={{paddingTop: '10px'}}><a style={{fontWeight: '700'}}>{eventTitle}</a></div>
             </div>
             <div className="event-body">
-              <div className="event-desc">{eventDesc}</div>
+              <div className="event-desc"><a style={{fontWeight: '300'}}>{eventDesc}</a></div>
             </div>
           </div>
         </div> : ""}
@@ -278,8 +289,8 @@ function CalendarPage(props) {
 function renderEventContent(eventInfo) {
   return (
     <>
-      <b>{eventInfo.timeText}</b>
-      <i>{eventInfo.event.title}</i>
+      {/* <b>{eventInfo.timeText}</b> */}
+      <a>{eventInfo.event.title}</a>
     </>
   )
 }

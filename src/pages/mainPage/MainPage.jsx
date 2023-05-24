@@ -158,21 +158,21 @@ const MainPage = (props) => {
                         }}>
                             <img src={itap} className='block-img'></img>
                             <a></a>
-                            <p>Инструмент для поиска взаимосвязей</p>
+                            <p>Поиск взаимосвязей</p>
                         </div>
                         <div className='block' onClick={() => {
                             navigate("/superset")
                         }}>
                             <img src={superset} className='block-img'></img>
                             <a></a>
-                            <p>Инструмент для аналитических отчетов</p>
+                            <p>Аналитические отчеты</p>
                         </div>
                         <div className='block' onClick={() => {
                             navigate("/profiler")
                         }}>
                             <img src={profiler} className='block-img'></img>
                             <a></a>
-                            <p>Инструмент для поиска объектов</p>
+                            <p>Поиск объектов</p>
                         </div>
                     </div>
                     <div className='nav-back' style={{
