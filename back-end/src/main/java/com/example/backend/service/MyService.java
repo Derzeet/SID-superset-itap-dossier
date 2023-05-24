@@ -133,6 +133,10 @@ public class MyService {
     @Autowired
     private NewsRepo newsRepo;
 
+    public List<events> getAllEvents() {
+        return eventsRepo.findAll();
+    }
+
     public events createEvent(events event) {
         return eventsRepo.save(event);
     }

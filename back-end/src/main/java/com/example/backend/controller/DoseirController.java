@@ -46,6 +46,11 @@ public class DoseirController {
         return myService.createEvent(event);
     }
 
+    @GetMapping(value="/events")
+    public List<events> getAllEvents() {
+        return myService.getAllEvents();
+    }
+
     @PostMapping(value = "/news/create", consumes = {"multipart/form-data"})
     public news createVacancy(@RequestParam("file") MultipartFile file, news news){
         System.out.println(file);

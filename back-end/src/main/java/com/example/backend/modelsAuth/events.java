@@ -15,7 +15,9 @@ public class events {
     private Long id;
 
     private String title;
-    private String description;
+
+    @Column(name="description")
+    private String desc;
     private Date start;
 
     @Column(name = "\"end\"")
@@ -38,11 +40,11 @@ public class events {
     }
 
     public String getDesc() {
-        return description;
+        return desc;
     }
 
     public void setDesc(String desc) {
-        this.description = desc;
+        this.desc = desc;
     }
 
     public Date getStart() {
