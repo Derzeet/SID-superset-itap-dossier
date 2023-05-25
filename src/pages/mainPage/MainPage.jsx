@@ -172,7 +172,7 @@ const MainPage = (props) => {
                         }}>
                             <img src={profiler} className='block-img'></img>
                             <a></a>
-                            <p>Поиска объектов</p>
+                            <p>Инструмент для поиска объектов</p>
                         </div>
                     </div>
                     <div className='nav-back' style={{

@@ -33,7 +33,7 @@ const SideBar = (props) => {
 
     const sideBarButtons = [
         {name: "Главная страница", to: "/"},
-        {name: "Сотрудники", to: "/workers"},
+        {name: "Спрвочник", to: "/workers"},
         {name: "Все новости", to: "/news"},
         {name: "Календарь", to: "/calendar"},
         // {name: "Информационные ресурсы", to: "/"},
