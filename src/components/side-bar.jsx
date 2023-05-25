@@ -40,7 +40,7 @@ const SideBar = (props) => {
         // {name: "База знаний", to: "/"},
         {name: "Мессенджер", to: "/"},
         {name: "Заявления", to: "/"},
-        {name: "Бюро пропусков", to: "/"},
+        {name: "Бюро пропусков", to: "/bureau"},
         {name: "Служба поддержки", to: "/"},
     ]
 
@@ -62,7 +62,7 @@ const SideBar = (props) => {
             </div>
             <div className='menu-bar'  
                 style={{
-                    width: menuOpen?"200px":"0", 
+                    width: menuOpen?"300px":"0", 
                     padding: menuOpen?"0px 20px":"0", 
                     border: menuOpen?"1px solid #3a3a3a":"none",
                     marginRight: menuOpen?"20px":"0",
