@@ -28,7 +28,7 @@ import { MobileDateTimePicker } from '@mui/x-date-pickers/MobileDateTimePicker';
 
 import axios from 'axios';
 import default_host from '../../config/config';
-
+import SideBar from '../../components/side-bar';
 import './Calendar.scss'
 import { grey } from '@mui/material/colors';
 
@@ -157,7 +157,8 @@ function CalendarPage(props) {
   }
 
   return (
-    <>
+    <div style={{display: 'flex'}}>
+    <SideBar/>
       <div style={{}} className='calendarPage'>
         <Dialog open={open} onClose={handleClose}>
           <div style={{padding: '10px', backgroundColor: '#0D0F11', borderRadius: '2px', border: '0.5px solid rgba(134, 134, 134, 0.31)'}}>
@@ -292,7 +293,7 @@ function CalendarPage(props) {
           </div>
         </div> : ""}
       </div>
-    </>
+    </div>
   );
 }
 
