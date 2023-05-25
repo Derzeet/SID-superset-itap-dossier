@@ -172,7 +172,7 @@ const MainPage = (props) => {
                         }}>
                             <img src={profiler} className='block-img'></img>
                             <a></a>
-                            <p>Поиск объектов</p>
+                            <p>Инструмент для поиска объектов</p>
                         </div>
                     </div>
                     <div className='nav-back' style={{
@@ -182,7 +182,7 @@ const MainPage = (props) => {
                         backdropFilter: ' blur(27.5px)',
                     }}>
                         <div className="NavbarItems3">
-                            <div>Новости</div>
+                            <div><Link to={'/news'} style={{color: '#fff'}}>Новости</Link></div>
                             <div>Объявления</div>
                         </div>
                     </div>

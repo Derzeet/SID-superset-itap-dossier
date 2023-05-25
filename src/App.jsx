@@ -27,6 +27,8 @@ import OracleTable from "./pages/OracleTable/OracleTable";
 import NewsPage from './pages/NewsPage/NewsPage';
 import ArticlePage from './pages/ArticlePage/ArticlePage';
 import CreateArticlePage from './pages/CreateArticle/CreateArticlePage';
+import BureauPage from './pages/BureauPage/BureauPage';
+
 function App() {
   const userSession = JSON.parse(localStorage.getItem("user"))
 
@@ -136,6 +138,16 @@ function App() {
                 <UlDosiePage/>
               </>
             }/>
+<<<<<<< HEAD
+            <Route path='/bureau' element={
+                <>
+                  <GrayNavbar/>
+                  <BureauPage/>
+                </>
+            }/>
+            
+=======
+>>>>>>> 2e9642384b885d9738cf48a08d41398d9838dd02
             <Route path="/itap" element={
               <>
                 {/* <div style={{height: "12px"}}></div> */}

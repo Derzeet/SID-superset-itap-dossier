@@ -40,7 +40,7 @@ const SideBar = (props) => {
         // {name: "База знаний", to: "/"},
         {name: "Мессенджер", to: "/"},
         {name: "Заявления", to: "/"},
-        {name: "Бюро пропусков", to: "/"},
+        {name: "Бюро пропусков", to: "/bureau"},
         {name: "Служба поддержки", to: "/"},
     ]
 
@@ -62,11 +62,10 @@ const SideBar = (props) => {
             </div>
             <div className='menu-bar'  
                 style={{
-                    width: menuOpen?"250px":"0",
-                    height: menuOpen?"100%":"0",
+                    width: menuOpen?"300px":"0",
                     padding: menuOpen?"0px 20px":"0", 
                     border: menuOpen?"1px solid #3a3a3a":"none",
-                    marginRight: menuOpen?"0px":"0",
+                    marginRight: menuOpen?"20px":"0",
                 }}>
                 <div className="menu-close" style={{display: !menuOpen?"none":"block"}}>
                     <IconButton aria-label="expand row" size="small" onClick={() => setMenuOpen(false)}>

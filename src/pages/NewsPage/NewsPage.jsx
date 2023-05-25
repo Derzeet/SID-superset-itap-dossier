@@ -76,8 +76,9 @@ function NewsPage() {
                 <div className='newsHeader'>
                     <div>Все новости</div>
                     <div>
-                        <Link to='/article/create'>
+                        <Link to='/article/create' style={{display: 'flex', flexDirection: 'row', gap: '5px', alignItems: 'center'}}>
                             <AddIcon style={{ fill: '#ffffff', fontSize: '25px' }}/>
+                            <span style={{color: '#fff', fontSize: '18px'}}>Добавить новость</span>
                         </Link>
                     </div>
                 </div>
