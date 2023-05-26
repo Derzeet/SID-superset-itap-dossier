@@ -17,6 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -133,6 +135,9 @@ public class MyService {
     @Autowired
     private NewsRepo newsRepo;
 
+    public void deleteEvent(Long id) {
+        eventsRepo.deleteById(id);
+    }
     public List<events> getAllEvents() {
         return eventsRepo.findAll();
     }
@@ -140,22 +145,38 @@ public class MyService {
     public events createEvent(events event) {
         return eventsRepo.save(event);
     }
-    public news createNews(news news , MultipartFile file){
-        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-        if(fileName.contains(".."))
-        {
-            System.out.println("not a a valid file");
-        }
-        try {
-            news.setImage(Base64.getEncoder().encodeToString(file.getBytes()));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        System.out.println(news.getId());
-//        news.setCountry("LocalDateTime.now()");
-        news.setDateOfCreated(LocalDateTime.now());
-        return newsRepo.save(news);
+
+    public List<news> getAllNews() {
+        return newsRepo.findAll();
     }
+    public List<news> getNewsById(Long id) {
+        return newsRepo.getListById(id);
+    }
+
+    public ResponseEntity<String> createNews(news news) {
+        try {
+            news savedNews = newsRepo.save(news);
+            return ResponseEntity.ok("News created with ID: " + savedNews.getId());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to create news.");
+        }
+    }
+//    public news createNews(news news , MultipartFile file){
+//        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+//        if(fileName.contains(".."))
+//        {
+//            System.out.println("not a a valid file");
+//        }
+//        try {
+//            news.setImage(Base64.getEncoder().encodeToString(file.getBytes()));
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        System.out.println(news.getId());
+////        news.setCountry("LocalDateTime.now()");
+//        news.setDateOfCreated(LocalDateTime.now());
+//        return newsRepo.save(news);
+//    }
 
     public List<searchResultModelUl> searchUlByName(String name) {
         List<mv_ul> mvUls = mv_ul_repo.getUlsByName(name.replace("$", "%"));

@@ -28,9 +28,9 @@ import { MobileDateTimePicker } from '@mui/x-date-pickers/MobileDateTimePicker';
 
 import axios from 'axios';
 import default_host from '../../config/config';
-
+import SideBar from '../../components/side-bar';
 import './Calendar.scss'
-import SideBar from "../../components/side-bar";
+
 import { grey } from '@mui/material/colors';
 
 
@@ -67,6 +67,10 @@ function CalendarPage(props) {
     handleClose();
     get()
   };
+
+  const deleteEvent = async (id) => {
+    axios.delete(default_host + 'event', {params: {id}})
+  }
   //dialog window-----------
   const [open, setOpen] = React.useState(false);
 
@@ -88,6 +92,7 @@ function CalendarPage(props) {
   const [events, setEvents] = useState([])
   const [showEvent, setShowEvent] = useState(true)
 
+  const [id, setId] = useState(0)
   const [eventTitle, setEventTitle] = useState("")
   const [eventStart, setEventStart] = useState("")
   const [eventEnd, setEventEnd] = useState("")
@@ -141,7 +146,7 @@ function CalendarPage(props) {
     })[0]
 
     console.log(event)
-
+    setId(event.id)
     setEventTitle(event.title)
     setEventDesc(event.desc)
     setEventStart(event.start)
@@ -153,9 +158,7 @@ function CalendarPage(props) {
   }
 
   return (
-    <>
-      <div className={'adminPage'} style={{display: "flex", flexDirection: 'row'}}>
-        <SideBar/>
+    <div style={{display: 'flex'}}>
       <div style={{}} className='calendarPage'>
         <Dialog open={open} onClose={handleClose}>
           <div style={{padding: '10px', backgroundColor: '#0D0F11', borderRadius: '2px', border: '0.5px solid rgba(134, 134, 134, 0.31)'}}>
@@ -282,10 +285,15 @@ function CalendarPage(props) {
             <div className="event-body">
               <div className="event-desc"><a style={{fontWeight: '300'}}>{eventDesc}</a></div>
             </div>
+            <div className="event-footer">
+              {id != 0 ?
+                <Button onClick={() => deleteEvent(id)}>Удалить событие</Button> : ""
+              }
+            </div>
           </div>
         </div> : ""}
-      </div></div>
-    </>
+      </div>
+    </div>
   );
 }
 

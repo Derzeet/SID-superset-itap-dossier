@@ -1,6 +1,7 @@
 .articlePage {
     display: flex;
     flex-direction: row;
+    height: 100%;
 
     .articleBody {
         width: 80%;
@@ -54,3 +55,4 @@
     }
 
 }
+

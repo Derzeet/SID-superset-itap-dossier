@@ -16,6 +16,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -51,11 +52,29 @@ public class DoseirController {
         return myService.getAllEvents();
     }
 
-    @PostMapping(value = "/news/create", consumes = {"multipart/form-data"})
-    public news createVacancy(@RequestParam("file") MultipartFile file, news news){
-        System.out.println(file);
-        return myService.createNews(news,file);
+    @DeleteMapping(value="/event")
+    public void deleteEvent(@RequestParam Long id) {
+        myService.deleteEvent(id);
     }
+
+    @PostMapping(value="/news")
+    public ResponseEntity<String> createNews(@RequestBody news news) {
+        return myService.createNews(news);
+    }
+
+    @GetMapping(value = "/news")
+    public List<news> getAllNews() {
+        return myService.getAllNews();
+    }
+    @GetMapping(value = "/new")
+    public List<news> getAllNews(@RequestParam Long id) {
+//        System.out.println(id);
+        return myService.getNewsById(id);
+    }
+//    @PostMapping(value = "/news/create", consumes = {"multipart/form-data"})
+//    public news createVacancy(@RequestParam("file") MultipartFile file, @RequestParam news news){
+//        return myService.createNews(news,file);
+//    }
 
     @GetMapping("/ch")
     public List<photoDb> getCh() {

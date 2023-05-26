@@ -40,7 +40,6 @@ const Search = (props) => {
     return (
         <>
             <div className='searchPage'>
-              <SideBar/>
                 <div className='searchtabs'>
                     <div className="tab-wrap">
                         <input type="radio" id="tab0" name="tabGroup2" className="tab" disabled style={{cursor: 'default'}}/>

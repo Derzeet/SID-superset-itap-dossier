@@ -112,36 +112,98 @@ const astana_der_1_sled_control = [
 ]
 
 const workers = {
-    "afm_rk-head": afm_rk_head,
-    "afm_rk-secret_pred": afm_rk_secret_pred,
-    "astana_der-head": astana_der_head,
-    "astana_der-1_oper_control": astana_der_1_oper_control,
-    "astana_der-1_sled_control": astana_der_1_sled_control
+    "head_office-head": afm_rk_head,
+    "head_office-secret_pred": afm_rk_secret_pred,
+    "1_filial-head": astana_der_head,
+    "1_filial-secret_pred": astana_der_1_oper_control,
+    "1_filial-sled_dep": astana_der_1_sled_control
 }
 
 const places = {
-    "afm_rk": "Агентство Республики Казахстан по финансовому мониторингу", 
-    "astana_der":"РГУ ДЭР по городу Астана", 
-    "almaty_der":"Департамент экономических расследований по г. Алматы", 
-    "akmola_der":"ДЭР по Акмолинской области", 
-    "aktobe_oblast_der":"ДЭР по Актюбинской области", 
-    "almaty_oblast_der":"ДЭР по Алматинской области", 
-    "atyrau_oblast_der":"ДЭР по Атырауской области", 
-    "zk_oblast_der":"ДЭР по Заподно-Казахстанской области", 
-    "zhambyl_oblast_der":"ДЭР по Жамбылской области", 
-    "karaganda_oblast_der":"ДЭР по Карагандиснкой области", 
-    "kostanay_oblast_der":"ДЭР по Костанайской области", 
-    "kyzylorda_oblast_der": "ДЭР по Кызылординской области", 
-    "mangistau_oblast_der": "ДЭР по Мангистауской области", 
-    "shymkent_oblast_der": "ДЭР по по городу Шымкент", 
-    "pavlodar_oblast_der": "ДЭР по Павлодарской области",
-    "sk_oblast_der": "ДЭР по Северо-Казахстанской области",
-    "vk_oblast_der": "ДЭР по Восточно-Казахстанской области",
-    "turkestan_oblast_der": "ДЭР по Туркенстанской области",
-    "kinolog_centre_der": "Кинологический центр",
-    "abay_oblast_der": "ДЭР по области Абай",
-    "zhtisu_oblast_der": "ДЭР по области Жетісу",
-    "ulytau_oblast_der": "ДЭР по области Ұлытау",
+    "head_office": {
+        name: "Головной офис", 
+        ranks: {
+            "head": "Руководство",
+            "secret_pred": "Отдел",
+            "sled_dep": "Отдел",
+            "oper_dep": "Отдел",
+            "analytic_dep": "Отдел",
+            "finance_monitor_dep": "Отдел",
+            "antikor_dep": "Отдел",
+            "finance_terrorism_dep": "Отдел",
+            "oper_analysis_dep": "Отдел",
+            "work_subj": "Отдел",
+        }
+    },
+    "1_filial": {
+        name: "Филиал 1", 
+        ranks: {
+            "head": "Руководство",
+            "secret_pred": "Отдел",
+            "sled_dep": "Отдел",
+            "oper_dep": "Отдел",
+            "analytic_dep": "Отдел",
+            "finance_monitor_dep": "Отдел",
+        }
+    },
+    "2_filial": {
+        name: "Филиал 2", 
+        ranks: {
+        }
+    },
+    "3_filial": {
+        name: "Филиал 3", 
+        ranks: {
+            "head": "Руководство",
+            "secret_pred": "Отдел",
+            "sled_dep": "Отдел",
+            "oper_dep": "Отдел",
+            "finance_monitor_dep": "Отдел",
+            "antikor_dep": "Отдел",
+        }
+    },
+    "4_filial": {
+        name: "Филиал 4", 
+        ranks: {
+            "head": "Руководство",
+            "secret_pred": "Отдел",
+            "sled_dep": "Отдел",
+            "oper_dep": "Отдел",
+            "analytic_dep": "Отдел",
+        }
+    },
+    "5_filial": {
+        name: "Филиал 5", 
+        ranks: {
+            "head": "Руководство",
+            "oper_dep": "Отдел",
+            "analytic_dep": "Отдел",
+            "finance_monitor_dep": "Отдел",
+            "antikor_dep": "Отдел",
+        }
+    },
+    // "afm_rk": "Агентство Республики Казахстан по финансовому мониторингу", 
+    // "astana_der":"РГУ ДЭР по городу Астана", 
+    // "almaty_der":"Департамент экономических расследований по г. Алматы", 
+    // "akmola_der":"ДЭР по Акмолинской области", 
+    // "aktobe_oblast_der":"ДЭР по Актюбинской области", 
+    // "almaty_oblast_der":"ДЭР по Алматинской области", 
+    // "atyrau_oblast_der":"ДЭР по Атырауской области", 
+    // "zk_oblast_der":"ДЭР по Заподно-Казахстанской области", 
+    // "zhambyl_oblast_der":"ДЭР по Жамбылской области", 
+    // "karaganda_oblast_der":"ДЭР по Карагандиснкой области", 
+    // "kostanay_oblast_der":"ДЭР по Костанайской области", 
+    // "kyzylorda_oblast_der": "ДЭР по Кызылординской области", 
+    // "mangistau_oblast_der": "ДЭР по Мангистауской области", 
+    // "shymkent_oblast_der": "ДЭР по по городу Шымкент", 
+    // "pavlodar_oblast_der": "ДЭР по Павлодарской области",
+    // "sk_oblast_der": "ДЭР по Северо-Казахстанской области",
+    // "vk_oblast_der": "ДЭР по Восточно-Казахстанской области",
+    // "turkestan_oblast_der": "ДЭР по Туркенстанской области",
+    // "kinolog_centre_der": "Кинологический центр",
+    // "abay_oblast_der": "ДЭР по области Абай",
+    // "zhtisu_oblast_der": "ДЭР по области Жетісу",
+    // "ulytau_oblast_der": "ДЭР по области Ұлытау",
 }
 const ranksAfm = {
     "head": "Руководство",
@@ -206,7 +268,7 @@ function WorkersPage(props) {
 
     return ( 
         <div style={{width: '70%', margin: '0 auto', paddingTop: "5%"}}>
-            <h1 style={{marginBottom: '10px'}}>Сотрудники</h1>
+            <h1 style={{marginBottom: '10px'}}>Справочник</h1>
             <input value={p} onChange={(e) => (setP(e.target.value))} type="text" className="searchUsers" placeholder="Поиск"></input>
             {Object.keys(places).map((key, index) => (
                 <MainRow place={key} index={index}/>
@@ -218,7 +280,6 @@ function WorkersPage(props) {
             ))} */}
 
             <div style={{height: '100px'}}/>
-       
         </div>
     );
 }
@@ -238,7 +299,7 @@ function MainRow(props) {
             <Table className="uitable" style={{backgroundColor: '#222629', borderRadius: '2px', borderBottom: 'hidden', marginBottom: '10px'}}>
                 <TableHead  style={{ borderBottom: 'hidden'}}>
                     <TableRow hover onClick={() => setOpen(!open)}>
-                        <TableCell style={{width: '95%'}}><a style={{fontSize: '16px', fontWeight: '500', color: open ? '#AAAAAA' : 'white', transition: '0.5s all ease'}}>{places[place]}</a></TableCell>
+                        <TableCell style={{width: '95%'}}><a style={{fontSize: '16px', fontWeight: '500', color: open ? '#AAAAAA' : 'white', transition: '0.5s all ease'}}>{places[place].name}</a></TableCell>
                         <TableCell  style={{width: '5%'}}>
                             <IconButton
                             aria-label="expand row"
@@ -254,7 +315,7 @@ function MainRow(props) {
                     <TableCell style={{ borderBottom: 'hidden', paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
                         <Collapse style={{ borderBottom: 'hidden'}} in={open} timeout="auto" unmountOnExit>
                             <Box  style={{ borderBottom: 'hidden'}} sx={{ margin: 1 }}>
-                                {Object.keys(getRanks(place)).map((key, index) => (
+                                {Object.keys(places[place].ranks).map((key, index) => (
                                     <SubRow sub={key} place={place} currentOpen={currentOpen} index={index} handleSubRowOpen={handleSubRowOpen}/>
                                 ))}
                             </Box>
@@ -301,7 +362,7 @@ function SubRow(props) {
              <Table className="uitable" style={{backgroundColor: '#222629', borderBottom: 'hidden', marginBottom: '10px',  borderRadius: '3px'}}>
                 <TableHead  style={{ borderBottom: 'hidden'}}>
                     <TableRow hover style={{borderRadius: '3px'}} onClick={() => props.handleSubRowOpen(props.index)}>
-                        <TableCell style={{width: '95%'}}><a style={{fontSize: '15px', fontWeight: '500', color: open ? '#AAAAAA' : 'white', transition: '0.5s all ease'}}>{getRanks(place)[sub]}</a></TableCell>
+                        <TableCell style={{width: '95%'}}><a style={{fontSize: '15px', fontWeight: '500', color: open ? '#AAAAAA' : 'white', transition: '0.5s all ease'}}>{places[place].ranks[sub]}</a></TableCell>
                         <TableCell  style={{width: '5%'}}>
                             <IconButton
                             aria-label="expand row"

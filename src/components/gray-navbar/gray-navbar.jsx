@@ -16,9 +16,12 @@ import Paper from '@mui/material/Paper';
 import Popper from '@mui/material/Popper';
 import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
+import SideBar from '../side-bar';
+
 
 const GrayNavbar = (props) => {
     const userSession = JSON.parse(localStorage.getItem("user"))
+    const [menuOpen, setMenuOpen] = useState(false)
     const navigate = useNavigate()    
     useEffect(() => {
         if (userSession == null) {
@@ -87,7 +90,7 @@ const GrayNavbar = (props) => {
                 backdropFilter: ' blur(27.5px)',
                 }}>
             <nav className="NavbarItems2">
-                <h1 className="logoNav"><Link style={{}} to='/'>SID</Link></h1>
+                <h1 className="logoNav"><Link style={{}} to='/'>iSET</Link></h1>
                 <div>
                     {userSession &&
                     userSession.roles.includes("ADMIN")
@@ -179,6 +182,7 @@ const GrayNavbar = (props) => {
                 
             </nav>
         </div>
+        <SideBar/>
         </>
      );
 }

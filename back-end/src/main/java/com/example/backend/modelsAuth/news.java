@@ -4,6 +4,8 @@ package com.example.backend.modelsAuth;
 import io.hypersistence.utils.hibernate.type.array.ListArrayType;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
+import org.neo4j.driver.internal.shaded.reactor.util.annotation.Nullable;
+
 import java.util.List;
 
 import javax.persistence.*;
@@ -17,18 +19,22 @@ public class news {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Nullable
     @Column(name = "title")
     private String title;
+    @Nullable
     @Column(name = "description")
     private String description;
 
-    @Lob
+    @Nullable
     @Column(name = "image")
 
     private String image;
+    @Nullable
     @Column(name = "dateOfCreated")
 
     private LocalDateTime dateOfCreated;
+    @Nullable
     @Type(type = "list-array")
     @Column(name = "comments")
 

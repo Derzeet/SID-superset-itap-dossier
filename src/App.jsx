@@ -27,6 +27,8 @@ import OracleTable from "./pages/OracleTable/OracleTable";
 import NewsPage from './pages/NewsPage/NewsPage';
 import ArticlePage from './pages/ArticlePage/ArticlePage';
 import CreateArticlePage from './pages/CreateArticle/CreateArticlePage';
+import BureauPage from './pages/BureauPage/BureauPage';
+
 function App() {
   const userSession = JSON.parse(localStorage.getItem("user"))
 
@@ -37,7 +39,6 @@ function App() {
   const TableLog = lazy(() => import('./components/itapComponents/TableLog/TableLog'));
   const UserDetails = lazy(() => import('./pages/userDetails/userDetails'));
   const theme = createTheme({
-
     palette: {
       mode: 'dark',
     },
@@ -68,7 +69,7 @@ function App() {
   })
   return (
     <div className="App">
-          <ThemeProvider theme={theme}>
+      <ThemeProvider theme={theme}>
         <Router>
           <Routes>
             <Route path='/' element={
@@ -121,7 +122,6 @@ function App() {
                 <SearchPage/>
               </>
             }/>
-
             <Route path='/profiler/person/:iin' element={
               <>
                 {/*<div style={{height: "12px"}}></div>*/}
@@ -154,11 +154,11 @@ function App() {
 
                 {/*<div style={{height: "12px"}}></div>*/}
                 <GrayNavbar/>
-                  <Suspense fallback={<span class="loader"></span>}>
-                    <motion.div initial={{opacity: 0}} animate={{opacity: 1}} transition={{ duration: 0.2 }}>
-                      <RegistrationPage/>
-                    </motion.div>
-                  </Suspense>
+                <Suspense fallback={<span class="loader"></span>}>
+                  <motion.div initial={{opacity: 0}} animate={{opacity: 1}} transition={{ duration: 0.2 }}>
+                    <RegistrationPage/>
+                  </motion.div>
+                </Suspense>
               </>
             } />
             
@@ -216,7 +216,7 @@ function App() {
             }/>
             </Routes>
         </Router>
-        </ThemeProvider>
+      </ThemeProvider>
     </div>
   )
 }

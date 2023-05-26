@@ -4,6 +4,8 @@ import SideBar from '../../components/side-bar';
 import './createArticle.scss';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import default_host from '../../config/config';
+import { array } from 'yup';
 
 function CreateArticlePage(props) {
 
@@ -12,10 +14,24 @@ function CreateArticlePage(props) {
     const [poster, setPoster] = useState('')
 
     const navigate = useNavigate()    
-
+    const convertToBase64 = (file) => {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.readAsDataURL(file);
+          reader.onload = () => resolve(reader.result);
+          reader.onerror = (error) => reject(error);
+        });
+      };
     const handleSave = async () => {
         console.log(title, desc, poster)
-
+        // const base = await convertToBase64(poster)
+        const x = poster.slice(poster.indexOf(",")+1)
+        console.log(x)
+        const news = {
+            title,
+            description: desc,
+            image: poster
+        }
         // news/create?title=ff&description=fasf%file=fasf
 
         const params = {
@@ -24,25 +40,29 @@ function CreateArticlePage(props) {
             file: poster
         }
 
-        let res = await axios.post(
-            'http://192.168.30.24:9095/create/news', {
-              // specify query parameters
-              params,
-            }
-        );
-
-            console.log(res)
+        let res = await axios.post(default_host + 'news', news);
+            console.log(res.data)
 
         navigate('/news')
     }
-
+    const handleFileInputChange = async (event) => {
+        const file = event.target.files[0];
+        if (file) {
+          try {
+            const base64Image = await convertToBase64(file);
+            setPoster(base64Image)
+            console.log(base64Image); // Base64 representation of the image
+          } catch (error) {
+            console.error(error); // Handle any errors that occur during conversion
+          }
+        }
+      };
     const handleCancel = () => {
         navigate('/news')
     }
 
     return ( 
         <div className="createArticlePage">
-            <SideBar/>
 
             <div className="createArticleBody">
                 <div className='pageTitle'>Создание новости</div>
@@ -53,7 +73,7 @@ function CreateArticlePage(props) {
                 <div className='inputBody'>
                     <div className="inputPoster">
                         <label htmlFor="poster">Добавьте медиа-файл</label>
-                        <input type="file" name="poster" id="poster" onChange={(event) => {setPoster(event.target.value)}}/>
+                        <input type="file" name="poster" id="poster" onChange={handleFileInputChange}/>
                     </div>
                     <div className="inputDescription">
                         <label htmlFor="description">Введите описание</label>
