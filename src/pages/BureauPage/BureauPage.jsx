@@ -34,7 +34,6 @@ function BureauPage(props) {
     return (
         <>
             <div className='bureauPage'>
-                <SideBar/>
                 <div className='bureauTabs'>
                     <div className="tab-wrap">
                         <input type="radio" id="tab0" name="tabGroup2" className="tab" disabled style={{cursor: 'default'}}/>

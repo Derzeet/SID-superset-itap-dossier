@@ -429,7 +429,6 @@ const DosiePage = (props) => {
         return (  
             <>
                 <div className='dosiePage'>
-                 <SideBar/>
                     <div className="central-bar">
                         <div className="frames">
                             <LeftTopFrame photo={base} photos={photos} data={leftTopFrameData}/>

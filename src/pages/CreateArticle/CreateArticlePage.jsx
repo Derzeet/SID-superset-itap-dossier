@@ -60,7 +60,6 @@ function CreateArticlePage(props) {
 
     return ( 
         <div className="createArticlePage">
-            <SideBar/>
 
             <div className="createArticleBody">
                 <div className='pageTitle'>Создание новости</div>

@@ -46,30 +46,27 @@ const SideBar = (props) => {
 
     return (  
         <>
-            <div className="menu-open" 
-                style={{
-                    width: menuOpen?"0":"40px", 
-                    zIndex: 100,
-                    height: 'min-content', 
-                    display: menuOpen? "none": "unset"
-                }} onClick={() => {
-                    setMenuOpen(true) 
-                    searchPage()
-                    }}>
-                <IconButton aria-label="expand row" size="small" onClick={() => setMenuOpen(true)}>
-                    <MenuIcon style={{ fill: '#949494' }}/>
-                </IconButton>
-            </div>
             <div className='menu-bar'  
                 style={{
-                    width: menuOpen?"300px":"0",
-                    padding: menuOpen?"0px 20px":"0", 
-                    border: menuOpen?"1px solid #3a3a3a":"none",
-                    marginRight: menuOpen?"20px":"0",
+                    // width: menuOpen?"300px":"0",
+                    // padding: menuOpen?"0px 20px":"0", 
+                    // border: menuOpen?"1px solid #3a3a3a":"none",
+                    // marginRight: menuOpen?"20px":"0",
+                    height: '100%', /* 100% Full-height */
+                    width: menuOpen? "300px":0, /* 0 width - change this with JavaScript */
+                    // marginRight: menuOpen? "300px":0, /* 0 width - change this with JavaScript */
+                    position: 'fixed', /* Stay in place */
+                    zIndex: 3, /* Stay on top */
+                    top: '0', /* Stay at the top */
+                    left: 0,
+                    backgroundColor: '#0D0F11', /* Black*/
+                    overflowX: 'hidden', /* Disable horizontal scroll */
+                    paddingTop: '60px', /* Place content 60px from the top */
+                    transition: '0.5s'/* 0.5 second transition effect to slide in the sidenav */
                 }}>
-                <div className="menu-close" style={{display: !menuOpen?"none":"block"}}>
+                <div className="menu-close" style={{ top: '30px', display: !menuOpen?"none":"block"}}>
                     <IconButton aria-label="expand row" size="small" onClick={() => setMenuOpen(false)}>
-                        <KeyboardArrowLeftIcon style={{ fill: '#ffffff' }}/>
+                        <KeyboardArrowLeftIcon style={{ fill: '#ffffff', fontSize: '33px' }}/>
                     </IconButton>
                 </div>
                 <div className='menu-body'>
@@ -90,6 +87,22 @@ const SideBar = (props) => {
                         <Link to='/login' onClick={logoutHandler}>Выйти</Link>
                     </div>
                 </div>
+            </div>
+            <div className="menu-open" 
+                style={{
+                    top: '35px',
+                    width: menuOpen?"0":"40px", 
+                    zIndex: 2,
+                    left: "10px",
+                    height: 'min-content', 
+                    display: menuOpen? "none": "unset"
+                }} onClick={() => {
+                    setMenuOpen(true) 
+                    searchPage()
+                    }}>
+                <IconButton aria-label="expand row" size="small" onClick={() => setMenuOpen(true)}>
+                    <MenuIcon style={{ fill: '#949494', fontSize: '30px' }}/>
+                </IconButton>
             </div>
         </>
     );

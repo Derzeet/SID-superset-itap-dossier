@@ -69,9 +69,7 @@ function NewsPage() {
     }, [])
 
     return ( 
-        <div className="newsPage">
-            <SideBar/>
-            
+        <div className="newsPage" style={{height: '100%'}}>
             <div className="newsBody">
                 <div className='newsHeader'>
                     <div>Все новости</div>

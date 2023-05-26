@@ -39,7 +39,6 @@ function App() {
   const TableLog = lazy(() => import('./components/itapComponents/TableLog/TableLog'));
   const UserDetails = lazy(() => import('./pages/userDetails/userDetails'));
   const theme = createTheme({
-
     palette: {
       mode: 'dark',
     },
@@ -70,7 +69,7 @@ function App() {
   })
   return (
     <div className="App">
-          <ThemeProvider theme={theme}>
+      <ThemeProvider theme={theme}>
         <Router>
           <Routes>
             <Route path='/' element={
@@ -123,7 +122,6 @@ function App() {
                 <SearchPage/>
               </>
             }/>
-
             <Route path='/profiler/person/:iin' element={
               <>
                 <div style={{height: "12px"}}></div>
@@ -138,16 +136,6 @@ function App() {
                 <UlDosiePage/>
               </>
             }/>
-<<<<<<< HEAD
-            <Route path='/bureau' element={
-                <>
-                  <GrayNavbar/>
-                  <BureauPage/>
-                </>
-            }/>
-            
-=======
->>>>>>> 2e9642384b885d9738cf48a08d41398d9838dd02
             <Route path="/itap" element={
               <>
                 {/* <div style={{height: "12px"}}></div> */}
@@ -166,11 +154,11 @@ function App() {
 
                 <div style={{height: "12px"}}></div>
                 <GrayNavbar/>
-                  <Suspense fallback={<span class="loader"></span>}>
-                    <motion.div initial={{opacity: 0}} animate={{opacity: 1}} transition={{ duration: 0.2 }}>
-                      <RegistrationPage/>
-                    </motion.div>
-                  </Suspense>
+                <Suspense fallback={<span class="loader"></span>}>
+                  <motion.div initial={{opacity: 0}} animate={{opacity: 1}} transition={{ duration: 0.2 }}>
+                    <RegistrationPage/>
+                  </motion.div>
+                </Suspense>
               </>
             } />
             
@@ -228,7 +216,7 @@ function App() {
             }/>
             </Routes>
         </Router>
-        </ThemeProvider>
+      </ThemeProvider>
     </div>
   )
 }

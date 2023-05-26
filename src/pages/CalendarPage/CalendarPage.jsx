@@ -158,7 +158,6 @@ function CalendarPage(props) {
 
   return (
     <div style={{display: 'flex'}}>
-    <SideBar/>
       <div style={{}} className='calendarPage'>
         <Dialog open={open} onClose={handleClose}>
           <div style={{padding: '10px', backgroundColor: '#0D0F11', borderRadius: '2px', border: '0.5px solid rgba(134, 134, 134, 0.31)'}}>

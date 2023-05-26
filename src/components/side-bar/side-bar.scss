@@ -30,7 +30,7 @@
 
         overflow: hidden !important;
 
-        position: relative;
+        // position: relative;
         border: 1px solid #3a3a3a;
         width: 0;
         margin-left: 20px;
@@ -48,8 +48,8 @@
             justify-content: space-between;
 
             // border: 1px solid red;
-            height: 95%;
-            padding: 20px;
+            height: 70%;
+            padding: 10px;
 
             > div:nth-child(1) {
                 padding-top: 40px;
@@ -78,8 +78,10 @@
                 div {
                     font-size: 16px;
                     color: white;
-
-                    background: radial-gradient(110.65% 7956.71% at 10.63% 20.65%, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.6) 100%);
+                    background-image: url('./../../background/block1back.png');
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                    // background: radial-gradient(110.65% 7956.71% at 10.63% 20.65%, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.6) 100%);
                     padding: 10px;
                     border-radius: 4px;
 

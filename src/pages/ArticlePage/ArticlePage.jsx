@@ -33,7 +33,6 @@ function ArticlePage(props) {
 
     return ( 
         <div className="articlePage">
-            <SideBar/>
             <div className="articleBody">
                 <div className="articleTitle">{title}</div>
                 <div className="articlePoster">
