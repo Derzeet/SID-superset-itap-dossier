@@ -64,8 +64,8 @@ function CalendarPage(props) {
     console.log(event);
     setFormData(initialFormData);
     axios.post(default_host + 'events', event)
-    handleClose();
     get()
+    handleClose();
   };
 
   const deleteEvent = async (id) => {

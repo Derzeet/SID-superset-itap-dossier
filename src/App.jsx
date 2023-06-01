@@ -28,6 +28,7 @@ import NewsPage from './pages/NewsPage/NewsPage';
 import ArticlePage from './pages/ArticlePage/ArticlePage';
 import CreateArticlePage from './pages/CreateArticle/CreateArticlePage';
 import BureauPage from './pages/BureauPage/BureauPage';
+import SupersetPage from "./pages/Superset/SupersetPage";
 
 function App() {
   const userSession = JSON.parse(localStorage.getItem("user"))
@@ -80,6 +81,14 @@ function App() {
                 <MainPage/>
               </>
             }/>
+            <Route path='/superset' element={
+              <>
+                {/*<div style={{height: "30px"}}></div>*/}
+                <GrayNavbar/>
+                {/* <Navbar /> */}
+                <SupersetPage/>
+              </>
+            }/>
             <Route path='/workers' element={
               <>
                 {/*<div style={{height: "12px"}}></div>*/}
@@ -113,6 +122,14 @@ function App() {
                 <GrayNavbar/>
                 {/* <Navbar /> */}
                 <CalendarPage/>
+              </>
+            }/>
+            <Route path='/bureau' element={
+              <>
+                {/*<div style={{height: "12px"}}></div>*/}
+                <GrayNavbar/>
+                {/* <Navbar /> */}
+                <BureauPage/>
               </>
             }/>
             <Route path='/profiler' element={

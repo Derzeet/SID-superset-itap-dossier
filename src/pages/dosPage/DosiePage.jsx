@@ -68,7 +68,7 @@ const DosiePage = (props) => {
         const searchIIN = () => {
             isLoading(true)
             const params = {iin: iin}
-            
+
             // const tempData = {
             //     "mvFls": [
             //         {
@@ -357,12 +357,12 @@ const DosiePage = (props) => {
             //     setMilitaryEntities(tempData.militaryAccounting2Entities)
             //     setMzEntities(tempData.mzEntities)
             //     setConvictsTerminatedByRehabs(tempData.convictsTerminatedByRehabs)
-                
+
             //     setAccountantListEntities(tempData.accountantListEntities)
             //     setAdvocateListEntities(tempData.advocateListEntities)
             //     setAuditorsListEntities(tempData.auditorsListEntities)
             //     setBailiffListEntities(tempData.bailiffListEntities)
-                
+
             //     setIpgoEmailEntities(tempData.ipgoEmailEntities)
             //     setDetdom(tempData.orphans)
             //     setAdms(tempData.adms)
@@ -379,7 +379,7 @@ const DosiePage = (props) => {
                 setPhoto(res.data.photoDbf)
                 setLeftTopFrameData(res.data.mvFls)
                 setRelatives(res.data.fl_relatives)
-                setBase(res.data.photoDbf[0].photo)
+                if (res.data.photoDbf && res.data.photoDbf[0].photo) setBase(res.data.photoDbf[0].photo)
                 setPhotos(res.data.photoDbf)
                 // res.data.photoDDFmap()
                 setAddresses(res.data.regAddressFls)

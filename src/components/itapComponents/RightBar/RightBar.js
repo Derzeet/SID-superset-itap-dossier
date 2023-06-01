@@ -3,6 +3,8 @@ import ReactDOM from "react-dom";
 
 import RelationBlock from "../Relation/RelationBlock";
 import './RightBar.css'
+import IconButton from "@mui/material/IconButton";
+import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 
 const RightBar = (props) => {
   const [showRels, setShowRelss] = useState("")
@@ -28,7 +30,12 @@ const RightBar = (props) => {
   }
 
   return (
-    <div className='rightBar'>
+    <div className={`rightBar ${props.openRight?'rightBar20':'rightBar0'}`}>
+        <div className="rightBarClose">
+            <IconButton aria-label="expand row" size="small" onClick={() => props.handleRightOpen(false)}>
+                <KeyboardArrowRightIcon style={{ fill: '#ffffff' }}/>
+            </IconButton>
+        </div>
       <div className="infoBlock" id="infoBlock">
         <div>
 

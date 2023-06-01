@@ -13,6 +13,10 @@ import com.example.backend.tools.PdfGenerator;
 //import com.lowagie.text.DocumentException;
 import com.lowagie.text.*;
 import lombok.AllArgsConstructor;
+import org.apache.tomcat.util.http.fileupload.FileItem;
+import org.apache.tomcat.util.http.fileupload.IOUtils;
+import org.apache.tomcat.util.http.fileupload.disk.DiskFileItem;
+import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
@@ -20,10 +24,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import org.apache.tomcat.util.http.fileupload.FileItem;
 import javax.servlet.http.HttpServletResponse;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
+import java.io.*;
+import java.nio.file.Files;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
@@ -80,6 +85,10 @@ public class DoseirController {
     public List<photoDb> getCh() {
         return newPhotoRepo.findAllByIinv("040502651337");
     }
+//    @GetMapping("/allnews")
+//    public List<news> getNewsAll() {
+//        return myService.allNews();
+//    }
     @GetMapping("/chh")
     public NodesFL getChf() {
         NodesFL ss = myService.getNode("831013300660");

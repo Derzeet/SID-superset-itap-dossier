@@ -1,10 +1,11 @@
 import React, { Component, useEffect, useState } from "react";
 import axios from 'axios';
 
+import SideBar from '../../components/side-bar';
+
 import './AdminPage.css'
 import UsersTable from "../../components/itapComponents/UsersTable/UsersTable";
 import { useLocation, useNavigate } from "react-router-dom";
-import SideBar from "../../components/side-bar";
 
 const baseURL = "http://192.168.30.24:9091/api/finpol/main"
 
@@ -31,19 +32,11 @@ const AdminPage = (props) => {
     })
 
     return (
-        <section style={{overflowX: 'hidden'}}>
-            <div className="countStats">
-                <div className="lastQuery">
-                    <div>Количество пользователей</div>
-                    <div>{users}</div>
-                </div>
-        <div className={'adminPage'} style={{display: "flex", flexDirection: 'row'}}>
+        <div className={'adminPage'} style={{display: 'flex', flexDirection: 'row'}}>
             <SideBar/>
-            <section >
+            <section>
                 <div className="countStats">
-
                     <div className="lastQuery">
-
                         <div>Количество пользователей</div>
                         <div>{users}</div>
                     </div>
@@ -61,6 +54,7 @@ const AdminPage = (props) => {
                 <div>
                     <UsersTable></UsersTable>
                 </div>
+                <div className="footer"></div>
             </section>
         </div>
 

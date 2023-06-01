@@ -10,6 +10,7 @@ import {useLocation} from 'react-router-dom'
 import queryString from 'query-string';
 
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import IconButton from '@mui/material/IconButton';
 
 import './../../Loader.css'
@@ -71,7 +72,8 @@ const GraphNetnew = (props) => {
     const [showRels, setShowRels] = useState("")
     const [openLimit, setOpenLimit] = useState(0)
     const [openLeft, setOpenLeft] = useState(true)
-    
+    const [openRight, setOpenRight] = useState(true)
+
     useEffect(() => {
         console.log(openLimit, showRels)
     }, [openLimit, showRels])
@@ -1098,6 +1100,10 @@ const GraphNetnew = (props) => {
       setOpenLeft(value)
     }
 
+    const handleRightOpen = (value) => {
+        setOpenRight(value)
+    }
+
     const handleLayout = (layout) => {
         setLayoutOptions(prev => ({
             ...prev,
@@ -1249,7 +1255,7 @@ const GraphNetnew = (props) => {
                   </IconButton>
                 </div>
                 <LeftBar openLeft={openLeft} handleLeftOpen={handleLeftOpen} object={object} type={type} handleLayout={handleLayout} update={update} importBt={importBt} exportBt={exportBt} handleSubmit={Submit}></LeftBar>
-                <div className={`centralBar ${openLeft?'centralBar60':'centralBar80'}`}>
+                <div className={`centralBar ${!openLeft && !openRight ?'centralBar100' : openLeft && openRight ? 'centralBar60' : 'centralBar80'} `}>
                     <div className="waiterBox">
                         <i id="waiter" className="fa-solid fa-magnifying-glass"></i>
                     </div>
@@ -1266,7 +1272,7 @@ const GraphNetnew = (props) => {
                 </IconButton>
               </div>
               <LeftBar openLeft={openLeft} handleLeftOpen={handleLeftOpen} object={object} type={type} handleLayout={handleLayout} update={update} importBt={importBt} exportBt={exportBt} handleSubmit={Submit}></LeftBar>
-              <div className={`centralBar ${openLeft?'centralBar60':'centralBar80'}`}>
+              <div className={`centralBar ${!openLeft && !openRight ?'centralBar100' : openLeft && openRight ? 'centralBar60' : 'centralBar80'} `}>
                 <div className="waiterBox">
                     <a>No objects found</a>
                 </div>
@@ -1283,7 +1289,7 @@ const GraphNetnew = (props) => {
                 </IconButton>
               </div>
               <LeftBar openLeft={openLeft} handleLeftOpen={handleLeftOpen} object={object} type={type} handleLayout={handleLayout} update={update} importBt={importBt} exportBt={exportBt} handleSubmit={Submit}></LeftBar>
-              <div className={`centralBar ${openLeft?'centralBar60':'centralBar80'}`}>
+              <div className={`centralBar ${!openLeft && !openRight ?'centralBar100' : openLeft && openRight ? 'centralBar60' : 'centralBar80'} `}>
                 <div className="loader">
                   <div className="inner one"></div>
                   <div className="inner two"></div>
@@ -1302,7 +1308,7 @@ const GraphNetnew = (props) => {
                 </IconButton>
               </div>
               <LeftBar openLeft={openLeft} handleLeftOpen={handleLeftOpen} handleLayout={handleLayout} params={graJSON} update={update} downloadScheme={download} exportBt={exportBt} handleSubmit={Submit}></LeftBar>
-              <div className={`centralBar ${openLeft?'centralBar60':'centralBar80'}`}>
+              <div className={`centralBar ${openLeft && openRight ?'centralBar60' : openLeft || openRight ? 'centralBar80' : 'centralBar100'} `}>
                   <div className="nodeSearch">
                       <div>
                           <input type="text" id="nodeSearchInput" placeholder="Поиск по схеме" 
@@ -1316,12 +1322,9 @@ const GraphNetnew = (props) => {
                                   if (event.target.value == "") Network.fit({});
                               }}
                           />
-
                           <i className="fa-solid fa-magnifying-glass"
                               onClick={() => search()}>
                           </i>
-                          
-
                       </div>
                       <div>
                           <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAACXBIWXMAAAsTAAALEwEAmpwYAAAA4UlEQVR4nK3UMUoDQRSH8V2wiDaWCvZ24hHEVgjewCt4hO//hl3YZk9gZ+0NAiktUwqW6dOl0sInKw6kyIqZfV85xY/h8WaqKqY6yKkq4E7SUwR0DjxLckmLKVYNPACbX8yLwZTSFfC6A3kR2Pf9MSBJH3swPwg0s1tJ7yOQ/xts2/ZsZ+g+Baz3DL0MBC6B5QGQj4Jd150CqwLM/7rhkaRHSdsQMNc0zQXwEgbmzGwuaR0GDgEnw1IDnyFgLqV0PfLsfMrnMLaji1Lwp/yKgK8QMGdmN8BbGDgEzMzsPh98A4cThMeOLdocAAAAAElFTkSuQmCC"
@@ -1342,7 +1345,12 @@ const GraphNetnew = (props) => {
                       updateGraph={updateGraph}
                   />
               </div>
-              <RightBar setShowRels={setShowRels} setOpenLimit={setOpenLimit} Network={Network} showAction={showActionBtn} shortOpen={shortOpen} shortHide={shortHide} isOnSelectNode={showNodeInfo} isOnSelectEdge={showEdgeInfo} showImage={showNodeImage} showSudInfo={showSudInfo}></RightBar>
+                <div className="rightBarOpen" style={{display: openRight?'none':'block', transition: 'display .8s ease'}}>
+                    <IconButton aria-label="expand row" size="small" onClick={() => handleRightOpen(true)}>
+                        <KeyboardArrowLeftIcon style={{ fill: '#ffffff' }}/>
+                    </IconButton>
+                </div>
+                <RightBar handleRightOpen={handleRightOpen} openRight={openRight} setShowRels={setShowRels} setOpenLimit={setOpenLimit} Network={Network} showAction={showActionBtn} shortOpen={shortOpen} shortHide={shortHide} isOnSelectNode={showNodeInfo} isOnSelectEdge={showEdgeInfo} showImage={showNodeImage} showSudInfo={showSudInfo}></RightBar>
             </div>
 
         )

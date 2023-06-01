@@ -18,6 +18,7 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { useEffect } from "react";
 import './WorkersPage.scss'
+import SideBar from "../../components/side-bar";
 import Avatar from '@mui/material/Avatar';
 
 const afm_rk_head = [
@@ -121,7 +122,7 @@ const workers = {
 
 const places = {
     "head_office": {
-        name: "Головной офис", 
+        name: "Головной офис",
         ranks: {
             "head": "Руководство",
             "secret_pred": "Отдел",
@@ -136,7 +137,7 @@ const places = {
         }
     },
     "1_filial": {
-        name: "Филиал 1", 
+        name: "Филиал 1",
         ranks: {
             "head": "Руководство",
             "secret_pred": "Отдел",
@@ -147,12 +148,12 @@ const places = {
         }
     },
     "2_filial": {
-        name: "Филиал 2", 
+        name: "Филиал 2",
         ranks: {
         }
     },
     "3_filial": {
-        name: "Филиал 3", 
+        name: "Филиал 3",
         ranks: {
             "head": "Руководство",
             "secret_pred": "Отдел",
@@ -163,7 +164,7 @@ const places = {
         }
     },
     "4_filial": {
-        name: "Филиал 4", 
+        name: "Филиал 4",
         ranks: {
             "head": "Руководство",
             "secret_pred": "Отдел",
@@ -173,7 +174,7 @@ const places = {
         }
     },
     "5_filial": {
-        name: "Филиал 5", 
+        name: "Филиал 5",
         ranks: {
             "head": "Руководство",
             "oper_dep": "Отдел",
@@ -182,20 +183,20 @@ const places = {
             "antikor_dep": "Отдел",
         }
     },
-    // "afm_rk": "Агентство Республики Казахстан по финансовому мониторингу", 
-    // "astana_der":"РГУ ДЭР по городу Астана", 
-    // "almaty_der":"Департамент экономических расследований по г. Алматы", 
-    // "akmola_der":"ДЭР по Акмолинской области", 
-    // "aktobe_oblast_der":"ДЭР по Актюбинской области", 
-    // "almaty_oblast_der":"ДЭР по Алматинской области", 
-    // "atyrau_oblast_der":"ДЭР по Атырауской области", 
-    // "zk_oblast_der":"ДЭР по Заподно-Казахстанской области", 
-    // "zhambyl_oblast_der":"ДЭР по Жамбылской области", 
-    // "karaganda_oblast_der":"ДЭР по Карагандиснкой области", 
-    // "kostanay_oblast_der":"ДЭР по Костанайской области", 
-    // "kyzylorda_oblast_der": "ДЭР по Кызылординской области", 
-    // "mangistau_oblast_der": "ДЭР по Мангистауской области", 
-    // "shymkent_oblast_der": "ДЭР по по городу Шымкент", 
+    // "afm_rk": "Агентство Республики Казахстан по финансовому мониторингу",
+    // "astana_der":"РГУ ДЭР по городу Астана",
+    // "almaty_der":"Департамент экономических расследований по г. Алматы",
+    // "akmola_der":"ДЭР по Акмолинской области",
+    // "aktobe_oblast_der":"ДЭР по Актюбинской области",
+    // "almaty_oblast_der":"ДЭР по Алматинской области",
+    // "atyrau_oblast_der":"ДЭР по Атырауской области",
+    // "zk_oblast_der":"ДЭР по Заподно-Казахстанской области",
+    // "zhambyl_oblast_der":"ДЭР по Жамбылской области",
+    // "karaganda_oblast_der":"ДЭР по Карагандиснкой области",
+    // "kostanay_oblast_der":"ДЭР по Костанайской области",
+    // "kyzylorda_oblast_der": "ДЭР по Кызылординской области",
+    // "mangistau_oblast_der": "ДЭР по Мангистауской области",
+    // "shymkent_oblast_der": "ДЭР по по городу Шымкент",
     // "pavlodar_oblast_der": "ДЭР по Павлодарской области",
     // "sk_oblast_der": "ДЭР по Северо-Казахстанской области",
     // "vk_oblast_der": "ДЭР по Восточно-Казахстанской области",
@@ -230,9 +231,9 @@ const ranksAfm = {
 const ranksDef = {
     "head": "Руководство",
     "1_oper_control": "1 Оперативное управление",
-    "1_sled_control": "1 Слудственное управление",
+    "1_sled_control": "1 Следственное управление",
     "2_oper_control": "2 Оперативное управление",
-    "1_sled_control": "2 Слудственное управление",
+    "2_sled_control": "2 Следственное управление",
     "3_oper_control": "3 Оперативное управление",
     "admin_control": "Административное упраление",
     "outside_workers": "Внештатные сотрудники",
