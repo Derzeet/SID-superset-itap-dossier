@@ -24,9 +24,9 @@ const GrayNavbar = (props) => {
     const [menuOpen, setMenuOpen] = useState(false)
     const navigate = useNavigate()    
     useEffect(() => {
-        if (userSession == null) {
-            navigate('/login')
-        }
+        // if (userSession == null) {
+        //     navigate('/login')
+        // }
     })
 
     const logoutHandler = () => {
@@ -72,7 +72,7 @@ const GrayNavbar = (props) => {
     }, [open]);
 
     useEffect(() => {
-        const a = !userSession ? navigate('/login') : ""
+        // const a = !userSession ? toLogin() : ""
     })
 
     const toAdmin = () => {

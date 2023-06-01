@@ -149,6 +149,12 @@ function App() {
                   </Suspense>
               </>
             } />
+            <Route path='/bureau' element={
+              <>
+                <GrayNavbar/>
+                <BureauPage/>
+              </>
+            }/>
             <Route path="/registration" element={
               <>
 
