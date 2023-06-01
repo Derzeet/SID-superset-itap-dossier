@@ -57,6 +57,9 @@ function CreateArticlePage(props) {
           }
         }
       };
+    const handleCancel = () => {
+        navigate('/news')
+    }
 
     return ( 
         <div className="createArticlePage">
@@ -78,7 +81,10 @@ function CreateArticlePage(props) {
                     </div>
                 </div>
                 <div className="articleSave">
-                    <input type="button" name="save" id="saveButton" value={'Сохранить'} onClick={handleSave}/>
+                    <div>
+                        <input type="button" name="save" id="saveButton" value={'Отменить'} onClick={handleCancel}/>
+                        <input type="button" name="save" id="saveButton" value={'Сохранить'} onClick={handleSave}/>
+                    </div>
                 </div>
             </div>
         </div>

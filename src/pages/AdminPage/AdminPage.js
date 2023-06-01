@@ -1,6 +1,8 @@
 import React, { Component, useEffect, useState } from "react";
 import axios from 'axios';
 
+import SideBar from '../../components/side-bar';
+
 import './AdminPage.css'
 import UsersTable from "../../components/itapComponents/UsersTable/UsersTable";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -30,29 +32,32 @@ const AdminPage = (props) => {
     })
 
     return (
-        <section style={{overflowX: 'hidden'}}>
-            <div className="countStats">
-                <div className="lastQuery">
-                    <div>Количество пользователей</div>
-                    <div>{users}</div>
-                </div>
+        <div className={'adminPage'} style={{display: 'flex', flexDirection: 'row'}}>
+            <SideBar/>
+            <section>
+                <div className="countStats">
+                    <div className="lastQuery">
+                        <div>Количество пользователей</div>
+                        <div>{users}</div>
+                    </div>
 
-                <div>
-                    <div>Количество запросов</div>
-                    <div>{logs}</div>
-                </div>
+                    <div>
+                        <div>Количество запросов</div>
+                        <div>{logs}</div>
+                    </div>
 
-                <div>
-                    <div>Количество запросов за сегодня</div>
-                    <div>{todayLogs}</div>
+                    <div>
+                        <div>Количество запросов за сегодня</div>
+                        <div>{todayLogs}</div>
+                    </div>
                 </div>
-            </div>
-            <div>
-                <UsersTable></UsersTable>
-            </div>
-            <div className="footer"></div>
-        </section>
-        
+                <div>
+                    <UsersTable></UsersTable>
+                </div>
+                <div className="footer"></div>
+            </section>
+        </div>
+
     );
 }
 

@@ -30,6 +30,7 @@ import axios from 'axios';
 import default_host from '../../config/config';
 import SideBar from '../../components/side-bar';
 import './Calendar.scss'
+
 import { grey } from '@mui/material/colors';
 
 
@@ -63,8 +64,8 @@ function CalendarPage(props) {
     console.log(event);
     setFormData(initialFormData);
     axios.post(default_host + 'events', event)
-    handleClose();
     get()
+    handleClose();
   };
 
   const deleteEvent = async (id) => {
@@ -285,7 +286,7 @@ function CalendarPage(props) {
               <div className="event-desc"><a style={{fontWeight: '300'}}>{eventDesc}</a></div>
             </div>
             <div className="event-footer">
-              {id != 0 ? 
+              {id != 0 ?
                 <Button onClick={() => deleteEvent(id)}>Удалить событие</Button> : ""
               }
             </div>

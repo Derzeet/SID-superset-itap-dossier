@@ -23,7 +23,6 @@ const RegisterForm = () => {
             password: "",
             password_conf: "",
             fio: "",
-            user_photo: "",
         }
     });
     const handleRegistration = (data) => {
@@ -34,7 +33,6 @@ const RegisterForm = () => {
             data.fio,
             data.password,
             data.level,
-            data.user_photo
         ).then(
             response => {
                 console.log(response)
@@ -91,13 +89,13 @@ const RegisterForm = () => {
                 }
             },
         },
-        user_photo: {
-            required: "userphoto is required",
-            minLength: {
-                value: 1,
-                message: "userphoto"
-            }
-        }
+        // user_photo: {
+        //     required: "userphoto is required",
+        //     minLength: {
+        //         value: 1,
+        //         message: "userphoto"
+        //     }
+        // }
     };
 
     return (
@@ -157,14 +155,7 @@ const RegisterForm = () => {
                             <input type="password" {...register("password_conf", registerOptions.password_conf)} id="password-conf" placeholder="Подтвердите пароль" />
                         </div>
                     </div>
-                    <div className="thirdLine">
 
-                    <div className="custom-file mb-4">
-                        <label className="custom-file-label"
-                               htmlFor="customFile">Upload Resume:</label>
-                        <input type="file" name="user_photo" className="user_photo"
-                               id="user_photo" {...register("user_photo", registerOptions.user_photo)}/>
-                    </div></div>
                 </div>
 
                 <div className="actions">
@@ -184,7 +175,7 @@ const RegisterForm = () => {
                             {errors.level ? <span>{errors.level?.message}</span> : ""}
                             {errors.password ? <span>{errors.password?.message}</span>: ""}
                             {errors.password_conf ? <span>{errors.password_conf?.message}</span> : ""}
-                            {errors.user_photo ? <span>{errors.user_photo?.message}</span> : ""}
+                            {/*{errors.user_photo ? <span>{errors.user_photo?.message}</span> : ""}*/}
                         </div>
                     </div> 
                     : ""

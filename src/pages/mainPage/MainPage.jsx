@@ -133,7 +133,7 @@ const MainPage = (props) => {
 
     return (
         <>
-            <div className='mainPageBlock'>
+            <div className='mainPageBlock'       >
                 <Modal
                 open={openNews}
                 onClose={handleNewsClose}

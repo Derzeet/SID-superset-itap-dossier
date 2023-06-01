@@ -6,6 +6,7 @@ import './RegistrationPage.css'
 import { useForm } from "react-hook-form"
 
 import RegisterForm from "../../components/itapComponents/RegisterForm/RegisterForm";
+import SideBar from "../../components/side-bar";
 
 export default class RegistrationPage extends Component {
     render() {

@@ -111,12 +111,12 @@ $tab-wrap-border-radius: 2px;
                 opacity: 1;
                 position: relative;
                 top: 0;
-                z-index: 100;
+                z-index: 2;
                 
             }
     
             & .tab__result:nth-of-type(#{$i}) {
-                z-index: 100;
+                z-index: 2;
             }
         }
     

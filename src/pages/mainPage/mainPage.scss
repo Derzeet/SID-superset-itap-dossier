@@ -1,7 +1,6 @@
 @mixin blockDiv($width, $height, $blockWidth, $blockHeight) {
     // border: 1px solid red;
-    padding-top: 50px;
-    padding-bottom: 50px;
+    padding: 50px 0px;
     
     display: flex;
     justify-content: space-between;
@@ -248,7 +247,7 @@ body {
 }
 
 .blockdiv {
-    @include blockDiv(90%, 20%, 30%, 100%);
+    @include blockDiv(70%, 20%, 30%, 100%);
 }
 
 .blockdiv2 {

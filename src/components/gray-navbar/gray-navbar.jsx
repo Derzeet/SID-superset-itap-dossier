@@ -31,7 +31,7 @@ const GrayNavbar = (props) => {
 
     const logoutHandler = () => {
         authService.logout();
-        // navigate('/login');
+        navigate('/login');
     }
 
     const [open, setOpen] = React.useState(false);
@@ -84,10 +84,10 @@ const GrayNavbar = (props) => {
     return ( 
         <>
             <div className="nav-back" style={{
-                    marginTop: '5px',
-                    background: 'radial-gradient(110.65% 7956.71% at 10.63% 20.65%, rgba(255, 255, 255, 0.201) 0%, rgba(255, 255, 255, 0) 100%)', 
-                    border: '0.2px solid #868686',
-                    backdropFilter: ' blur(27.5px)',
+                marginTop: '13px',
+                background: 'radial-gradient(110.65% 7956.71% at 10.63% 20.65%, rgba(255, 255, 255, 0.201) 0%, rgba(255, 255, 255, 0) 100%)', 
+                border: '0.2px solid #868686',
+                backdropFilter: ' blur(27.5px)',
                 }}>
             <nav className="NavbarItems2">
                 <h1 className="logoNav"><Link style={{}} to='/'>iSET</Link></h1>

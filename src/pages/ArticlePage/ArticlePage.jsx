@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import SideBar from '../../components/side-bar';
+import { Link } from 'react-router-dom';
+
+
+import ArrowBackOutlinedIcon from '@mui/icons-material/ArrowBackOutlined';
+
 import default_host from '../../config/config';
 import './articlePage.scss'
 import axios from 'axios';
@@ -34,6 +39,11 @@ function ArticlePage(props) {
     return ( 
         <div className="articlePage">
             <div className="articleBody">
+                <div className="goBack">
+                    <Link to={'/news'}>
+                        <ArrowBackOutlinedIcon style={{color: 'white', fontSize: '40px', cursor: 'pointer'}}/>
+                    </Link>
+                </div>
                 <div className="articleTitle">{title}</div>
                 <div className="articlePoster">
                     <img src={poster} alt={title} />

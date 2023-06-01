@@ -160,6 +160,11 @@
 
             width: 100%;
 
+            > div {
+                display: flex;
+                gap: 10px;
+            }
+
             input[type="button"] {
                 font-size: 16px;
                 padding: 25px;
