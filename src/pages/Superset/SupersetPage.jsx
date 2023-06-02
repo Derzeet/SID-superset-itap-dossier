@@ -12,22 +12,20 @@ function SupersetPage() {
     const [open, setOpen] = useState(false);
 
     const fetchDashboardUrl = (event) => {
+
+
         let url = event.target.id;
         
-        axios.get(`http://192.168.30.24:9095/dashboard/${url}`)
+        axios.get(`http://192.168.30.24:9095/dashboard/dashurl`)
             .then(response => {
                 setDashboardUrl(response.data.url);
             })
             .catch(error => {
                 console.error('Error fetching dashboard URL:', error);
             });
+
+        setOpen(true)
     };
-
-
-    useEffect(() => {
-// Fetch the initial URLs
-        fetchDashboardUrl({'target': {'id': 'dashurl'}});
-    }, []);
 
     return (
         <div className='supersetPage'>
