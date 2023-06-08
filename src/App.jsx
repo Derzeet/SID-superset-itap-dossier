@@ -29,6 +29,7 @@ import ArticlePage from './pages/ArticlePage/ArticlePage';
 import CreateArticlePage from './pages/CreateArticle/CreateArticlePage';
 import BureauPage from './pages/BureauPage/BureauPage';
 import SupersetPage from "./pages/Superset/SupersetPage";
+import ProfilePage from './pages/ProfilePage/ProfilePage';
 
 function App() {
   const userSession = JSON.parse(localStorage.getItem("user"))
@@ -166,6 +167,12 @@ function App() {
                   </Suspense>
               </>
             } />
+            <Route path='/profile' element={
+              <>
+                <GrayNavbar/>
+                <ProfilePage/>
+              </>
+            }/>
             <Route path='/bureau' element={
               <>
                 <GrayNavbar/>

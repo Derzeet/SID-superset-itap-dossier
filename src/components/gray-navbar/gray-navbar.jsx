@@ -23,10 +23,13 @@ const GrayNavbar = (props) => {
     const userSession = JSON.parse(localStorage.getItem("user"))
     const [menuOpen, setMenuOpen] = useState(false)
     const navigate = useNavigate()    
+
+    const debugMode = useState(true)
+
     useEffect(() => {
-        // if (userSession == null) {
-        //     navigate('/login')
-        // }
+        if (!debugMode && userSession == null) {
+            navigate('/login')
+        }
     })
 
     const logoutHandler = () => {
@@ -43,8 +46,8 @@ const GrayNavbar = (props) => {
 
     const handleClose = (event) => {
         if (
-        anchorRef.current &&
-        anchorRef.current.contains(event.target)
+            anchorRef.current &&
+            anchorRef.current.contains(event.target)
         ) {
         return;
         }
@@ -72,7 +75,7 @@ const GrayNavbar = (props) => {
     }, [open]);
 
     useEffect(() => {
-        // const a = !userSession ? toLogin() : ""
+        const a = !userSession && !debugMode ? toLogin() : ""
     })
 
     const toAdmin = () => {
@@ -102,7 +105,7 @@ const GrayNavbar = (props) => {
                     ) : ("")}
 
                     <ul className="nav-menu">
-                    {userSession ? 
+                    {debugMode || userSession ? 
                         <>
                             {/* <style>
                                 
@@ -121,7 +124,8 @@ const GrayNavbar = (props) => {
                                         aria-controls={open ? 'composition-menu' : undefined}
                                         aria-expanded={open ? 'true' : undefined}
                                         aria-haspopup="true"
-                                        onClick={handleToggle}>
+                                        // onClick={handleToggle}
+                                        >
                                     <AccountCircleIcon style={{ fill: '#ffffff' }}/>
                                 </IconButton>
                                 <IconButton 
@@ -162,7 +166,7 @@ const GrayNavbar = (props) => {
                                             aria-labelledby="composition-button"
                                             onKeyDown={handleListKeyDown}
                                         >
-                                            <MenuItem onClick={handleClose}>Профиль</MenuItem>
+                                            <MenuItem onClick={handleClose}><Link style={{ fontWeight: 600}} className={"nav-links"} to={"/profile"}>Профиль</Link></MenuItem>
                                             <MenuItem onClick={handleClose}><Link style={{ fontWeight: 600}} className={"nav-links"} to={"/login"} onClick={logoutHandler}>Выйти</Link></MenuItem>
                                         </MenuList>
                                         </ClickAwayListener>
