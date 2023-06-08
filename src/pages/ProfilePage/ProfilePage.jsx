@@ -37,6 +37,7 @@ function ProfilePage(props) {
         if (newPassword === approvePassword) {
             setChangePasswordError(false)
 
+            
 
             document.getElementById('tab1').click()
     

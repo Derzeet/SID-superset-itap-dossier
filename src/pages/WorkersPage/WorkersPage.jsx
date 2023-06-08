@@ -381,11 +381,11 @@ function SubRow(props) {
                             <Box  style={{ borderBottom: 'hidden'}} sx={{ margin: 1 }}>
                                 {people.map((worker) => (
                                     <TableRow style={{borderBottom: ''}}>
-                                        <TableCell style={{width: '10%'}} align="left"><Avatar
+                                        <TableCell style={{width: '10%'}} align="left"><Link to={`/worker/${worker.id}`}><Avatar
                                             alt={worker.fio}
                                             src="/static/images/avatar/1.jpg"
                                             sx={{ width: 50, height: 50 }}
-                                        /></TableCell>
+                                        /></Link></TableCell>
                                         <TableCell style={{ width: '30%' }} align="left"><a style={{color: 'white'}}>{worker.fio}</a></TableCell>
                                         <TableCell style={{ width: '20%' }} align="left"><a>{worker.email}</a></TableCell>
                                         <TableCell style={{ width: '20%' }} align="left"><a>{worker.phone}</a></TableCell>

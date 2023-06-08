@@ -5,11 +5,14 @@ import './supersetPage.scss'
 import SideBar from '../../components/side-bar';
 import logoImage from './superset-logo.png';
 
+import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
+
 function SupersetPage() {
     const [dashboardUrl, setDashboardUrl] = useState('');
     const [questionUrl, setQuestionUrl] = useState('');
 
     const [open, setOpen] = useState(false);
+    const [openSelect, setOpenSelect] = useState(true);
 
     const fetchDashboardUrl = (event) => {
 
@@ -31,15 +34,18 @@ function SupersetPage() {
         <div className='supersetPage'>
             <SideBar/>
             <div className='supersetBody'>
-                <div className="title">METABASE</div>
                 <div className="iframes-container">
-                    <div className="selectBar">
+                    <div className={`selectBar ${openSelect ? 'selectBarOpen' : 'selectBarClose'}`}>
+
                         <div onClick={fetchDashboardUrl} id='dashurl'>Dashurl</div>
                         <div onClick={fetchDashboardUrl} id='dashboard_2'>DASHBOARD2</div>
                         <div onClick={fetchDashboardUrl} id='dashboard_3'>DASHBOARD3</div>
                         <div onClick={fetchDashboardUrl} id='dashboard_4'>DASHBOARD4</div>
+
+                        <div onClick={() => {setOpenSelect(false)}}><LibraryBooksIcon/></div>
                     </div>
                     <div className="iframe-items">
+                        <div onClick={() => {setOpenSelect(true)}}><LibraryBooksIcon/></div>
                         {
                             open ? 
                             <iframe
