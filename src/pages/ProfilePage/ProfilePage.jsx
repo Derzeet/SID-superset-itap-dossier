@@ -46,6 +46,8 @@ function ProfilePage(props) {
     const [currTab, setCurrTab] = useState('tab1')
     useEffect(() => {
         document.getElementById('tab1').click()
+
+        getUserInfo()
     }, [])
 
     const [changePasswordError, setChangePasswordError] = useState(false)
@@ -113,8 +115,8 @@ function ProfilePage(props) {
                 <div className="mainInfo">
                     <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAANwAAAEPCAYAAAAph6q0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAANXSURBVHgB7daxTQMxAEZhJzSUocsIlBkNOjpESYXYADZhhBvjOm4EfGKF5FXfJ/2yPMCTfRjT5XJ5ncfT3GkA17bNfS3L8nyYsX2M/9iA23rbg/sdXjYobMchNqicjgPICA5CgoOQ4CAkOAgJDkKCg5DgICQ4CAkOQoKDkOAgJDgICQ5CgoOQ4CAkOAgJDkKCg5DgICQ4CAkOQoKDkOAgJDgICQ5CgoOQ4CAkOAgJDkKCg5DgICQ4CAkOQoKDkOAgJDgICQ5CgoOQ4CAkOAgJDkKCg5DgICQ4CAkOQoKDkOAgJDgICQ5CgoOQ4CAkOAgJDkKCg5DgICQ4CAkOQoKDkOAgJDgICQ5CgoOQ4CAkOAgJDkKCg5DgICQ4CAkOQoKDkOAgJDgICQ5CgoOQ4CAkOAgJDkKCg5DgICQ4CAkOQoKDkOAgJDgICQ5CgoOQ4CAkOAgJDkKCg5DgICQ4CAkOQoKDkOAgJDgICQ5CgoOQ4CAkOAgJDkKCg5DgICQ4CAkOQoKDkOAgJDgICQ5CgoOQ4CAkOAgJDkKCg5DgICQ4CAkOQoKDkOAgJDgICQ5CgoOQ4CAkOAgJDkKCg5DgICQ4CAkOQoKDkOAgJDgICQ5CgoOQ4CAkOAgJDkKCg5DgICQ4CAkOQoKDkOAgJDgICQ5CgoOQ4CAkOAgJDkKCg5DgICQ4CAkOQoKDkOAgJDgICQ5CgoOQ4CAkOAgJDkKCg5DgICQ4CAkOQoKDkOAgJDgICQ5CgoOQ4CAkOAgJDkKCg5DgICQ4CAkOQoKDkOAgJDgICQ5CgoOQ4CAkOAgJDkKCg5DgICQ4CAkOQoKDkOAgJDgICQ5CgoOQ4CAkOAgJDkKCg5DgICQ4CAkOQoKDkOAgJDgICQ5CgoOQ4CAkOAgJDkKCg5DgICQ4CAkOQoKDkOAgJDgICQ5CgoOQ4CAkOAgJDkKCg5DgICQ4CAkOQoKDkOAgJDgICQ5CgoOQ4CAkOAgJDkKCg5DgICQ4CAkOQoKDkOAgJDgICQ5CgoOQ4CAkOAgJDkKCg5DgICQ4CAkOQoKDkOAgJDgICQ5CgoOQ4CAkOAgJDkKCg5DgICQ4CAkOQoKDkOAgtAe3DaCw7cF9DqDwfbeu68/5fH6Yl8e5+wFc2/6LfF+W5eUP2xwYQKepFAMAAAAASUVORK5CYII=" alt="" />
                     <div>
-                        <div className="name">Қуанышбеков Мадияр Еркебұланұлы</div>
-                        <div className="email">e-mail: <span>mkuanyshbekov@mail.ru</span></div>
+                        <div className="name">{name}</div>
+                        <div className="email">e-mail: <span>{email}</span></div>
                         <div className="birthDay">День рождения: <span>31.01.2002</span></div>
                         <div className="rank">Звание: <span>Ст. Сержант</span></div>
                         <div className="companyName">Организация: <span>ГУ “Агентство Республики Казахстан по финансовому мониторигу”</span></div>
