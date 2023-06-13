@@ -18,6 +18,303 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import axios from 'axios';
 
 function ProfilePage(props) {
+    const [name, setName] = useState('')
+    const [email, setEmail] = useState('')
+    const [role, setRole] = useState('')
+
+    const [tab1, setTab1] = useState(true)
+    const [tab2, setTab2] = useState(false)
+    const [tab3, setTab3] = useState(false)
+    const [tab4, setTab4] = useState(false)
+    const [tab5, setTab5] = useState(false)
+    const [tab6, setTab6] = useState(false)
+    const [tab7, setTab7] = useState(false)
+    const [tab8, setTab8] = useState(false)
+    const [tab9, setTab9] = useState(false)
+
+    const [tabs, setTabs] = useState({
+        'tab1': true,
+        'tab2': false,
+        'tab3': false,
+        'tab4': false,
+        'tab5': false,
+        'tab6': false,
+        'tab7': false,
+        'tab8': false,
+        'tab9': false
+    })
+    const [currTab, setCurrTab] = useState('tab1')
+    useEffect(() => {
+        document.getElementById('tab1').click()
+    }, [])
+
+    const [changePasswordError, setChangePasswordError] = useState(false)
+
+    const userSession = JSON.parse(localStorage.getItem("user"))
+
+    const getUserInfo = async () => {
+        console.log(userSession)
+
+        let res = await axios.get("http://192.168.30.24:9091/api/finpol/main/getUserInfo",
+    { headers: {
+                Authorization: `Bearer ${userSession.accessToken}`
+            }})
+
+        setName(res.data.email)
+        setEmail(res.data.username)
+        setRole(res.data.roles[0].name)
+
+        console.log(res.data)
+    }
+
+    const handlePasswordChange =  async  ()  => {
+        let newPassword = document.querySelector('.newPassword input').value;
+        let approvePassword = document.querySelector('.approvePassword input').value;
+    
+        if (newPassword === approvePassword) {
+            setChangePasswordError(false)
+
+            
+            let res = await axios.post("http://192.168.30.24:9091/api/finpol/auth/changePassword?password=" + newPassword)
+            console.log(res.body)
+            document.getElementById('tab1').click()
+
+        } else {
+            setChangePasswordError(true)
+
+        }
+    }
+
+    const handleTabClick = (tabId) => {
+        setTabs({
+            'tab1': false,
+            'tab2': false,
+            'tab3': false,
+            'tab4': false,
+            'tab5': false,
+            'tab6': false,
+            'tab7': false,
+            'tab8': false,
+        })
+
+        setTabs({
+            ...tabs,
+            [currTab]: false,
+            [tabId]: true
+        })
+
+        setCurrTab(tabId)
+    }
+
+    return (
+        <div className="profilePage">
+            <SideBar/>
+            <div className='profilePageBody'>
+                <div className="mainInfo">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAANwAAAEPCAYAAAAph6q0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAANXSURBVHgB7daxTQMxAEZhJzSUocsIlBkNOjpESYXYADZhhBvjOm4EfGKF5FXfJ/2yPMCTfRjT5XJ5ncfT3GkA17bNfS3L8nyYsX2M/9iA23rbg/sdXjYobMchNqicjgPICA5CgoOQ4CAkOAgJDkKCg5DgICQ4CAkOQoKDkOAgJDgICQ5CgoOQ4CAkOAgJDkKCg5DgICQ4CAkOQoKDkOAgJDgICQ5CgoOQ4CAkOAgJDkKCg5DgICQ4CAkOQoKDkOAgJDgICQ5CgoOQ4CAkOAgJDkKCg5DgICQ4CAkOQoKDkOAgJDgICQ5CgoOQ4CAkOAgJDkKCg5DgICQ4CAkOQoKDkOAgJDgICQ5CgoOQ4CAkOAgJDkKCg5DgICQ4CAkOQoKDkOAgJDgICQ5CgoOQ4CAkOAgJDkKCg5DgICQ4CAkOQoKDkOAgJDgICQ5CgoOQ4CAkOAgJDkKCg5DgICQ4CAkOQoKDkOAgJDgICQ5CgoOQ4CAkOAgJDkKCg5DgICQ4CAkOQoKDkOAgJDgICQ5CgoOQ4CAkOAgJDkKCg5DgICQ4CAkOQoKDkOAgJDgICQ5CgoOQ4CAkOAgJDkKCg5DgICQ4CAkOQoKDkOAgJDgICQ5CgoOQ4CAkOAgJDkKCg5DgICQ4CAkOQoKDkOAgJDgICQ5CgoOQ4CAkOAgJDkKCg5DgICQ4CAkOQoKDkOAgJDgICQ5CgoOQ4CAkOAgJDkKCg5DgICQ4CAkOQoKDkOAgJDgICQ5CgoOQ4CAkOAgJDkKCg5DgICQ4CAkOQoKDkOAgJDgICQ5CgoOQ4CAkOAgJDkKCg5DgICQ4CAkOQoKDkOAgJDgICQ5CgoOQ4CAkOAgJDkKCg5DgICQ4CAkOQoKDkOAgJDgICQ5CgoOQ4CAkOAgJDkKCg5DgICQ4CAkOQoKDkOAgJDgICQ5CgoOQ4CAkOAgJDkKCg5DgICQ4CAkOQoKDkOAgJDgICQ5CgoOQ4CAkOAgJDkKCg5DgICQ4CAkOQoKDkOAgJDgICQ5CgoOQ4CAkOAgJDkKCg5DgICQ4CAkOQoKDkOAgJDgICQ5CgoOQ4CAkOAgJDkKCg5DgICQ4CAkOQoKDkOAgtAe3DaCw7cF9DqDwfbeu68/5fH6Yl8e5+wFc2/6LfF+W5eUP2xwYQKepFAMAAAAASUVORK5CYII=" alt="" />
+                    <div>
+                        <div className="name">Қуанышбеков Мадияр Еркебұланұлы</div>
+                        <div className="email">e-mail: <span>mkuanyshbekov@mail.ru</span></div>
+                        <div className="birthDay">День рождения: <span>31.01.2002</span></div>
+                        <div className="rank">Звание: <span>Ст. Сержант</span></div>
+                        <div className="companyName">Организация: <span>ГУ “Агентство Республики Казахстан по финансовому мониторигу”</span></div>
+                        <div className="department">Отдел: <span>Управление информационной безопасности</span></div>
+                        <div className="phone">Рабочий телефон: <span>87785535429</span></div>
+                        <div className="gender">Пол: <span>Мужчина</span></div>
+                    </div>
+                </div>
+                <div className="profileTabs">
+                <div className="tab-wrap">
+                        <input type="radio" id="tab0" name="tabGroup2" className="tab" disabled style={{cursor: 'default'}}/>
+                        <label htmlFor="tab0" style={{cursor:"default", background: "#0d0f1100"}} sx={{}}></label>
+
+                        <TabItem 
+                            pos='start'
+                            name="tab1" 
+                            label='Общие сведения'
+                            thisTab={tabs['tab1']}
+                            nextTab={tabs['tab2']}
+                            handleTabClick={handleTabClick}
+                            />
+                        
+                        <TabItem 
+                            pos='middle'
+                            name="tab2" 
+                            label='Образование'
+                            thisTab={tabs['tab2']}
+                            nextTab={tabs['tab3']}
+                            handleTabClick={handleTabClick}
+                            />
+
+                        <TabItem 
+                            pos='middle'
+                            name="tab3" 
+                            label='Опыт работы'
+                            thisTab={tabs['tab3']}
+                            nextTab={tabs['tab4']}
+                            handleTabClick={handleTabClick}
+                            />
+
+                        <TabItem 
+                            pos='middle'
+                            name="tab4" 
+                            label='Справки'
+                            thisTab={tabs['tab4']}
+                            nextTab={tabs['tab5']}
+                            handleTabClick={handleTabClick}
+                            />
+                        
+                        <TabItem 
+                            pos='middle'
+                            name="tab5" 
+                            label='Заявления'
+                            thisTab={tabs['tab5']}
+                            nextTab={tabs['tab6']}
+                            handleTabClick={handleTabClick}
+                            />
+
+                        <TabItem 
+                            pos='middle'
+                            name="tab6" 
+                            label='Заявки'
+                            thisTab={tabs['tab6']}
+                            nextTab={tabs['tab7']}
+                            handleTabClick={handleTabClick}
+                            />
+
+                        <TabItem 
+                            pos='middle'
+                            name="tab7" 
+                            label='Приказы'
+                            thisTab={tabs['tab7']}
+                            nextTab={tabs['tab8']}
+                            handleTabClick={handleTabClick}
+                            />
+
+                        <TabItem 
+                            pos='end'
+                            name="tab8" 
+                            label='Скуд'
+                            thisTab={tabs['tab8']}
+                            handleTabClick={handleTabClick}
+                            />       
+                        
+                        <div className="tab__content">
+                            
+                        </div>
+
+                        <div className="tab__content tab1_content">
+                            <div>Категория: <span>{'B-6 (A-5)'}</span></div>
+                            <div>Дата рождения: <span>{'22 сентября 2022г.'}</span></div>
+                            <div>Национальность: <span>{'Казах'}</span></div>
+                            <div>Семейное положение: <span>{'Холост'}</span></div>
+                            <div>Мобильный номер: <span>{''}</span></div>
+                            <div>Вид: <span>{'Государственный служащий'}</span></div>
+                            <div>Адрес места рождения: <span>{'Казахстан'}</span></div>
+                            <div>Адрес места проживания: <span>{'Казахстан'}</span></div>
+                            <div>Табельный номер: <span>{'700'}</span></div>
+                            <div>Дата приема: <span>{'14.04.2023г.'}</span></div>
+                            <div>Дата последнего перемещения: <span>{'14.04.2023г.'}</span></div>
+                        </div>
+
+                        <div className="tab__content tab2_content">
+                            <div className="title">Образование</div>
+                            <TableContainer>
+                                <Table>
+                                    <TableHead>
+                                        <TableRow style={{background: '#202020'}}>
+                                            <TableCell style={{color: '#838383'}}>Вид Образования</TableCell>
+                                            <TableCell style={{color: '#838383'}}>Дата поступления</TableCell>
+                                            <TableCell style={{color: '#838383'}}>Учебное заведение</TableCell>
+                                            <TableCell style={{color: '#838383'}}>Специальность</TableCell>
+                                        </TableRow>
+                                    </TableHead>
+                                    <TableBody>
+                                        {/* <TableRow sx={{borderBottom: 'hidden'}}>
+                                            <TableCell>Вид Образования</TableCell>
+                                            <TableCell>Дата поступления</TableCell>
+                                            <TableCell>Учебное заведение</TableCell>
+                                            <TableCell>Специальность</TableCell>
+                                        </TableRow> */}
+                                        <TableRow>
+                                            <TableCell colSpan={4} style={{ textAlign: 'center', fontSize: '20px'}}>Отсутствуют данные</TableCell>
+                                        </TableRow>
+                                    </TableBody>
+                                </Table>
+                            </TableContainer>
+                        </div>
+
+                        <div className="tab__content">
+                        </div>
+
+                        <div className="tab__content">
+                        </div>
+
+                        <div className="tab__content">
+                        </div>
+
+                        <div className="tab__content">
+                        </div>
+
+                        <div className="tab__content">
+                        </div>
+
+                        <div className="tab__content">
+                        </div>
+
+                        <div className="tab__content">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+function TabItem(props) {
+
+    const style = {
+        textTransform: 'uppercase',
+        backgroundColor: props.thisTab?"#0D0F11":"#171B1F", 
+        color: props.thisTab?"#FFFFFF":"#7B7B7B",
+        borderTop: "1px #565656 solid",
+    }
+
+    const startStyle = {
+        ...style,
+        borderLeft: "1px #565656 solid",
+        borderRight: !props.thisTab? (!props.nextTab ? "1px #565656 solid" : "none") : "1px #565656 solid"
+    }
+
+    const middleStyle = {
+        ...style,
+        borderTop: "1px #565656 solid",
+        borderRight: !props.thisTab? (!props.nextTab ? "1px #565656 solid" : "none") : "1px #565656 solid"
+    }
+    
+    const endStyle = {
+        ...style,
+        borderTop: "1px #565656 solid",
+        borderRight: "1px #565656 solid"
+    }
+
+    const getStyle = () => {
+        if (props.pos === 'middle') return middleStyle
+        else if (props.pos === 'end') return endStyle
+        else return startStyle
+    }
+
+    return (
+        <>
+            <input type="radio" id={props.name} name="tabGroup2" className="tab"
+                onClick={(event) => props.handleTabClick(event.target.id)}/>
+            <label htmlFor={props.name} 
+                style={getStyle()}>{props.label}</label>
+        </>
+    )
+}
+
+function OldProfilePage(props) {
 
     const [tab1, setTab1] = useState(true)
     const [tab2, setTab2] = useState(true)

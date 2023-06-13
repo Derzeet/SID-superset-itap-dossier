@@ -60,6 +60,7 @@ const SideBar = (props) => {
                     top: '0', /* Stay at the top */
                     left: 0,
                     backgroundColor: '#0D0F11', /* Black*/
+                    borderRight: menuOpen?'1px solid #3a3a3a':'',
                     overflowX: 'hidden', /* Disable horizontal scroll */
                     paddingTop: '60px', /* Place content 60px from the top */
                     transition: '0.5s'/* 0.5 second transition effect to slide in the sidenav */
