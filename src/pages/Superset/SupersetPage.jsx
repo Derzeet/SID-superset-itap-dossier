@@ -28,6 +28,20 @@ function SupersetPage() {
             });
 
         setOpen(true)
+    };    const fetchDashboardUrl1 = (event) => {
+
+
+        let url = event.target.id;
+
+        axios.get(`http://192.168.30.24:9095/dashboard/dashurl1`)
+            .then(response => {
+                setDashboardUrl(response.data.url);
+            })
+            .catch(error => {
+                console.error('Error fetching dashboard URL:', error);
+            });
+
+        setOpen(true)
     };
 
     return (
@@ -37,8 +51,8 @@ function SupersetPage() {
                 <div className="iframes-container">
                     <div className={`selectBar ${openSelect ? 'selectBarOpen' : 'selectBarClose'}`}>
 
-                        <div onClick={fetchDashboardUrl} id='dashurl'>Dashurl</div>
-                        <div onClick={fetchDashboardUrl} id='dashboard_2'>DASHBOARD2</div>
+                        <div onClick={fetchDashboardUrl} id='dashurl'>DASHBOARD1</div>
+                        <div onClick={fetchDashboardUrl1} id='dashboard_2'>DASHBOARD2</div>
                         <div onClick={fetchDashboardUrl} id='dashboard_3'>DASHBOARD3</div>
                         <div onClick={fetchDashboardUrl} id='dashboard_4'>DASHBOARD4</div>
 

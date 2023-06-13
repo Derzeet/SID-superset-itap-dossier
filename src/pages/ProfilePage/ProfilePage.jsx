@@ -15,22 +15,33 @@ import Paper from '@mui/material/Paper';
 import InputAdornment from '@mui/material/InputAdornment';
 import VisibilityOn from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import axios from 'axios';
 
 function ProfilePage(props) {
 
     const [tab1, setTab1] = useState(true)
     const [tab2, setTab2] = useState(true)
 
-    useEffect(() => {
+    const [name, setName] = useState('')
+    const [email, setEmail] = useState('')
+    const [role, setRole] = useState('')
+    // const [name, setName] = useState('')
 
+    useEffect(() => {
+        getUserInfo()
     }, [tab1, tab2])
+
+    useEffect(() => {
+        getUserInfo()
+    }, [])
 
     const [showPassword, setShowPassword] = useState(false)
     const [changePasswordError, setChangePasswordError] = useState(false)
 
     const [appNumber, setAppNumber] = useState(0)
+    const userSession = JSON.parse(localStorage.getItem("user"))
 
-    const handlePasswordChange = () => {
+    const handlePasswordChange =  async  ()  => {
         let newPassword = document.querySelector('.newPassword input').value;
         let approvePassword = document.querySelector('.approvePassword input').value;
     
@@ -38,14 +49,46 @@ function ProfilePage(props) {
             setChangePasswordError(false)
 
             
-
+            let res = await axios.post("http://192.168.30.24:9091/api/finpol/auth/changePassword?password=" + newPassword)
+            console.log(res.body)
             document.getElementById('tab1').click()
-    
+
         } else {
             setChangePasswordError(true)
 
         }
     }
+    const getUserInfo = async () => {
+        console.log(userSession)
+
+        let res = await axios.get("http://192.168.30.24:9091/api/finpol/main/getUserInfo",
+    { headers: {
+                Authorization: `Bearer ${userSession.accessToken}`
+            }})
+
+        setName(res.data.email)
+        setEmail(res.data.username)
+        setRole(res.data.roles[0].name)
+
+        console.log(res.data)
+    }
+    // {
+    //     "id": 86,
+    //     "username": "zhokha_off@mail.com",
+    //     "email": "Zhahanger Zhangaliev",
+    //     "user_photo": null,
+    //     "password": "$2a$10$ma56cY1dDVR8ewcnslcu8.pYW5ny0XiiDo5X922AeC4bC7gHV5cUK",
+    //     "active": true,
+    //     "roles": [
+    //     {
+    //         "id": 1,
+    //         "name": "ADMIN",
+    //         "relations": null,
+    //         "person_properties": null,
+    //         "company_properties": null
+    //     }
+    // ]
+    // }
 
     return ( 
         <div className='profilePage'>
@@ -122,7 +165,7 @@ function ProfilePage(props) {
                                                 // height: '10px'
                                             }}  
                                             id="filled-read-only-input" 
-                                            value={'Куанышбеков Мадияр Еркебуланулы'}
+                                            value={name}
                                             variant="outlined" />
                                     </div>
                                     <div>
@@ -134,34 +177,20 @@ function ProfilePage(props) {
                                                 // height: '10px'
                                             }}  
                                             id="filled-read-only-input" 
-                                            value={'mkuanyshbekov@list.ru'}
+                                            value={email}
                                             variant="outlined" />
                                     </div>
                                     <div>
-                                        <label htmlFor="pName">Пароль</label>
-                                        <TextField
-                                            // label="With normal TextField"
-                                            id="filled-read-only-input"
-                                            value={'ffffff'}
-                                            type={!showPassword ? 'password' : 'text'}
-                                            variant="outlined"
-                                            sx={{ 
-                                                flex: 1, 
-                                                border: "1px solid #565656", 
-                                                borderRadius: "4px",
-                                            }} 
-                                            InputProps={{
-                                                endAdornment: 
-                                                    <InputAdornment position="end" sx={{cursor: 'pointer'}}
-                                                        onClick={() => {setShowPassword(prev => !prev)}}>
-                                                        {!showPassword ? <VisibilityOn sx={{fontSize: '0.9rem'}}/>
-                                                        : <VisibilityOff sx={{fontSize: '0.9rem'}}/>}
-                                                    </InputAdornment>,
-                                            }}
-                                        />
-                                        <div className='changePassword' onClick={() => {
-                                            document.getElementById('tab2').click()
-                                        }}>Поменять пароль</div>
+                                        <label htmlFor="pName">Роль</label>
+                                        <TextField sx={{
+                                            flex: 1,
+                                            border: "1px solid #565656",
+                                            borderRadius: "4px",
+                                            // height: '10px'
+                                        }}
+                                                   id="filled-read-only-input"
+                                                   value={role}
+                                                   variant="outlined" />
                                     </div>
                                 </div>
                             </div>

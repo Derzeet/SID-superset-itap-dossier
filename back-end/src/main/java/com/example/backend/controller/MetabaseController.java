@@ -30,7 +30,23 @@ public class MetabaseController {
 
         Jwt token = JwtHelper.encode(pyload, new MacSigner(METABASE_SECRET_KEY));
         //Note the difference between the sharing dashboard and question in the address below
-        String url = METABASE_SITE_URL + "/embed/dashboard/" + token.getEncoded() + "#bordered=true&titled=true";
+        String url = METABASE_SITE_URL + "/embed/dashboard/" + token.getEncoded() + "#theme=night&bordered=true&titled=true";
+        return new DashboardParams(url);
+    }
+    @GetMapping("/dashurl1")
+    public DashboardParams dashAction1() {
+        int round = Math.round(System.currentTimeMillis() / 1000)+10*60; // 10 minute expiration
+        String pyload = "{\n" +
+                "  \"resource\": {\"dashboard\": 3},\n" +  //This place should write the number you share
+                "  \"params\": {\n" +
+                "    \n" +
+                "  },\n" +
+                "  \"exp\":"+ round + "\n" +   //If no expiration time is required, this line can be commented out
+                "}";
+
+        Jwt token = JwtHelper.encode(pyload, new MacSigner(METABASE_SECRET_KEY));
+        //Note the difference between the sharing dashboard and question in the address below
+        String url = METABASE_SITE_URL + "/embed/dashboard/" + token.getEncoded() + "#theme=night&bordered=true&titled=true";
         return new DashboardParams(url);
     }
 

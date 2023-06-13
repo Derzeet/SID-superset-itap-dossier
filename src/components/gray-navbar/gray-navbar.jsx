@@ -124,9 +124,9 @@ const GrayNavbar = (props) => {
                                         aria-controls={open ? 'composition-menu' : undefined}
                                         aria-expanded={open ? 'true' : undefined}
                                         aria-haspopup="true"
-                                        // onClick={handleToggle}
+                                        onClick={handleToggle}
                                         >
-                                    <AccountCircleIcon style={{ fill: '#ffffff' }}/>
+                                    <AccountCircleIcon style={{ fill: '#ffffff', fontSize: '35px' }}/>
                                 </IconButton>
                                 <IconButton 
                                     aria-label="expand row" 
@@ -138,7 +138,7 @@ const GrayNavbar = (props) => {
                                     aria-haspopup="true"
                                     onClick={handleToggle}>
 
-                                    <KeyboardArrowDownIcon style={{ fill: '#ffffff' }}/>
+                                    <KeyboardArrowDownIcon style={{ fill: '#ffffff', fontSize: '35px'  }}/>
                                 </IconButton>
                             </li>
                             <Popper

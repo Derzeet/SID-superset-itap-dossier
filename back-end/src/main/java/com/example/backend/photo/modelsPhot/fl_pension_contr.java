@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "fl_pension_contr", schema = "imp_kfm_fl")
+@Table(name = "fl_pension", schema = "imp_kfm_fl")
 @NoArgsConstructor
 @AllArgsConstructor
 public class fl_pension_contr {

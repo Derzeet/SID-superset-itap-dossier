@@ -33,7 +33,7 @@ const SideBar = (props) => {
 
     const sideBarButtons = [
         {name: "Главная страница", to: "/"},
-        {name: "Спрвочник", to: "/workers"},
+        {name: "Справочник", to: "/workers"},
         {name: "Все новости", to: "/news"},
         {name: "Календарь", to: "/calendar"},
         // {name: "Информационные ресурсы", to: "/"},
@@ -76,7 +76,10 @@ const SideBar = (props) => {
                         </div>
                         <div className='menu-buttons'>
                             {sideBarButtons.map((button, index) => (
-                                <Link className="menu-text" to={button.to} key={index}>
+                                <Link className="menu-text" to={button.to} key={index} onClick={() => {
+                                    setMenuOpen(false)
+                                }
+                                }>
                                     <div>{button.name}</div>
                                 </Link>
                                 

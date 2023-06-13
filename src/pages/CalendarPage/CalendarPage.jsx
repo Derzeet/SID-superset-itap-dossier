@@ -263,13 +263,13 @@ function CalendarPage(props) {
           <div>
             <Box sx={{
               display: open ? 'none': 'flex',
-              position: 'fixed',
-              bottom: '20px',
-              right: '20px',
+              // position: 'fixeed',
+              // bottom: '20px',
+              // right: '20px',
               zIndex: '9999',
               transform: 'translateZ(0px)',
             }}>
-              <IconButton onClick={handleClickOpen} aria-label="delete" size="large">
+              <IconButton style={{fontSize: "50px"}} onClick={handleClickOpen} aria-label="delete" size="large">
                 <AddCircleIcon fontSize="inherit" />
               </IconButton>
             </Box>
