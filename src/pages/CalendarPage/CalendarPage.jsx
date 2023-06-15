@@ -105,27 +105,27 @@ function CalendarPage(props) {
   }
   useEffect(() => {
 
-    get()
+    // get()
 
-    // setEvents(
-    //   [
-    //     {
-    //       id: 1,
-    //       start: "2023-05-19",
-    //       end: "2023-05-19",
-    //       date: "2023-05-19",
-    //       title: "One",
-    //       desc: "lorem Ipsum lorem ipsum dolor sit amet"
-    //     },
-    //     {
-    //       id: 2,
-    //       start: "2023-05-20",
-    //       end: "2023-05-21",
-    //       title: "ttoooday",
-    //       desc: "lorem Ipsum lorem ipsum dolor sit amet"
-    //     },
-    //   ]
-    // );
+    setEvents(
+      [
+        {
+          id: 1,
+          start: "2023-06-14",
+          end: "2023-06-15",
+          date: "2023-06-15",
+          title: "Собрание",
+          desc: "каб С1.4.141"
+        },
+        {
+          id: 2,
+          start: "2023-06-13",
+          end: "2023-06-13",
+          title: "Конференция",
+          desc: "Первая конференция"
+        },
+      ]
+    );
 
   }, [])
 

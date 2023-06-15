@@ -160,7 +160,7 @@ function App() {
                 <GrayNavbar/>
 
                   <Suspense fallback={<span class="loader"></span>}>
-                    <motion.div initial={{opacity: 0}} animate={{opacity: 1}} transition={{ duration: 0.2 }}>
+                    <motion.div initial={{opacity: 0}} animate={{opacity: 1}} transition={{ duration: 0.2 }} style={{height: 'calc(100% - 110px)'}}>
                       <GraphNet />
 
                     </motion.div>

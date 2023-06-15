@@ -22,19 +22,21 @@ const SignInForm = () => {
         }
     });
     const handleLogin = (data) => {
-        console.log(data);
-        authService.login(
-            data.username,
-            data.password
-        ).then(
-            response => {
-                console.log(response)
-                navigate('/');
-            },
-            error => {
-                console.log(error)
-            }
-        );
+        // console.log(data);
+        // authService.login(
+        //     data.username,
+        //     data.password
+        // ).then(
+        //     response => {
+        //         console.log(response)
+        //         navigate('/');
+        //     },
+        //     error => {
+        //         console.log(error)
+        //     }
+        // );
+        navigate('/');
+
     }
     const handleErrors = (errors) => {
         console.log(errors)
@@ -59,7 +61,7 @@ const SignInForm = () => {
 
     return (
         <div>
-            <form name="loginForm" onSubmit={handleSubmit(handleLogin, handleErrors)}>
+            <form name="loginForm" onSubmit={handleLogin}>
 
                 <div className="inputs">
                     <div className="">

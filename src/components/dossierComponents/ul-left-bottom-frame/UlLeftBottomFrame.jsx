@@ -602,7 +602,138 @@ const NedvijimostRow = (props) => {
     </>
   )
 }
-
+const taxes = [
+  {
+      "paymentDocumentNumber": "92834601",
+      "bin": "100240021921",
+      "budgetClassificationCode": "105115",
+      "dateOfBudgetEnrollment": "29.07.2021",
+      "kbkName": "Налог на добавленную стоимость на товары, импортированные с территории государств-членов ЕАЭС",
+      "ogdCode": "620301",
+      "ogdName": "УГД по Сарыаркинскому району",
+      "paymentAmount": "8507835",
+      "paymentType": "Налог",
+      "transactionType": "Платеж",
+      "dateOfAccountDebit": "29.07.2021"
+  },
+  {
+      "paymentDocumentNumber": "83714344",
+      "bin": "100240021921",
+      "budgetClassificationCode": "901101",
+      "dateOfBudgetEnrollment": "26.07.2021",
+      "kbkName": "Поступления в пенсионный фонд 901101",
+      "ogdCode": "620701",
+      "ogdName": "УГД по Байконурскому району",
+      "paymentAmount": "25500",
+      "paymentType": "Налог",
+      "transactionType": "Платеж",
+      "dateOfAccountDebit": "26.07.2021"
+  },
+  {
+      "paymentDocumentNumber": "83714351",
+      "bin": "100240021921",
+      "budgetClassificationCode": "904101",
+      "dateOfBudgetEnrollment": "26.07.2021",
+      "kbkName": "Поступления отчислений и взносов на обязательное социальное медицинское страхование",
+      "ogdCode": "620701",
+      "ogdName": "УГД по Байконурскому району",
+      "paymentAmount": "20396",
+      "paymentType": "Налог",
+      "transactionType": "Платеж",
+      "dateOfAccountDebit": "26.07.2021"
+  },
+  {
+      "paymentDocumentNumber": "83714348",
+      "bin": "100240021921",
+      "budgetClassificationCode": "904101",
+      "dateOfBudgetEnrollment": "26.07.2021",
+      "kbkName": "Поступления отчислений и взносов на обязательное социальное медицинское страхование",
+      "ogdCode": "620701",
+      "ogdName": "УГД по Байконурскому району",
+      "paymentAmount": "5100",
+      "paymentType": "Налог",
+      "transactionType": "Платеж",
+      "dateOfAccountDebit": "26.07.2021"
+  },
+  {
+      "paymentDocumentNumber": "83714345",
+      "bin": "100240021921",
+      "budgetClassificationCode": "901101",
+      "dateOfBudgetEnrollment": "26.07.2021",
+      "kbkName": "Поступления в пенсионный фонд 901101",
+      "ogdCode": "620701",
+      "ogdName": "УГД по Байконурскому району",
+      "paymentAmount": "101980",
+      "paymentType": "Налог",
+      "transactionType": "Платеж",
+      "dateOfAccountDebit": "26.07.2021"
+  },
+  {
+      "paymentDocumentNumber": "83714352",
+      "bin": "100240021921",
+      "budgetClassificationCode": "901101",
+      "dateOfBudgetEnrollment": "26.07.2021",
+      "kbkName": "Поступления в пенсионный фонд 901101",
+      "ogdCode": "620701",
+      "ogdName": "УГД по Байконурскому району",
+      "paymentAmount": "23258",
+      "paymentType": "Налог",
+      "transactionType": "Платеж",
+      "dateOfAccountDebit": "26.07.2021"
+  },
+  {
+      "paymentDocumentNumber": "83714350",
+      "bin": "100240021921",
+      "budgetClassificationCode": "904101",
+      "dateOfBudgetEnrollment": "26.07.2021",
+      "kbkName": "Поступления отчислений и взносов на обязательное социальное медицинское страхование",
+      "ogdCode": "620701",
+      "ogdName": "УГД по Байконурскому району",
+      "paymentAmount": "20396",
+      "paymentType": "Налог",
+      "transactionType": "Платеж",
+      "dateOfAccountDebit": "26.07.2021"
+  },
+  {
+      "paymentDocumentNumber": "83714349",
+      "bin": "100240021921",
+      "budgetClassificationCode": "904101",
+      "dateOfBudgetEnrollment": "26.07.2021",
+      "kbkName": "Поступления отчислений и взносов на обязательное социальное медицинское страхование",
+      "ogdCode": "620701",
+      "ogdName": "УГД по Байконурскому району",
+      "paymentAmount": "5100",
+      "paymentType": "Налог",
+      "transactionType": "Платеж",
+      "dateOfAccountDebit": "26.07.2021"
+  },
+  {
+      "paymentDocumentNumber": "83714346",
+      "bin": "100240021921",
+      "budgetClassificationCode": "902101",
+      "dateOfBudgetEnrollment": "26.07.2021",
+      "kbkName": "Поступления социальных отчислений",
+      "ogdCode": "620701",
+      "ogdName": "УГД по Байконурскому району",
+      "paymentAmount": "20194",
+      "paymentType": "Налог",
+      "transactionType": "Платеж",
+      "dateOfAccountDebit": "26.07.2021"
+  },
+  {
+      "paymentDocumentNumber": "83714347",
+      "bin": "100240021921",
+      "budgetClassificationCode": "902101",
+      "dateOfBudgetEnrollment": "26.07.2021",
+      "kbkName": "Поступления социальных отчислений",
+      "ogdCode": "620701",
+      "ogdName": "УГД по Байконурскому району",
+      "paymentAmount": "8034",
+      "paymentType": "Налог",
+      "transactionType": "Платеж",
+      "dateOfAccountDebit": "26.07.2021"
+  }
+]
 const TaxesBlock = (props) => {
   const {bin, taxCount} = props
   const [open, setOpen] = useState(false)
@@ -616,12 +747,13 @@ const TaxesBlock = (props) => {
 
         setLoading(true)
         const params = {bin, page}
-        
-        axios.get(default_host+'taxpage', {params: params}).then(res => {
-          setCurr(res.data)
-          console.log(res.data)
-          setLoading(false)
-        })
+        setCurr(taxes)
+        setLoading(false)
+        // axios.get(default_host+'taxpage', {params: params}).then(res => {
+        //   setCurr(res.data)
+        //   console.log(res.data)
+        //   setLoading(false)
+        // })
       }
     }
       
@@ -809,6 +941,35 @@ const PensionBlock = (props) => {
     </>
   )
 }
+const year_2013_1 = 
+[
+    {
+        "zeroten": "530000",
+        "IIN": "551124400116",
+        "fio": "ЗАМОРСКАЯ ГАЛИНА ВАСИЛЬЕВНА",
+        "zerotwelve": "149280"
+    },
+    {
+        "zeroten": "48000",
+        "zerotwelve": "24600",
+        "IIN": "780101400785",
+        "fio": "ЛАРИОНОВА ЮЛИЯ АЛЕКСЕЕВНА"
+    }
+]
+const year_2014_1 = [
+  {
+      "IIN": "760602350175",
+      "fio": "ЛАРИОНОВ ВЛАДИМИР ВЛАДИМИРОВИЧ",
+      "zerotwelve": "8100",
+      "zeroten": "18000"
+  },
+  {
+      "zerotwelve": "8100",
+      "IIN": "780101400785",
+      "zeroten": "18000",
+      "fio": "ЛАРИОНОВА ЮЛИЯ АЛЕКСЕЕВНА"
+  }
+]
 const PensionYear = (props) => {
   const {year, number, bin} = props
   const [page, setPage] = React.useState(0);
@@ -822,12 +983,18 @@ const PensionYear = (props) => {
 
         setLoading(true)
         const params = {bin, year, page}
-        
-        axios.get(default_host+'pensionsbyyear', {params: params}).then(res => {
-          setCurr(res.data)
-          console.log(res.data)
+        if (year=='2013') {
+          setCurr(year_2013_1)
           setLoading(false)
-        })
+        } else if (year == "2014") {
+          setCurr(year_2014_1)
+          setLoading(false)
+        }
+        // axios.get(default_host+'pensionsbyyear', {params: params}).then(res => {
+        //   setCurr(res.data)
+        //   console.log(res.data)
+        //   setLoading(false)
+        // })
       }
     }
       

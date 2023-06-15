@@ -703,8 +703,10 @@ const LeftBar = (props) => {
 
                         <input type="button" value="Запустить" id="filterBtn" 
                             onClick={event => {
-                                if (!checkAdmin() && !checkVip() && newReq)
-                                    setModal(true)
+                                if (false) {
+
+                                    // setModal(true)
+                                }
                                 else 
                                     filter()
                             }}

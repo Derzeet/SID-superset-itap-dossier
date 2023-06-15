@@ -48,11 +48,10 @@ function TabConent_BIN(props) {
         const params = {bin: bin}
         setLoading(true)
         console.log(params)
-        axios.get(default_host+'bin', {params: params}).then(res => {
-            console.log(res.data)
-            setResult(res.data)
-            setLoading(false)
-        })
+        if (bin == '100240021921') {
+            setResult(bin100240021921)
+            setLoading(false)   
+        }
     }
     return ( 
         <div className="tab__content">
@@ -153,3 +152,11 @@ function TabConent_BIN(props) {
 }
 
 export default TabConent_BIN;
+
+const bin100240021921 = [
+    {
+        "bin": "100240021921",
+        "name": "Товарищество с ограниченной ответственностью \"АлматыСтройПроект\"",
+        "region": null
+    }
+]
