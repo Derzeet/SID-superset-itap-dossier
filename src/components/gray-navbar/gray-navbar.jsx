@@ -95,8 +95,8 @@ const GrayNavbar = (props) => {
             <nav className="NavbarItems2">
                 <h1 className="logoNav" style={{paddingLeft: '100px'}}><Link style={{}} to='/'>iSET</Link></h1>
                 <div>
-                    {userSession &&
-                    userSession.roles.includes("ADMIN")
+                    {(userSession &&
+                    userSession.roles.includes("ADMIN")) || debugMode
                     ?  (
                         <>
                         <div className="admin"><a style={{ fontWeight: 500}} onClick={() => toAdmin()}>Админ панель</a></div>
