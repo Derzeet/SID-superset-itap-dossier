@@ -183,8 +183,9 @@ const GraphNetnew = (props) => {
 
     const nodesOptions = {
         font: {
-            size: 14,
-            color: "white"
+            size: 17,
+            color: "white",
+            vadjust: -15
         },
         size: 20
     }
@@ -454,6 +455,7 @@ const GraphNetnew = (props) => {
 
         console.log(params)
         axios.get(baseURL + url, {params: params}).then(res => {
+            console.log(res.data)
             let _nodes = []
             const _edges = res.data.edges;
             
@@ -541,6 +543,8 @@ const GraphNetnew = (props) => {
         axios.get(`${baseURL}/shortopen`, {params: {id: id, relations: showRels, limit: openLimit }}).then(res => {
             let _nodes = []
             let _edges = []
+
+            console.log("SHORT OPEN", res.data)
 
             let tempNodes = nodes
             let tempEdges = edges
@@ -696,14 +700,18 @@ const GraphNetnew = (props) => {
     const setNodeSettings = (node, iin1, iin2) => {
         let key = false
 
+        node.label = node.relCount + '\t\t\t\t\t\t\t\t\t';
+
         Object.assign(node, {"opened": false})
 
         if (node.properties.Type == "ЮЛ" || node.properties.Type == "ИП") {
             // settings for ul
-            node.label = node.properties.Name;
+            // node.label += '\n\n' + node.properties.Name;
 
-            if (node.label.length > 60) { 
-                node.label = cropLabel(node.label)
+            if (node.properties.Name.length > 60) {
+                node.label += '\n\n' + cropLabel(node.properties.Name)
+            } else {
+                node.label += '\n\n' + node.properties.Name
             }
             
 
@@ -728,13 +736,13 @@ const GraphNetnew = (props) => {
             // settings for propiska
             node.group = "PROPISKA"
 
-            node.label = node.properties.Adress_propiski;
+            node.label += '\n\n' + node.properties.Adress_propiski;
 
         } else {
             // settings for fl
             const p = node.properties;
 
-            node.label = p.FIO
+            node.label += "\n\n" + p.FIO
 
             key = false;
             if (p.IIN != null && (p.IIN == iin1 || p.IIN == iin2)) key = true; 

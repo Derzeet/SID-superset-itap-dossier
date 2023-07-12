@@ -93,7 +93,7 @@ const GrayNavbar = (props) => {
                 backdropFilter: ' blur(27.5px)',
                 }}>
             <nav className="NavbarItems2">
-                <h1 className="logoNav"><Link style={{}} to='/'>iSET</Link></h1>
+                <h1 className="logoNav" style={{paddingLeft: '100px'}}><Link style={{}} to='/'>iSET</Link></h1>
                 <div>
                     {userSession &&
                     userSession.roles.includes("ADMIN")
@@ -104,7 +104,7 @@ const GrayNavbar = (props) => {
                         </>
                     ) : ("")}
 
-                    <ul className="nav-menu">
+                    <ul className="nav-menu" style={{marginLeft: '50px'}}>
                     {debugMode || userSession ? 
                         <>
                             {/* <style>

@@ -73,6 +73,7 @@ const UlDosiePage = (props) => {
                 setTaxes(res.data.taxOutEntities)
                 setMshes(res.data.mshes)
                 setAutos(res.data.mvAutoFls)
+                console.log(res.data.pensionYearAndEmpNum)
                 setPension((curr) => res.data.pensionYearAndEmpNum)
                 setCommodityProducers(res.data.commodityProducers)
                 setAccountant(res.data.accountantListEntities)

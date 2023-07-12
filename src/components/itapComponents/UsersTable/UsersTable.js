@@ -23,7 +23,7 @@ export default class UsersTable extends Component {
             .then(res => {
             const users = res.data;
             this.setState({ users });
-            // console.log(res.data)
+            console.log(res.data)
         })
     }
 

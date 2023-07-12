@@ -1,6 +1,14 @@
 body {
 }
 
+.node-label {
+  margin-top: 100px;
+}
+
+.vis-label {
+  padding: -10px;
+}
+
 .mainSection {
   background-color: #0D0F11 !important;
 
